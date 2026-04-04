@@ -36,9 +36,8 @@ Si cambia una regla de negocio, un flujo, un permiso, una decision visual compar
 
 ```text
 assets/       Recursos locales como logo e imagenes
-components/   Fragmentos HTML reutilizables
-css/          Variables, estilos globales, formularios y tablas
-js/           Logica por dominio y servicios
+css/          Variables, estilos de componentes, formularios, tablas y layout
+js/           Logica por dominio, componentes renderizados y servicios
 pages/        Pantallas publicas y privadas del sistema
 index.html    Landing publica principal
 ```
@@ -166,6 +165,7 @@ Objetivo de esta capa:
 - Usar `addEventListener`.
 - Mantener la identidad visual institucional calida ya definida.
 - Reutilizar `css/forms.css` para campos y botones compartidos.
+- Evitar redefinir en `css/main.css` componentes ya centralizados en `css/forms.css` o `css/components.css`.
 - Reutilizar `css/tables.css` para tablas administrativas compartidas.
 - Reutilizar `css/components.css` para navbar, sidebar, footer y tarjetas compartidas.
 - Centralizar estructuras privadas repetidas en renderizadores o utilidades compartidas antes de duplicar HTML entre paginas.
@@ -186,13 +186,18 @@ Modelo vigente recomendado:
 - `principal`: rama de integracion y desarrollo vigente. Todo cambio nuevo debe llegar primero aqui.
 - `feature/*`, `fix/*`, `hotfix/*`: ramas cortas de trabajo para cambios puntuales.
 
+Estado actual del repositorio:
+
+- Las ramas base vigentes son `Arawkano` y `principal`.
+- La rama `main` fue retirada para evitar duplicar el rol de rama de trabajo.
+
 Reglas operativas:
 
 - Ningun cambio nuevo debe desarrollarse directamente en `Arawkano`.
 - Todo cambio debe nacer desde `principal` o desde una rama corta creada a partir de `principal`.
 - Antes de promover codigo a `Arawkano`, el cambio debe estar probado, documentado y aprobado en `principal`.
 - Si `Arawkano` representa la version estable, `principal` representa la version en evolucion.
-- No mantener varias ramas base con el mismo rol funcional; evitar duplicar `main` y `principal` como ramas de trabajo simultaneas.
+- No mantener varias ramas base con el mismo rol funcional.
 
 Flujo recomendado:
 

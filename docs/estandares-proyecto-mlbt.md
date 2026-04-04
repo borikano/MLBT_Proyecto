@@ -42,6 +42,7 @@ Objetivo:
 - Documentar toda regla transversal junto con su ubicacion tecnica principal.
 - Validar inmediatamente despues de tocar autenticacion, navegacion o permisos.
 - Eliminar fragmentos legacy cuando dejen de ser la fuente de verdad para evitar divergencias.
+- No conservar carpetas vacias ni archivos placeholder sin uso real documentado.
 - Mantener el `index.html` como landing especial solo cuando su composicion realmente difiera del resto de vistas publicas.
 - Si un modulo ya se importa desde el script principal de la pagina, no volver a cargarlo con otra etiqueta `script type="module" src="..."`.
 
@@ -54,6 +55,7 @@ Objetivo:
 - Las ramas `feature/*`, `fix/*` y `hotfix/*` deben usarse para cambios puntuales y de corta vida.
 - No desarrollar directamente sobre `Arawkano`.
 - No duplicar ramas base con el mismo rol operativo.
+- Las ramas base activas del repositorio deben mantenerse reducidas a `Arawkano` y `principal`, salvo que aparezca una necesidad tecnica justificada.
 
 ### Flujo minimo obligatorio
 
@@ -90,6 +92,7 @@ Objetivo:
 - `css/forms.css` debe concentrar inputs, selects, botones y estados interactivos comunes.
 - `css/tables.css` debe concentrar tablas administrativas, contraste, zebra striping y acciones.
 - `css/components.css` debe concentrar navbar, sidebar, footer, tarjetas y otros componentes visuales reutilizables.
+- `css/main.css` debe reservarse para layout, secciones de pagina y overrides puntuales que no pertenezcan a `forms.css`, `tables.css` o `components.css`.
 - La tipografia del hero publico debe priorizar lectura limpia en escritorio, sin cortes agresivos ni bloques sobredimensionados.
 - No romper formularios por anchos minimos excesivos.
 - En escritorio, los formularios administrativos deben priorizar dos columnas limpias.
