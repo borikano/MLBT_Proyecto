@@ -45,6 +45,41 @@ Objetivo:
 - Mantener el `index.html` como landing especial solo cuando su composicion realmente difiera del resto de vistas publicas.
 - Si un modulo ya se importa desde el script principal de la pagina, no volver a cargarlo con otra etiqueta `script type="module" src="..."`.
 
+## Estandares de ramas, versionado y respaldo
+
+### Modelo de ramas
+
+- `Arawkano` debe representar la version estable y aprobada del proyecto.
+- `principal` debe representar la version de trabajo e integracion.
+- Las ramas `feature/*`, `fix/*` y `hotfix/*` deben usarse para cambios puntuales y de corta vida.
+- No desarrollar directamente sobre `Arawkano`.
+- No duplicar ramas base con el mismo rol operativo.
+
+### Flujo minimo obligatorio
+
+- Todo cambio nuevo debe pasar primero por `principal`.
+- Antes de promover a `Arawkano`, el cambio debe estar probado, documentado y respaldado.
+- La promocion de `principal` a `Arawkano` debe preferir Pull Request o una fusion controlada.
+- Si una version no esta aprobada, no debe llegar a `Arawkano`.
+
+### Versionado
+
+- Los hitos aprobados deben etiquetarse con tags versionados.
+- El proyecto debe usar una secuencia coherente, por ejemplo `v0.1.0`, `v0.2.0`, `v0.2.1`, `v1.0.0`.
+- Los tags deben crearse sobre versiones ya validadas en la rama estable.
+
+### Respaldo y recuperacion
+
+- GitHub debe funcionar como respaldo principal del historial del codigo.
+- Debe hacerse `push` frecuente a la rama de trabajo para no acumular cambios sin respaldo remoto.
+- Para hitos importantes, debe existir copia adicional en nube o medio externo.
+- No usar `push --force` sobre ramas estables.
+- No aplicar comandos destructivos sin revisar antes el estado del repositorio.
+
+### Regla critica de continuidad
+
+- Nada debe llegar a `Arawkano` si antes no paso por `principal`, fue probado, documentado y respaldado.
+
 ## Estandares visuales
 
 - Respetar la identidad institucional calida del proyecto.

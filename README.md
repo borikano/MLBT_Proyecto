@@ -178,6 +178,55 @@ Objetivo de esta capa:
 - Preferir cambios pequenos y controlados sobre refactors grandes sin validacion.
 - Cuando una regla sea de negocio, documentarla primero y luego implementarla.
 
+## Flujo de ramas y continuidad
+
+Modelo vigente recomendado:
+
+- `Arawkano`: rama estable, aprobada y de referencia. No debe usarse para desarrollo diario.
+- `principal`: rama de integracion y desarrollo vigente. Todo cambio nuevo debe llegar primero aqui.
+- `feature/*`, `fix/*`, `hotfix/*`: ramas cortas de trabajo para cambios puntuales.
+
+Reglas operativas:
+
+- Ningun cambio nuevo debe desarrollarse directamente en `Arawkano`.
+- Todo cambio debe nacer desde `principal` o desde una rama corta creada a partir de `principal`.
+- Antes de promover codigo a `Arawkano`, el cambio debe estar probado, documentado y aprobado en `principal`.
+- Si `Arawkano` representa la version estable, `principal` representa la version en evolucion.
+- No mantener varias ramas base con el mismo rol funcional; evitar duplicar `main` y `principal` como ramas de trabajo simultaneas.
+
+Flujo recomendado:
+
+1. Actualizar `principal`.
+2. Crear una rama `feature/*` o `fix/*`.
+3. Desarrollar y hacer commits pequenos.
+4. Integrar primero a `principal`.
+5. Validar compatibilidad, permisos, navegacion y modulos criticos.
+6. Promover desde `principal` hacia `Arawkano` solo cuando el cambio quede aprobado.
+
+Promocion a estable:
+
+- Preferir Pull Request de `principal` hacia `Arawkano`.
+- Si se fusiona por terminal, hacerlo solo cuando `Arawkano` deba recibir una version ya validada.
+
+## Versionado y respaldos
+
+Versionado recomendado:
+
+- Usar tags para hitos aprobados, por ejemplo `v0.1.0`, `v0.2.0`, `v0.2.1`, `v1.0.0`.
+- Crear un tag cada vez que `Arawkano` reciba una version estable importante.
+
+Respaldo recomendado:
+
+- GitHub funciona como respaldo principal del historial del codigo.
+- Se debe hacer `push` frecuente a `principal` para no acumular trabajo sin respaldo remoto.
+- Ademas del repositorio remoto, conservar una copia externa en nube o disco externo para hitos importantes.
+- No usar `push --force` sobre ramas estables.
+- No usar comandos destructivos sin necesidad y sin validar el estado del repositorio.
+
+Regla de seguridad operativa:
+
+- Nada debe llegar a `Arawkano` si antes no paso por `principal`, fue probado, documentado y respaldado.
+
 ## Practicas Recomendadas Para No Repetir Instrucciones
 
 - Definir una sola fuente de verdad para navegacion privada, permisos y reglas transversales.
@@ -189,6 +238,7 @@ Objetivo de esta capa:
 - Actualizar `README.md` y `docs/estandares-proyecto-mlbt.md` cada vez que cambie una regla transversal o una convencion de desarrollo.
 - Validar archivos tocados inmediatamente despues de cada cambio para detectar roturas temprano.
 - Evitar introducir una segunda fuente de verdad para el mismo componente o flujo.
+- Mantener documentado el flujo de ramas, versionado y respaldo como parte de la arquitectura del proyecto, no como nota temporal.
 
 ## Reglas UI Actuales
 
