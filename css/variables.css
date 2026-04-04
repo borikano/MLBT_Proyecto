@@ -1,0 +1,76 @@
+:root {
+	/* Colores institucionales */
+	--color-primary: #c44f2a;
+	--color-primary-strong: #a63f20;
+	--color-secondary: #486b3b;
+	--color-secondary-strong: #35522c;
+	--color-accent: #f1a43c;
+	--color-accent-soft: #ffd78d;
+	--color-surface: #fffaf2;
+	--color-surface-muted: #f6ead5;
+	--color-background: #f2dfc0;
+	--color-background-strong: #e1c08f;
+	--color-text: #231815;
+	--color-text-muted: #5d463d;
+	--color-text-soft: #7b655d;
+	--color-border: rgba(67, 48, 43, 0.14);
+	--color-white: #ffffff;
+	--color-black: #111111;
+	--color-overlay: rgba(35, 24, 21, 0.08);
+	--color-shadow-soft: rgba(35, 24, 21, 0.16);
+	--color-shadow-strong: rgba(35, 24, 21, 0.26);
+
+	/* Tipografias */
+	--font-family-display: "Trebuchet MS", "Gill Sans", sans-serif;
+	--font-family-body: "Palatino Linotype", "Book Antiqua", serif;
+	--font-family-ui: Verdana, Geneva, sans-serif;
+
+	--font-size-xs: 0.75rem;
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.125rem;
+	--font-size-xl: 1.5rem;
+	--font-size-2xl: 2rem;
+	--font-size-3xl: 3rem;
+
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	--line-height-tight: 1.15;
+	--line-height-base: 1.6;
+	--line-height-loose: 1.8;
+
+	/* Espaciado */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+
+	/* Bordes y sombras */
+	--radius-xs: 0.375rem;
+	--radius-sm: 0.75rem;
+	--radius-md: 1.25rem;
+	--radius-lg: 2rem;
+	--radius-pill: 999px;
+
+	--shadow-xs: 0 4px 10px var(--color-overlay);
+	--shadow-sm: 0 10px 24px var(--color-shadow-soft);
+	--shadow-md: 0 18px 42px var(--color-shadow-soft);
+	--shadow-lg: 0 24px 56px var(--color-shadow-strong);
+
+	/* Layout y transiciones */
+	--container-max-width: 1200px;
+	--sidebar-width: 280px;
+	--header-height: 88px;
+	--transition-fast: 160ms ease;
+	--transition-base: 220ms ease;
+}

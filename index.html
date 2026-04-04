@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="María La Bonita Taquería: operación offline para pedidos, inventario, ventas y gestión interna del personal.">
+	<title>MLBT | María La Bonita Taquería</title>
+	<link rel="stylesheet" href="css/variables.css">
+	<link rel="stylesheet" href="css/components.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+	<div id="app" class="page-shell">
+		<header class="topbar" aria-label="Encabezado principal">
+			<a class="brand-mark" href="index.html" aria-label="Ir al inicio de MLBT">
+				<img src="assets/img/Logo_Principal.png" alt="Logo de María La Bonita Taquería">
+				<span>MLBT Project | María La Bonita Taquería</span>
+			</a>
+			<nav class="topbar__nav" aria-label="Navegación principal">
+				<div class="hero-actions hero-actions--compact" data-public-actions>
+					<a class="button button--primary landing-button" href="pages/login.html">Iniciar sesión</a>
+				</div>
+				<div class="hero-actions hero-actions--compact" data-session-actions hidden>
+					<a class="button button--secondary landing-button" href="pages/dashboard.html">Ir al Dashboard</a>
+				</div>
+			</nav>
+		</header>
+
+		<main class="hero-layout landing-layout">
+			<section class="hero-copy landing-copy" aria-labelledby="app-title">
+				<p class="eyebrow">María La Bonita Taquería</p>
+				<h1 id="app-title">Panel operativo y administrativo de MLBT.</h1>
+				<p class="app-description landing-copy__description">Control local para pedidos, inventario, ventas y seguimiento interno del restaurante.</p>
+				<p class="hero-session-note" id="hero-session-note" data-session-note hidden aria-live="polite"></p>
+				<div class="hero-actions" data-session-actions hidden>
+					<a class="button button--secondary landing-button" href="pages/dashboard.html">Ir al Dashboard</a>
+				</div>
+				<p class="landing-copy__hint">Los accesos y las altas de personal se gestionan de forma controlada desde administración.</p>
+				<div class="hero-copy__details" aria-label="Información básica del restaurante">
+					<article class="surface-card hero-info-card">
+						<h2>Operación diaria</h2>
+						<p>Control unificado para pedidos, ventas y operación diaria.</p>
+					</article>
+					<article class="surface-card hero-info-card">
+						<h2>Disponibilidad</h2>
+						<p>Base offline preparada para trabajo continuo, incluso sin internet.</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="hero-visual landing-visual" aria-label="Identidad visual de MLBT">
+				<article class="visual-card visual-card--brand">
+					<img class="visual-card__logo" src="assets/img/Logo_Principal.png" alt="Identidad principal de MLBT">
+					<div>
+						<p class="visual-card__label">Bienvenida</p>
+						<h2>Operación clara para cocina, caja, salón y administración.</h2>
+					</div>
+				</article>
+
+				<div class="visual-grid">
+					<article class="visual-card">
+						<img src="assets/img/Domicilio.png" alt="Servicio de domicilio MLBT">
+						<div>
+							<p class="visual-card__label">Pedidos</p>
+							<h3>Domicilios y solicitudes organizadas desde una sola base.</h3>
+						</div>
+					</article>
+					<article class="visual-card">
+						<img src="assets/img/Horario.png" alt="Horario de operación MLBT">
+						<div>
+							<p class="visual-card__label">Coordinación</p>
+							<h3>Turnos y flujo comercial con una interfaz consistente.</h3>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<p>&copy; <span id="current-year">2026</span> María La Bonita Taquería.</p>
+		</footer>
+	</div>
+
+	<noscript>
+		<p class="noscript-message">Esta aplicación requiere JavaScript habilitado para funcionar correctamente.</p>
+	</noscript>
+
+	<script type="module" src="js/app.js"></script>
+</body>
+</html>
+
+

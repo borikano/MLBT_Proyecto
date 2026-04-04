@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Acceso al sistema de gestión de pedidos MLBT">
+	<title>MLBT | Iniciar sesión</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="public-navbar-mount"></div>
+
+		<main class="hero-layout" aria-labelledby="login-title">
+			<div id="public-hero-intro-mount"></div>
+
+			<section class="surface-card" aria-label="Formulario de inicio de sesión">
+				<form id="login-form" class="auth-form" novalidate>
+					<div class="auth-form__content">
+						<div>
+							<label for="email">Correo electrónico</label>
+							<input class="auth-form__input" id="email" name="email" type="email" autocomplete="email" placeholder="Ejemplo: admin@mlbt.com" required>
+						</div>
+
+						<div>
+							<label for="password">Contraseña</label>
+							<div class="password-field">
+								<input class="auth-form__input password-field__input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required>
+								<button class="password-field__toggle" type="button" data-password-toggle aria-controls="password" aria-pressed="false" aria-label="Mostrar contraseña">
+									<span class="password-field__icon" aria-hidden="true"></span>
+								</button>
+							</div>
+						</div>
+
+						<p id="login-message" class="auth-form__message" aria-live="polite"></p>
+
+						<button class="button button--primary" type="submit">Iniciar sesión</button>
+						<p class="auth-helper-text auth-helper-text--center">¿Necesitas información del proceso? <a href="register.html">Consulta el registro controlado</a>.</p>
+					</div>
+				</form>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { login } from "../js/auth.js";
+		import { renderAppFooter, renderPublicHeroIntro, renderPublicNavbar } from "../js/components.js";
+		import session from "../js/session.js";
+		import { initPasswordVisibilityToggles } from "../js/ui.js";
+
+		var form = document.getElementById("login-form");
+		var emailInput = document.getElementById("email");
+		var passwordInput = document.getElementById("password");
+		var messageNode = document.getElementById("login-message");
+
+		renderPublicNavbar({
+			mountId: "public-navbar-mount",
+			navbarLabel: "Encabezado de acceso",
+			subtitle: "Acceso al sistema",
+			actionLabel: "Volver al inicio",
+			actionHref: "../index.html"
+		});
+		renderPublicHeroIntro({
+			mountId: "public-hero-intro-mount",
+			className: "hero-copy",
+			ariaLabelledBy: "login-title",
+			eyebrow: "Acceso seguro",
+			titleId: "login-title",
+			title: "Ingresa al panel de gestión de pedidos.",
+			description: "Usa tus credenciales para entrar al entorno administrativo de María La Bonita Taquería. Esta base trabaja completamente offline y protege la sesión desde el navegador.",
+			helperText: "Si necesitas acceso nuevo, la solicitud de registro se gestiona de forma controlada por administración."
+		});
+		renderAppFooter({
+			mountId: "app-footer-mount",
+			moduleLabel: "MLBT | Acceso administrativo"
+		});
+
+		if (session.isActive()) {
+			window.location.href = "dashboard.html";
+		}
+
+		initPasswordVisibilityToggles();
+
+		form.addEventListener("submit", function (event) {
+			event.preventDefault();
+
+			var result = login(emailInput.value, passwordInput.value);
+			messageNode.textContent = result.message;
+
+			if (result.success) {
+				window.location.href = "dashboard.html";
+			}
+		});
+	</script>
+</body>
+</html>

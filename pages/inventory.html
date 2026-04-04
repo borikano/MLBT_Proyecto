@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Gestión de inventario del sistema MLBT">
+	<title>MLBT | Inventario</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+	<link rel="stylesheet" href="../css/tables.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="private-navbar-mount"></div>
+
+		<main class="admin-layout" aria-labelledby="inventory-title">
+			<div id="private-sidebar-mount"></div>
+
+			<section class="surface-card inventory-module" aria-label="Módulo de inventario">
+				<div class="auth-form__content inventory-module__content">
+					<div class="module-header">
+						<p class="eyebrow">Módulo de inventario</p>
+						<h1 id="inventory-title">Control de insumos y stock</h1>
+						<p class="app-description">Registra productos, controla existencias y documenta movimientos de entrada, salida o ajuste desde una sola vista privada.</p>
+						<p class="auth-form__message module-status" id="inventory-session-message" aria-live="polite"></p>
+					</div>
+
+					<div class="inventory-module__panels">
+						<section class="inventory-panel" aria-labelledby="inventory-item-title">
+							<h2 id="inventory-item-title">Registrar nuevo ítem</h2>
+							<form id="inventory-item-form" class="inventory-form-grid" novalidate>
+								<div>
+									<label for="inventory-nombre">Nombre</label>
+									<input class="auth-form__input" id="inventory-nombre" name="nombre" type="text" required>
+								</div>
+								<div>
+									<label for="inventory-categoria">Categoría</label>
+									<input class="auth-form__input" id="inventory-categoria" name="categoria" type="text" required>
+								</div>
+								<div>
+									<label for="inventory-unidad">Unidad</label>
+									<input class="auth-form__input" id="inventory-unidad" name="unidad" type="text" placeholder="kg, unidad, litro" required>
+								</div>
+								<div>
+									<label for="inventory-stock">Stock inicial</label>
+									<input class="auth-form__input" id="inventory-stock" name="stock" type="number" min="0" step="1" required>
+								</div>
+								<div>
+									<label for="inventory-stock-min">Stock mínimo</label>
+									<input class="auth-form__input" id="inventory-stock-min" name="stockMin" type="number" min="0" step="1" required>
+								</div>
+								<div>
+									<label for="inventory-estado">Estado</label>
+									<select class="auth-form__input" id="inventory-estado" name="estado" required>
+										<option value="Activo">Activo</option>
+										<option value="Inactivo">Inactivo</option>
+									</select>
+								</div>
+
+								<p id="inventory-item-message" class="auth-form__message" aria-live="polite"></p>
+								<button class="button button--secondary" type="submit">Guardar ítem</button>
+							</form>
+						</section>
+
+						<section class="inventory-panel" aria-labelledby="inventory-movement-title">
+							<h2 id="inventory-movement-title">Registrar movimiento</h2>
+							<form id="inventory-movement-form" class="inventory-form-grid" novalidate>
+								<div>
+									<label for="movement-item">Ítem</label>
+									<select class="auth-form__input" id="movement-item" name="itemId" required>
+										<option value="">Selecciona un ítem</option>
+									</select>
+								</div>
+								<div>
+									<label for="movement-type">Tipo de movimiento</label>
+									<select class="auth-form__input" id="movement-type" name="tipo" required>
+										<option value="entrada">Entrada</option>
+										<option value="salida">Salida</option>
+										<option value="ajuste">Ajuste</option>
+									</select>
+								</div>
+								<div>
+									<label for="movement-quantity">Cantidad</label>
+									<input class="auth-form__input" id="movement-quantity" name="cantidad" type="number" step="1" required>
+								</div>
+								<div>
+									<label for="movement-reason">Motivo</label>
+									<input class="auth-form__input" id="movement-reason" name="motivo" type="text" required>
+								</div>
+
+								<p id="inventory-movement-message" class="auth-form__message" aria-live="polite"></p>
+								<button class="button button--primary" type="submit">Registrar movimiento</button>
+							</form>
+						</section>
+					</div>
+
+					<section class="inventory-table-section" aria-labelledby="inventory-table-title">
+						<h2 id="inventory-table-title">Ítems registrados</h2>
+						<div class="table-wrapper">
+							<table class="data-table">
+								<thead>
+									<tr>
+										<th scope="col">Alerta</th>
+										<th scope="col">N° Registro</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Categoría</th>
+										<th scope="col">Unidad</th>
+										<th scope="col">Stock</th>
+										<th scope="col">Stock mínimo</th>
+										<th scope="col">Estado</th>
+									</tr>
+								</thead>
+								<tbody id="inventory-table-body"></tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { logout, protectRoute } from "../js/auth.js";
+		import { renderAppFooter, renderPrivateNavbar, renderPrivateSidebar } from "../js/components.js";
+		import session from "../js/session.js";
+		import { initInventoryModule } from "../js/inventory.js";
+
+		var isAllowed = protectRoute();
+
+		if (isAllowed) {
+			var currentUser = session.getUser();
+			renderPrivateNavbar({
+				mountId: "private-navbar-mount",
+				navbarLabel: "Barra principal de inventario"
+			});
+			renderAppFooter({
+				mountId: "app-footer-mount",
+				moduleLabel: "MLBT | Módulo de inventario"
+			});
+			var logoutButton = document.getElementById("logout-button");
+			var sessionMessage = document.getElementById("inventory-session-message");
+
+			renderPrivateSidebar({
+				mountId: "private-sidebar-mount",
+				currentPage: "inventory",
+				currentUser: currentUser
+			});
+
+			sessionMessage.textContent = "Bienvenido, " + (currentUser && currentUser.name ? currentUser.name : "Usuario MLBT");
+
+			logoutButton.addEventListener("click", function () {
+				logout();
+			});
+
+			initInventoryModule({
+				itemFormId: "inventory-item-form",
+				movementFormId: "inventory-movement-form",
+				itemMessageId: "inventory-item-message",
+				movementMessageId: "inventory-movement-message",
+				itemSelectId: "movement-item",
+				tableBodyId: "inventory-table-body"
+			});
+		}
+	</script>
+</body>
+</html>

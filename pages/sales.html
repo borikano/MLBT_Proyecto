@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Gestión de ventas y pedidos del sistema MLBT">
+	<title>MLBT | Ventas</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+	<link rel="stylesheet" href="../css/tables.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="private-navbar-mount"></div>
+
+		<main class="admin-layout" aria-labelledby="sales-title">
+			<div id="private-sidebar-mount"></div>
+
+			<section class="surface-card sales-module" aria-label="Módulo de ventas">
+				<div class="auth-form__content sales-module__content">
+					<div class="module-header">
+						<p class="eyebrow">Módulo de ventas</p>
+						<h1 id="sales-title">Registro de pedidos y ventas</h1>
+						<p class="app-description">Agrega productos disponibles al pedido actual, confirma la venta y consulta el historial de pedidos procesados.</p>
+						<p class="auth-form__message module-status" id="sales-session-message" aria-live="polite"></p>
+					</div>
+
+					<div class="sales-module__panels">
+						<section class="inventory-panel" aria-labelledby="sales-form-title">
+							<h2 id="sales-form-title">Agregar producto al pedido</h2>
+							<form id="sales-form" class="sales-form-grid" novalidate>
+								<div>
+									<label for="sales-item-select">Producto</label>
+									<select class="auth-form__input" id="sales-item-select" name="itemId" required>
+										<option value="">Selecciona un producto</option>
+									</select>
+								</div>
+								<div>
+									<label for="sales-quantity">Cantidad</label>
+									<input class="auth-form__input" id="sales-quantity" name="quantity" type="number" min="1" step="1" required>
+								</div>
+								<button class="button button--secondary" type="submit">Agregar al pedido</button>
+							</form>
+						</section>
+
+						<aside class="inventory-panel sales-summary" aria-labelledby="sales-summary-title">
+							<h2 id="sales-summary-title">Resumen del pedido</h2>
+							<ul id="sales-order-list" class="sales-summary__list"></ul>
+							<div class="sales-summary__total">
+								<span>Total</span>
+								<strong id="sales-order-total">$0</strong>
+							</div>
+							<button class="button button--primary" type="button" id="confirm-sale-button">Confirmar venta</button>
+						</aside>
+					</div>
+
+					<section class="inventory-table-section" aria-labelledby="sales-history-title">
+						<h2 id="sales-history-title">Historial de ventas</h2>
+						<div class="table-wrapper">
+							<table class="data-table">
+								<thead>
+									<tr>
+										<th scope="col">ID</th>
+										<th scope="col">Fecha</th>
+										<th scope="col">Pedido</th>
+										<th scope="col">Total</th>
+										<th scope="col">Usuario</th>
+									</tr>
+								</thead>
+								<tbody id="sales-history-body"></tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { logout, protectRoute } from "../js/auth.js";
+		import { renderAppFooter, renderPrivateNavbar, renderPrivateSidebar } from "../js/components.js";
+		import session from "../js/session.js";
+		import { initSalesModule } from "../js/sales.js";
+
+		var isAllowed = protectRoute();
+
+		if (isAllowed) {
+			var currentUser = session.getUser();
+			renderPrivateNavbar({
+				mountId: "private-navbar-mount",
+				navbarLabel: "Barra principal de ventas"
+			});
+			renderAppFooter({
+				mountId: "app-footer-mount",
+				moduleLabel: "MLBT | Módulo de ventas"
+			});
+			var logoutButton = document.getElementById("logout-button");
+			var sessionMessage = document.getElementById("sales-session-message");
+
+			renderPrivateSidebar({
+				mountId: "private-sidebar-mount",
+				currentPage: "sales",
+				currentUser: currentUser
+			});
+
+			sessionMessage.textContent = "Bienvenido, " + (currentUser && currentUser.name ? currentUser.name : "Usuario MLBT");
+
+			logoutButton.addEventListener("click", function () {
+				logout();
+			});
+
+			initSalesModule({
+				formId: "sales-form",
+				selectId: "sales-item-select",
+				summaryListId: "sales-order-list",
+				totalId: "sales-order-total",
+				confirmButtonId: "confirm-sale-button",
+				historyTableBodyId: "sales-history-body"
+			});
+		}
+	</script>
+</body>
+</html>

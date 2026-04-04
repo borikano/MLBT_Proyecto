@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Información de registro controlado de personal para María La Bonita Taquería">
+	<title>MLBT | Registro controlado de personal</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="public-navbar-mount"></div>
+
+		<main class="hero-layout" aria-labelledby="register-title">
+			<div id="public-hero-intro-mount"></div>
+
+			<section class="surface-card" aria-label="Información del flujo de registro controlado">
+				<div class="auth-form auth-form__content">
+					<p class="auth-form__message">El registro público directo está deshabilitado.</p>
+					<div class="hero-copy__details">
+						<article class="hero-info-card">
+							<h2>1. Solicitud interna</h2>
+							<p>El Administrador de tienda registra la solicitud de nuevo usuario operativo desde el módulo interno.</p>
+						</article>
+						<article class="hero-info-card">
+							<h2>2. Aprobación</h2>
+							<p>El Administrador del sistema revisa y aprueba la solicitud antes de habilitar el acceso.</p>
+						</article>
+						<article class="hero-info-card">
+							<h2>3. Alta directa ADM</h2>
+							<p>Cuando el alta la registra directamente el Administrador del sistema, el usuario puede quedar habilitado en el mismo paso.</p>
+						</article>
+					</div>
+					<div class="form-actions-row">
+						<a class="button button--primary" href="login.html">Ir al login</a>
+						<a class="button button--ghost" href="../index.html">Volver al inicio</a>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { renderAppFooter, renderPublicHeroIntro, renderPublicNavbar } from "../js/components.js";
+		import session from "../js/session.js";
+
+		renderPublicNavbar({
+			mountId: "public-navbar-mount",
+			navbarLabel: "Encabezado de registro de personal",
+			subtitle: "Registro público controlado"
+		});
+		renderPublicHeroIntro({
+			mountId: "public-hero-intro-mount",
+			className: "hero-copy",
+			ariaLabelledBy: "register-title",
+			eyebrow: "Registro controlado",
+			titleId: "register-title",
+			title: "Las altas de usuarios ahora se gestionan solo desde administración.",
+			description: "Por seguridad de la información, los nuevos usuarios no se crean de forma pública. Las solicitudes deben ser registradas por un Administrador de tienda y aprobadas por un Administrador del sistema, o ingresadas directamente por un Administrador del sistema.",
+			infoCardTitle: "Flujo vigente",
+			infoCardDescription: "Si necesitas acceso, solicita el registro al responsable administrativo de la tienda. El acceso quedará activo solo después de aprobación."
+		});
+		renderAppFooter({
+			mountId: "app-footer-mount",
+			moduleLabel: "MLBT | Registro de personal"
+		});
+
+		if (session.isActive()) {
+			window.location.href = "dashboard.html";
+		}
+	</script>
+</body>
+</html>

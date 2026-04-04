@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Panel principal privado del sistema MLBT">
+	<title>MLBT | Dashboard</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="private-navbar-mount"></div>
+
+		<main class="admin-layout" aria-labelledby="dashboard-title">
+			<div id="private-sidebar-mount"></div>
+
+			<section class="surface-card dashboard-module" aria-label="Centro de operaciones del dashboard">
+				<div class="auth-form__content dashboard-module__content">
+					<div class="module-header">
+						<p class="eyebrow">Área privada</p>
+						<h1 id="dashboard-title">Bienvenido al centro de operaciones de MLBT.</h1>
+						<p class="app-description">La sesión está protegida y activa. Desde aquí puedes navegar rápidamente a los módulos principales del sistema administrativo.</p>
+					</div>
+
+					<div class="dashboard-shortcuts">
+						<a class="dashboard-shortcut" id="dashboard-users-shortcut" href="users-list.html">
+							<p class="visual-card__label">Gestión</p>
+							<h2>Usuarios</h2>
+							<p>Administra perfiles y accesos internos.</p>
+						</a>
+						<a class="dashboard-shortcut" href="inventory.html">
+							<p class="visual-card__label">Control</p>
+							<h2>Inventario</h2>
+							<p>Registra insumos, stock y movimientos.</p>
+						</a>
+						<a class="dashboard-shortcut" href="sales.html">
+							<p class="visual-card__label">Operación</p>
+							<h2>Ventas</h2>
+							<p>Procesa pedidos y revisa el historial.</p>
+						</a>
+					</div>
+
+					<section class="visual-card visual-card--brand dashboard-session" aria-label="Resumen del usuario autenticado">
+						<img class="visual-card__logo" src="../assets/img/Logo_Principal.png" alt="Logo institucional MLBT">
+						<div>
+							<p class="visual-card__label">Sesión actual</p>
+							<h2 id="welcome-user">Administrador conectado</h2>
+							<p class="app-description">Rol activo: <strong id="user-role">Cargando...</strong></p>
+						</div>
+					</section>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { canAccessUsersModule, logout, protectRoute } from "../js/auth.js";
+		import { renderAppFooter, renderPrivateNavbar, renderPrivateSidebar } from "../js/components.js";
+		import session from "../js/session.js";
+
+		var isAllowed = protectRoute();
+
+		if (isAllowed) {
+			var currentUser = session.getUser();
+			renderPrivateNavbar({
+				mountId: "private-navbar-mount",
+				navbarLabel: "Cabecera del dashboard"
+			});
+			renderAppFooter({
+				mountId: "app-footer-mount",
+				moduleLabel: "MLBT | Dashboard privado"
+			});
+			var roleNode = document.getElementById("user-role");
+			var welcomeNode = document.getElementById("welcome-user");
+			var logoutButton = document.getElementById("logout-button");
+			var usersShortcut = document.getElementById("dashboard-users-shortcut");
+			var hasUsersModuleAccess = canAccessUsersModule(currentUser);
+
+			renderPrivateSidebar({
+				mountId: "private-sidebar-mount",
+				currentPage: "dashboard",
+				currentUser: currentUser
+			});
+
+			if (currentUser) {
+				roleNode.textContent = currentUser.role || "Usuario MLBT";
+				welcomeNode.textContent = "Bienvenido, " + (currentUser.name || "Usuario MLBT");
+			}
+
+			if (!hasUsersModuleAccess) {
+				if (usersShortcut) {
+					usersShortcut.remove();
+				}
+			}
+
+			logoutButton.addEventListener("click", function () {
+				logout();
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Gestión de usuarios del sistema MLBT">
+	<title>MLBT | Usuarios</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+	<link rel="stylesheet" href="../css/tables.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="private-navbar-mount"></div>
+
+		<main class="admin-layout" aria-labelledby="users-title">
+			<div id="private-sidebar-mount"></div>
+
+			<section class="surface-card users-module" aria-label="Módulo de usuarios">
+				<div class="auth-form__content users-module__content">
+					<div class="module-header">
+						<p class="eyebrow">Módulo de usuarios</p>
+						<h1 id="users-title">Registro de usuarios</h1>
+						<p class="app-description" id="users-module-description">Crea perfiles operativos para administradores de tienda, meseros y cocineros con validaciones más estrictas.</p>
+						<p class="auth-form__message module-status" id="users-session-message" aria-live="polite"></p>
+					</div>
+
+					<div class="module-actions" aria-label="Acciones del módulo de usuarios">
+						<a class="button button--ghost" id="users-list-link" href="users-list.html">Ver base de usuarios</a>
+					</div>
+
+					<section class="inventory-panel" id="users-form-panel" aria-labelledby="users-form-title">
+						<h2 id="users-form-title">Registrar usuario</h2>
+						<form id="user-form" class="users-form-grid" novalidate>
+							<div>
+								<label for="user-role">Rol</label>
+								<select class="auth-form__input" id="user-role" name="role" required>
+									<option value="">Selecciona un rol</option>
+									<option value="Administrador de tienda">Administrador de tienda</option>
+									<option value="Mesero">Mesero</option>
+									<option value="Cocinero">Cocinero</option>
+								</select>
+							</div>
+
+							<div>
+								<label for="user-document-number">Número de CC</label>
+								<input class="auth-form__input" id="user-document-number" name="documentNumber" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Ejemplo: 1234567890" required>
+							</div>
+
+							<div>
+								<label for="user-first-name">Nombres</label>
+								<input class="auth-form__input" id="user-first-name" name="firstName" type="text" autocomplete="given-name" placeholder="Ejemplo: María Paz" required>
+							</div>
+
+							<div>
+								<label for="user-last-name">Apellidos</label>
+								<input class="auth-form__input" id="user-last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Ejemplo: Echeverry González" required>
+							</div>
+
+							<div>
+								<label for="user-phone">Teléfono</label>
+								<input class="auth-form__input" id="user-phone" name="phone" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="tel" placeholder="Ejemplo: 3001234567" required>
+							</div>
+
+							<div>
+								<label for="user-email">Email</label>
+								<input class="auth-form__input" id="user-email" name="email" type="email" autocomplete="email" placeholder="Ejemplo: maria@mlbt.com" required>
+							</div>
+
+							<div>
+								<label for="user-password">Contraseña</label>
+								<div class="password-field">
+									<input class="auth-form__input password-field__input" id="user-password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" aria-describedby="user-password-match-message" required>
+									<button class="password-field__toggle" type="button" data-password-toggle aria-controls="user-password" aria-pressed="false" aria-label="Mostrar contraseña">
+										<span class="password-field__icon" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+
+							<div>
+								<label for="user-confirm-password">Confirmar contraseña</label>
+								<div class="password-field">
+									<input class="auth-form__input password-field__input" id="user-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Repite la contraseña" aria-describedby="user-password-match-message" required>
+									<button class="password-field__toggle" type="button" data-password-toggle aria-controls="user-confirm-password" aria-pressed="false" aria-label="Mostrar contraseña">
+										<span class="password-field__icon" aria-hidden="true"></span>
+									</button>
+								</div>
+								<p id="user-password-match-message" class="auth-form__note" aria-live="polite"></p>
+							</div>
+
+							<p id="user-form-message" class="auth-form__message" aria-live="polite"></p>
+
+							<button class="button button--secondary" id="user-submit-button" type="submit">Guardar usuario</button>
+						</form>
+					</section>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { logout, protectRoute } from "../js/auth.js";
+		import { renderAppFooter, renderPrivateNavbar, renderPrivateSidebar } from "../js/components.js";
+		import session from "../js/session.js";
+		import { initUsersRegistrationModule } from "../js/users.js";
+		import { initPasswordVisibilityToggles } from "../js/ui.js";
+
+		var isAllowed = protectRoute({
+			allowedRoles: ["Administrador del sistema", "Administrador de tienda"],
+			unauthorizedRedirect: "dashboard.html"
+		});
+
+		if (isAllowed) {
+			var currentUser = session.getUser();
+			renderPrivateNavbar({
+				mountId: "private-navbar-mount",
+				navbarLabel: "Barra principal de usuarios"
+			});
+			renderAppFooter({
+				mountId: "app-footer-mount",
+				moduleLabel: "MLBT | Módulo de usuarios"
+			});
+			var logoutButton = document.getElementById("logout-button");
+			var sessionMessage = document.getElementById("users-session-message");
+			var submitButton = document.getElementById("user-submit-button");
+			var formPanel = document.getElementById("users-form-panel");
+			var moduleDescription = document.getElementById("users-module-description");
+			var usersListLink = document.getElementById("users-list-link");
+			var moduleActions = usersListLink ? usersListLink.parentElement : null;
+
+			renderPrivateSidebar({
+				mountId: "private-sidebar-mount",
+				currentPage: "users",
+				currentUser: currentUser
+			});
+
+			sessionMessage.textContent = "Bienvenido, " + (currentUser && currentUser.name ? currentUser.name : "Usuario MLBT");
+
+			if (currentUser && currentUser.role === "Administrador de tienda") {
+				moduleDescription.textContent = "Registra solicitudes controladas para nuevos usuarios operativos. Un administrador del sistema debe aprobar cada alta.";
+				submitButton.textContent = "Enviar solicitud";
+			}
+
+			if (!currentUser || (currentUser.role !== "Administrador del sistema" && currentUser.role !== "Administrador de tienda")) {
+				moduleDescription.textContent = "No tienes permisos para solicitar ni registrar nuevos usuarios desde este módulo.";
+				if (moduleActions) {
+					moduleActions.remove();
+				}
+				formPanel.hidden = true;
+			}
+
+			logoutButton.addEventListener("click", function () {
+				logout();
+			});
+
+			initPasswordVisibilityToggles();
+
+			initUsersRegistrationModule({
+				formId: "user-form",
+				documentFieldId: "user-document-number",
+				phoneFieldId: "user-phone",
+				messageId: "user-form-message"
+			});
+		}
+	</script>
+</body>
+</html>

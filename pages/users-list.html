@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Base de usuarios registrados del sistema MLBT">
+	<title>MLBT | Base de usuarios</title>
+	<link rel="stylesheet" href="../css/variables.css">
+	<link rel="stylesheet" href="../css/components.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/forms.css">
+	<link rel="stylesheet" href="../css/tables.css">
+</head>
+<body>
+	<div class="page-shell">
+		<div id="private-navbar-mount"></div>
+
+		<main class="admin-layout" aria-labelledby="users-list-title">
+			<div id="private-sidebar-mount"></div>
+
+			<section class="surface-card users-module" aria-label="Base de usuarios registrados">
+				<div class="auth-form__content users-module__content">
+					<div class="module-header">
+						<p class="eyebrow">Módulo de usuarios</p>
+						<h1 id="users-list-title">Base de usuarios registrados</h1>
+						<p class="app-description">Consulta la base operativa de usuarios, revisa sus roles y gestiona bajas lógicas o reactivaciones sin perder el historial del registro.</p>
+						<p class="auth-form__message module-status" id="users-session-message" aria-live="polite"></p>
+					</div>
+
+					<div class="module-actions" aria-label="Acciones de la base de usuarios">
+						<a class="button button--secondary" id="users-create-link" href="users.html">Registrar nuevo usuario</a>
+					</div>
+
+					<section class="inventory-table-section" aria-labelledby="users-table-title">
+						<h2 id="users-table-title">Usuarios registrados</h2>
+						<div class="table-wrapper">
+							<table class="data-table">
+								<thead>
+									<tr>
+										<th scope="col">Estado</th>
+										<th scope="col">Acciones</th>
+										<th scope="col">N° Registro</th>
+										<th scope="col">Rol</th>
+										<th scope="col">CC</th>
+										<th scope="col">Nombres</th>
+										<th scope="col">Apellidos</th>
+										<th scope="col">Teléfono</th>
+										<th scope="col">Email</th>
+										<th scope="col">Fecha de alta</th>
+									</tr>
+								</thead>
+								<tbody id="users-table-body"></tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</section>
+		</main>
+
+		<div id="app-footer-mount"></div>
+	</div>
+
+	<script type="module">
+		import { logout, protectRoute } from "../js/auth.js";
+		import { renderAppFooter, renderPrivateNavbar, renderPrivateSidebar } from "../js/components.js";
+		import session from "../js/session.js";
+		import { initUsersListModule } from "../js/users.js";
+
+		var isAllowed = protectRoute({
+			allowedRoles: ["Administrador del sistema", "Administrador de tienda"],
+			unauthorizedRedirect: "dashboard.html"
+		});
+
+		if (isAllowed) {
+			var currentUser = session.getUser();
+			renderPrivateNavbar({
+				mountId: "private-navbar-mount",
+				navbarLabel: "Barra principal de base de usuarios"
+			});
+			renderAppFooter({
+				mountId: "app-footer-mount",
+				moduleLabel: "MLBT | Base de usuarios"
+			});
+			var logoutButton = document.getElementById("logout-button");
+			var sessionMessage = document.getElementById("users-session-message");
+			var createLink = document.getElementById("users-create-link");
+			var moduleActions = createLink ? createLink.parentElement : null;
+
+			renderPrivateSidebar({
+				mountId: "private-sidebar-mount",
+				currentPage: "users-list",
+				currentUser: currentUser
+			});
+
+			sessionMessage.textContent = "Bienvenido, " + (currentUser && currentUser.name ? currentUser.name : "Usuario MLBT");
+
+			if (currentUser && currentUser.role === "Administrador de tienda") {
+				createLink.textContent = "Solicitar nuevo usuario";
+			}
+
+			if (!currentUser || (currentUser.role !== "Administrador del sistema" && currentUser.role !== "Administrador de tienda")) {
+				if (moduleActions) {
+					moduleActions.remove();
+				}
+			}
+
+			logoutButton.addEventListener("click", function () {
+				logout();
+			});
+
+			initUsersListModule({
+				tableBodyId: "users-table-body"
+			});
+		}
+	</script>
+</body>
+</html>
