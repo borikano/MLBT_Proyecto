@@ -40,3 +40,14 @@ feature/GA7_220501096_AA3_EV01_MLBT
 - Se agrega documento de estándares técnicos para separar código por tipo y responsabilidad.
 - Se define que los archivos index solo deben actuar como punto de entrada o navegación inicial.
 
+
+## Actualizacion - 2026-05-24 18:41:30
+
+- Se crea el modulo complementario java-web.
+- Se agregan modelos Java para usuarios, inventario y ventas.
+- Se agregan servicios Java para separar reglas de aplicacion.
+- Se agrega repositorio temporal en memoria para separar datos de controladores.
+- Se agregan Servlets para login, dashboard, usuarios, inventario, ventas y cierre de sesion.
+- Se agregan JSP en WEB-INF para mantener vistas separadas.
+- Se agrega CSS separado en assets/css.
+- Se mantiene index.jsp solo como punto de entrada del modulo.

@@ -95,4 +95,35 @@ Ramas vigentes:
 ## Resultado esperado
 
 La evidencia permite demostrar la codificación del módulo web del proyecto MLBT, su estructura funcional, su organización técnica, la trazabilidad de formularios y la preparación para una futura evolución hacia backend.
+## Modulo Java Web complementario
+
+Se agrega el modulo `java-web` como complemento tecnico para evidenciar directamente una implementacion Java Web con JSP, Servlets, formularios y metodos HTTP.
+
+El modulo mantiene separacion por tipo de codigo:
+
+- Java en `java-web/src/main/java/`.
+- Servlets en `java-web/src/main/java/com/mlbt/controller/`.
+- Modelos en `java-web/src/main/java/com/mlbt/model/`.
+- Repositorio temporal en `java-web/src/main/java/com/mlbt/repository/`.
+- Servicios en `java-web/src/main/java/com/mlbt/service/`.
+- JSP en `java-web/src/main/webapp/WEB-INF/jsp/`.
+- CSS en `java-web/src/main/webapp/assets/css/`.
+
+El archivo `index.jsp` se mantiene como punto de entrada y no contiene logica sensible.
+
+## Trazabilidad Java Web
+
+| Elemento | Ruta | Descripcion |
+|---|---|---|
+| Proyecto Maven | java-web/pom.xml | Configuracion del modulo Java Web con empaquetado WAR. |
+| Estilos | java-web/src/main/webapp/assets/css/app.css | Estilos centralizados del modulo. |
+| Vistas JSP | java-web/src/main/webapp/WEB-INF/jsp/ | Vistas protegidas y formularios. |
+| Controladores | java-web/src/main/java/com/mlbt/controller/ | Servlets para solicitudes GET y POST. |
+| Modelos | java-web/src/main/java/com/mlbt/model/ | Clases de dominio. |
+| Servicios | java-web/src/main/java/com/mlbt/service/ | Reglas de aplicacion. |
+| Repositorio | java-web/src/main/java/com/mlbt/repository/ | Datos temporales en memoria. |
+
+## Resultado complementario
+
+Con este modulo, la evidencia cuenta con una implementacion directa de formularios JSP, metodos GET, metodos POST, Servlets y estructura Java Web separada por responsabilidad.
 

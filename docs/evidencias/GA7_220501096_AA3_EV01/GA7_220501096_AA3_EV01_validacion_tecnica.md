@@ -44,4 +44,23 @@ Get-ChildItem -Recurse -Include *.jsp
 ## Conclusión
 
 El proyecto cuenta con estructura web frontend funcional y documentada. La evidencia se apoya en la codificación existente, la organización del repositorio, la trazabilidad de formularios y la documentación técnica complementaria.
+## Validacion del modulo Java Web
+
+Comandos de validacion sugeridos:
+
+```powershell
+Get-ChildItem -Recurse java-web -Include *.jsp,*.java,*.xml,*.css,*.md | Select-Object FullName
+```
+
+```powershell
+Get-ChildItem -Recurse java-web -Include *.jsp | Select-String -Pattern "method=""get""|method=""post""|action=" -CaseSensitive:$false
+```
+
+```powershell
+Get-ChildItem -Recurse java-web -Include *.java | Select-String -Pattern "doGet|doPost|@WebServlet" -CaseSensitive:$false
+```
+
+```powershell
+mvn -f java-web/pom.xml clean package
+```
 
