@@ -6,7 +6,7 @@ MLBT - Sistema administrativo frontend para Maria La Bonita Taqueria.
 
 ## Rama de trabajo
 
-feature/ga7-aa3-ev01-evidencia
+feature/GA7_220501096_AA3_EV01_MLBT
 
 ## Registro inicial
 
@@ -20,7 +20,7 @@ feature/ga7-aa3-ev01-evidencia
 
 | Actividad | Estado | Descripción |
 |---|---|---|
-| Preparar rama de trabajo | Completado | Se creó la rama feature/ga7-aa3-ev01-evidencia desde principal. |
+| Preparar rama de trabajo | Completado | Se creó la rama feature/GA7_220501096_AA3_EV01_MLBT desde principal. |
 | Documentar evidencia | En proceso | Se crea documento base de la evidencia. |
 | Revisar estructura del proyecto | Pendiente | Validar archivos HTML, CSS, JS y documentación. |
 | Validar formularios | Pendiente | Confirmar formularios y lógica de eventos submit. |
@@ -33,3 +33,10 @@ feature/ga7-aa3-ev01-evidencia
 - La persistencia se realiza mediante localStorage.
 - La estructura ya contiene una capa inicial de servicios para futura migración a backend.
 - No se registran archivos JSP en la versión actual.
+
+## Actualización - 2026-05-24 18:37:30
+
+- Se ajusta la nomenclatura de rama, carpeta y documentos para usar el identificador completo de la evidencia.
+- Se agrega documento de estándares técnicos para separar código por tipo y responsabilidad.
+- Se define que los archivos index solo deben actuar como punto de entrada o navegación inicial.
+

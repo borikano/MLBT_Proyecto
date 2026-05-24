@@ -44,3 +44,4 @@ Get-ChildItem -Recurse -Include *.jsp
 ## Conclusión
 
 El proyecto cuenta con estructura web frontend funcional y documentada. La evidencia se apoya en la codificación existente, la organización del repositorio, la trazabilidad de formularios y la documentación técnica complementaria.
+
