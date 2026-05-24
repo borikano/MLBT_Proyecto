@@ -51,3 +51,11 @@ feature/GA7_220501096_AA3_EV01_MLBT
 - Se agregan JSP en WEB-INF para mantener vistas separadas.
 - Se agrega CSS separado en assets/css.
 - Se mantiene index.jsp solo como punto de entrada del modulo.
+
+## Actualización - 2026-05-24 18:45:07
+
+- Se genera reporte de validación técnica del módulo Java Web.
+- Se valida estructura separada por tipo de código.
+- Se valida presencia de formularios JSP con GET y POST.
+- Se valida presencia de Servlets con doGet, doPost y @WebServlet.
+- Se valida que index.jsp funcione como punto de entrada sin concentrar lógica sensible.
