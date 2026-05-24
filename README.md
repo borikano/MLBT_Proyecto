@@ -293,3 +293,13 @@ Este proyecto ya tiene reglas de negocio importantes implementadas. Antes de toc
 - `js/services/`
 
 Eso evita romper acceso, roles, bajas logicas o la futura migracion a backend.
+## Trazabilidad de formularios HTML, métodos HTTP y páginas JSP
+
+Como parte de la documentación técnica del proyecto, se incluye un mapa de trazabilidad donde se identifican los formularios HTML, la lógica equivalente a operaciones GET/POST y el estado actual de páginas JSP.
+
+Documento de referencia:
+
+- [Trazabilidad de formularios HTML, métodos HTTP y páginas JSP](docs/trazabilidad-formularios-http-jsp.md)
+
+En la versión actual, el proyecto MLBT funciona como aplicación frontend con HTML, CSS y JavaScript. Los formularios se encuentran en la carpeta pages, la lógica se gestiona desde la carpeta js y actualmente no se encontraron archivos .jsp.
+
