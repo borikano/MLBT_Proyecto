@@ -302,4 +302,12 @@ Documento de referencia:
 - [Trazabilidad de formularios HTML, métodos HTTP y páginas JSP](docs/trazabilidad-formularios-http-jsp.md)
 
 En la versión actual, el proyecto MLBT funciona como aplicación frontend con HTML, CSS y JavaScript. Los formularios se encuentran en la carpeta pages, la lógica se gestiona desde la carpeta js y actualmente no se encontraron archivos .jsp.
+## Evidencia GA7_220501096_AA3_EV01
+
+La documentación de la evidencia de codificación del módulo web se encuentra en:
+
+- [Evidencia GA7_220501096_AA3_EV01](docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_evidencia.md)
+- [Bitácora GA7_220501096_AA3_EV01](docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_bitacora.md)
+- [Validación técnica GA7_220501096_AA3_EV01](docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_validacion_tecnica.md)
+- [Estándares técnicos GA7_220501096_AA3_EV01](docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_estandares_tecnicos.md)
 

@@ -226,3 +226,18 @@ Minimo se debe documentar cuando cambie:
 - Badges visuales para estados y alertas.
 - Migracion de inventario y ventas a la capa de servicios.
 - Implementacion del proveedor remoto real.
+## Separación por tipo de código y responsabilidad
+
+El proyecto debe mantener separación estricta por tipo de archivo, tecnología y responsabilidad.
+
+Reglas:
+
+- HTML y JSP deben usarse para estructura y vistas.
+- CSS debe concentrar únicamente estilos y presentación.
+- JavaScript debe concentrar comportamiento frontend, eventos y consumo de servicios.
+- Java debe concentrar controladores, modelos, servicios y lógica de servidor cuando exista módulo backend o Java Web.
+- La documentación técnica debe permanecer en `docs/`.
+- No se deben mezclar marcos de trabajo ni responsabilidades en un mismo archivo.
+- Los archivos `index.html` o `index.jsp` deben funcionar como punto de entrada o navegación inicial, no como ubicación de lógica importante o sensible.
+- Las reglas críticas deben centralizarse en módulos, servicios o controladores según la tecnología usada.
+
