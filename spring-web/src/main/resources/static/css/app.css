@@ -161,3 +161,37 @@ th {
     font-size: 0.88rem;
     font-weight: 700;
 }
+
+.brand-strip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fffaf2;
+    box-shadow: 0 8px 20px rgba(60, 35, 20, 0.06);
+}
+
+.brand-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #ffffff;
+}
+
+.brand-strip strong {
+    display: block;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.brand-strip span {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
+}
