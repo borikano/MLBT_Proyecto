@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MLBT Spring Web</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1>MLBT Spring Web</h1>
+                    <p class="muted">Módulo Spring Boot MVC con CRUD, JPA/Hibernate y MySQL.</p>
+                </div>
+                <span class="badge">GA7_220501096_AA3_EV01</span>
+            </div>
+
+            <nav class="nav">
+                <a th:href="@{/usuarios}">Usuarios</a>
+                <a th:href="@{/inventario}">Inventario</a>
+                <a th:href="@{/ventas}">Ventas</a>
+            </nav>
+
+            <p>
+                Este módulo permite navegar entre las páginas principales del sistema y administrar
+                usuarios, productos de inventario y ventas mediante operaciones de crear, listar,
+                editar y eliminar.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

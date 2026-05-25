@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1>Inventario</h1>
+                    <p class="muted">Administración de productos e insumos.</p>
+                </div>
+                <a class="button" th:href="@{/inventario/nuevo}">Agregar producto</a>
+            </div>
+
+            <nav class="nav">
+                <a th:href="@{/dashboard}">Dashboard</a>
+                <a th:href="@{/usuarios}">Usuarios</a>
+                <a th:href="@{/ventas}">Ventas</a>
+            </nav>
+
+            <form class="search-form" th:action="@{/inventario}" method="get">
+                <label>
+                    Consulta por GET
+                    <input type="text" name="q" placeholder="Nombre del producto">
+                </label>
+                <button class="button secondary" type="submit">Consultar</button>
+            </form>
+
+            <div class="empty" th:if="${#lists.isEmpty(productos)}">
+                No hay productos registrados.
+            </div>
+
+            <table th:if="${!#lists.isEmpty(productos)}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Stock</th>
+                        <th>Unidad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto : ${productos}">
+                        <td th:text="${producto.id}"></td>
+                        <td th:text="${producto.nombre}"></td>
+                        <td th:text="${producto.stock}"></td>
+                        <td th:text="${producto.unidad}"></td>
+                        <td th:text="${producto.activo ? 'Activo' : 'Inactivo'}"></td>
+                        <td>
+                            <div class="actions">
+                                <a class="button secondary" th:href="@{/inventario/{id}/editar(id=${producto.id})}">Editar</a>
+                                <form th:action="@{/inventario/{id}/eliminar(id=${producto.id})}" method="post">
+                                    <button class="button danger" type="submit">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario inventario</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1 th:text="${modo} + ' producto'"></h1>
+                    <p class="muted">Formulario de creación o actualización de inventario.</p>
+                </div>
+                <a class="button secondary" th:href="@{/inventario}">Volver</a>
+            </div>
+
+            <form class="form-grid" th:action="@{/inventario}" th:object="${producto}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <label>
+                    Producto
+                    <input type="text" th:field="*{nombre}" required>
+                    <span class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+                </label>
+
+                <label>
+                    Stock
+                    <input type="number" th:field="*{stock}" min="0" required>
+                    <span class="error" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span>
+                </label>
+
+                <label>
+                    Unidad
+                    <input type="text" th:field="*{unidad}" required>
+                    <span class="error" th:if="${#fields.hasErrors('unidad')}" th:errors="*{unidad}"></span>
+                </label>
+
+                <label>
+                    <span>Estado</span>
+                    <select th:field="*{activo}">
+                        <option th:value="true">Activo</option>
+                        <option th:value="false">Inactivo</option>
+                    </select>
+                </label>
+
+                <div class="actions">
+                    <button class="button" type="submit">Guardar</button>
+                    <a class="button secondary" th:href="@{/inventario}">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

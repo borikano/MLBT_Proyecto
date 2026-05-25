@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1>Ventas</h1>
+                    <p class="muted">Administración de ventas registradas.</p>
+                </div>
+                <a class="button" th:href="@{/ventas/nueva}">Agregar venta</a>
+            </div>
+
+            <nav class="nav">
+                <a th:href="@{/dashboard}">Dashboard</a>
+                <a th:href="@{/usuarios}">Usuarios</a>
+                <a th:href="@{/inventario}">Inventario</a>
+            </nav>
+
+            <form class="search-form" th:action="@{/ventas}" method="get">
+                <label>
+                    Consulta por GET
+                    <input type="text" name="q" placeholder="Producto o referencia">
+                </label>
+                <button class="button secondary" type="submit">Consultar</button>
+            </form>
+
+            <div class="empty" th:if="${#lists.isEmpty(ventas)}">
+                No hay ventas registradas.
+            </div>
+
+            <table th:if="${!#lists.isEmpty(ventas)}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="venta : ${ventas}">
+                        <td th:text="${venta.id}"></td>
+                        <td th:text="${venta.producto}"></td>
+                        <td th:text="${venta.cantidad}"></td>
+                        <td th:text="${venta.total}"></td>
+                        <td th:text="${venta.fecha}"></td>
+                        <td>
+                            <div class="actions">
+                                <a class="button secondary" th:href="@{/ventas/{id}/editar(id=${venta.id})}">Editar</a>
+                                <form th:action="@{/ventas/{id}/eliminar(id=${venta.id})}" method="post">
+                                    <button class="button danger" type="submit">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
