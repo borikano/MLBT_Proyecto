@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1>Usuarios</h1>
+                    <p class="muted">Administración de usuarios del sistema.</p>
+                </div>
+                <a class="button" th:href="@{/usuarios/nuevo}">Agregar usuario</a>
+            </div>
+
+            <nav class="nav">
+                <a th:href="@{/dashboard}">Dashboard</a>
+                <a th:href="@{/inventario}">Inventario</a>
+                <a th:href="@{/ventas}">Ventas</a>
+            </nav>
+
+            <form class="search-form" th:action="@{/usuarios}" method="get">
+                <label>
+                    Consulta por GET
+                    <input type="text" name="q" placeholder="Nombre, correo o rol">
+                </label>
+                <button class="button secondary" type="submit">Consultar</button>
+            </form>
+
+            <div class="empty" th:if="${#lists.isEmpty(usuarios)}">
+                No hay usuarios registrados.
+            </div>
+
+            <table th:if="${!#lists.isEmpty(usuarios)}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.nombre}"></td>
+                        <td th:text="${usuario.correo}"></td>
+                        <td th:text="${usuario.rol}"></td>
+                        <td th:text="${usuario.activo ? 'Activo' : 'Inactivo'}"></td>
+                        <td>
+                            <div class="actions">
+                                <a class="button secondary" th:href="@{/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
+                                <form th:action="@{/usuarios/{id}/eliminar(id=${usuario.id})}" method="post">
+                                    <button class="button danger" type="submit">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario venta</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1 th:text="${modo} + ' venta'"></h1>
+                    <p class="muted">Formulario de creación o actualización de ventas.</p>
+                </div>
+                <a class="button secondary" th:href="@{/ventas}">Volver</a>
+            </div>
+
+            <form class="form-grid" th:action="@{/ventas}" th:object="${venta}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <label>
+                    Producto
+                    <input type="text" th:field="*{producto}" required>
+                    <span class="error" th:if="${#fields.hasErrors('producto')}" th:errors="*{producto}"></span>
+                </label>
+
+                <label>
+                    Cantidad
+                    <input type="number" th:field="*{cantidad}" min="1" required>
+                    <span class="error" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></span>
+                </label>
+
+                <label>
+                    Total
+                    <input type="number" th:field="*{total}" min="0.01" step="0.01" required>
+                    <span class="error" th:if="${#fields.hasErrors('total')}" th:errors="*{total}"></span>
+                </label>
+
+                <div class="actions">
+                    <button class="button" type="submit">Guardar</button>
+                    <a class="button secondary" th:href="@{/ventas}">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

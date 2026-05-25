@@ -1,0 +1,163 @@
+:root {
+    --bg: #fff8ef;
+    --panel: #ffffff;
+    --primary: #9b2c2c;
+    --primary-dark: #641d1d;
+    --secondary: #7a665d;
+    --danger: #b42318;
+    --border: #ead7c5;
+    --text: #2d1f1a;
+    --muted: #6f5b52;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.layout {
+    width: min(1120px, 94%);
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(60, 35, 20, 0.08);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0 24px;
+}
+
+.nav a,
+.button {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 0;
+    background: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.button.secondary {
+    background: var(--secondary);
+}
+
+.button.danger {
+    background: var(--danger);
+}
+
+.nav a:hover,
+.button:hover {
+    background: var(--primary-dark);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.form-grid {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    flex-wrap: wrap;
+    margin: 12px 0 18px;
+}
+
+.search-form label {
+    min-width: 260px;
+}
+
+label {
+    display: grid;
+    gap: 6px;
+    font-weight: 700;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font: inherit;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: #ffffff;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #fff1df;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.empty {
+    padding: 18px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    background: #fffaf2;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #fff1df;
+    font-size: 0.88rem;
+    font-weight: 700;
+}

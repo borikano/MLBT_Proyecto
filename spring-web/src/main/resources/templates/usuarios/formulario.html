@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario usuario</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+    <main class="layout">
+        <section class="panel">
+            <div class="header">
+                <div>
+                    <h1 th:text="${modo} + ' usuario'"></h1>
+                    <p class="muted">Formulario de creación o actualización de usuarios.</p>
+                </div>
+                <a class="button secondary" th:href="@{/usuarios}">Volver</a>
+            </div>
+
+            <form class="form-grid" th:action="@{/usuarios}" th:object="${usuario}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <label>
+                    Nombre
+                    <input type="text" th:field="*{nombre}" required>
+                    <span class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+                </label>
+
+                <label>
+                    Correo
+                    <input type="email" th:field="*{correo}" required>
+                    <span class="error" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></span>
+                </label>
+
+                <label>
+                    Rol
+                    <select th:field="*{rol}" required>
+                        <option value="">Seleccione un rol</option>
+                        <option value="Administrador del sistema">Administrador del sistema</option>
+                        <option value="Administrador de tienda">Administrador de tienda</option>
+                        <option value="Mesero">Mesero</option>
+                        <option value="Cocinero">Cocinero</option>
+                    </select>
+                    <span class="error" th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"></span>
+                </label>
+
+                <label>
+                    <span>Estado</span>
+                    <select th:field="*{activo}">
+                        <option th:value="true">Activo</option>
+                        <option th:value="false">Inactivo</option>
+                    </select>
+                </label>
+
+                <div class="actions">
+                    <button class="button" type="submit">Guardar</button>
+                    <a class="button secondary" th:href="@{/usuarios}">Cancelar</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
