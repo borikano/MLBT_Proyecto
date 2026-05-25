@@ -81,3 +81,66 @@ http://localhost:8082
 ## Rama estable
 
 Arawkano
+
+## Entrega GA7_220501096_AA3_EV01
+
+El modulo principal entregado para la evidencia GA7_220501096_AA3_EV01 se encuentra en:
+
+- spring-web
+
+Este modulo implementa una aplicacion web con Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL/MariaDB mediante XAMPP.
+
+### Funcionalidades entregadas
+
+- Dashboard principal.
+- CRUD de usuarios.
+- CRUD de inventario.
+- CRUD de ventas.
+- Persistencia en MySQL/MariaDB.
+- Integracion visual con identidad MLBT.
+- Documentacion tecnica de soporte.
+
+### Requisitos de la evidencia cubiertos
+
+- Se tienen en cuenta artefactos previos del ciclo del software.
+- Se documenta la relacion con requisitos, prototipos, modelos, arquitectura y navegacion.
+- Se mantiene estructura de codigo separada por responsabilidad.
+- Se conserva versionamiento mediante Git y GitHub.
+- Se incluyen documentos de validacion funcional, cierre, hoja de ruta e indice de entrega.
+
+### Trazabilidad de requisitos
+
+El documento de trazabilidad principal se encuentra en:
+
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_trazabilidad_requisitos_evidencia.md
+
+Este documento relaciona los elementos solicitados para la evidencia con los componentes implementados en el repositorio.
+
+### Ejecucion local
+
+Antes de ejecutar el modulo, iniciar MySQL desde XAMPP.
+
+Comando desde la raiz del repositorio:
+
+.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+
+URL local:
+
+http://localhost:8082
+
+### Compilacion
+
+.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+
+### Documentacion de entrega
+
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_indice_entrega.md
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_entrega_final.md
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_validacion_funcional_spring_web.md
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_hoja_ruta_evolutiva.md
+- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_trazabilidad_requisitos_evidencia.md
+
+### Alcance posterior
+
+Los componentes de autenticacion, roles, permisos, auditoria, KDS, reportes e inventario avanzado quedan documentados como linea evolutiva posterior del proyecto MLBT.
+
