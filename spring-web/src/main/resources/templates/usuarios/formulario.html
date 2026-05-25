@@ -8,6 +8,13 @@
 <body>
     <main class="layout">
         <section class="panel">
+            <div class="brand-strip">
+                <img class="brand-logo" th:src="@{/img/Logo_Principal.png}" alt="Logo MLBT">
+                <div>
+                    <strong>MLBT Project</strong>
+                    <span>Maria La Bonita Taqueria</span>
+                </div>
+            </div>
             <div class="header">
                 <div>
                     <h1 th:text="${modo} + ' usuario'"></h1>
@@ -60,3 +67,4 @@
     </main>
 </body>
 </html>
+
