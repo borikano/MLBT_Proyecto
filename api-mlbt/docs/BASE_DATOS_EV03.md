@@ -2,11 +2,11 @@
 
 ## Proyecto
 
-MLBT Project - Maria La Bonita Taqueria
+MLBT Project - María La Bonita Taquería
 
 ## Evidencia
 
-GA7-220501096-AA5-EV03 - Diseno y Desarrollo de servicios web - proyecto
+GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
 
 ## Motor de base de datos
 
@@ -22,10 +22,10 @@ Prisma ORM.
 
 ## Modelos iniciales
 
-| Modelo | Tabla | Proposito |
+| Modelo | Tabla | Propósito |
 |---|---|---|
-| Usuario | usuarios | Gestion de usuarios, autenticacion y roles. |
-| ProductoInventario | productos_inventario | Gestion de productos e inventario base. |
+| Usuario | usuarios | Gestión de usuarios, autenticación y roles. |
+| ProductoInventario | productos_inventario | Gestión de productos e inventario base. |
 | Venta | ventas | Registro inicial de ventas del sistema. |
 
 ## Roles proyectados
@@ -51,3 +51,4 @@ Crear migracion inicial:
 Abrir Prisma Studio:
 
 .\node_modules\.bin\prisma.cmd studio
+

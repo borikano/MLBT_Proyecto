@@ -2,55 +2,83 @@
 
 ## Proyecto
 
-MLBT Project - Maria La Bonita Taqueria
+MLBT Project - María La Bonita Taquería
 
 ## Evidencia
 
-GA7-220501096-AA5-EV03 - Diseno y Desarrollo de servicios web - proyecto
+GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
 
-## Proposito
+## Propósito
 
-Este modulo contiene la API del proyecto MLBT. Su objetivo es exponer servicios web para las funcionalidades principales del sistema, manteniendo separacion con el frontend base, el modulo Java Web y el modulo Spring Web.
+Este módulo contiene la API del proyecto MLBT. Expone servicios web para autenticación, usuarios, inventario y ventas.
 
-## Alcance inicial
-
-La API del proyecto se prepara para cubrir servicios asociados a:
-
-- Salud del servicio.
-- Autenticacion.
-- Usuarios.
-- Inventario.
-- Ventas.
-- Documentacion de endpoints.
-
-## Stack tecnico previsto
+## Stack técnico
 
 - Node.js.
 - Express.
 - Prisma ORM.
-- MySQL / MariaDB mediante XAMPP.
+- MySQL / MariaDB con XAMPP.
 - bcrypt.
 - JSON Web Token.
 - Zod.
 - pnpm.
-- Postman.
-- Git y GitHub.
+- Postman para la siguiente evidencia EV04.
 
-## Estructura inicial
+## URL local
 
-| Carpeta | Proposito |
-|---|---|
-| src/config | Configuracion de entorno, base de datos y variables. |
-| src/controllers | Controladores HTTP. |
-| src/middlewares | Middlewares de autenticacion, errores y validaciones. |
-| src/routes | Definicion de rutas de la API. |
-| src/schemas | Esquemas de validacion. |
-| src/services | Logica de aplicacion. |
-| src/utils | Utilidades compartidas. |
-| prisma | Modelo de base de datos y migraciones. |
-| docs | Documentacion de servicios. |
-| postman | Colecciones Postman. |
+http://localhost:3001
 
-## Estado
+## Endpoints principales
 
-Estructura inicial creada. La implementacion de servicios se realizara de forma incremental.
+- GET /
+- GET /api/health
+- POST /api/auth/login
+- GET /api/auth/profile
+- GET /api/users
+- POST /api/users
+- PUT /api/users/:id
+- DELETE /api/users/:id
+- GET /api/inventory
+- POST /api/inventory
+- PUT /api/inventory/:id
+- DELETE /api/inventory/:id
+- GET /api/sales
+- POST /api/sales
+- PUT /api/sales/:id
+- DELETE /api/sales/:id
+
+## Ejecución local
+
+Antes de ejecutar, iniciar MySQL desde XAMPP.
+
+Desde la carpeta api-mlbt:
+
+node .\src\server.js
+
+## Validación rápida
+
+node .\src\server.js --check
+
+## Base de datos
+
+- Motor: MySQL / MariaDB.
+- Base local: mlbt_api_ga7_aa5_ev03.
+- ORM: Prisma.
+
+## Datos iniciales
+
+Para cargar datos iniciales:
+
+node prisma/seed.js
+
+## Documentación
+
+- docs/ENDPOINTS_EV03.md
+- docs/BASE_DATOS_EV03.md
+- docs/DATOS_INICIALES_EV03.md
+- docs/VALIDACION_ENDPOINTS_EV03.md
+
+## Nota
+
+El archivo .env es local y no debe versionarse. Se incluye .env.example como plantilla segura.
+

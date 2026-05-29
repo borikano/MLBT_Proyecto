@@ -2,13 +2,13 @@
 
 ## Proyecto
 
-MLBT Project - Maria La Bonita Taqueria
+MLBT Project - María La Bonita Taquería
 
 ## Evidencia
 
-GA7-220501096-AA5-EV03 - Diseno y Desarrollo de servicios web - proyecto
+GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
 
-## Proposito
+## Propósito
 
 Documentar los datos iniciales utilizados para validar la API del proyecto MLBT.
 
@@ -16,10 +16,10 @@ Documentar los datos iniciales utilizados para validar la API del proyecto MLBT.
 
 | Usuario | Rol | Uso |
 |---|---|---|
-| adminapp | ADMIN_APP | Administracion general del sistema. |
-| admintienda | ADMIN_TIENDA | Administracion operativa de tienda. |
-| mesero | MESERO | Operacion de pedidos y ventas. |
-| cocina | COCINA | Operacion de cocina/KDS proyectado. |
+| adminapp | ADMIN_APP | Administración general del sistema. |
+| admintienda | ADMIN_TIENDA | Administración operativa de tienda. |
+| mesero | MESERO | Operación de pedidos y ventas. |
+| cocina | COCINA | Operación de cocina/KDS proyectado. |
 
 ## Productos iniciales
 
@@ -32,7 +32,7 @@ Documentar los datos iniciales utilizados para validar la API del proyecto MLBT.
 
 ## Ventas iniciales
 
-| Producto | Cantidad | Proposito |
+| Producto | Cantidad | Propósito |
 |---|---|---|
 | Orden de tacos | 2 | Registro inicial de venta. |
 | Orden Pizza Mexicana | 5 | Registro inicial de venta. |
@@ -41,7 +41,7 @@ Documentar los datos iniciales utilizados para validar la API del proyecto MLBT.
 
 Estas credenciales son solo para entorno local de desarrollo.
 
-| Usuario | Contrasena | Rol |
+| Usuario | Contraseña | Rol |
 |---|---|---|
 | adminapp | AdminApp123* | ADMIN_APP |
 | admintienda | AdminTienda123* | ADMIN_TIENDA |
@@ -54,4 +54,5 @@ node prisma/seed.js
 
 ## Nota de seguridad
 
-Las contrasenas no se almacenan en texto plano. El seed aplica hash mediante bcrypt antes de guardar los usuarios.
+Las contraseñas no se almacenan en texto plano. El seed aplica hash mediante bcrypt antes de guardar los usuarios.
+

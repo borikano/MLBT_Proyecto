@@ -2,11 +2,11 @@
 
 ## Proyecto
 
-MLBT Project - Maria La Bonita Taqueria
+MLBT Project - María La Bonita Taquería
 
 ## Evidencia
 
-GA7-220501096-AA5-EV03 - Diseno y Desarrollo de servicios web - proyecto
+GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
 
 ## URL base local
 
@@ -14,21 +14,21 @@ http://localhost:3001
 
 ## Endpoints base
 
-| Metodo | Endpoint | Descripcion | Autenticacion |
+| Método | Endpoint | Descripción | Autenticación |
 |---|---|---|---|
 | GET | / | Ruta raiz de la API. | No |
 | GET | /api/health | Estado del servicio. | No |
 
-## Endpoints de autenticacion
+## Endpoints de autenticación
 
-| Metodo | Endpoint | Descripcion | Autenticacion |
+| Método | Endpoint | Descripción | Autenticación |
 |---|---|---|---|
-| POST | /api/auth/login | Inicio de sesion y generacion de token JWT. | No |
+| POST | /api/auth/login | Inicio de sesion y generación de token JWT. | No |
 | GET | /api/auth/profile | Consulta de perfil autenticado. | Si |
 
 ## Endpoints de usuarios
 
-| Metodo | Endpoint | Descripcion | Autenticacion |
+| Método | Endpoint | Descripción | Autenticación |
 |---|---|---|---|
 | GET | /api/users | Lista usuarios. | Si |
 | GET | /api/users/:id | Consulta usuario por id. | Si |
@@ -38,7 +38,7 @@ http://localhost:3001
 
 ## Endpoints de inventario
 
-| Metodo | Endpoint | Descripcion | Autenticacion |
+| Método | Endpoint | Descripción | Autenticación |
 |---|---|---|---|
 | GET | /api/inventory | Lista productos de inventario. | Si |
 | GET | /api/inventory/:id | Consulta producto por id. | Si |
@@ -48,7 +48,7 @@ http://localhost:3001
 
 ## Endpoints de ventas
 
-| Metodo | Endpoint | Descripcion | Autenticacion |
+| Método | Endpoint | Descripción | Autenticación |
 |---|---|---|---|
 | GET | /api/sales | Lista ventas. | Si |
 | GET | /api/sales/:id | Consulta venta por id. | Si |
@@ -67,3 +67,4 @@ Authorization: Bearer TOKEN_JWT
 ## Estado
 
 Documento base actualizado para implementar servicios reales de la API del proyecto MLBT.
+
