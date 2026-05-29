@@ -81,4 +81,35 @@ node prisma/seed.js
 ## Nota
 
 El archivo .env es local y no debe versionarse. Se incluye .env.example como plantilla segura.
+## Evidencia EV04 - Pruebas Postman
+
+La evidencia **GA7-220501096-AA5-EV04 - API del Proyecto** valida esta API mediante una colección Postman.
+
+Archivo de colección:
+
+- `postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json`
+
+Guía de pruebas:
+
+- `docs/POSTMAN_EV04.md`
+
+Pruebas documentadas:
+
+- Ruta raíz de la API.
+- Health check.
+- Login correcto con generación de token JWT.
+- Perfil protegido con token.
+- Consulta de usuarios.
+- Consulta de inventario.
+- Consulta de ventas.
+- Login incorrecto rechazado.
+- Perfil sin token rechazado.
+
+Capturas de evidencia:
+
+- `../docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
+
+Resultado:
+
+La API fue probada en Postman y los endpoints principales respondieron según lo esperado.
 

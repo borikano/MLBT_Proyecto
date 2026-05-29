@@ -182,5 +182,46 @@ node .\src\server.js
 URL local:
 
 http://localhost:3001
+## Entrega GA7_220501096_AA5_EV04
 
+La evidencia **GA7-220501096-AA5-EV04 - API del Proyecto** corresponde a la validación funcional de la API del proyecto MLBT mediante Postman.
+
+Módulo evaluado:
+
+- `api-mlbt`
+
+Elementos entregados:
+
+- Colección Postman de la API.
+- Guía de pruebas Postman.
+- Plan de pruebas.
+- Capturas de ejecución en Postman.
+- Documento de resultados.
+- Cierre técnico de la evidencia.
+
+Endpoints validados:
+
+- `GET /`
+- `GET /api/health`
+- `POST /api/auth/login`
+- `GET /api/auth/profile`
+- `GET /api/users`
+- `GET /api/inventory`
+- `GET /api/sales`
+- `POST /api/auth/login` con credenciales incorrectas.
+- `GET /api/auth/profile` sin token.
+
+Documentación principal:
+
+- `api-mlbt/docs/POSTMAN_EV04.md`
+- `api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json`
+- `docs/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_indice_entrega.md`
+- `docs/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_plan_pruebas_postman.md`
+- `docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_resultados_postman.md`
+- `docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_cierre_tecnico.md`
+- `docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
+
+Resultado:
+
+La API del proyecto MLBT fue validada en Postman con resultados aprobados para autenticación, perfil protegido, usuarios, inventario, ventas y escenarios de error esperados.
 
