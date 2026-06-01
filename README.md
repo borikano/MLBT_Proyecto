@@ -1,3 +1,26 @@
+<!-- GUIA_TECNICA_PROYECTO_INICIO -->
+
+## Guía técnica del proyecto
+
+Para facilitar la lectura, ejecución, prueba y auditoría técnica del proyecto, este repositorio incluye una guía pública de navegación:
+
+Ruta recomendada:
+
+00_GUIA_TECNICA_PROYECTO/README.md
+
+Esta guía centraliza:
+
+- estructura del proyecto;
+- código fuente relevante;
+- comandos de ejecución;
+- evidencias EV03 y EV04;
+- colección Postman;
+- capturas y resultados;
+- trazabilidad Git;
+- cierre técnico consolidado.
+
+<!-- GUIA_TECNICA_PROYECTO_FIN -->
+
 # MLBT_Proyecto
 
 Proyecto web del sistema MLBT - María La Bonita Taquería.
@@ -224,4 +247,5 @@ Documentación principal:
 Resultado:
 
 La API del proyecto MLBT fue validada en Postman con resultados aprobados para autenticación, perfil protegido, usuarios, inventario, ventas y escenarios de error esperados.
+
 
