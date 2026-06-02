@@ -1,3 +1,16 @@
+<!-- LICENCIA_USO_ACADEMICO_INICIO -->
+
+## Licencia y uso académico
+
+Este repositorio se publica con fines académicos, de revisión técnica y de portafolio.
+
+La licencia y condiciones de uso están documentadas en:
+
+- LICENSE.md
+
+Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
+
+<!-- LICENCIA_USO_ACADEMICO_FIN -->
 <!-- GUIA_TECNICA_PROYECTO_INICIO -->
 
 ## Guía técnica del proyecto
@@ -247,5 +260,6 @@ Documentación principal:
 Resultado:
 
 La API del proyecto MLBT fue validada en Postman con resultados aprobados para autenticación, perfil protegido, usuarios, inventario, ventas y escenarios de error esperados.
+
 
 
