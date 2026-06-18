@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import logoPrincipal from "@/assets/mlbt/brand/logo-principal.png"
 import inicioSesion from "@/assets/mlbt/backgrounds/inicio-sesion.png"
@@ -15,9 +15,11 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { isAuthenticatedMock, loginMock } from "@/lib/auth"
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [formData, setFormData] = useState({
     usuario: "",
@@ -26,6 +28,14 @@ export default function Login() {
 
   const [error, setError] = useState("")
 
+  const redirectTo = location.state?.from?.pathname || "/dashboard"
+
+  useEffect(() => {
+    if (isAuthenticatedMock()) {
+      navigate("/dashboard", { replace: true })
+    }
+  }, [navigate])
+
   const handleChange = (event) => {
     const { name, value } = event.target
 
@@ -33,18 +43,23 @@ export default function Login() {
       ...currentData,
       [name]: value,
     }))
+
+    if (error) {
+      setError("")
+    }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (formData.usuario === "admin" && formData.clave === "admin") {
-      sessionStorage.setItem("mlbt-auth", "true")
-      navigate("/dashboard")
+    const result = loginMock(formData)
+
+    if (result.ok) {
+      navigate(redirectTo, { replace: true })
       return
     }
 
-    setError("Usuario o contraseña incorrectos. Intenta con admin / admin.")
+    setError(result.message)
   }
 
   return (
@@ -70,7 +85,8 @@ export default function Login() {
               </h1>
 
               <p className="mt-4 text-sm leading-6 text-orange-50/80">
-                Panel administrativo para gestionar usuarios, inventario y ventas.
+                Panel administrativo para gestionar usuarios, inventario y
+                ventas.
               </p>
             </div>
           </div>
