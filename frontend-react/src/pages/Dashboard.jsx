@@ -71,7 +71,7 @@ export default function Dashboard() {
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {metricas.map((metrica) => (
-          <Card key={metrica.titulo} className="border-[#f1d4bd]">
+          <Card key={metrica.titulo} className="border-[#f1d4bd] bg-white">
             <CardHeader className="pb-2">
               <CardDescription>{metrica.titulo}</CardDescription>
               <CardTitle className="text-3xl text-[#7c2d12]">
@@ -90,13 +90,18 @@ export default function Dashboard() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {accesosRapidos.map((item) => (
-          <Card key={item.titulo} className="overflow-hidden border-[#f1d4bd]">
-            <div className="flex h-40 items-center justify-center bg-[#1c120d] p-6">
-              <img
-                src={item.imagen}
-                alt={item.titulo}
-                className="h-full w-full object-contain"
-              />
+          <Card
+            key={item.titulo}
+            className="overflow-hidden border-[#f1d4bd] bg-white transition hover:-translate-y-1 hover:shadow-md"
+          >
+            <div className="flex h-44 items-center justify-center bg-gradient-to-br from-[#fff7ed] via-[#fff3e3] to-[#f8dcc2] p-6">
+              <div className="flex h-28 w-28 items-center justify-center rounded-full border border-[#f1d4bd] bg-white p-3 shadow-sm">
+                <img
+                  src={item.imagen}
+                  alt={item.titulo}
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
             </div>
 
             <CardHeader>
