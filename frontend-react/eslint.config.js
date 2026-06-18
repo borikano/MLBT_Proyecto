@@ -54,4 +54,14 @@ export default [
       "react-hooks/set-state-in-effect": "off",
     },
   },
+  {
+    files: [
+      "src/components/shared/DataTable.jsx",
+      "src/context/MlbtDataContext.jsx",
+    ],
+    rules: {
+      "react-hooks/incompatible-library": "off",
+      "react-refresh/only-export-components": "off",
+    },
+  },
 ]
