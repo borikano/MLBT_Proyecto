@@ -48,9 +48,9 @@ export default function Login() {
   }
 
   return (
-    <main className="min-h-screen bg-[#fff7ed]">
-      <section className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-        <aside className="hidden items-center justify-center bg-[#1c120d] px-10 py-12 lg:flex">
+    <main className="min-h-screen overflow-hidden bg-[#fff7ed]">
+      <section className="grid min-h-screen grid-cols-1 lg:h-screen lg:grid-cols-2">
+        <aside className="hidden items-center justify-center bg-[#1c120d] px-10 py-8 lg:flex">
           <div className="max-w-md text-center">
             <div className="mx-auto flex h-72 w-72 items-center justify-center rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl">
               <img
