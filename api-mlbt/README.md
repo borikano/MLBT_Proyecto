@@ -10,9 +10,9 @@ GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
 
 ## Propósito
 
-Este módulo contiene la API del proyecto MLBT. Expone servicios web para autenticación, usuarios, inventario y ventas.
+Este módulo contiene los servicios REST de MLBT para autenticación, usuarios, inventario y ventas.
 
-## Stack técnico
+## Tecnologías utilizadas
 
 - Node.js.
 - Express.
@@ -83,7 +83,7 @@ node prisma/seed.js
 El archivo .env es local y no debe versionarse. Se incluye .env.example como plantilla segura.
 ## Evidencia EV04 - Pruebas Postman
 
-La evidencia **GA7-220501096-AA5-EV04 - API del Proyecto** valida esta API mediante una colección Postman.
+La evidencia **GA7-220501096-AA5-EV04 - API MLBT** valida esta API mediante una colección Postman.
 
 Archivo de colección:
 
@@ -112,4 +112,6 @@ Capturas de evidencia:
 Resultado:
 
 La API fue probada en Postman y los endpoints principales respondieron según lo esperado.
+
+
 
