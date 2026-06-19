@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 import domicilioImg from "@/assets/mlbt/ui/domicilio.png"
@@ -16,7 +17,21 @@ import { useMlbtData } from "@/context/MlbtDataContext"
 import * as usuariosData from "@/data/mocks/usuarios.mock"
 
 function getTodayIsoDate() {
-  return new Date().toISOString().slice(0, 10)
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, "0")
+  const day = String(today.getDate()).padStart(2, "0")
+
+  return `${year}-${month}-${day}`
+}
+
+function formatDisplayDate(isoDate) {
+  if (!isoDate) {
+    return "Sin fecha seleccionada"
+  }
+
+  const [year, month, day] = isoDate.split("-")
+  return `${day}/${month}/${year}`
 }
 
 function formatCurrency(value) {
@@ -90,6 +105,7 @@ export default function Dashboard() {
 
   const usuariosMock = getUsuariosMock()
   const today = getTodayIsoDate()
+  const [fechaDashboard, setFechaDashboard] = useState(today)
 
   const ventasOrdenadas = [...ventas].sort((a, b) =>
     String(b.fechaHora || "").localeCompare(String(a.fechaHora || ""))
@@ -99,7 +115,7 @@ export default function Dashboard() {
     (a, b) => Number(b.id || 0) - Number(a.id || 0)
   )
 
-  const ventasHoy = ventas.filter((venta) => venta.fecha === today)
+  const ventasHoy = ventas.filter((venta) => venta.fecha === fechaDashboard)
 
   const totalVentasHoy = ventasHoy.reduce(
     (total, venta) => total + Number(venta.total || 0),
@@ -134,14 +150,14 @@ export default function Dashboard() {
 
   const metricas = [
     {
-      titulo: "Ventas de hoy",
+      titulo: "Ventas del día",
       valor: formatCurrency(totalVentasHoy),
-      descripcion: `${ventasHoy.length} venta(s) confirmada(s) en la fecha actual.`,
+      descripcion: `${ventasHoy.length} venta(s) confirmada(s) el ${formatDisplayDate(fechaDashboard)}.`,
     },
     {
       titulo: "Productos vendidos",
       valor: productosVendidosHoy,
-      descripcion: "Unidades vendidas hoy según el historial local.",
+      descripcion: `Unidades vendidas el ${formatDisplayDate(fechaDashboard)} según el historial local.`,
     },
     {
       titulo: "Insumos activos",
@@ -174,6 +190,57 @@ export default function Dashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Card className="border-[#f1d4bd] bg-white md:col-span-2 xl:col-span-4">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-[#7c2d12]">
+                Calendario de análisis
+              </CardTitle>
+              <CardDescription>
+                Selecciona una fecha para segmentar las ventas y productos
+                vendidos desde el panel principal.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent>
+              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div className="w-full max-w-xs space-y-2">
+                  <label
+                    htmlFor="fechaDashboard"
+                    className="text-sm font-medium text-slate-700"
+                  >
+                    Fecha de análisis
+                  </label>
+
+                  <input
+                    id="fechaDashboard"
+                    type="date"
+                    value={fechaDashboard}
+                    onChange={(event) => setFechaDashboard(event.target.value)}
+                    className="h-10 w-full rounded-md border border-[#ead8c8] bg-white px-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-[#c44f2a] focus:ring-2 focus:ring-[#f1d4bd]"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2 text-sm text-muted-foreground md:items-end">
+                  <span>
+                    Analizando ventas del{" "}
+                    <strong className="text-[#7c2d12]">
+                      {formatDisplayDate(fechaDashboard)}
+                    </strong>
+                  </span>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setFechaDashboard(today)}
+                    className="border-[#d6a37f] text-[#7c2d12] hover:bg-[#fff7ed]"
+                  >
+                    Volver a hoy
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
         {metricas.map((metrica) => (
           <Card key={metrica.titulo} className="border-[#f1d4bd] bg-white">
             <CardHeader className="pb-2">
@@ -277,10 +344,10 @@ export default function Dashboard() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <CardTitle className="text-xl text-[#7c2d12]">
-                  Ventas recientes
+                  Ventas de la fecha seleccionada
                 </CardTitle>
                 <CardDescription>
-                  Últimas ventas confirmadas en el estado local.
+                  Ventas confirmadas para la fecha seleccionada en el estado local.
                 </CardDescription>
               </div>
 
@@ -315,7 +382,7 @@ export default function Dashboard() {
               ))
             ) : (
               <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                No hay ventas registradas.
+                No hay ventas registradas para la fecha seleccionada.
               </p>
             )}
           </CardContent>
@@ -448,3 +515,5 @@ export default function Dashboard() {
     </section>
   )
 }
+
+
