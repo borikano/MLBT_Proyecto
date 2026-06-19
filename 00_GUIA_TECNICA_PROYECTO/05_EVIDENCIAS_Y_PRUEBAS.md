@@ -27,3 +27,4 @@
 - `.env` no se versiona.
 - `node_modules` no se versiona.
 - Las evidencias usan datos de prueba.
+

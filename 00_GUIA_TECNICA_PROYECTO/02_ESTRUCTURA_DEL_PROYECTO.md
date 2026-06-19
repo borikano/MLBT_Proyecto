@@ -18,3 +18,4 @@
 ## Criterio aplicado
 
 La documentación se organiza sin duplicar los documentos existentes. Esta guía enlaza y resume las rutas principales del proyecto.
+

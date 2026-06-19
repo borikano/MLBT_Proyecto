@@ -49,3 +49,26 @@ Colección:
 ```text
 api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
 ```
+
+## Frontend React
+
+Ubicación:
+
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+
+Instalación de dependencias:
+
+    pnpm install
+
+Ejecución local:
+
+    pnpm dev
+
+URL local:
+
+    http://localhost:5173
+
+Validación:
+
+    pnpm lint
+    pnpm build

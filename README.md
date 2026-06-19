@@ -263,3 +263,50 @@ La API del proyecto MLBT fue validada en Postman con resultados aprobados para a
 
 
 
+
+## Entrega GA7_220501096_AA4_EV02 y GA7_220501096_AA4_EV03
+
+La evidencia GA7-220501096-AA4-EV02 corresponde al documento de verificación de procedimientos para la definición de componentes Front-End de la aplicación.
+
+La evidencia GA7-220501096-AA4-EV03 corresponde al componente frontend del proyecto formativo desarrollado con ReactJS.
+
+Módulo principal:
+
+- frontend-react
+
+Rutas funcionales:
+
+- /login
+- /dashboard
+- /usuarios
+- /inventario
+- /ventas
+
+Credenciales mock:
+
+- Usuario: admin
+- Contraseña: admin
+
+Tecnologías aplicadas:
+
+- ReactJS
+- Vite
+- JavaScript
+- Tailwind CSS
+- shadcn/ui
+- Radix UI
+- TanStack Table
+- react-router-dom
+- pnpm
+
+Documentación relacionada:
+
+- frontend-react/README.md
+- 00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md
+
+Validación local:
+
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    pnpm lint
+    pnpm build
+

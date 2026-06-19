@@ -56,6 +56,7 @@ Esta guía funciona como panel principal de revisión para ubicar rápidamente e
 | Módulo | Tecnología principal | Propósito | Estado |
 |---|---|---|---|
 | Frontend base | HTML, CSS, JavaScript | Interfaz base del proyecto MLBT | Disponible |
+| Frontend React | ReactJS, Vite, Tailwind CSS, shadcn/ui | SPA administrativa del proyecto MLBT | Disponible |
 | Java Web | JSP / Servlets | Validación de formularios y métodos HTTP | Disponible |
 | Spring Web | Spring Boot MVC | Módulo web con persistencia y vistas | Disponible |
 | API MLBT | Node.js, Express, Prisma, MySQL | Servicios REST para la evidencia AA5 | Disponible |
@@ -126,3 +127,4 @@ Nota: los comandos completos y detalles técnicos se conservan en los documentos
 | Guía técnica visual | Completado |
 | Licencia documentada | Completado |
 | Repositorio listo para revisión | Completado |
+

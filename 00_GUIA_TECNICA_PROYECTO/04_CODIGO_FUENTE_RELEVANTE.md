@@ -22,3 +22,17 @@
 | `spring-web` | Módulo web Spring. |
 | `java-web` | Módulo web Java. |
 | `pages`, `css`, `js`, `assets` | Recursos frontend base. |
+
+## Frontend React
+
+| Ruta | Propósito |
+|---|---|
+| `frontend-react/src/pages/Login.jsx` | Inicio de sesión mock. |
+| `frontend-react/src/pages/Dashboard.jsx` | Panel principal con calendario de análisis. |
+| `frontend-react/src/pages/Usuarios.jsx` | Gestión local de usuarios. |
+| `frontend-react/src/pages/Inventario.jsx` | Gestión local de inventario. |
+| `frontend-react/src/pages/Ventas.jsx` | Registro y análisis de ventas. |
+| `frontend-react/src/components/layout` | Layout administrativo y sidebar. |
+| `frontend-react/src/components/shared/DataTable.jsx` | Tabla reutilizable. |
+| `frontend-react/src/context/MlbtDataContext.jsx` | Estado compartido mock. |
+| `frontend-react/src/data/mocks` | Datos mock de usuarios, inventario y ventas. |

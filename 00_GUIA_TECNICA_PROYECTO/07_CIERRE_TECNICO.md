@@ -24,3 +24,11 @@ El repositorio MLBT contiene módulos web, API REST, documentación técnica, ev
 ## Estado final esperado
 
 Proyecto preparado para lectura, ejecución, prueba y auditoría técnica desde GitHub.
+
+## Frontend React AP07
+
+- Frontend React disponible en `frontend-react`.
+- README del módulo actualizado.
+- Guía técnica AP07 disponible en `08_FRONTEND_REACT_AP07.md`.
+- Validación realizada con `pnpm lint` y `pnpm build`.
+- Rutas funcionales principales: `/login`, `/dashboard`, `/usuarios`, `/inventario`, `/ventas`.
