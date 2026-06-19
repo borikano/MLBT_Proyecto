@@ -6,7 +6,6 @@ Esta aplicación permite validar el flujo administrativo de MLBT mediante datos 
 
 ## Evidencia relacionada
 
-- GA7-220501096-AA4-EV02: Verificación de procedimientos para la definición de componentes Front-End.
 - GA7-220501096-AA4-EV03: Componente front-end del proyecto formativo y proyectos de clase.
 
 ## Tecnologías utilizadas
@@ -110,3 +109,4 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 ## Estado de entrega
 
 La interfaz React queda validada con revisión de código y compilación de producción.
+

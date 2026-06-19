@@ -70,10 +70,8 @@ Documentar la implementación del componente de interfaz React desarrollado para
     pnpm lint
     pnpm build
 
-## Relación con EV02
-
-La evidencia GA7-220501096-AA4-EV02 corresponde al documento de verificación de procedimientos y definición de componentes Front-End. El código React versionado en este repositorio corresponde a la implementación práctica para la evidencia GA7-220501096-AA4-EV03.
 
 ## Resultado
 
 El componente de interfaz queda funcional con datos de prueba, navegación de una sola página, componentes reutilizables, formularios controlados, tablas de datos, validaciones visuales y estructura lista para integración posterior con el servidor.
+

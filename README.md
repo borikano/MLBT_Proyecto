@@ -32,10 +32,9 @@ Proyecto formativo web para la gestión administrativa de María La Bonita Taque
 | Orden | Fecha Git | Evidencia | Entrega | Ruta |
 |---|---|---|---|---|
 | 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Aplicación web Java / Spring | [docs/evidencias/GA7_220501096_AA3_EV01](docs/evidencias/GA7_220501096_AA3_EV01) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API del proyecto | [api-mlbt/docs](api-mlbt/docs) |
+| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API del proyecto | [api-mlbt/docs](api-mlbt/docs) y [docs/evidencias/GA7_220501096_AA5_EV03](docs/evidencias/GA7_220501096_AA5_EV03) |
 | 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | Pruebas de API con Postman | [api-mlbt/postman](api-mlbt/postman) y [docs/evidencias/GA7_220501096_AA5_EV04](docs/evidencias/GA7_220501096_AA5_EV04) |
-| 04 | 2026-06-18 | GA7-220501096-AA4-EV02 | Documento de definición de componentes Front-End | Documento anexo de la evidencia |
-| 05 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React del proyecto formativo | [frontend-react](frontend-react) y [08_FRONTEND_REACT_AP07.md](00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) |
+| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React del proyecto formativo | [frontend-react](frontend-react) y [08_FRONTEND_REACT_AP07.md](00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) |
 
 ## Estructura principal
 
@@ -79,6 +78,7 @@ Comandos principales:
     pnpm dev
     pnpm lint
     pnpm build
+
 
 
 
