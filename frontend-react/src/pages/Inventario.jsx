@@ -620,12 +620,6 @@ export default function Inventario() {
         </p>
 
         <h1 id="resumen-inventario" className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]">Inventario</h1>
-
-        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-          Control mock de insumos y stock. Permite registrar ítems, modificar
-          datos, gestionar estado y documentar movimientos de entrada, salida o
-          ajuste.
-        </p>
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -1113,6 +1107,8 @@ export default function Inventario() {
     </section>
   )
 }
+
+
 
 
 

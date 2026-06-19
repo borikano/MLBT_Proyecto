@@ -824,12 +824,6 @@ export default function Ventas() {
         </p>
 
         <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Ventas</h1>
-
-        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-          Módulo mock conectado al inventario. La página separa el análisis de
-          ventas, el historial confirmado y la gestión del pedido actual para
-          mantener claridad operativa.
-        </p>
       </div>
 
       <section className="scroll-mt-6 space-y-5">
@@ -1347,6 +1341,8 @@ export default function Ventas() {
     </section>
   )
 }
+
+
 
 
 

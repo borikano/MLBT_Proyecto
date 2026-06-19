@@ -423,11 +423,6 @@ export default function Usuarios() {
         </p>
 
         <h1 id="resumen-usuarios" className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]">Usuarios</h1>
-
-        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-          CRUD mock alineado con MLBT. La baja se maneja como cambio de estado
-          para conservar historial.
-        </p>
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -690,6 +685,8 @@ export default function Usuarios() {
     </section>
   )
 }
+
+
 
 
 
