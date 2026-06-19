@@ -1,4 +1,4 @@
-# Frontend React AP07 - MLBT
+# Interfaz React AP07 - MLBT
 
 ## Evidencia
 
@@ -10,28 +10,28 @@ MLBT - María La Bonita Taquería.
 
 ## Objetivo
 
-Documentar la implementación del componente frontend React desarrollado para el proyecto formativo MLBT, dejando trazabilidad técnica para revisión, ejecución local y entrega de evidencia.
+Documentar la implementación del componente de interfaz React desarrollado para el proyecto formativo MLBT, dejando trazabilidad técnica para revisión, ejecución local y entrega de evidencia.
 
 ## Alcance implementado
 
-- Login mock.
-- Dashboard administrativo.
-- Calendario de análisis en dashboard.
+- Inicio de sesión de prueba.
+- Panel principal administrativo.
+- Calendario de análisis en el panel principal.
 - Gestión de usuarios.
 - Gestión de inventario.
 - Gestión de ventas.
-- Validación de stock.
+- Validación de existencias.
 - Registro de movimientos.
 - Pedido actual.
 - Historial de ventas.
 - Navegación lateral fija.
 - Enlaces internos por sección.
 - Roles administrativos.
-- Datos mock compartidos.
+- Datos de prueba compartidos.
 
 ## Ruta del módulo
 
-    frontend-react/
+    frontend-react
 
 ## Rutas funcionales
 
@@ -46,7 +46,7 @@ Documentar la implementación del componente frontend React desarrollado para el
     Usuario: admin
     Contraseña: admin
 
-## Stack aplicado
+## Tecnologías utilizadas
 
 - ReactJS.
 - Vite.
@@ -58,29 +58,11 @@ Documentar la implementación del componente frontend React desarrollado para el
 - react-router-dom.
 - pnpm.
 
-## Estructura relevante
-
-    frontend-react/src/pages/Login.jsx
-    frontend-react/src/pages/Dashboard.jsx
-    frontend-react/src/pages/Usuarios.jsx
-    frontend-react/src/pages/Inventario.jsx
-    frontend-react/src/pages/Ventas.jsx
-    frontend-react/src/components/layout/AdminLayout.jsx
-    frontend-react/src/components/layout/AppSidebar.jsx
-    frontend-react/src/components/shared/DataTable.jsx
-    frontend-react/src/context/MlbtDataContext.jsx
-    frontend-react/src/lib/auth.js
-    frontend-react/src/data/mocks/
-
 ## Ejecución local
 
     Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
     pnpm install
     pnpm dev
-
-URL local:
-
-    http://localhost:5173
 
 ## Validación técnica
 
@@ -94,4 +76,4 @@ La evidencia GA7-220501096-AA4-EV02 corresponde al documento de verificación de
 
 ## Resultado
 
-El componente frontend queda funcional con datos mock, navegación SPA, componentes reutilizables, formularios controlados, tablas de datos, validaciones visuales y estructura lista para integración posterior con backend.
+El componente de interfaz queda funcional con datos de prueba, navegación de una sola página, componentes reutilizables, formularios controlados, tablas de datos, validaciones visuales y estructura lista para integración posterior con el servidor.

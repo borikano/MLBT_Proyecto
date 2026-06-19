@@ -1,62 +1,12 @@
 # Comandos de ejecución
 
-## API MLBT
-
-Ubicación:
-
-```powershell
-Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\api-mlbt"
-```
-
-Instalación de dependencias:
-
-```powershell
-pnpm install
-```
-
-Ejecución local:
-
-```powershell
-node .\src\server.js
-```
-
-URL local principal:
-
-```text
-http://localhost:3001
-```
-
-Endpoints principales:
-
-```text
-GET  /
-GET  /api/health
-POST /api/auth/login
-GET  /api/auth/profile
-GET  /api/users
-GET  /api/inventory
-GET  /api/sales
-```
-
-## Base de datos
-
-La API usa MySQL/MariaDB mediante XAMPP. El archivo `.env` no se versiona. Se usa `.env.example` como referencia.
-
-## Postman
-
-Colección:
-
-```text
-api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
-```
-
-## Frontend React
+## Interfaz React
 
 Ubicación:
 
     Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
 
-Instalación de dependencias:
+Instalación:
 
     pnpm install
 
@@ -64,7 +14,7 @@ Ejecución local:
 
     pnpm dev
 
-URL local:
+Dirección local:
 
     http://localhost:5173
 
@@ -72,3 +22,31 @@ Validación:
 
     pnpm lint
     pnpm build
+
+## API MLBT
+
+Ubicación:
+
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\api-mlbt"
+
+Instalación:
+
+    pnpm install
+
+Ejecución local:
+
+    pnpm run dev
+
+Dirección local:
+
+    http://localhost:3001
+
+## Spring Web
+
+Desde la raíz del repositorio:
+
+    .\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+
+Dirección local:
+
+    http://localhost:8082

@@ -1,15 +1,15 @@
-# Frontend React - MLBT
+# Interfaz React - MLBT
 
-Frontend administrativo del proyecto formativo María La Bonita Taquería.
+Módulo administrativo del proyecto formativo María La Bonita Taquería.
 
-Este módulo implementa una aplicación web tipo SPA construida con ReactJS, Vite, Tailwind CSS y shadcn/ui. La aplicación permite validar el flujo administrativo de MLBT mediante datos mock antes de conectar con los servicios backend.
+Esta aplicación permite validar el flujo administrativo de MLBT mediante datos de prueba antes de conectar con los servicios del servidor.
 
 ## Evidencia relacionada
 
 - GA7-220501096-AA4-EV02: Verificación de procedimientos para la definición de componentes Front-End.
 - GA7-220501096-AA4-EV03: Componente front-end del proyecto formativo y proyectos de clase.
 
-## Stack técnico
+## Tecnologías utilizadas
 
 - ReactJS
 - Vite
@@ -23,8 +23,6 @@ Este módulo implementa una aplicación web tipo SPA construida con ReactJS, Vit
 
 ## Instalación
 
-Desde PowerShell:
-
     Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
     pnpm install
 
@@ -32,7 +30,7 @@ Desde PowerShell:
 
     pnpm dev
 
-URL local:
+Dirección local:
 
     http://localhost:5173
 
@@ -41,7 +39,7 @@ URL local:
     pnpm lint
     pnpm build
 
-## Credenciales mock
+## Credenciales de prueba
 
     Usuario: admin
     Contraseña: admin
@@ -56,13 +54,13 @@ URL local:
 
 ## Módulos implementados
 
-### Dashboard
+### Panel principal
 
-Panel administrativo con calendario de análisis, métricas de ventas, productos vendidos, insumos activos, usuarios activos, alertas de inventario, ventas por fecha seleccionada, movimientos recientes, usuarios recientes y accesos rápidos.
+Incluye calendario de análisis, métricas de ventas, productos vendidos, insumos activos, usuarios activos, alertas de inventario, ventas por fecha seleccionada, movimientos recientes, usuarios recientes y accesos rápidos.
 
 ### Usuarios
 
-Gestión local de usuarios administrativos con creación, edición, retiro lógico, reactivación, roles y tabla de datos.
+Permite crear, editar, retirar, reactivar y consultar usuarios administrativos.
 
 Roles contemplados:
 
@@ -73,20 +71,18 @@ Roles contemplados:
 
 ### Inventario
 
-Gestión local de insumos, stock, estados, alertas visuales, movimientos de entrada, salida y ajuste.
+Permite registrar insumos, controlar existencias, gestionar estados y documentar movimientos de entrada, salida y ajuste.
 
 ### Ventas
 
-Registro local de ventas con validación de stock, selección de cliente, tipo de venta, segmento de pago, método de pago, pedido actual, historial confirmado y análisis de ventas.
+Permite registrar ventas, validar existencias, seleccionar cliente, tipo de venta, segmento de pago, método de pago, pedido actual, historial confirmado y análisis de ventas.
 
 ## Navegación interna
-
-El sidebar incluye navegación jerárquica hacia secciones internas:
 
 - Usuarios
   - Resumen de usuarios
   - Crear / editar usuario
-  - Data Table de usuarios
+  - Tabla de usuarios
 - Inventario
   - Resumen de inventario
   - Registrar ítem
@@ -109,10 +105,8 @@ El sidebar incluye navegación jerárquica hacia secciones internas:
 - src/components/shared/DataTable.jsx
 - src/context/MlbtDataContext.jsx
 - src/lib/auth.js
-- src/data/mocks/usuarios.mock.js
-- src/data/mocks/inventario.mock.js
-- src/data/mocks/ventas.mock.js
+- src/data
 
 ## Estado de entrega
 
-El frontend queda validado con lint y build, usando datos mock y estructura preparada para integración posterior con backend.
+La interfaz React queda validada con revisión de código y compilación de producción.

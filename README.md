@@ -11,268 +11,44 @@ La licencia y condiciones de uso están documentadas en:
 Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
 
 <!-- LICENCIA_USO_ACADEMICO_FIN -->
-<!-- GUIA_TECNICA_PROYECTO_INICIO -->
 
-## Guía técnica del proyecto
+# MLBT - María La Bonita Taquería
 
-Para facilitar la lectura, ejecución, prueba y auditoría técnica del proyecto, este repositorio incluye una guía pública de navegación:
+Proyecto formativo web para la gestión administrativa de María La Bonita Taquería.
 
-Ruta recomendada:
+## Guía técnica
 
-00_GUIA_TECNICA_PROYECTO/README.md
+La ruta principal de revisión es:
 
-Esta guía centraliza:
+- 00_GUIA_TECNICA_PROYECTO/README.md
 
-- estructura del proyecto;
-- código fuente relevante;
-- comandos de ejecución;
-- evidencias EV03 y EV04;
-- colección Postman;
-- capturas y resultados;
-- trazabilidad Git;
-- cierre técnico consolidado.
+## Evidencias relacionadas
 
-<!-- GUIA_TECNICA_PROYECTO_FIN -->
-
-# MLBT_Proyecto
-
-Proyecto web del sistema MLBT - María La Bonita Taquería.
-
-## Estado del proyecto
-
-Este repositorio contiene la aplicacion frontend principal del proyecto MLBT y los módulos Java Web desarrollados para la evidencia GA7_220501096_AA3_EV01.
-
-El módulo principal de la evidencia es:
-
-- spring-web
-
-Este módulo implementa una aplicacion Java Web con Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL.
-
-## Proyecto funcional
-
-| Elemento | Ruta | Descripción |
+| Evidencia | Entrega | Ruta principal |
 |---|---|---|
-| Frontend base | index.html | Aplicacion HTML, CSS y JavaScript del proyecto MLBT. |
-| Paginas frontend | pages | Vistas HTML del frontend base. |
-| Recursos graficos | assets/img | Imagenes originales del proyecto. |
-| Módulo Spring Boot principal | spring-web | Implementacion Java Web con framework y CRUD. |
-| Módulo Java Web complementario | java-web | Complemento técnico con JSP y Servlets. |
-| Evidencia | docs/evidencias/GA7_220501096_AA3_EV01 | Documentación tecnica de la evidencia. |
+| GA7-220501096-AA3-EV01 | Aplicación web Java / Spring | docs/evidencias/GA7_220501096_AA3_EV01 |
+| GA7-220501096-AA4-EV02 | Documento de definición de componentes Front-End | Documento anexo de la evidencia |
+| GA7-220501096-AA4-EV03 | Interfaz React del proyecto formativo | frontend-react y 00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md |
+| GA7-220501096-AA5-EV03 | API del proyecto | api-mlbt/docs |
+| GA7-220501096-AA5-EV04 | Pruebas de API con Postman | api-mlbt/postman y docs/evidencias/GA7_220501096_AA5_EV04 |
 
-## Tecnologias
+## Estructura principal
 
-### Frontend base
-
-- HTML.
-- CSS.
-- JavaScript.
-
-### Módulo principal Spring Web
-
-- Java 17.
-- Spring Boot.
-- Spring MVC.
-- Spring Data JPA.
-- Hibernate.
-- Thymeleaf.
-- MySQL / MariaDB con XAMPP.
-- Maven Wrapper.
-
-## Ejecución del módulo Spring Web
-
-Antes de ejecutar, iniciar MySQL desde XAMPP.
-
-Base de datos:
-
-mlbt_ga7_aa3_ev01
-
-Comando:
-
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
-
-URL local:
-
-http://localhost:8082
-
-## Rutas funcionales
-
-| Ruta | Funcion |
+| Ruta | Propósito |
 |---|---|
-| /dashboard | Panel principal. |
-| /usuarios | CRUD de usuarios. |
-| /inventario | CRUD de inventario. |
-| /ventas | CRUD de ventas. |
+| frontend-react | Interfaz React de la evidencia AP07. |
+| api-mlbt | API REST del proyecto MLBT. |
+| spring-web | Módulo web Spring. |
+| java-web | Módulo web Java. |
+| pages, css, js, assets | Interfaz base del proyecto. |
+| docs | Evidencias y documentación técnica. |
+| 00_GUIA_TECNICA_PROYECTO | Panel técnico de revisión. |
 
-## Compilacion
+## Interfaz React AP07
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+Ruta:
 
-## Documentación de evidencia
-
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_evidencia.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_bitacora.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_validación_tecnica.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_estandares_técnicos.md
-
-## Rama estable
-
-Arawkano
-
-## Entrega GA7_220501096_AA3_EV01
-
-El módulo principal entregado para la evidencia GA7_220501096_AA3_EV01 se encuentra en:
-
-- spring-web
-
-Este módulo implementa una aplicacion web con Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL/MariaDB mediante XAMPP.
-
-### Funcionalidades entregadas
-
-- Dashboard principal.
-- CRUD de usuarios.
-- CRUD de inventario.
-- CRUD de ventas.
-- Persistencia en MySQL/MariaDB.
-- Integracion visual con identidad MLBT.
-- Documentación tecnica de soporte.
-
-### Requisitos de la evidencia cubiertos
-
-- Se tienen en cuenta artefactos previos del ciclo del software.
-- Se documenta la relacion con requisitos, prototipos, modelos, arquitectura y navegacion.
-- Se mantiene estructura de codigo separada por responsabilidad.
-- Se conserva versionamiento mediante Git y GitHub.
-- Se incluyen documentos de validación funcional, cierre, hoja de ruta e indice de entrega.
-
-### Trazabilidad de requisitos
-
-El documento de trazabilidad principal se encuentra en:
-
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_trazabilidad_requisitos_evidencia.md
-
-Este documento relaciona los elementos solicitados para la evidencia con los componentes implementados en el repositorio.
-
-### Ejecución local
-
-Antes de ejecutar el módulo, iniciar MySQL desde XAMPP.
-
-Comando desde la raiz del repositorio:
-
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
-
-URL local:
-
-http://localhost:8082
-
-### Compilacion
-
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
-
-### Documentación de entrega
-
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_indice_entrega.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_entrega_final.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_validación_funcional_spring_web.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_hoja_ruta_evolutiva.md
-- docs/evidencias/GA7_220501096_AA3_EV01/GA7_220501096_AA3_EV01_trazabilidad_requisitos_evidencia.md
-
-### Alcance posterior
-
-Los componentes de autenticación, roles, permisos, auditoria, KDS, reportes e inventario avanzado quedan documentados como linea evolutiva posterior del proyecto MLBT.
-
-## Entrega GA7_220501096_AA5_EV03
-
-La evidencia GA7-220501096-AA5-EV03 corresponde al diseño y desarrollo de servicios web para el proyecto MLBT.
-
-Módulo principal:
-
-- api-mlbt
-
-La API implementa servicios para:
-
-- Autenticación con JWT.
-- Perfil protegido.
-- Usuarios.
-- Inventario.
-- Ventas.
-- Validaciónes con Zod.
-- Persistencia con Prisma y MySQL/MariaDB mediante XAMPP.
-
-Documentación principal:
-
-- docs/evidencias/GA7_220501096_AA5_EV03/GA7_220501096_AA5_EV03_indice_entrega.md
-- docs/evidencias/GA7_220501096_AA5_EV03/GA7_220501096_AA5_EV03_cierre_técnico.md
-- api-mlbt/docs/ENDPOINTS_EV03.md
-- api-mlbt/docs/BASE_DATOS_EV03.md
-- api-mlbt/docs/DATOS_INICIALES_EV03.md
-- api-mlbt/docs/VALIDACION_ENDPOINTS_EV03.md
-
-Ejecución local:
-
-Antes de ejecutar, iniciar MySQL desde XAMPP.
-
-Desde la carpeta api-mlbt:
-
-node .\src\server.js
-
-URL local:
-
-http://localhost:3001
-## Entrega GA7_220501096_AA5_EV04
-
-La evidencia **GA7-220501096-AA5-EV04 - API del Proyecto** corresponde a la validación funcional de la API del proyecto MLBT mediante Postman.
-
-Módulo evaluado:
-
-- `api-mlbt`
-
-Elementos entregados:
-
-- Colección Postman de la API.
-- Guía de pruebas Postman.
-- Plan de pruebas.
-- Capturas de ejecución en Postman.
-- Documento de resultados.
-- Cierre técnico de la evidencia.
-
-Endpoints validados:
-
-- `GET /`
-- `GET /api/health`
-- `POST /api/auth/login`
-- `GET /api/auth/profile`
-- `GET /api/users`
-- `GET /api/inventory`
-- `GET /api/sales`
-- `POST /api/auth/login` con credenciales incorrectas.
-- `GET /api/auth/profile` sin token.
-
-Documentación principal:
-
-- `api-mlbt/docs/POSTMAN_EV04.md`
-- `api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json`
-- `docs/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_indice_entrega.md`
-- `docs/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_plan_pruebas_postman.md`
-- `docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_resultados_postman.md`
-- `docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_cierre_tecnico.md`
-- `docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
-
-Resultado:
-
-La API del proyecto MLBT fue validada en Postman con resultados aprobados para autenticación, perfil protegido, usuarios, inventario, ventas y escenarios de error esperados.
-
-
-
-
-## Entrega GA7_220501096_AA4_EV02 y GA7_220501096_AA4_EV03
-
-La evidencia GA7-220501096-AA4-EV02 corresponde al documento de verificación de procedimientos para la definición de componentes Front-End de la aplicación.
-
-La evidencia GA7-220501096-AA4-EV03 corresponde al componente frontend del proyecto formativo desarrollado con ReactJS.
-
-Módulo principal:
-
-- frontend-react
+    frontend-react
 
 Rutas funcionales:
 
@@ -282,7 +58,7 @@ Rutas funcionales:
 - /inventario
 - /ventas
 
-Credenciales mock:
+Credenciales de prueba:
 
 - Usuario: admin
 - Contraseña: admin
@@ -299,10 +75,11 @@ Tecnologías aplicadas:
 - react-router-dom
 - pnpm
 
-Documentación relacionada:
+Ejecución local:
 
-- frontend-react/README.md
-- 00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    pnpm install
+    pnpm dev
 
 Validación local:
 
@@ -310,3 +87,10 @@ Validación local:
     pnpm lint
     pnpm build
 
+Dirección local:
+
+    http://localhost:5173
+
+## Rama de trabajo
+
+- Arawkano
