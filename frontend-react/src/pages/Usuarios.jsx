@@ -422,7 +422,7 @@ export default function Usuarios() {
           Gestión local
         </p>
 
-        <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Usuarios</h1>
+        <h1 id="resumen-usuarios" className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]">Usuarios</h1>
 
         <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
           CRUD mock alineado con MLBT. La baja se maneja como cambio de estado
@@ -462,6 +462,7 @@ export default function Usuarios() {
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
           <CardTitle className="text-lg text-[#7c2d12]">
+            <div id="formulario-usuarios" className="scroll-mt-6" />
             {estaEditando ? "Modificar usuario" : "Crear usuario"}
           </CardTitle>
           <CardDescription>
@@ -637,9 +638,8 @@ export default function Usuarios() {
 
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Data Table de usuarios
-          </CardTitle>
+          <div id="tabla-usuarios" className="scroll-mt-6" />
+          <CardTitle className="text-lg text-[#7c2d12]">Data Table de usuarios</CardTitle>
           <CardDescription>
             Implementada con TanStack Table y componentes shadcn/ui. Los datos
             completos se conservan en el estado local.
@@ -690,3 +690,12 @@ export default function Usuarios() {
     </section>
   )
 }
+
+
+
+
+
+
+
+
+

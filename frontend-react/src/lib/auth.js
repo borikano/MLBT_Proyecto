@@ -15,6 +15,9 @@ function buildMockSession() {
 
   return {
     isAuthenticated: true,
+    authenticated: true,
+    usuario: MOCK_ADMIN_USER.usuario,
+    rol: MOCK_ADMIN_USER.rol,
     user: {
       usuario: MOCK_ADMIN_USER.usuario,
       nombre: MOCK_ADMIN_USER.nombre,
@@ -25,11 +28,12 @@ function buildMockSession() {
   }
 }
 
-export function loginMock({ usuario, clave }) {
+export function loginMock({ usuario = "", clave = "" } = {}) {
   const usuarioNormalizado = usuario.trim()
 
   const credentialsAreValid =
-    usuarioNormalizado === MOCK_ADMIN_USER.usuario && clave === MOCK_ADMIN_USER.clave
+    usuarioNormalizado === MOCK_ADMIN_USER.usuario &&
+    clave === MOCK_ADMIN_USER.clave
 
   if (!credentialsAreValid) {
     return {
@@ -76,4 +80,5 @@ export function isAuthenticatedMock() {
 
 export function logoutMock() {
   sessionStorage.removeItem(AUTH_STORAGE_KEY)
+  localStorage.removeItem(AUTH_STORAGE_KEY)
 }

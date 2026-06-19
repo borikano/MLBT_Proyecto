@@ -619,7 +619,7 @@ export default function Inventario() {
           Control local
         </p>
 
-        <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Inventario</h1>
+        <h1 id="resumen-inventario" className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]">Inventario</h1>
 
         <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
           Control mock de insumos y stock. Permite registrar ítems, modificar
@@ -740,6 +740,7 @@ export default function Inventario() {
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
           <CardTitle className="text-lg text-[#7c2d12]">
+            <div id="formulario-inventario" className="scroll-mt-6" />
             {estaEditando ? "Modificar ítem" : "Registrar nuevo ítem"}
           </CardTitle>
           <CardDescription>
@@ -880,9 +881,7 @@ export default function Inventario() {
 
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Registrar movimiento
-          </CardTitle>
+          <CardTitle id="movimiento-inventario" className="scroll-mt-6 text-lg text-[#7c2d12]">Registrar movimiento</CardTitle>
           <CardDescription>
             Documenta entradas, salidas o ajustes. El movimiento actualiza el
             stock del ítem seleccionado.
@@ -983,9 +982,7 @@ export default function Inventario() {
         <CardHeader className="p-5 pb-3">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <CardTitle className="text-lg text-[#7c2d12]">
-                Data Table de inventario
-              </CardTitle>
+              <CardTitle id="tablas-inventario" className="scroll-mt-6 text-lg text-[#7c2d12]">Data Table de inventario</CardTitle>
               <CardDescription>
                 Ítems registrados con control de stock, alertas y estado.
               </CardDescription>
@@ -1116,3 +1113,11 @@ export default function Inventario() {
     </section>
   )
 }
+
+
+
+
+
+
+
+

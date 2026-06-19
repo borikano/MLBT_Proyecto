@@ -335,7 +335,6 @@ export default function Ventas() {
   const [orderError, setOrderError] = useState("")
   const [saleError, setSaleError] = useState("")
   const [segmentacion, setSegmentacion] = useState("dia")
-  const [periodoSeleccionado, setPeriodoSeleccionado] = useState("todos")
   const [fechaCalendario, setFechaCalendario] = useState("")
   const [segmentoPagoFiltro, setSegmentoPagoFiltro] = useState("todos")
 
@@ -347,22 +346,14 @@ export default function Ventas() {
     ? ventas.filter((venta) => venta.fecha === fechaCalendario)
     : ventas
 
-  const resumenSegmentado = buildSegmentSummary(ventasPorFecha, segmentacion)
-
-  const ventasPorPeriodo =
-    periodoSeleccionado === "todos"
-      ? ventasPorFecha
-      : ventasPorFecha.filter(
-          (venta) => getSegmentKey(venta, segmentacion) === periodoSeleccionado
-        )
-
   const ventasFiltradas =
     segmentoPagoFiltro === "todos"
-      ? ventasPorPeriodo
-      : ventasPorPeriodo.filter(
+      ? ventasPorFecha
+      : ventasPorFecha.filter(
           (venta) => venta.metodoPagoSegmento === segmentoPagoFiltro
         )
 
+  const resumenSegmentado = buildSegmentSummary(ventasFiltradas, segmentacion)
   const demandaProductos = buildDemandSummary(ventasFiltradas)
   const resumenPagos = buildPaymentSummary(ventasFiltradas)
 
@@ -440,17 +431,14 @@ export default function Ventas() {
 
   const handleSegmentacionChange = (value) => {
     setSegmentacion(value)
-    setPeriodoSeleccionado("todos")
   }
 
   const handleFechaCalendarioChange = (event) => {
     setFechaCalendario(event.target.value)
-    setPeriodoSeleccionado("todos")
   }
 
   const limpiarFiltros = () => {
     setFechaCalendario("")
-    setPeriodoSeleccionado("todos")
     setSegmentoPagoFiltro("todos")
     setSegmentacion("dia")
   }
@@ -695,7 +683,7 @@ export default function Ventas() {
     },
     {
       accessorKey: "items",
-      header: "Pedido",
+      header: "Pedido vendido",
       cell: ({ row }) => (
         <div className="space-y-1">
           {row.original.items.map((item) => (
@@ -829,7 +817,7 @@ export default function Ventas() {
   ]
 
   return (
-    <section className="min-w-0 space-y-5">
+    <section className="min-w-0 space-y-8">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
           Registro local
@@ -838,364 +826,90 @@ export default function Ventas() {
         <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Ventas</h1>
 
         <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-          Módulo mock conectado al inventario. Las ventas validan insumos,
-          descuentan stock al confirmar y segmentan resultados por fecha,
-          periodo y método de pago.
+          Módulo mock conectado al inventario. La página separa el análisis de
+          ventas, el historial confirmado y la gestión del pedido actual para
+          mantener claridad operativa.
         </p>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
-        <Card className="border-[#f1d4bd] bg-white">
-          <CardHeader className="p-4">
-            <CardDescription>Ventas registradas hoy</CardDescription>
-            <CardTitle className="text-2xl text-[#7c2d12]">
-              {ventasDia}
-            </CardTitle>
-          </CardHeader>
-        </Card>
+      <section className="scroll-mt-6 space-y-5">
+        <div className="rounded-xl border border-[#f1d4bd] bg-[#fff7ed] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
+            Sección 1
+          </p>
+          <h2 className="mt-1 text-xl font-bold text-[#7c2d12]">
+            <div id="analisis-ventas" className="scroll-mt-6" />
+            Análisis de ventas
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Consulta ventas confirmadas, demanda por producto y comportamiento
+            por método de pago sin afectar el pedido actual.
+          </p>
+        </div>
 
-        <Card className="border-[#f1d4bd] bg-white">
-          <CardHeader className="p-4">
-            <CardDescription>Total vendido hoy</CardDescription>
-            <CardTitle className="text-2xl text-[#7c2d12]">
-              {formatCurrency(totalVentasDia)}
-            </CardTitle>
-          </CardHeader>
-        </Card>
+        <div className="grid gap-3 md:grid-cols-3">
+          <Card className="border-[#f1d4bd] bg-white">
+            <CardHeader className="p-4">
+              <CardDescription>Ventas registradas hoy</CardDescription>
+              <CardTitle className="text-2xl text-[#7c2d12]">
+                {ventasDia}
+              </CardTitle>
+            </CardHeader>
+          </Card>
 
-        <Card className="border-[#f1d4bd] bg-white">
-          <CardHeader className="p-4">
-            <CardDescription>Productos vendidos filtrados</CardDescription>
-            <CardTitle className="text-2xl text-[#7c2d12]">
-              {totalProductosFiltrados}
-            </CardTitle>
-          </CardHeader>
-        </Card>
-      </div>
+          <Card className="border-[#f1d4bd] bg-white">
+            <CardHeader className="p-4">
+              <CardDescription>Total vendido hoy</CardDescription>
+              <CardTitle className="text-2xl text-[#7c2d12]">
+                {formatCurrency(totalVentasDia)}
+              </CardTitle>
+            </CardHeader>
+          </Card>
 
-      <Card className="min-w-0 border-[#f1d4bd] bg-white">
-        <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Segmentación de ventas
-          </CardTitle>
-          <CardDescription>
-            Usa el calendario y los filtros para analizar ventas por hora, día,
-            mes, año y método de pago.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="space-y-4 p-5 pt-0">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            <div className="space-y-1.5">
-              <Label htmlFor="fechaCalendario">Calendario</Label>
-              <Input
-                id="fechaCalendario"
-                type="date"
-                value={fechaCalendario}
-                onChange={handleFechaCalendarioChange}
-                className="h-9"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="segmentacion">Agrupar por</Label>
-              <Select value={segmentacion} onValueChange={handleSegmentacionChange}>
-                <SelectTrigger id="segmentacion" className="h-9">
-                  <SelectValue placeholder="Selecciona agrupación" />
-                </SelectTrigger>
-                <SelectContent>
-                  {segmentacionesVenta.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="periodoSeleccionado">Periodo</Label>
-              <Select
-                value={periodoSeleccionado}
-                onValueChange={setPeriodoSeleccionado}
-              >
-                <SelectTrigger id="periodoSeleccionado" className="h-9">
-                  <SelectValue placeholder="Selecciona periodo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="todos">Todos los periodos</SelectItem>
-                  {resumenSegmentado.map((item) => (
-                    <SelectItem key={item.key} value={item.key}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="segmentoPagoFiltro">Segmento de pago</Label>
-              <Select
-                value={segmentoPagoFiltro}
-                onValueChange={setSegmentoPagoFiltro}
-              >
-                <SelectTrigger id="segmentoPagoFiltro" className="h-9">
-                  <SelectValue placeholder="Selecciona segmento" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="todos">Todos los segmentos</SelectItem>
-                  {segmentosMetodoPagoVenta.map((segmento) => (
-                    <SelectItem key={segmento.value} value={segmento.value}>
-                      {segmento.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex items-end">
-              <Button type="button" variant="outline" onClick={limpiarFiltros}>
-                Limpiar filtros
-              </Button>
-            </div>
-          </div>
-
-          <div className="grid gap-3 md:grid-cols-3">
-            <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
-              <p className="text-xs text-muted-foreground">Ventas filtradas</p>
-              <p className="text-xl font-bold text-[#7c2d12]">
-                {totalVentasFiltradas}
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
-              <p className="text-xs text-muted-foreground">Ingresos filtrados</p>
-              <p className="text-xl font-bold text-[#7c2d12]">
-                {formatCurrency(totalIngresosFiltrados)}
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
-              <p className="text-xs text-muted-foreground">Fecha aplicada</p>
-              <p className="text-xl font-bold text-[#7c2d12]">
-                {fechaCalendario || "Todas"}
-              </p>
-            </div>
-          </div>
-
-          <DataTable
-            columns={resumenColumns}
-            data={resumenSegmentado}
-            emptyMessage="No hay periodos para mostrar."
-          />
-        </CardContent>
-      </Card>
-
-      <div className="grid gap-5 xl:grid-cols-2">
-        <Card className="min-w-0 border-[#f1d4bd] bg-white">
-          <CardHeader className="p-5 pb-3">
-            <CardTitle className="text-lg text-[#7c2d12]">
-              Demanda por producto
-            </CardTitle>
-            <CardDescription>
-              Unidades vendidas según los filtros aplicados.
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="space-y-3 p-5 pt-0">
-            {demandaProductos.length > 0 ? (
-              demandaProductos.map((item) => (
-                <div
-                  key={item.productId}
-                  className="flex items-center justify-between gap-3 rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-[#7c2d12]">
-                      {item.productName}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Total vendido: {formatCurrency(item.total)}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">Unidades</p>
-                    <p className="text-lg font-bold text-[#7c2d12]">
-                      {item.quantity}
-                    </p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                No hay demanda para los filtros aplicados.
-              </p>
-            )}
-          </CardContent>
-        </Card>
+          <Card className="border-[#f1d4bd] bg-white">
+            <CardHeader className="p-4">
+              <CardDescription>Productos vendidos filtrados</CardDescription>
+              <CardTitle className="text-2xl text-[#7c2d12]">
+                {totalProductosFiltrados}
+              </CardTitle>
+            </CardHeader>
+          </Card>
+        </div>
 
         <Card className="min-w-0 border-[#f1d4bd] bg-white">
           <CardHeader className="p-5 pb-3">
             <CardTitle className="text-lg text-[#7c2d12]">
-              Métodos de pago segmentados
+              Segmentación de ventas
             </CardTitle>
             <CardDescription>
-              Resumen por segmento de pago según los filtros aplicados.
+              Usa el calendario y el segmento de pago para filtrar. La tabla se
+              agrupa directamente por día, hora, mes o año.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-3 p-5 pt-0">
-            {resumenPagos.length > 0 ? (
-              resumenPagos.map((item) => (
-                <div
-                  key={item.key}
-                  className="flex items-center justify-between gap-3 rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-[#7c2d12]">
-                      {item.segmento}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {item.descripcion}
-                    </p>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="text-xs text-muted-foreground">
-                      {item.ventas} venta(s)
-                    </p>
-                    <p className="text-lg font-bold text-[#7c2d12]">
-                      {formatCurrency(item.total)}
-                    </p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                No hay pagos para los filtros aplicados.
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card className="min-w-0 border-[#f1d4bd] bg-white">
-        <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Datos de la venta
-          </CardTitle>
-          <CardDescription>
-            Define cliente, tipo de venta y método de pago antes de confirmar.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="p-5 pt-0">
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="cliente">Cliente</Label>
-              <Input
-                id="cliente"
-                name="cliente"
-                type="text"
-                placeholder="Ej: Cliente mostrador"
-                value={saleForm.cliente}
-                onChange={handleSaleInputChange}
-                className="h-9"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="tipoVenta">Tipo de venta</Label>
-              <Select
-                value={saleForm.tipoVenta}
-                onValueChange={(value) => updateSaleFormField("tipoVenta", value)}
-              >
-                <SelectTrigger id="tipoVenta" className="h-9">
-                  <SelectValue placeholder="Selecciona tipo" />
-                </SelectTrigger>
-                <SelectContent>
-                  {tiposVenta.map((tipo) => (
-                    <SelectItem key={tipo} value={tipo}>
-                      {tipo}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="metodoPagoSegmento">Segmento de pago</Label>
-              <Select
-                value={saleForm.metodoPagoSegmento}
-                onValueChange={handleMetodoPagoSegmentoChange}
-              >
-                <SelectTrigger id="metodoPagoSegmento" className="h-9">
-                  <SelectValue placeholder="Selecciona segmento" />
-                </SelectTrigger>
-                <SelectContent>
-                  {segmentosMetodoPagoVenta.map((segmento) => (
-                    <SelectItem key={segmento.value} value={segmento.value}>
-                      {segmento.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="metodoPago">Método de pago</Label>
-              <Select
-                value={saleForm.metodoPago}
-                onValueChange={(value) =>
-                  updateSaleFormField("metodoPago", value)
-                }
-              >
-                <SelectTrigger id="metodoPago" className="h-9">
-                  <SelectValue placeholder="Selecciona método" />
-                </SelectTrigger>
-                <SelectContent>
-                  {selectedPaymentSegment?.metodos.map((metodo) => (
-                    <SelectItem key={metodo.value} value={metodo.value}>
-                      {metodo.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="min-w-0 border-[#f1d4bd] bg-white">
-        <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Agregar producto al pedido
-          </CardTitle>
-          <CardDescription>
-            El sistema valida los insumos contra el stock disponible antes de
-            agregar productos al pedido.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="p-5 pt-0">
-          <form onSubmit={agregarProducto} className="space-y-4">
-            <div className="grid gap-3 md:grid-cols-[2fr_1fr_auto] md:items-end">
+          <CardContent className="space-y-4 p-5 pt-0">
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
               <div className="space-y-1.5">
-                <Label htmlFor="productId">Producto</Label>
-                <Select
-                  value={orderForm.productId}
-                  onValueChange={(value) =>
-                    updateOrderFormField("productId", value)
-                  }
-                >
-                  <SelectTrigger id="productId" className="h-9">
-                    <SelectValue placeholder="Selecciona un producto" />
+                <Label htmlFor="fechaCalendario">Calendario</Label>
+                <Input
+                  id="fechaCalendario"
+                  type="date"
+                  value={fechaCalendario}
+                  onChange={handleFechaCalendarioChange}
+                  className="h-9"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="segmentacion">Agrupar por</Label>
+                <Select value={segmentacion} onValueChange={handleSegmentacionChange}>
+                  <SelectTrigger id="segmentacion" className="h-9">
+                    <SelectValue placeholder="Selecciona agrupación" />
                   </SelectTrigger>
                   <SelectContent>
-                    {productosActivos.map((producto) => (
-                      <SelectItem key={producto.id} value={String(producto.id)}>
-                        {producto.codigo} - {producto.nombre} -{" "}
-                        {formatCurrency(producto.precio)}
+                    {segmentacionesVenta.map((item) => (
+                      <SelectItem key={item.value} value={item.value}>
+                        {item.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -1203,125 +917,443 @@ export default function Ventas() {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="quantity">Cantidad</Label>
-                <Input
-                  id="quantity"
-                  name="quantity"
-                  type="number"
-                  min="1"
-                  value={orderForm.quantity}
-                  onChange={handleQuantityChange}
-                  className="h-9"
-                />
+                <Label htmlFor="segmentoPagoFiltro">Segmento de pago</Label>
+                <Select
+                  value={segmentoPagoFiltro}
+                  onValueChange={setSegmentoPagoFiltro}
+                >
+                  <SelectTrigger id="segmentoPagoFiltro" className="h-9">
+                    <SelectValue placeholder="Selecciona segmento" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="todos">Todos los segmentos</SelectItem>
+                    {segmentosMetodoPagoVenta.map((segmento) => (
+                      <SelectItem key={segmento.value} value={segmento.value}>
+                        {segmento.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
-              <Button
-                type="submit"
-                className="bg-[#7c2d12] hover:bg-[#9a3412]"
-              >
-                Agregar
-              </Button>
+              <div className="flex items-end">
+                <Button type="button" variant="outline" onClick={limpiarFiltros}>
+                  Limpiar filtros
+                </Button>
+              </div>
             </div>
 
-            {orderError && (
-              <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-                {orderError}
-              </p>
-            )}
-          </form>
-        </CardContent>
-      </Card>
+            <div className="grid gap-3 md:grid-cols-3">
+              <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
+                <p className="text-xs text-muted-foreground">
+                  Ventas filtradas
+                </p>
+                <p className="text-xl font-bold text-[#7c2d12]">
+                  {totalVentasFiltradas}
+                </p>
+              </div>
 
-      {consumoPedido.length > 0 && (
-        <Card className="min-w-0 border-orange-200 bg-orange-50">
+              <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
+                <p className="text-xs text-muted-foreground">
+                  Ingresos filtrados
+                </p>
+                <p className="text-xl font-bold text-[#7c2d12]">
+                  {formatCurrency(totalIngresosFiltrados)}
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
+                <p className="text-xs text-muted-foreground">Fecha aplicada</p>
+                <p className="text-xl font-bold text-[#7c2d12]">
+                  {fechaCalendario || "Todas"}
+                </p>
+              </div>
+            </div>
+
+            <DataTable
+              columns={resumenColumns}
+              data={resumenSegmentado}
+              emptyMessage="No hay periodos para mostrar."
+            />
+          </CardContent>
+        </Card>
+
+        <div className="grid gap-5 xl:grid-cols-2">
+          <Card className="min-w-0 border-[#f1d4bd] bg-white">
+            <CardHeader className="p-5 pb-3">
+              <CardTitle className="text-lg text-[#7c2d12]">
+                Demanda por producto
+              </CardTitle>
+              <CardDescription>
+                Unidades vendidas según los filtros aplicados.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="space-y-3 p-5 pt-0">
+              {demandaProductos.length > 0 ? (
+                demandaProductos.map((item) => (
+                  <div
+                    key={item.productId}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-[#7c2d12]">
+                        {item.productName}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Total vendido: {formatCurrency(item.total)}
+                      </p>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-xs text-muted-foreground">Unidades</p>
+                      <p className="text-lg font-bold text-[#7c2d12]">
+                        {item.quantity}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+                  No hay demanda para los filtros aplicados.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="min-w-0 border-[#f1d4bd] bg-white">
+            <CardHeader className="p-5 pb-3">
+              <CardTitle className="text-lg text-[#7c2d12]">
+                Métodos de pago segmentados
+              </CardTitle>
+              <CardDescription>
+                Resumen por segmento de pago según los filtros aplicados.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="space-y-3 p-5 pt-0">
+              {resumenPagos.length > 0 ? (
+                resumenPagos.map((item) => (
+                  <div
+                    key={item.key}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-semibold text-[#7c2d12]">
+                        {item.segmento}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {item.descripcion}
+                      </p>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-xs text-muted-foreground">
+                        {item.ventas} venta(s)
+                      </p>
+                      <p className="text-lg font-bold text-[#7c2d12]">
+                        {formatCurrency(item.total)}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+                  No hay pagos para los filtros aplicados.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section className="scroll-mt-6 space-y-5">
+        <div className="rounded-xl border border-[#f1d4bd] bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
+            Sección 2
+          </p>
+          <h2 className="mt-1 text-xl font-bold text-[#7c2d12]">
+
+            Historial de ventas confirmadas
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Registro de ventas ya procesadas. Este historial se consulta de
+            forma independiente al pedido que esté en construcción.
+          </p>
+        </div>
+
+        <Card className="min-w-0 border-[#f1d4bd] bg-white">
           <CardHeader className="p-5 pb-3">
-            <CardTitle className="text-lg text-orange-800">
-              Insumos reservados para el pedido
+            <CardTitle className="text-lg text-[#7c2d12]">
+              <div id="historial-ventas" className="scroll-mt-6" />
+              Historial de ventas
             </CardTitle>
-            <CardDescription className="text-orange-700">
-              Estos insumos se descontarán del inventario al confirmar la venta.
+            <CardDescription>
+              Registro simulado de ventas confirmadas. La tabla responde a la
+              fecha, agrupación y segmento de pago seleccionado en análisis.
             </CardDescription>
           </CardHeader>
 
           <CardContent className="p-5 pt-0">
             <DataTable
-              columns={consumoColumns}
-              data={consumoPedido}
-              emptyMessage="No hay insumos reservados."
+              columns={ventasColumns}
+              data={ventasFiltradas}
+              emptyMessage="No hay ventas para los filtros seleccionados."
             />
           </CardContent>
         </Card>
-      )}
+      </section>
 
-      <Card className="min-w-0 border-[#f1d4bd] bg-white">
-        <CardHeader className="p-5 pb-3">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <CardTitle className="text-lg text-[#7c2d12]">
-                Pedido actual
+      <section className="scroll-mt-6 space-y-5">
+        <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+            Sección 3
+          </p>
+          <h2 className="mt-1 text-xl font-bold text-orange-900">
+            Gestión del pedido actual
+          </h2>
+          <p className="mt-1 text-sm text-orange-800">
+            Construye una venta nueva. Los productos agregados al pedido validan
+            insumos contra inventario y solo descuentan stock cuando se confirma
+            la venta.
+          </p>
+        </div>
+
+        <Card className="min-w-0 border-[#f1d4bd] bg-white">
+          <CardHeader className="p-5 pb-3">
+            <CardTitle className="text-lg text-[#7c2d12]">
+              Datos del pedido
+            </CardTitle>
+            <CardDescription>
+              Define cliente, tipo de venta y método de pago antes de confirmar.
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="p-5 pt-0">
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="cliente">Cliente</Label>
+                <Input
+                  id="cliente"
+                  name="cliente"
+                  type="text"
+                  placeholder="Ej: Cliente mostrador"
+                  value={saleForm.cliente}
+                  onChange={handleSaleInputChange}
+                  className="h-9"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="tipoVenta">Tipo de venta</Label>
+                <Select
+                  value={saleForm.tipoVenta}
+                  onValueChange={(value) => updateSaleFormField("tipoVenta", value)}
+                >
+                  <SelectTrigger id="tipoVenta" className="h-9">
+                    <SelectValue placeholder="Selecciona tipo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {tiposVenta.map((tipo) => (
+                      <SelectItem key={tipo} value={tipo}>
+                        {tipo}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="metodoPagoSegmento">Segmento de pago</Label>
+                <Select
+                  value={saleForm.metodoPagoSegmento}
+                  onValueChange={handleMetodoPagoSegmentoChange}
+                >
+                  <SelectTrigger id="metodoPagoSegmento" className="h-9">
+                    <SelectValue placeholder="Selecciona segmento" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {segmentosMetodoPagoVenta.map((segmento) => (
+                      <SelectItem key={segmento.value} value={segmento.value}>
+                        {segmento.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <Label htmlFor="metodoPago">Método de pago</Label>
+                <Select
+                  value={saleForm.metodoPago}
+                  onValueChange={(value) =>
+                    updateSaleFormField("metodoPago", value)
+                  }
+                >
+                  <SelectTrigger id="metodoPago" className="h-9">
+                    <SelectValue placeholder="Selecciona método" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {selectedPaymentSegment?.metodos.map((metodo) => (
+                      <SelectItem key={metodo.value} value={metodo.value}>
+                        {metodo.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="min-w-0 border-[#f1d4bd] bg-white">
+          <CardHeader className="p-5 pb-3">
+            <CardTitle className="text-lg text-[#7c2d12]">
+              Agregar producto al pedido
+            </CardTitle>
+            <CardDescription>
+              El sistema valida los insumos contra el stock disponible antes de
+              agregar productos al pedido.
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="p-5 pt-0">
+            <form onSubmit={agregarProducto} className="space-y-4">
+              <div className="grid gap-3 md:grid-cols-[2fr_1fr_auto] md:items-end">
+                <div className="space-y-1.5">
+                  <Label htmlFor="productId">Producto</Label>
+                  <Select
+                    value={orderForm.productId}
+                    onValueChange={(value) =>
+                      updateOrderFormField("productId", value)
+                    }
+                  >
+                    <SelectTrigger id="productId" className="h-9">
+                      <SelectValue placeholder="Selecciona un producto" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {productosActivos.map((producto) => (
+                        <SelectItem key={producto.id} value={String(producto.id)}>
+                          {producto.codigo} - {producto.nombre} -{" "}
+                          {formatCurrency(producto.precio)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="quantity">Cantidad</Label>
+                  <Input
+                    id="quantity"
+                    name="quantity"
+                    type="number"
+                    min="1"
+                    value={orderForm.quantity}
+                    onChange={handleQuantityChange}
+                    className="h-9"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="bg-[#7c2d12] hover:bg-[#9a3412]"
+                >
+                  Agregar
+                </Button>
+              </div>
+
+              {orderError && (
+                <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                  {orderError}
+                </p>
+              )}
+            </form>
+          </CardContent>
+        </Card>
+
+        {consumoPedido.length > 0 && (
+          <Card className="min-w-0 border-orange-200 bg-orange-50">
+            <CardHeader className="p-5 pb-3">
+              <CardTitle className="text-lg text-orange-800">
+                Insumos reservados para el pedido
               </CardTitle>
-              <CardDescription>
-                Productos agregados antes de confirmar la venta.
+              <CardDescription className="text-orange-700">
+                Estos insumos se descontarán del inventario al confirmar la venta.
               </CardDescription>
-            </div>
+            </CardHeader>
 
-            <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] px-4 py-3 text-right">
-              <p className="text-xs text-muted-foreground">Total pedido</p>
-              <p className="text-2xl font-bold text-[#7c2d12]">
-                {formatCurrency(totalPedido)}
+            <CardContent className="p-5 pt-0">
+              <DataTable
+                columns={consumoColumns}
+                data={consumoPedido}
+                emptyMessage="No hay insumos reservados."
+              />
+            </CardContent>
+          </Card>
+        )}
+
+        <Card className="min-w-0 border-[#f1d4bd] bg-white">
+          <CardHeader className="p-5 pb-3">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <CardTitle className="text-lg text-[#7c2d12]">
+                  <div id="pedido-actual" className="scroll-mt-6" />
+                  Pedido actual
+                </CardTitle>
+                <CardDescription>
+                  Productos agregados antes de confirmar la venta.
+                </CardDescription>
+              </div>
+
+              <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] px-4 py-3 text-right">
+                <p className="text-xs text-muted-foreground">Total pedido</p>
+                <p className="text-2xl font-bold text-[#7c2d12]">
+                  {formatCurrency(totalPedido)}
+                </p>
+              </div>
+            </div>
+          </CardHeader>
+
+          <CardContent className="space-y-4 p-5 pt-0">
+            <DataTable
+              columns={pedidoColumns}
+              data={pedidoActual}
+              emptyMessage="No hay productos agregados al pedido actual."
+            />
+
+            {saleError && (
+              <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                {saleError}
               </p>
+            )}
+
+            <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+              <Button type="button" variant="outline" onClick={limpiarPedido}>
+                Limpiar pedido
+              </Button>
+
+              <Button
+                type="button"
+                onClick={confirmarVenta}
+                className="bg-[#7c2d12] hover:bg-[#9a3412]"
+              >
+                Confirmar venta
+              </Button>
             </div>
-          </div>
-        </CardHeader>
-
-        <CardContent className="space-y-4 p-5 pt-0">
-          <DataTable
-            columns={pedidoColumns}
-            data={pedidoActual}
-            emptyMessage="No hay productos agregados al pedido actual."
-          />
-
-          {saleError && (
-            <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-              {saleError}
-            </p>
-          )}
-
-          <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-            <Button type="button" variant="outline" onClick={limpiarPedido}>
-              Limpiar pedido
-            </Button>
-
-            <Button
-              type="button"
-              onClick={confirmarVenta}
-              className="bg-[#7c2d12] hover:bg-[#9a3412]"
-            >
-              Confirmar venta
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="min-w-0 border-[#f1d4bd] bg-white">
-        <CardHeader className="p-5 pb-3">
-          <CardTitle className="text-lg text-[#7c2d12]">
-            Historial de ventas
-          </CardTitle>
-          <CardDescription>
-            Registro simulado de ventas confirmadas. La tabla responde al
-            periodo, fecha y segmento de pago seleccionado.
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className="p-5 pt-0">
-          <DataTable
-            columns={ventasColumns}
-            data={ventasFiltradas}
-            emptyMessage="No hay ventas para los filtros seleccionados."
-          />
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </section>
     </section>
   )
 }
+
+
+
+
+
+
+
+
+
+
