@@ -41,15 +41,11 @@ Documentar y validar la API del proyecto MLBT mediante pruebas funcionales en Po
 | Ruta | Propósito |
 |---|---|
 | 02_BACK_END/01_API_NODE/postman | Colección Postman de la API. |
-| 02_BACK_END/01_API_NODE/03_DOCS/POSTMAN_EV04.md | Guía de pruebas Postman. |
+| 02_BACK_END/01_API_NODE/docs/POSTMAN_EV04.md | Guía de pruebas Postman. |
 | 03_DOCS/evidencias/GA7_220501096_AA5_EV04 | Documentos de entrega de EV04. |
 | 03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman | Capturas de pruebas en Postman. |
 | 03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/terminal | Capturas de validaciones desde terminal. |
 | 03_DOCS/evidencias/GA7_220501096_AA5_EV04/resultados | Resultados y cierre de pruebas. |
-
-## Estado
-
-Estructura inicial creada. Las pruebas se documentarán después de validar la API en Postman.
 
 ## Resultados finales
 
@@ -64,7 +60,7 @@ Estructura inicial creada. Las pruebas se documentarán después de validar la A
 ## Archivos finales
 
 - 02_BACK_END/01_API_NODE/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
-- 02_BACK_END/01_API_NODE/03_DOCS/POSTMAN_EV04.md
+- 02_BACK_END/01_API_NODE/docs/POSTMAN_EV04.md
 - 03_DOCS/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_plan_pruebas_postman.md
 - 03_DOCS/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_resultados_postman.md
 - 03_DOCS/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_cierre_tecnico.md

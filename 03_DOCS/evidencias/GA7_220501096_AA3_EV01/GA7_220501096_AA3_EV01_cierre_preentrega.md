@@ -12,15 +12,11 @@ MLBT_Proyecto
 
 Arawkano
 
-## Commit validado
-
-e0b3f5a2d41b76e01d067e657980afe00152b074
-
 ## Resultado Git
 
-- Arbol de trabajo limpio.
-- Arawkano sincronizada con principal.
-- origin/Arawkano sincronizada con origin/principal.
+- Árbol de trabajo limpio al momento del cierre.
+- Rama estable validada.
+- Historial respaldado en GitHub.
 
 ## Evidencia validada
 
@@ -39,18 +35,20 @@ Se valida la existencia del módulo 02_BACK_END/03_JAVA_WEB con estructura separ
 - Servlets en controller.
 - Modelos en model.
 - Servicios en service.
-- Repositorio temporal en epository.
+- Repositorio temporal en repository.
 - JSP en WEB-INF/jsp.
-- CSS en ssets/css.
+- CSS en assets/css.
 - index.jsp como punto de entrada.
 
-## Conteo de archivos
+## Conteo de archivos validado
 
 | Tipo | Cantidad |
 |---|---:|
 | Java | 14 |
-| JSP | 5 |
+| JSP | 6 |
 | CSS | 1 |
+| XML | 2 |
+| Markdown | 1 |
 
 ## Resultado
 

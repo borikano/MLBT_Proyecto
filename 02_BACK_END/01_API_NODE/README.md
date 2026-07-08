@@ -2,11 +2,11 @@
 
 ## Proyecto
 
-MLBT Project - María La Bonita Taquería
+MLBT Project - María La Bonita Taquería.
 
 ## Evidencia
 
-GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto
+GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto.
 
 ## Propósito
 
@@ -22,7 +22,7 @@ Este módulo contiene los servicios REST de MLBT para autenticación, usuarios, 
 - JSON Web Token.
 - Zod.
 - pnpm.
-- Postman para la siguiente evidencia EV04.
+- Postman para la evidencia EV04.
 
 ## URL local
 
@@ -53,11 +53,12 @@ Antes de ejecutar, iniciar MySQL desde XAMPP.
 
 Desde la carpeta 02_BACK_END/01_API_NODE:
 
-node .\src\server.js
+    pnpm install
+    node .\src\server.js
 
 ## Validación rápida
 
-node .\src\server.js --check
+    node .\src\server.js --check
 
 ## Base de datos
 
@@ -69,46 +70,31 @@ node .\src\server.js --check
 
 Para cargar datos iniciales:
 
-node prisma/seed.js
+    node prisma/seed.js
 
-## Documentación
+## Documentación del módulo
 
-- 03_DOCS/ENDPOINTS_EV03.md
-- 03_DOCS/BASE_DATOS_EV03.md
-- 03_DOCS/DATOS_INICIALES_EV03.md
-- 03_DOCS/VALIDACION_ENDPOINTS_EV03.md
+| Documento | Ruta |
+|---|---|
+| Endpoints EV03 | [docs/ENDPOINTS_EV03.md](docs/ENDPOINTS_EV03.md) |
+| Base de datos EV03 | [docs/BASE_DATOS_EV03.md](docs/BASE_DATOS_EV03.md) |
+| Datos iniciales EV03 | [docs/DATOS_INICIALES_EV03.md](docs/DATOS_INICIALES_EV03.md) |
+| Validación de endpoints EV03 | [docs/VALIDACION_ENDPOINTS_EV03.md](docs/VALIDACION_ENDPOINTS_EV03.md) |
+| Guía Postman EV04 | [docs/POSTMAN_EV04.md](docs/POSTMAN_EV04.md) |
+| Separación de evidencias AA5 | [docs/SEPARACION_EVIDENCIAS_AA5.md](docs/SEPARACION_EVIDENCIAS_AA5.md) |
 
-## Nota
-
-El archivo .env es local y no debe versionarse. Se incluye .env.example como plantilla segura.
 ## Evidencia EV04 - Pruebas Postman
 
-La evidencia **GA7-220501096-AA5-EV04 - API MLBT** valida esta API mediante una colección Postman.
+La evidencia GA7-220501096-AA5-EV04 valida esta API mediante una colección Postman.
 
 Archivo de colección:
 
-- `postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json`
-
-Guía de pruebas:
-
-- `03_DOCS/POSTMAN_EV04.md`
-
-Pruebas documentadas:
-
-- Ruta raíz de la API.
-- Health check.
-- Login correcto con generación de token JWT.
-- Perfil protegido con token.
-- Consulta de usuarios.
-- Consulta de inventario.
-- Consulta de ventas.
-- Login incorrecto rechazado.
-- Perfil sin token rechazado.
+- [postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json](postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json)
 
 Capturas de evidencia:
 
-- `../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
+- [../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman](../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman)
 
-Resultado:
+## Nota de seguridad
 
-La API fue probada en Postman y los endpoints principales respondieron según lo esperado.
+El archivo .env es local y no debe versionarse. Se incluye .env.example como plantilla segura.

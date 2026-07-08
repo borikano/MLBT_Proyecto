@@ -1,4 +1,4 @@
-# GA7_220501096_AA5_EV03 - Indice de entrega
+# GA7_220501096_AA5_EV03 - Índice de entrega
 
 ## Proyecto
 
@@ -24,12 +24,12 @@ feature/GA7_220501096_AA5_EV03_MLBT_API
 
 | Documento | Propósito |
 |---|---|
-| 02_BACK_END/01_API_NODE/README.md | Descripción tecnica del módulo API. |
-| 02_BACK_END/01_API_NODE/03_DOCS/ENDPOINTS_EV03.md | Endpoints implementados. |
-| 02_BACK_END/01_API_NODE/03_DOCS/BASE_DATOS_EV03.md | Base de datos y modelos Prisma. |
-| 02_BACK_END/01_API_NODE/03_DOCS/DATOS_INICIALES_EV03.md | Datos iniciales de prueba. |
-| 02_BACK_END/01_API_NODE/03_DOCS/VALIDACION_ENDPOINTS_EV03.md | Validación funcional desde terminal. |
-| 03_DOCS/evidencias/GA7_220501096_AA5_EV03/GA7_220501096_AA5_EV03_cierre_técnico.md | Cierre técnico de la evidencia. |
+| 02_BACK_END/01_API_NODE/README.md | Descripción técnica del módulo API. |
+| 02_BACK_END/01_API_NODE/docs/ENDPOINTS_EV03.md | Endpoints implementados. |
+| 02_BACK_END/01_API_NODE/docs/BASE_DATOS_EV03.md | Base de datos y modelos Prisma. |
+| 02_BACK_END/01_API_NODE/docs/DATOS_INICIALES_EV03.md | Datos iniciales de prueba. |
+| 02_BACK_END/01_API_NODE/docs/VALIDACION_ENDPOINTS_EV03.md | Validación funcional desde terminal. |
+| 03_DOCS/evidencias/GA7_220501096_AA5_EV03/GA7_220501096_AA5_EV03_cierre_tecnico.md | Cierre técnico de la evidencia. |
 
 ## Estado
 

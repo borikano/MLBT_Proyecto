@@ -14,6 +14,15 @@
 | 01_FRONT_END/01_REACT_AP07/src/context/MlbtDataContext.jsx | Estado compartido de datos de prueba. |
 | 01_FRONT_END/01_REACT_AP07/src/data | Datos de prueba para usuarios, inventario y ventas. |
 
+## Interfaz base
+
+| Ruta | Propósito |
+|---|---|
+| 01_FRONT_END/02_INTERFAZ_BASE/pages | Páginas HTML públicas y administrativas base. |
+| 01_FRONT_END/02_INTERFAZ_BASE/css | Estilos separados por responsabilidad visual. |
+| 01_FRONT_END/02_INTERFAZ_BASE/js | Lógica JavaScript organizada por dominio. |
+| 01_FRONT_END/02_INTERFAZ_BASE/assets | Recursos visuales de la interfaz base. |
+
 ## API MLBT
 
 | Ruta | Propósito |
@@ -26,10 +35,9 @@
 | 02_BACK_END/01_API_NODE/src/services | Servicios de negocio. |
 | 02_BACK_END/01_API_NODE/prisma/schema.prisma | Modelo de datos Prisma. |
 
-## Módulos web
+## Módulos web Java
 
 | Ruta | Propósito |
 |---|---|
-| 02_BACK_END/02_SPRING_WEB | Módulo web Spring. |
-| 02_BACK_END/03_JAVA_WEB | Módulo web Java. |
-| pages, css, js, assets | Recursos de la interfaz base. |
+| 02_BACK_END/02_SPRING_WEB | Módulo web Spring Boot con Thymeleaf y persistencia. |
+| 02_BACK_END/03_JAVA_WEB | Módulo Java Web con JSP, Servlets y estructura Maven. |

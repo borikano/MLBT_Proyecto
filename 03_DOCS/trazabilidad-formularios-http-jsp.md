@@ -6,139 +6,59 @@ GA7-220501096-AA3-EV01 - Codificación de módulos del software Stand-alone, web
 
 ## Propósito
 
-Este documento consolida la trazabilidad técnica de los formularios HTML, la lógica equivalente a operaciones GET/POST y el estado actual de páginas JSP dentro del proyecto:
+Este documento consolida la trazabilidad técnica de formularios, operaciones equivalentes a GET y POST, y módulos web disponibles dentro del proyecto MLBT.
 
-- Dónde están los formularios HTML.
-- Cómo se identifican las operaciones equivalentes a GET y POST.
-- Dónde estarían o se proyectan las páginas JSP.
-- Qué archivos JavaScript gestionan la lógica de cada formulario.
+## Estado consolidado actual
 
-## Estado actual del proyecto
+El repositorio MLBT cuenta actualmente con varios frentes técnicos:
 
-El proyecto MLBT se encuentra implementado actualmente como una aplicación web frontend con HTML, CSS y JavaScript Vanilla.
+| Bloque | Ruta | Estado |
+|---|---|---|
+| Interfaz base HTML, CSS y JavaScript | 01_FRONT_END/02_INTERFAZ_BASE | Disponible como base histórica y funcional. |
+| Interfaz React | 01_FRONT_END/01_REACT_AP07 | Disponible como componente Front End AP07. |
+| API Node | 02_BACK_END/01_API_NODE | Disponible como servicio REST. |
+| Spring Web | 02_BACK_END/02_SPRING_WEB | Disponible como módulo Java Spring Boot. |
+| Java Web JSP y Servlets | 02_BACK_END/03_JAVA_WEB | Disponible como módulo complementario Java Web. |
 
-En la versión actual del repositorio:
+## Interfaz base HTML y JavaScript
 
-- Sí existen formularios HTML.
-- Sí existe captura de eventos submit desde JavaScript.
-- Sí existe persistencia local mediante localStorage.
-- No se encontraron archivos .jsp.
-- No se encontraron formularios HTML con atributos method="get" o method="post" declarados directamente.
-- No se encontraron atributos action apuntando a servlets o páginas JSP.
+La interfaz base conserva formularios HTML controlados con JavaScript. Las operaciones equivalentes a GET y POST se realizan mediante lectura y escritura de datos desde servicios locales y almacenamiento del navegador.
 
-Por lo anterior, el comportamiento equivalente a GET y POST se documenta de acuerdo con la lógica implementada en JavaScript.
+| Formulario | Ruta | Lógica asociada |
+|---|---|---|
+| Login | 01_FRONT_END/02_INTERFAZ_BASE/pages/login.html | 01_FRONT_END/02_INTERFAZ_BASE/js/auth.js |
+| Usuarios | 01_FRONT_END/02_INTERFAZ_BASE/pages/users.html | 01_FRONT_END/02_INTERFAZ_BASE/js/users.js |
+| Inventario | 01_FRONT_END/02_INTERFAZ_BASE/pages/inventory.html | 01_FRONT_END/02_INTERFAZ_BASE/js/inventory.js |
+| Ventas | 01_FRONT_END/02_INTERFAZ_BASE/pages/sales.html | 01_FRONT_END/02_INTERFAZ_BASE/js/sales.js |
 
-## Formularios HTML identificados
+## Módulo Java Web
 
-| Página | Formulario | Archivo | Línea aproximada | Descripción |
-|---|---|---|---:|---|
-| Inventario | inventory-item-form | pages/inventory.html | 33 | Formulario para registrar o actualizar ítems de inventario. |
-| Inventario | inventory-movement-form | pages/inventory.html | 69 | Formulario para registrar movimientos de inventario. |
-| Login | login-form | pages/login.html | 21 | Formulario de inicio de sesión. |
-| Ventas | sales-form | pages/sales.html | 33 | Formulario para registrar ventas. |
-| Usuarios | user-form | pages/users.html | 36 | Formulario para registrar o administrar usuarios. |
+El módulo Java Web complementario evidencia directamente el uso de JSP, Servlets y formularios con métodos GET y POST.
 
-## Relación entre formularios y lógica JavaScript
-
-| Formulario | Archivo HTML | Archivo JavaScript asociado | Evidencia técnica |
-|---|---|---|---|
-| login-form | pages/login.html | js/auth.js | Gestiona autenticación y sesión de usuario. |
-| inventory-item-form | pages/inventory.html | js/inventory.js | Usa addEventListener("submit"), event.preventDefault() y funciones de guardado de inventario. |
-| inventory-movement-form | pages/inventory.html | js/inventory.js | Registra movimientos y actualiza existencias mediante JavaScript. |
-| sales-form | pages/sales.html | js/sales.js | Usa addEventListener("submit"), event.preventDefault() y saveSales(). |
-| user-form | pages/users.html | js/users.js | Usa addEventListener("submit"), event.preventDefault() y saveUsers(). |
-
-## Uso equivalente de GET
-
-En esta versión frontend, las operaciones equivalentes a GET se realizan mediante lectura de datos desde almacenamiento local y servicios JavaScript.
-
-| Operación equivalente | Archivo | Función o evidencia | Descripción |
-|---|---|---|---|
-| Consultar usuarios | js/services/user-data-service.js | getUsers() | Obtiene usuarios desde el proveedor configurado. |
-| Consultar usuarios locales | js/services/local/user-data-service.local.js | getUsers() | Obtiene usuarios desde localStorage. |
-| Consultar auditoría | js/services/user-data-service.js | getAuditEntries() | Obtiene registros de auditoría. |
-| Consultar sesión | js/session.js | getUser() | Recupera la sesión activa. |
-| Consultar inventario | js/inventory.js | storage.get() | Carga ítems y movimientos de inventario. |
-| Consultar ventas | js/sales.js | storage.get() | Carga ventas registradas. |
-
-## Uso equivalente de POST
-
-En esta versión frontend, las operaciones equivalentes a POST se realizan cuando el usuario envía un formulario HTML y JavaScript captura el evento submit.
-
-| Operación equivalente | Formulario | Archivo JavaScript | Evidencia técnica | Descripción |
-|---|---|---|---|---|
-| Iniciar sesión | login-form | js/auth.js | Captura de formulario y validación | Valida credenciales y crea sesión local. |
-| Registrar ítem de inventario | inventory-item-form | js/inventory.js | addEventListener("submit") y event.preventDefault() | Guarda o actualiza ítems de inventario. |
-| Registrar movimiento de inventario | inventory-movement-form | js/inventory.js | addEventListener("submit") y event.preventDefault() | Registra entradas o salidas de inventario. |
-| Registrar venta | sales-form | js/sales.js | addEventListener("submit"), event.preventDefault() y saveSales() | Guarda ventas y actualiza inventario. |
-| Registrar o administrar usuario | user-form | js/users.js | addEventListener("submit"), event.preventDefault() y saveUsers() | Guarda usuarios y registra cambios administrativos. |
-
-## Persistencia de datos
-
-La persistencia actual se realiza mediante localStorage, centralizada principalmente en:
-
-| Archivo | Responsabilidad |
+| Elemento | Ruta |
 |---|---|
-| js/storage.js | Encapsula operaciones sobre localStorage: guardar, leer, eliminar y limpiar datos. |
-| js/services/local/user-data-service.local.js | Gestiona persistencia local de usuarios y auditoría. |
-| js/services/user-data-service.js | Selecciona proveedor de datos local o remoto. |
-| js/services/remote/user-data-service.remote.js | Deja preparada una capa remota para futura conexión con backend. |
+| Módulo Java Web | 02_BACK_END/03_JAVA_WEB |
+| JSP | 02_BACK_END/03_JAVA_WEB/src/main/webapp/WEB-INF/jsp |
+| Servlets | 02_BACK_END/03_JAVA_WEB/src/main/java/com/mlbt/controller |
+| Modelos | 02_BACK_END/03_JAVA_WEB/src/main/java/com/mlbt/model |
+| Servicios | 02_BACK_END/03_JAVA_WEB/src/main/java/com/mlbt/service |
+| CSS | 02_BACK_END/03_JAVA_WEB/src/main/webapp/assets/css |
 
-## Estado de páginas JSP
+## Servlets documentados
 
-En la revisión actual del repositorio no se encontraron archivos con extensión .jsp.
-
-Comando utilizado:
-
-Get-ChildItem -Recurse -Include *.jsp
-
-Resultado:
-
-Sin resultados.
+| Servlet | Ruta HTTP | Método principal |
+|---|---|---|
+| LoginServlet | /login | GET y POST |
+| DashboardServlet | /dashboard | GET |
+| UsersServlet | /users | GET y POST |
+| InventoryServlet | /inventory | GET y POST |
+| SalesServlet | /sales | GET y POST |
+| LogoutServlet | /logout | GET |
 
 ## Interpretación para la entrega
 
-La documentación técnica deja visible que el proyecto tiene formularios HTML funcionales, pero actualmente no usa JSP ni servlets.
-
-La lógica de envío no se realiza con method="post" directamente en el HTML, sino mediante JavaScript, capturando el evento submit y evitando la recarga de página con event.preventDefault().
-
-## Mejora técnica futura
-
-Para fortalecer la evidencia frente al objetivo de aprendizaje, se recomienda una de estas dos opciones:
-
-### Opción 1: Mantener frontend y documentar claramente
-
-Mantener el proyecto como aplicación frontend, dejando este documento como trazabilidad de formularios, lógica de consulta, lógica de registro y ausencia actual de JSP.
-
-### Opción 2: Crear módulo complementario Java Web
-
-Crear una carpeta o rama complementaria con JSP y Servlets, por ejemplo:
-
-02_BACK_END/03_JAVA_WEB/
-├── src/main/webapp/
-│   ├── login.jsp
-│   ├── dashboard.jsp
-│   ├── inventory.jsp
-│   ├── sales.jsp
-│   └── users.jsp
-│
-└── src/main/java/
-    └── servlets/
-        ├── LoginServlet.java
-        ├── InventoryServlet.java
-        ├── SalesServlet.java
-        └── UserServlet.java
-
-De esta forma se podría evidenciar directamente:
-
-- Formularios JSP/HTML.
-- Métodos GET.
-- Métodos POST.
-- Servlets.
-- Redirección o despacho hacia páginas JSP.
+La evidencia cuenta con una base histórica frontend y con un módulo complementario Java Web. La documentación permite identificar formularios HTML, lógica JavaScript, JSP, Servlets y operaciones HTTP usadas para validar la separación de responsabilidades.
 
 ## Conclusión
 
-El proyecto MLBT cumple actualmente con una estructura web frontend organizada y con formularios funcionales. Este documento permite ubicar de forma directa los formularios HTML, la lógica equivalente a GET/POST y el estado actual de páginas JSP.
-
-Una mejora técnica futura es complementar el proyecto con una implementación Java Web basada en JSP y Servlets.
+El proyecto MLBT conserva trazabilidad entre formularios frontend, operaciones equivalentes de JavaScript y una implementación Java Web complementaria con JSP y Servlets.
