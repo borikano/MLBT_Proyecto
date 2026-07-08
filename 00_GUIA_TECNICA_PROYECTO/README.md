@@ -13,13 +13,13 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Recurso | Enlace | Estado |
 |---|---|---|
 | README principal | [../README.md](../README.md) | Disponible |
-| Interfaz React AP07 | [../front-end/react-ap07](../front-end/react-ap07) | Disponible |
-| README interfaz React | [../front-end/react-ap07/README.md](../front-end/react-ap07/README.md) | Disponible |
+| Interfaz React AP07 | [../01_FRONT_END/01_REACT_AP07](../01_FRONT_END/01_REACT_AP07) | Disponible |
+| README interfaz React | [../01_FRONT_END/01_REACT_AP07/README.md](../01_FRONT_END/01_REACT_AP07/README.md) | Disponible |
 | Guía React AP07 | [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) | Disponible |
-| API MLBT | [../back-end/api-node](../back-end/api-node) | Disponible |
-| Documentación API | [../back-end/api-node/docs](../back-end/api-node/docs) | Disponible |
-| Colección Postman | [../back-end/api-node/postman](../back-end/api-node/postman) | Disponible |
-| Evidencias generales | [../docs/evidencias](../docs/evidencias) | Disponible |
+| API MLBT | [../02_BACK_END/01_API_NODE](../02_BACK_END/01_API_NODE) | Disponible |
+| Documentación API | [../02_BACK_END/01_API_NODE/docs](../02_BACK_END/01_API_NODE/docs) | Disponible |
+| Colección Postman | [../02_BACK_END/01_API_NODE/postman](../02_BACK_END/01_API_NODE/postman) | Disponible |
+| Evidencias generales | [../03_DOCS/evidencias](../03_DOCS/evidencias) | Disponible |
 | Licencia | [../LICENSE.md](../LICENSE.md) | Disponible |
 
 ---
@@ -28,10 +28,10 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 
 | Orden | Fecha Git | Evidencia | Módulo o entrega | Ruta de revisión |
 |---|---|---|---|---|
-| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Spring Web / Java Web | [../docs/evidencias/GA7_220501096_AA3_EV01](../docs/evidencias/GA7_220501096_AA3_EV01) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API MLBT | [../back-end/api-node/docs](../back-end/api-node/docs) y [../docs/evidencias/GA7_220501096_AA5_EV03](../docs/evidencias/GA7_220501096_AA5_EV03) |
-| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | API MLBT / Postman | [../back-end/api-node/postman](../back-end/api-node/postman) y [../docs/evidencias/GA7_220501096_AA5_EV04](../docs/evidencias/GA7_220501096_AA5_EV04) |
-| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React | [../front-end/react-ap07](../front-end/react-ap07) y [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) |
+| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Spring Web / Java Web | [../03_DOCS/evidencias/GA7_220501096_AA3_EV01](../03_DOCS/evidencias/GA7_220501096_AA3_EV01) |
+| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API MLBT | [../02_BACK_END/01_API_NODE/docs](../02_BACK_END/01_API_NODE/docs) y [../03_DOCS/evidencias/GA7_220501096_AA5_EV03](../03_DOCS/evidencias/GA7_220501096_AA5_EV03) |
+| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | API MLBT / Postman | [../02_BACK_END/01_API_NODE/postman](../02_BACK_END/01_API_NODE/postman) y [../03_DOCS/evidencias/GA7_220501096_AA5_EV04](../03_DOCS/evidencias/GA7_220501096_AA5_EV04) |
+| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React | [../01_FRONT_END/01_REACT_AP07](../01_FRONT_END/01_REACT_AP07) y [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) |
 
 ---
 
@@ -54,11 +54,11 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 
 | Módulo | Comandos | Ruta |
 |---|---|---|
-| Interfaz React | pnpm install, pnpm dev, pnpm lint, pnpm build | [../front-end/react-ap07](../front-end/react-ap07) |
-| API MLBT | pnpm install, pnpm run dev | [../back-end/api-node](../back-end/api-node) |
-| Spring Web | Ejecutar según README del módulo | [../back-end/spring-web](../back-end/spring-web) |
-| Java Web | Ejecutar según README del módulo | [../back-end/java-web](../back-end/java-web) |
-| Interfaz base | Abrir páginas desde entorno local | [../front-end/interfaz-base/pages](../front-end/interfaz-base/pages) |
+| Interfaz React | pnpm install, pnpm dev, pnpm lint, pnpm build | [../01_FRONT_END/01_REACT_AP07](../01_FRONT_END/01_REACT_AP07) |
+| API MLBT | pnpm install, pnpm run dev | [../02_BACK_END/01_API_NODE](../02_BACK_END/01_API_NODE) |
+| Spring Web | Ejecutar según README del módulo | [../02_BACK_END/02_SPRING_WEB](../02_BACK_END/02_SPRING_WEB) |
+| Java Web | Ejecutar según README del módulo | [../02_BACK_END/03_JAVA_WEB](../02_BACK_END/03_JAVA_WEB) |
+| Interfaz base | Abrir páginas desde entorno local | [../01_FRONT_END/02_INTERFAZ_BASE/pages](../01_FRONT_END/02_INTERFAZ_BASE/pages) |
 
 ---
 

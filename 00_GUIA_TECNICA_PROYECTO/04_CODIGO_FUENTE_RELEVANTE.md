@@ -4,32 +4,32 @@
 
 | Ruta | Propósito |
 |---|---|
-| front-end/react-ap07/src/pages/Login.jsx | Inicio de sesión de prueba. |
-| front-end/react-ap07/src/pages/Dashboard.jsx | Panel principal con calendario de análisis. |
-| front-end/react-ap07/src/pages/Usuarios.jsx | Gestión local de usuarios. |
-| front-end/react-ap07/src/pages/Inventario.jsx | Gestión local de inventario. |
-| front-end/react-ap07/src/pages/Ventas.jsx | Registro y análisis de ventas. |
-| front-end/react-ap07/src/components/layout | Estructura administrativa y menú lateral. |
-| front-end/react-ap07/src/components/shared/DataTable.jsx | Tabla reutilizable. |
-| front-end/react-ap07/src/context/MlbtDataContext.jsx | Estado compartido de datos de prueba. |
-| front-end/react-ap07/src/data | Datos de prueba para usuarios, inventario y ventas. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Login.jsx | Inicio de sesión de prueba. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Dashboard.jsx | Panel principal con calendario de análisis. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Usuarios.jsx | Gestión local de usuarios. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Inventario.jsx | Gestión local de inventario. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Ventas.jsx | Registro y análisis de ventas. |
+| 01_FRONT_END/01_REACT_AP07/src/components/layout | Estructura administrativa y menú lateral. |
+| 01_FRONT_END/01_REACT_AP07/src/components/shared/DataTable.jsx | Tabla reutilizable. |
+| 01_FRONT_END/01_REACT_AP07/src/context/MlbtDataContext.jsx | Estado compartido de datos de prueba. |
+| 01_FRONT_END/01_REACT_AP07/src/data | Datos de prueba para usuarios, inventario y ventas. |
 
 ## API MLBT
 
 | Ruta | Propósito |
 |---|---|
-| back-end/api-node/src/app.js | Configuración principal de la aplicación Express. |
-| back-end/api-node/src/server.js | Punto de arranque local de la API. |
-| back-end/api-node/src/config/prisma.js | Cliente Prisma y conexión a base de datos. |
-| back-end/api-node/src/controllers | Controladores de autenticación, usuarios, inventario y ventas. |
-| back-end/api-node/src/routes | Rutas HTTP de la API. |
-| back-end/api-node/src/services | Servicios de negocio. |
-| back-end/api-node/prisma/schema.prisma | Modelo de datos Prisma. |
+| 02_BACK_END/01_API_NODE/src/app.js | Configuración principal de la aplicación Express. |
+| 02_BACK_END/01_API_NODE/src/server.js | Punto de arranque local de la API. |
+| 02_BACK_END/01_API_NODE/src/config/prisma.js | Cliente Prisma y conexión a base de datos. |
+| 02_BACK_END/01_API_NODE/src/controllers | Controladores de autenticación, usuarios, inventario y ventas. |
+| 02_BACK_END/01_API_NODE/src/routes | Rutas HTTP de la API. |
+| 02_BACK_END/01_API_NODE/src/services | Servicios de negocio. |
+| 02_BACK_END/01_API_NODE/prisma/schema.prisma | Modelo de datos Prisma. |
 
 ## Módulos web
 
 | Ruta | Propósito |
 |---|---|
-| back-end/spring-web | Módulo web Spring. |
-| back-end/java-web | Módulo web Java. |
+| 02_BACK_END/02_SPRING_WEB | Módulo web Spring. |
+| 02_BACK_END/03_JAVA_WEB | Módulo web Java. |
 | pages, css, js, assets | Recursos de la interfaz base. |

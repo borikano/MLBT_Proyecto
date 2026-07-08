@@ -12,12 +12,12 @@ Organizar y documentar el proyecto MLBT como repositorio público verificable, i
 
 | Módulo | Ruta | Propósito |
 |---|---|---|
-| Interfaz React | [../front-end/react-ap07](../front-end/react-ap07) | Interfaz desarrollada para AP07. |
-| API MLBT | [../back-end/api-node](../back-end/api-node) | API REST desarrollada con Node.js, Express, Prisma y MySQL/MariaDB. |
-| Spring Web | [../back-end/spring-web](../back-end/spring-web) | Módulo web Spring asociado a evidencias anteriores. |
-| Java Web | [../back-end/java-web](../back-end/java-web) | Módulo web Java asociado a evidencias anteriores. |
-| Evidencias | [../docs](../docs) | Documentación técnica y evidencias. |
-| Interfaz base | [../front-end/interfaz-base/pages](../front-end/interfaz-base/pages), [../front-end/interfaz-base/css](../front-end/interfaz-base/css), [../front-end/interfaz-base/js](../front-end/interfaz-base/js), [../front-end/interfaz-base/assets](../front-end/interfaz-base/assets) | Interfaz base del proyecto. |
+| Interfaz React | [../01_FRONT_END/01_REACT_AP07](../01_FRONT_END/01_REACT_AP07) | Interfaz desarrollada para AP07. |
+| API MLBT | [../02_BACK_END/01_API_NODE](../02_BACK_END/01_API_NODE) | API REST desarrollada con Node.js, Express, Prisma y MySQL/MariaDB. |
+| Spring Web | [../02_BACK_END/02_SPRING_WEB](../02_BACK_END/02_SPRING_WEB) | Módulo web Spring asociado a evidencias anteriores. |
+| Java Web | [../02_BACK_END/03_JAVA_WEB](../02_BACK_END/03_JAVA_WEB) | Módulo web Java asociado a evidencias anteriores. |
+| Evidencias | [../03_DOCS](../03_DOCS) | Documentación técnica y evidencias. |
+| Interfaz base | [../01_FRONT_END/02_INTERFAZ_BASE/pages](../01_FRONT_END/02_INTERFAZ_BASE/pages), [../01_FRONT_END/02_INTERFAZ_BASE/css](../01_FRONT_END/02_INTERFAZ_BASE/css), [../01_FRONT_END/02_INTERFAZ_BASE/js](../01_FRONT_END/02_INTERFAZ_BASE/js), [../01_FRONT_END/02_INTERFAZ_BASE/assets](../01_FRONT_END/02_INTERFAZ_BASE/assets) | Interfaz base del proyecto. |
 
 ## Estado
 

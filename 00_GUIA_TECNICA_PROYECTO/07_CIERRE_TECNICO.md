@@ -18,7 +18,7 @@ El repositorio MLBT contiene módulos web, API REST, documentación técnica, ev
 
 ## Interfaz React AP07
 
-- Interfaz React disponible en front-end/react-ap07.
+- Interfaz React disponible en 01_FRONT_END/01_REACT_AP07.
 - README del módulo actualizado.
 - Guía técnica AP07 disponible en 08_FRONTEND_REACT_AP07.md.
 - Validación realizada con pnpm lint y pnpm build.
