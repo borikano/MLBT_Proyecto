@@ -14,7 +14,7 @@ Arawkano
 
 ## Modulo principal de la evidencia
 
-spring-web
+back-end/spring-web
 
 ## Descripcion breve
 
@@ -41,8 +41,8 @@ La evidencia entrega un modulo web funcional desarrollado con Spring Boot, Sprin
 | Requisito de la evidencia | Evidencia dentro del repositorio |
 |---|---|
 | Tener en cuenta artefactos previos del ciclo del software | GA7_220501096_AA3_EV01_trazabilidad_requisitos_evidencia.md |
-| Codificar modulos del software | spring-web |
-| Incluir comentarios y estructura entendible | spring-web/src/main/java y documentos tecnicos |
+| Codificar modulos del software | back-end/spring-web |
+| Incluir comentarios y estructura entendible | back-end/spring-web/src/main/java y documentos tecnicos |
 | Cumplir estandares de codificacion | Separacion por controller, model, repository, service, config, templates, static |
 | Usar herramientas de versionamiento | Git, GitHub, ramas, commits, PR y merges |
 
@@ -50,19 +50,19 @@ La evidencia entrega un modulo web funcional desarrollado con Spring Boot, Sprin
 
 | Elemento | Ruta |
 |---|---|
-| Modulo Spring Boot | spring-web |
-| Configuracion Maven | spring-web/pom.xml |
-| Maven Wrapper | spring-web/mvnw.cmd |
-| Aplicacion principal | spring-web/src/main/java/com/mlbt/springweb/SpringWebApplication.java |
-| Controladores | spring-web/src/main/java/com/mlbt/springweb/controller |
-| Modelos JPA | spring-web/src/main/java/com/mlbt/springweb/model |
-| Repositorios JPA | spring-web/src/main/java/com/mlbt/springweb/repository |
-| Servicios | spring-web/src/main/java/com/mlbt/springweb/service |
-| Configuracion inicial | spring-web/src/main/java/com/mlbt/springweb/config |
-| Templates Thymeleaf | spring-web/src/main/resources/templates |
-| CSS Spring Web | spring-web/src/main/resources/static/css/app.css |
-| Imagenes Spring Web | spring-web/src/main/resources/static/img |
-| Configuracion MySQL | spring-web/src/main/resources/application.properties |
+| Modulo Spring Boot | back-end/spring-web |
+| Configuracion Maven | back-end/spring-web/pom.xml |
+| Maven Wrapper | back-end/spring-web/mvnw.cmd |
+| Aplicacion principal | back-end/spring-web/src/main/java/com/mlbt/springweb/SpringWebApplication.java |
+| Controladores | back-end/spring-web/src/main/java/com/mlbt/springweb/controller |
+| Modelos JPA | back-end/spring-web/src/main/java/com/mlbt/springweb/model |
+| Repositorios JPA | back-end/spring-web/src/main/java/com/mlbt/springweb/repository |
+| Servicios | back-end/spring-web/src/main/java/com/mlbt/springweb/service |
+| Configuracion inicial | back-end/spring-web/src/main/java/com/mlbt/springweb/config |
+| Templates Thymeleaf | back-end/spring-web/src/main/resources/templates |
+| CSS Spring Web | back-end/spring-web/src/main/resources/static/css/app.css |
+| Imagenes Spring Web | back-end/spring-web/src/main/resources/static/img |
+| Configuracion MySQL | back-end/spring-web/src/main/resources/application.properties |
 
 ## Rutas funcionales del modulo Spring Web
 
@@ -85,11 +85,11 @@ La evidencia entrega un modulo web funcional desarrollado con Spring Boot, Sprin
 
 ## Comando de compilacion
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml clean package
 
 ## Comando de ejecucion
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml spring-boot:run
 
 ## URL local
 

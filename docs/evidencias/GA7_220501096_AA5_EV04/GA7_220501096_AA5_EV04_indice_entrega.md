@@ -18,7 +18,7 @@ feature/GA7_220501096_AA5_EV04_MLBT_POSTMAN
 
 ## Módulo evaluado
 
-api-mlbt
+back-end/api-node
 
 ## Objetivo
 
@@ -40,8 +40,8 @@ Documentar y validar la API del proyecto MLBT mediante pruebas funcionales en Po
 
 | Ruta | Propósito |
 |---|---|
-| api-mlbt/postman | Colección Postman de la API. |
-| api-mlbt/docs/POSTMAN_EV04.md | Guía de pruebas Postman. |
+| back-end/api-node/postman | Colección Postman de la API. |
+| back-end/api-node/docs/POSTMAN_EV04.md | Guía de pruebas Postman. |
 | docs/evidencias/GA7_220501096_AA5_EV04 | Documentos de entrega de EV04. |
 | docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman | Capturas de pruebas en Postman. |
 | docs/evidencias/GA7_220501096_AA5_EV04/capturas/terminal | Capturas de validaciones desde terminal. |
@@ -63,8 +63,8 @@ Estructura inicial creada. Las pruebas se documentarán después de validar la A
 
 ## Archivos finales
 
-- api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
-- api-mlbt/docs/POSTMAN_EV04.md
+- back-end/api-node/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
+- back-end/api-node/docs/POSTMAN_EV04.md
 - docs/evidencias/GA7_220501096_AA5_EV04/GA7_220501096_AA5_EV04_plan_pruebas_postman.md
 - docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_resultados_postman.md
 - docs/evidencias/GA7_220501096_AA5_EV04/resultados/GA7_220501096_AA5_EV04_cierre_tecnico.md

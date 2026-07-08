@@ -13,10 +13,10 @@ Este documento relaciona los requisitos solicitados para la evidencia GA7_220501
 | Requisito | Cumplimiento en el proyecto | Ubicacion / evidencia |
 |---|---|---|
 | Tener en cuenta artefactos previos del ciclo del software | Se consideran modelos, arquitectura, prototipos, mapa de navegacion, modelo de datos, clases, requisitos y documentacion previa del proyecto MLBT. | docs/evidencias y documentacion historica del proyecto. |
-| Codificar modulos del software | Se implementa el modulo spring-web con dashboard, usuarios, inventario y ventas. | spring-web |
-| Usar tecnologias respectivas | Se utiliza Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf, MySQL/MariaDB y Maven Wrapper. | spring-web/pom.xml |
-| Incluir comentarios en el codigo | El codigo mantiene nombres descriptivos y comentarios puntuales de soporte en componentes de inicializacion, controladores y estructura funcional cuando aplica. | spring-web/src/main/java |
-| Cumplir estandares de codificacion | Se separan responsabilidades por controlador, modelo, repositorio, servicio, configuracion, templates y estilos. | spring-web/src/main/java y spring-web/src/main/resources |
+| Codificar modulos del software | Se implementa el modulo back-end/spring-web con dashboard, usuarios, inventario y ventas. | back-end/spring-web |
+| Usar tecnologias respectivas | Se utiliza Java 17, Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf, MySQL/MariaDB y Maven Wrapper. | back-end/spring-web/pom.xml |
+| Incluir comentarios en el codigo | El codigo mantiene nombres descriptivos y comentarios puntuales de soporte en componentes de inicializacion, controladores y estructura funcional cuando aplica. | back-end/spring-web/src/main/java |
+| Cumplir estandares de codificacion | Se separan responsabilidades por controlador, modelo, repositorio, servicio, configuracion, templates y estilos. | back-end/spring-web/src/main/java y back-end/spring-web/src/main/resources |
 | Usar herramientas de versionamiento | El proyecto se gestiona con Git y GitHub mediante ramas, commits, PR y merges documentados. | Repositorio GitHub y bitacora de commits. |
 
 ## Artefactos previos considerados
@@ -35,30 +35,30 @@ Este documento relaciona los requisitos solicitados para la evidencia GA7_220501
 
 | Modulo | Ruta | Estado |
 |---|---|---|
-| Dashboard | spring-web/src/main/resources/templates/dashboard.html | Implementado |
-| Usuarios | spring-web/src/main/resources/templates/usuarios | Implementado |
-| Inventario | spring-web/src/main/resources/templates/inventario | Implementado |
-| Ventas | spring-web/src/main/resources/templates/ventas | Implementado |
-| Controladores | spring-web/src/main/java/com/mlbt/springweb/controller | Implementado |
-| Servicios | spring-web/src/main/java/com/mlbt/springweb/service | Implementado |
-| Repositorios | spring-web/src/main/java/com/mlbt/springweb/repository | Implementado |
-| Modelos JPA | spring-web/src/main/java/com/mlbt/springweb/model | Implementado |
-| Configuracion inicial | spring-web/src/main/java/com/mlbt/springweb/config | Implementado |
-| Estilos CSS | spring-web/src/main/resources/static/css/app.css | Implementado |
-| Imagenes del proyecto | spring-web/src/main/resources/static/img | Implementado |
+| Dashboard | back-end/spring-web/src/main/resources/templates/dashboard.html | Implementado |
+| Usuarios | back-end/spring-web/src/main/resources/templates/usuarios | Implementado |
+| Inventario | back-end/spring-web/src/main/resources/templates/inventario | Implementado |
+| Ventas | back-end/spring-web/src/main/resources/templates/ventas | Implementado |
+| Controladores | back-end/spring-web/src/main/java/com/mlbt/springweb/controller | Implementado |
+| Servicios | back-end/spring-web/src/main/java/com/mlbt/springweb/service | Implementado |
+| Repositorios | back-end/spring-web/src/main/java/com/mlbt/springweb/repository | Implementado |
+| Modelos JPA | back-end/spring-web/src/main/java/com/mlbt/springweb/model | Implementado |
+| Configuracion inicial | back-end/spring-web/src/main/java/com/mlbt/springweb/config | Implementado |
+| Estilos CSS | back-end/spring-web/src/main/resources/static/css/app.css | Implementado |
+| Imagenes del proyecto | back-end/spring-web/src/main/resources/static/img | Implementado |
 
 ## Separacion tecnica aplicada
 
 | Capa | Responsabilidad | Ruta |
 |---|---|---|
-| Controller | Gestion de rutas, solicitudes GET/POST y navegacion MVC. | spring-web/src/main/java/com/mlbt/springweb/controller |
-| Model | Entidades JPA persistidas en base de datos. | spring-web/src/main/java/com/mlbt/springweb/model |
-| Repository | Acceso a datos mediante Spring Data JPA. | spring-web/src/main/java/com/mlbt/springweb/repository |
-| Service | Reglas de aplicacion y operaciones de negocio. | spring-web/src/main/java/com/mlbt/springweb/service |
-| Config | Datos iniciales y configuracion de arranque. | spring-web/src/main/java/com/mlbt/springweb/config |
-| Templates | Vistas Thymeleaf separadas por modulo. | spring-web/src/main/resources/templates |
-| Static CSS | Presentacion visual separada del codigo Java. | spring-web/src/main/resources/static/css |
-| Static IMG | Recursos visuales del proyecto. | spring-web/src/main/resources/static/img |
+| Controller | Gestion de rutas, solicitudes GET/POST y navegacion MVC. | back-end/spring-web/src/main/java/com/mlbt/springweb/controller |
+| Model | Entidades JPA persistidas en base de datos. | back-end/spring-web/src/main/java/com/mlbt/springweb/model |
+| Repository | Acceso a datos mediante Spring Data JPA. | back-end/spring-web/src/main/java/com/mlbt/springweb/repository |
+| Service | Reglas de aplicacion y operaciones de negocio. | back-end/spring-web/src/main/java/com/mlbt/springweb/service |
+| Config | Datos iniciales y configuracion de arranque. | back-end/spring-web/src/main/java/com/mlbt/springweb/config |
+| Templates | Vistas Thymeleaf separadas por modulo. | back-end/spring-web/src/main/resources/templates |
+| Static CSS | Presentacion visual separada del codigo Java. | back-end/spring-web/src/main/resources/static/css |
+| Static IMG | Recursos visuales del proyecto. | back-end/spring-web/src/main/resources/static/img |
 
 ## Versionamiento aplicado
 
@@ -74,7 +74,7 @@ Este documento relaciona los requisitos solicitados para la evidencia GA7_220501
 
 ## Relacion con la evidencia actual
 
-El modulo spring-web demuestra la codificacion de modulos web con tecnologia Java y framework Spring Boot, aplicando persistencia, controladores, servicios, vistas y estilos separados.
+El modulo back-end/spring-web demuestra la codificacion de modulos web con tecnologia Java y framework Spring Boot, aplicando persistencia, controladores, servicios, vistas y estilos separados.
 
 La evidencia actual entrega una base funcional validable localmente. Los componentes avanzados de seguridad, roles, auditoria, KDS, reportes e inventario avanzado quedan registrados en la hoja de ruta evolutiva para una fase posterior.
 

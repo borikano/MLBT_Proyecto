@@ -114,7 +114,7 @@ Mantener el proyecto como aplicación frontend, dejando este documento como traz
 
 Crear una carpeta o rama complementaria con JSP y Servlets, por ejemplo:
 
-java-web/
+back-end/java-web/
 ├── src/main/webapp/
 │   ├── login.jsp
 │   ├── dashboard.jsp

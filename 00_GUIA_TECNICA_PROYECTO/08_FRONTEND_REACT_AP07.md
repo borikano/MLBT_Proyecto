@@ -31,7 +31,7 @@ Documentar la implementación del componente de interfaz React desarrollado para
 
 ## Ruta del módulo
 
-    frontend-react
+    front-end/react-ap07
 
 ## Rutas funcionales
 
@@ -60,13 +60,13 @@ Documentar la implementación del componente de interfaz React desarrollado para
 
 ## Ejecución local
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\front-end\react-ap07"
     pnpm install
     pnpm dev
 
 ## Validación técnica
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\front-end\react-ap07"
     pnpm lint
     pnpm build
 
@@ -74,4 +74,3 @@ Documentar la implementación del componente de interfaz React desarrollado para
 ## Resultado
 
 El componente de interfaz queda funcional con datos de prueba, navegación de una sola página, componentes reutilizables, formularios controlados, tablas de datos, validaciones visuales y estructura lista para integración posterior con el servidor.
-

@@ -10,7 +10,7 @@ GA7-220501096-AA5-EV04 - API del Proyecto
 
 ## API evaluada
 
-api-mlbt
+back-end/api-node
 
 ## URL base local
 
@@ -22,7 +22,7 @@ Postman.
 
 ## Colección utilizada
 
-api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
+back-end/api-node/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
 
 ## Resumen de pruebas ejecutadas
 

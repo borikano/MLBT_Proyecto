@@ -55,7 +55,7 @@ Contrasena local: sin contrasena, segun configuracion local de XAMPP.
 
 Desde la raiz del repositorio:
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+.\back-end\spring-web\mvnw.cmd -f .\back-end\spring-web\pom.xml spring-boot:run
 
 URL local:
 
@@ -63,7 +63,7 @@ http://localhost:8082
 
 ## Compilacion
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+.\back-end\spring-web\mvnw.cmd -f .\back-end\spring-web\pom.xml clean package
 
 ## Modulos funcionales
 

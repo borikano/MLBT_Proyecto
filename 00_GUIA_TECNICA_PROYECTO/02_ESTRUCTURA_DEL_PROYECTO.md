@@ -5,10 +5,10 @@
 | Ruta | Propósito |
 |---|---|
 | README.md | Presentación principal del repositorio. |
-| frontend-react | Interfaz React del proyecto MLBT para AP07. |
-| api-mlbt | API REST del proyecto MLBT. |
-| spring-web | Módulo web Spring. |
-| java-web | Módulo web Java. |
+| front-end/react-ap07 | Interfaz React del proyecto MLBT para AP07. |
+| back-end/api-node | API REST del proyecto MLBT. |
+| back-end/spring-web | Módulo web Spring. |
+| back-end/java-web | Módulo web Java. |
 | docs | Evidencias y documentación técnica. |
 | assets | Recursos visuales. |
 | css | Estilos de la interfaz base. |

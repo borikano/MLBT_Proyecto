@@ -72,7 +72,7 @@ Reglas:
 Si se agrega un módulo Java Web, debe mantener estructura separada:
 
 ```text
-java-web/
+back-end/java-web/
 ├── pom.xml
 ├── src/main/java/
 │   └── com/mlbt/

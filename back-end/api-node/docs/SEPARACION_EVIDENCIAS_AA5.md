@@ -28,7 +28,6 @@ La API del caso se mantiene separada del proyecto MLBT.
 
 La API del proyecto MLBT se desarrolla dentro de este repositorio, en el módulo:
 
-api-mlbt
+back-end/api-node
 
 Este criterio evita mezclar evidencias y conserva trazabilidad clara entre entregas.
-

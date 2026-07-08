@@ -18,7 +18,7 @@ Arawkano
 
 ## Modulo principal entregado
 
-spring-web
+back-end/spring-web
 
 ## Descripcion general
 
@@ -56,18 +56,18 @@ El modulo implementa una aplicacion web para el proyecto MLBT, permitiendo naveg
 
 | Elemento | Ruta |
 |---|---|
-| Proyecto Spring Web | spring-web |
-| Configuracion Maven | spring-web/pom.xml |
-| Aplicacion principal | spring-web/src/main/java/com/mlbt/springweb/SpringWebApplication.java |
-| Controladores | spring-web/src/main/java/com/mlbt/springweb/controller |
-| Modelos JPA | spring-web/src/main/java/com/mlbt/springweb/model |
-| Repositorios | spring-web/src/main/java/com/mlbt/springweb/repository |
-| Servicios | spring-web/src/main/java/com/mlbt/springweb/service |
-| Configuracion inicial | spring-web/src/main/java/com/mlbt/springweb/config |
-| Vistas Thymeleaf | spring-web/src/main/resources/templates |
-| Estilos Spring Web | spring-web/src/main/resources/static/css/app.css |
-| Imagenes Spring Web | spring-web/src/main/resources/static/img |
-| Configuracion de aplicacion | spring-web/src/main/resources/application.properties |
+| Proyecto Spring Web | back-end/spring-web |
+| Configuracion Maven | back-end/spring-web/pom.xml |
+| Aplicacion principal | back-end/spring-web/src/main/java/com/mlbt/springweb/SpringWebApplication.java |
+| Controladores | back-end/spring-web/src/main/java/com/mlbt/springweb/controller |
+| Modelos JPA | back-end/spring-web/src/main/java/com/mlbt/springweb/model |
+| Repositorios | back-end/spring-web/src/main/java/com/mlbt/springweb/repository |
+| Servicios | back-end/spring-web/src/main/java/com/mlbt/springweb/service |
+| Configuracion inicial | back-end/spring-web/src/main/java/com/mlbt/springweb/config |
+| Vistas Thymeleaf | back-end/spring-web/src/main/resources/templates |
+| Estilos Spring Web | back-end/spring-web/src/main/resources/static/css/app.css |
+| Imagenes Spring Web | back-end/spring-web/src/main/resources/static/img |
+| Configuracion de aplicacion | back-end/spring-web/src/main/resources/application.properties |
 
 ## Base de datos
 
@@ -85,7 +85,7 @@ Antes de ejecutar, iniciar MySQL desde XAMPP.
 
 Desde la raiz del repositorio:
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml spring-boot:run
 
 URL local:
 
@@ -104,7 +104,7 @@ http://localhost:8082
 
 Comando utilizado:
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml clean package
 
 Resultado esperado:
 

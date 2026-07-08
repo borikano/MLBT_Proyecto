@@ -6,7 +6,7 @@ MLBT_Proyecto - Maria La Bonita Taqueria
 
 ## Modulo validado
 
-spring-web
+back-end/spring-web
 
 ## Objetivo de la validacion
 
@@ -17,7 +17,7 @@ Comprobar que el modulo Spring Web entregado para la evidencia GA7_220501096_AA3
 | Elemento | Resultado esperado |
 |---|---|
 | Java 17 | Disponible en el entorno local. |
-| Maven Wrapper | Disponible dentro de spring-web. |
+| Maven Wrapper | Disponible dentro de back-end/spring-web. |
 | XAMPP | Disponible para MySQL/MariaDB. |
 | MySQL/MariaDB | Activo en puerto 3306. |
 | Base de datos | mlbt_ga7_aa3_ev01 creada y disponible. |
@@ -39,11 +39,11 @@ Crear o verificar base de datos:
 
 Compilar modulo Spring Web:
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml clean package
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml clean package
 
 Ejecutar modulo Spring Web:
 
-.\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+.\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml spring-boot:run
 
 ## URL principal de prueba
 
@@ -114,14 +114,14 @@ http://localhost:8082
 
 | Elemento | Estado esperado |
 |---|---|
-| Controladores Spring MVC | Presentes en spring-web/src/main/java/com/mlbt/springweb/controller. |
-| Modelos JPA | Presentes en spring-web/src/main/java/com/mlbt/springweb/model. |
-| Repositorios JPA | Presentes en spring-web/src/main/java/com/mlbt/springweb/repository. |
-| Servicios | Presentes en spring-web/src/main/java/com/mlbt/springweb/service. |
-| Templates Thymeleaf | Presentes en spring-web/src/main/resources/templates. |
-| CSS separado | Presente en spring-web/src/main/resources/static/css/app.css. |
-| Imagenes estaticas | Presentes en spring-web/src/main/resources/static/img. |
-| Configuracion MySQL | Presente en spring-web/src/main/resources/application.properties. |
+| Controladores Spring MVC | Presentes en back-end/spring-web/src/main/java/com/mlbt/springweb/controller. |
+| Modelos JPA | Presentes en back-end/spring-web/src/main/java/com/mlbt/springweb/model. |
+| Repositorios JPA | Presentes en back-end/spring-web/src/main/java/com/mlbt/springweb/repository. |
+| Servicios | Presentes en back-end/spring-web/src/main/java/com/mlbt/springweb/service. |
+| Templates Thymeleaf | Presentes en back-end/spring-web/src/main/resources/templates. |
+| CSS separado | Presente en back-end/spring-web/src/main/resources/static/css/app.css. |
+| Imagenes estaticas | Presentes en back-end/spring-web/src/main/resources/static/img. |
+| Configuracion MySQL | Presente en back-end/spring-web/src/main/resources/application.properties. |
 
 ## Resultado de validacion
 

@@ -14,7 +14,7 @@ Disenar y desarrollar servicios web para el proyecto formativo MLBT, teniendo en
 
 ## Módulo desarrollado
 
-api-mlbt
+back-end/api-node
 
 ## Tecnologia aplicada
 
@@ -114,7 +114,7 @@ Se validaron desde terminal los siguientes escenarios:
 
 ## Comando de ejecución local
 
-Desde la carpeta api-mlbt:
+Desde la carpeta back-end/api-node:
 
 node .\src\server.js
 
@@ -127,4 +127,3 @@ node .\src\server.js --check
 La evidencia EV03 queda desarrollada con una API funcional para el proyecto MLBT, documentada, validada y versionada en GitHub.
 
 La evidencia EV04 debe continuar con pruebas formales en Postman, coleccion de endpoints, pantallazos y documentación de resultados.
-

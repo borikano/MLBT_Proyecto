@@ -43,7 +43,7 @@ feature/GA7_220501096_AA3_EV01_MLBT
 
 ## Actualizacion - 2026-05-24 18:41:30
 
-- Se crea el modulo complementario java-web.
+- Se crea el modulo complementario back-end/java-web.
 - Se agregan modelos Java para usuarios, inventario y ventas.
 - Se agregan servicios Java para separar reglas de aplicacion.
 - Se agrega repositorio temporal en memoria para separar datos de controladores.

@@ -67,4 +67,3 @@ Authorization: Bearer TOKEN_JWT
 ## Estado
 
 Documento base actualizado para implementar servicios reales de la API del proyecto MLBT.
-

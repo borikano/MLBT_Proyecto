@@ -45,4 +45,4 @@ Authorization: Bearer TOKEN_JWT
 
 La colección se guardará en:
 
-api-mlbt/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json
+back-end/api-node/postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json

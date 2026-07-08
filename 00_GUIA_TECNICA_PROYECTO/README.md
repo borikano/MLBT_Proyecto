@@ -13,12 +13,12 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Recurso | Enlace | Estado |
 |---|---|---|
 | README principal | [../README.md](../README.md) | Disponible |
-| Interfaz React AP07 | [../frontend-react](../frontend-react) | Disponible |
-| README interfaz React | [../frontend-react/README.md](../frontend-react/README.md) | Disponible |
+| Interfaz React AP07 | [../front-end/react-ap07](../front-end/react-ap07) | Disponible |
+| README interfaz React | [../front-end/react-ap07/README.md](../front-end/react-ap07/README.md) | Disponible |
 | Guía React AP07 | [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) | Disponible |
-| API MLBT | [../api-mlbt](../api-mlbt) | Disponible |
-| Documentación API | [../api-mlbt/docs](../api-mlbt/docs) | Disponible |
-| Colección Postman | [../api-mlbt/postman](../api-mlbt/postman) | Disponible |
+| API MLBT | [../back-end/api-node](../back-end/api-node) | Disponible |
+| Documentación API | [../back-end/api-node/docs](../back-end/api-node/docs) | Disponible |
+| Colección Postman | [../back-end/api-node/postman](../back-end/api-node/postman) | Disponible |
 | Evidencias generales | [../docs/evidencias](../docs/evidencias) | Disponible |
 | Licencia | [../LICENSE.md](../LICENSE.md) | Disponible |
 
@@ -29,9 +29,9 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Orden | Fecha Git | Evidencia | Módulo o entrega | Ruta de revisión |
 |---|---|---|---|---|
 | 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Spring Web / Java Web | [../docs/evidencias/GA7_220501096_AA3_EV01](../docs/evidencias/GA7_220501096_AA3_EV01) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API MLBT | [../api-mlbt/docs](../api-mlbt/docs) y [../docs/evidencias/GA7_220501096_AA5_EV03](../docs/evidencias/GA7_220501096_AA5_EV03) |
-| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | API MLBT / Postman | [../api-mlbt/postman](../api-mlbt/postman) y [../docs/evidencias/GA7_220501096_AA5_EV04](../docs/evidencias/GA7_220501096_AA5_EV04) |
-| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React | [../frontend-react](../frontend-react) y [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) |
+| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API MLBT | [../back-end/api-node/docs](../back-end/api-node/docs) y [../docs/evidencias/GA7_220501096_AA5_EV03](../docs/evidencias/GA7_220501096_AA5_EV03) |
+| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | API MLBT / Postman | [../back-end/api-node/postman](../back-end/api-node/postman) y [../docs/evidencias/GA7_220501096_AA5_EV04](../docs/evidencias/GA7_220501096_AA5_EV04) |
+| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React | [../front-end/react-ap07](../front-end/react-ap07) y [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) |
 
 ---
 
@@ -54,11 +54,11 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 
 | Módulo | Comandos | Ruta |
 |---|---|---|
-| Interfaz React | pnpm install, pnpm dev, pnpm lint, pnpm build | [../frontend-react](../frontend-react) |
-| API MLBT | pnpm install, pnpm run dev | [../api-mlbt](../api-mlbt) |
-| Spring Web | Ejecutar según README del módulo | [../spring-web](../spring-web) |
-| Java Web | Ejecutar según README del módulo | [../java-web](../java-web) |
-| Interfaz base | Abrir páginas desde entorno local | [../pages](../pages) |
+| Interfaz React | pnpm install, pnpm dev, pnpm lint, pnpm build | [../front-end/react-ap07](../front-end/react-ap07) |
+| API MLBT | pnpm install, pnpm run dev | [../back-end/api-node](../back-end/api-node) |
+| Spring Web | Ejecutar según README del módulo | [../back-end/spring-web](../back-end/spring-web) |
+| Java Web | Ejecutar según README del módulo | [../back-end/java-web](../back-end/java-web) |
+| Interfaz base | Abrir páginas desde entorno local | [../front-end/interfaz-base/pages](../front-end/interfaz-base/pages) |
 
 ---
 
@@ -73,7 +73,3 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Evidencias enlazadas | Completado |
 | Licencia documentada | Completado |
 | Repositorio listo para revisión | Completado |
-
-
-
-

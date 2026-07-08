@@ -240,4 +240,3 @@ Reglas:
 - No se deben mezclar marcos de trabajo ni responsabilidades en un mismo archivo.
 - Los archivos `index.html` o `index.jsp` deben funcionar como punto de entrada o navegación inicial, no como ubicación de lógica importante o sensible.
 - Las reglas críticas deben centralizarse en módulos, servicios o controladores según la tecnología usada.
-

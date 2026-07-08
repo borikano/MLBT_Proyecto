@@ -55,4 +55,3 @@ node prisma/seed.js
 ## Nota de seguridad
 
 Las contraseñas no se almacenan en texto plano. El seed aplica hash mediante bcrypt antes de guardar los usuarios.
-

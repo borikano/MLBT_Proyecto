@@ -33,7 +33,7 @@ e0b3f5a2d41b76e01d067e657980afe00152b074
 
 ## Módulo Java Web
 
-Se valida la existencia del módulo java-web con estructura separada por responsabilidad:
+Se valida la existencia del módulo back-end/java-web con estructura separada por responsabilidad:
 
 - Java en src/main/java.
 - Servlets en controller.

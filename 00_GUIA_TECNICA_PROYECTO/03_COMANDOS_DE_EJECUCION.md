@@ -4,7 +4,7 @@
 
 Ubicación:
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\front-end\react-ap07"
 
 Instalación:
 
@@ -27,7 +27,7 @@ Validación:
 
 Ubicación:
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\api-mlbt"
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/api-node"
 
 Instalación:
 
@@ -45,7 +45,7 @@ Dirección local:
 
 Desde la raíz del repositorio:
 
-    .\spring-web\mvnw.cmd -f .\spring-web\pom.xml spring-boot:run
+    .\back-end/spring-web\mvnw.cmd -f .\back-end/spring-web\pom.xml spring-boot:run
 
 Dirección local:
 

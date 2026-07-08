@@ -51,7 +51,7 @@ http://localhost:3001
 
 Antes de ejecutar, iniciar MySQL desde XAMPP.
 
-Desde la carpeta api-mlbt:
+Desde la carpeta back-end/api-node:
 
 node .\src\server.js
 
@@ -107,11 +107,8 @@ Pruebas documentadas:
 
 Capturas de evidencia:
 
-- `../docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
+- `../../docs/evidencias/GA7_220501096_AA5_EV04/capturas/postman/`
 
 Resultado:
 
 La API fue probada en Postman y los endpoints principales respondieron según lo esperado.
-
-
-

@@ -51,4 +51,3 @@ Crear migracion inicial:
 Abrir Prisma Studio:
 
 .\node_modules\.bin\prisma.cmd studio
-

@@ -10,7 +10,7 @@ feature/GA7_220501096_AA3_EV01_MLBT
 
 ## Módulo validado
 
-java-web",
+back-end/java-web",
 ",
 
 
@@ -25,7 +25,7 @@ java-web",
 ## Estructura validada
 
 `	ext
-java-web/
+back-end/java-web/
 ├── pom.xml
 ├── README.md
 ├── src/main/java/com/mlbt/controller/
@@ -42,27 +42,27 @@ java-web/
 
 | Responsabilidad | Ruta | Estado |
 |---|---|---|
-| Configuración Maven | java-web/pom.xml | Validado |
-| Java / Controladores | java-web/src/main/java/com/mlbt/controller | Validado |
-| Java / Modelos | java-web/src/main/java/com/mlbt/model | Validado |
-| Java / Repositorio temporal | java-web/src/main/java/com/mlbt/repository | Validado |
-| Java / Servicios | java-web/src/main/java/com/mlbt/service | Validado |
-| JSP / Vistas | java-web/src/main/webapp/WEB-INF/jsp | Validado |
-| CSS / Estilos | java-web/src/main/webapp/assets/css | Validado |
-| Index de entrada | java-web/src/main/webapp/index.jsp | Validado |
+| Configuración Maven | back-end/java-web/pom.xml | Validado |
+| Java / Controladores | back-end/java-web/src/main/java/com/mlbt/controller | Validado |
+| Java / Modelos | back-end/java-web/src/main/java/com/mlbt/model | Validado |
+| Java / Repositorio temporal | back-end/java-web/src/main/java/com/mlbt/repository | Validado |
+| Java / Servicios | back-end/java-web/src/main/java/com/mlbt/service | Validado |
+| JSP / Vistas | back-end/java-web/src/main/webapp/WEB-INF/jsp | Validado |
+| CSS / Estilos | back-end/java-web/src/main/webapp/assets/css | Validado |
+| Index de entrada | back-end/java-web/src/main/webapp/index.jsp | Validado |
 
 ## Validación de formularios JSP
 
 Se validó la presencia de formularios con ction, method="get" y method="post".
 
 `	ext
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\inventory.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/inventory" method="get">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\inventory.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/inventory" method="post">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\login.jsp:20: <form class="form-grid" action="${pageContext.request.contextPath}/login" method="post">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\sales.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/sales" method="get">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\sales.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/sales" method="post">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\users.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/users" method="get">
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\users.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/users" method="post">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\inventory.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/inventory" method="get">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\inventory.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/inventory" method="post">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\login.jsp:20: <form class="form-grid" action="${pageContext.request.contextPath}/login" method="post">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\sales.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/sales" method="get">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\sales.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/sales" method="post">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\users.jsp:21: <form class="form-grid" action="${pageContext.request.contextPath}/users" method="get">
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\webapp\WEB-INF\jsp\users.jsp:33: <form class="form-grid" action="${pageContext.request.contextPath}/users" method="post">
 `",
 ",
 
@@ -70,25 +70,25 @@ E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\webapp\WEB-INF\jsp\users.
 Se validó la presencia de anotaciones @WebServlet y métodos doGet / doPost.
 
 `	ext
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\DashboardServlet.java:11: @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\DashboardServlet.java:15: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:11: @WebServlet(name = "InventoryServlet", urlPatterns = {"/inventory"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:32: doGet(request, response);
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\LoginServlet.java:12: @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\LoginServlet.java:18: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\LoginServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\LogoutServlet.java:10: @WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\LogoutServlet.java:14: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\SalesServlet.java:11: @WebServlet(name = "SalesServlet", urlPatterns = {"/sales"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\SalesServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\SalesServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\SalesServlet.java:33: doGet(request, response);
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\UsersServlet.java:11: @WebServlet(name = "UsersServlet", urlPatterns = {"/users"})
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\UsersServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\UsersServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
-E:\Dev\01_Repositorios\MLBT_Proyecto\java-web\src\main\java\com\mlbt\controller\UsersServlet.java:33: doGet(request, response);
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\DashboardServlet.java:11: @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\DashboardServlet.java:15: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:11: @WebServlet(name = "InventoryServlet", urlPatterns = {"/inventory"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\InventoryServlet.java:32: doGet(request, response);
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\LoginServlet.java:12: @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\LoginServlet.java:18: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\LoginServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\LogoutServlet.java:10: @WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\LogoutServlet.java:14: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\SalesServlet.java:11: @WebServlet(name = "SalesServlet", urlPatterns = {"/sales"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\SalesServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\SalesServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\SalesServlet.java:33: doGet(request, response);
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\UsersServlet.java:11: @WebServlet(name = "UsersServlet", urlPatterns = {"/users"})
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\UsersServlet.java:17: protected void doGet(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\UsersServlet.java:24: protected void doPost(HttpServletRequest request, HttpServletResponse response)
+E:\Dev\01_Repositorios\MLBT_Proyecto\back-end/java-web\src\main\java\com\mlbt\controller\UsersServlet.java:33: doGet(request, response);
 `",
 ",
 
@@ -109,4 +109,4 @@ Maven no esta disponible en PATH. No se ejecuto compilacion local.
 ",
 
 
-El módulo java-web queda estructurado como complemento técnico de la evidencia GA7_220501096_AA3_EV01. La implementación separa Java, JSP, CSS, configuración y documentación, e incluye formularios con métodos GET y POST procesados mediante Servlets.
+El módulo back-end/java-web queda estructurado como complemento técnico de la evidencia GA7_220501096_AA3_EV01. La implementación separa Java, JSP, CSS, configuración y documentación, e incluye formularios con métodos GET y POST procesados mediante Servlets.

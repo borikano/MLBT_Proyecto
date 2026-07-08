@@ -33,11 +33,11 @@ Este modulo permite evidenciar una estructura web basada en Java, JSP y Servlets
 ## Compilacion
 
 ```powershell
-mvn -f java-web/pom.xml clean package
+mvn -f back-end/java-web/pom.xml clean package
 ```
 
 ## Artefacto esperado
 
 ```text
-java-web/target/mlbt-java-web.war
+back-end/java-web/target/mlbt-java-web.war
 ```

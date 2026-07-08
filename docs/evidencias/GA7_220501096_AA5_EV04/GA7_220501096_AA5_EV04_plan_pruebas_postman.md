@@ -10,7 +10,7 @@ GA7-220501096-AA5-EV04 - API del Proyecto
 
 ## API evaluada
 
-api-mlbt
+back-end/api-node
 
 ## URL base local
 
@@ -26,7 +26,7 @@ http://localhost:3001
 
 ## Comando para ejecutar la API
 
-Desde la carpeta api-mlbt:
+Desde la carpeta back-end/api-node:
 
 node .\src\server.js
 

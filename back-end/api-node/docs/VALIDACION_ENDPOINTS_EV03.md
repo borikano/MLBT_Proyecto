@@ -16,7 +16,7 @@ Validar desde terminal el funcionamiento de los servicios web reales implementad
 
 | Elemento | Valor |
 |---|---|
-| API | api-mlbt |
+| API | back-end/api-node |
 | URL base | http://localhost:3001 |
 | Base de datos | mlbt_api_ga7_aa5_ev03 |
 | Motor | MySQL / MariaDB mediante XAMPP |
@@ -59,7 +59,7 @@ Validar desde terminal el funcionamiento de los servicios web reales implementad
 
 ## Comando de ejecución local
 
-Desde la carpeta api-mlbt:
+Desde la carpeta back-end/api-node:
 
 node .\src\server.js
 
@@ -72,4 +72,3 @@ node .\src\server.js --check
 La API del proyecto MLBT queda validada funcionalmente desde terminal para los servicios de autenticación, usuarios, inventario y ventas.
 
 Esta validación corresponde a la evidencia EV03. La evidencia EV04 complementara esta implementacion mediante pruebas documentadas en Postman.
-

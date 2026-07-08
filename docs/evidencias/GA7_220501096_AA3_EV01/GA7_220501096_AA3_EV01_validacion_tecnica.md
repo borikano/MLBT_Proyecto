@@ -49,18 +49,17 @@ El proyecto cuenta con estructura web frontend funcional y documentada. La evide
 Comandos de validacion sugeridos:
 
 ```powershell
-Get-ChildItem -Recurse java-web -Include *.jsp,*.java,*.xml,*.css,*.md | Select-Object FullName
+Get-ChildItem -Recurse back-end/java-web -Include *.jsp,*.java,*.xml,*.css,*.md | Select-Object FullName
 ```
 
 ```powershell
-Get-ChildItem -Recurse java-web -Include *.jsp | Select-String -Pattern "method=""get""|method=""post""|action=" -CaseSensitive:$false
+Get-ChildItem -Recurse back-end/java-web -Include *.jsp | Select-String -Pattern "method=""get""|method=""post""|action=" -CaseSensitive:$false
 ```
 
 ```powershell
-Get-ChildItem -Recurse java-web -Include *.java | Select-String -Pattern "doGet|doPost|@WebServlet" -CaseSensitive:$false
+Get-ChildItem -Recurse back-end/java-web -Include *.java | Select-String -Pattern "doGet|doPost|@WebServlet" -CaseSensitive:$false
 ```
 
 ```powershell
-mvn -f java-web/pom.xml clean package
+mvn -f back-end/java-web/pom.xml clean package
 ```
-

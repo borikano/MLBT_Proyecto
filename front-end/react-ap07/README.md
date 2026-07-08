@@ -22,7 +22,7 @@ Esta aplicación permite validar el flujo administrativo de MLBT mediante datos 
 
 ## Instalación
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\frontend-react"
+    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\front-end\react-ap07"
     pnpm install
 
 ## Ejecución local
@@ -109,4 +109,3 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 ## Estado de entrega
 
 La interfaz React queda validada con revisión de código y compilación de producción.
-
