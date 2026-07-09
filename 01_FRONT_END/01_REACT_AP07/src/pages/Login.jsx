@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { isAuthenticatedMock, loginMock } from "@/lib/auth"
+import { isAuthenticated, login } from "@/lib/auth"
 
 export default function Login() {
   const navigate = useNavigate()
@@ -27,14 +27,15 @@ export default function Login() {
   })
 
   const [error, setError] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const redirectTo = location.state?.from?.pathname || "/dashboard"
 
   useEffect(() => {
-    if (isAuthenticatedMock()) {
-      navigate("/dashboard", { replace: true })
+    if (isAuthenticated()) {
+      navigate(redirectTo, { replace: true })
     }
-  }, [navigate])
+  }, [navigate, redirectTo])
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -49,10 +50,14 @@ export default function Login() {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    setIsSubmitting(true)
+    setError("")
 
-    const result = loginMock(formData)
+    const result = await login(formData)
+
+    setIsSubmitting(false)
 
     if (result.ok) {
       navigate(redirectTo, { replace: true })
@@ -119,7 +124,7 @@ export default function Login() {
                     id="usuario"
                     name="usuario"
                     type="text"
-                    placeholder="Ej: admin"
+                    placeholder="Ej: adminapp"
                     value={formData.usuario}
                     onChange={handleChange}
                     autoComplete="username"
@@ -132,7 +137,7 @@ export default function Login() {
                     id="clave"
                     name="clave"
                     type="password"
-                    placeholder="Ej: admin"
+                    placeholder="Ej: AdminApp123*"
                     value={formData.clave}
                     onChange={handleChange}
                     autoComplete="current-password"
@@ -149,9 +154,10 @@ export default function Login() {
               <CardFooter>
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full bg-[#7c2d12] hover:bg-[#9a3412]"
                 >
-                  Iniciar sesión
+                  {isSubmitting ? "Validando..." : "Iniciar sesión"}
                 </Button>
               </CardFooter>
             </form>

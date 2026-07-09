@@ -169,7 +169,7 @@ export default function Usuarios() {
     }
 
     if (password && password.length < 6) {
-      return "La contraseña mock debe tener mínimo 6 caracteres."
+      return "La contraseña debe tener mínimo 6 caracteres."
     }
 
     return ""
@@ -461,7 +461,7 @@ export default function Usuarios() {
             {estaEditando ? "Modificar usuario" : "Crear usuario"}
           </CardTitle>
           <CardDescription>
-            La contraseña se valida en el formulario mock, pero no se muestra ni
+            La contraseña se valida en el formulario, pero no se muestra ni
             se persiste como texto plano.
           </CardDescription>
         </CardHeader>
@@ -574,7 +574,7 @@ export default function Usuarios() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="password">
-                  {estaEditando ? "Nueva contraseña mock" : "Contraseña"}
+                  {estaEditando ? "Nueva contraseña" : "Contraseña"}
                 </Label>
                 <Input
                   id="password"
@@ -666,7 +666,7 @@ export default function Usuarios() {
             <AlertDialogDescription>
               Esta acción marcará a{" "}
               <strong>{usuarioSeleccionado?.name}</strong> como Retirado y
-              deshabilitará su acceso mock. El registro no se eliminará de la
+              deshabilitará su acceso. El registro no se eliminará de la
               tabla para conservar el historial.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -685,14 +685,3 @@ export default function Usuarios() {
     </section>
   )
 }
-
-
-
-
-
-
-
-
-
-
-

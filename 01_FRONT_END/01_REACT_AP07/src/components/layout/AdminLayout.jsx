@@ -18,7 +18,7 @@ export default function AdminLayout() {
               María La Bonita Taquería
             </p>
             <p className="truncate text-xs text-muted-foreground">
-              Sistema administrativo mock
+              Sistema administrativo integrado
             </p>
           </div>
         </header>
