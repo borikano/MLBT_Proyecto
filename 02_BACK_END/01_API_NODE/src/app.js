@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import { config } from "./config/env.js";
 import { healthRoutes } from "./routes/health.routes.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { userRoutes } from "./routes/user.routes.js";
@@ -13,17 +14,35 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
+function buildCorsOrigin() {
+  if (!config.frontendOrigin || config.frontendOrigin === "*") {
+    return true;
+  }
+
+  return config.frontendOrigin
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+}
+
+const corsOptions = {
+  origin: buildCorsOrigin(),
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(morgan(config.env === "production" ? "combined" : "dev"));
 
 app.get("/", (req, res) => {
   res.status(200).json({
     ok: true,
     message: "API MLBT disponible",
     project: "MLBT Project - Maria La Bonita Taqueria",
-    evidence: "GA7-220501096-AA5-EV03",
+    evidence: "GA8-220501096-AA1-EV02",
+    environment: config.env,
     endpoints: {
       health: "/api/health",
       login: "/api/auth/login",
