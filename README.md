@@ -16,6 +16,19 @@ Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
 
 Proyecto formativo web para la gestión administrativa de María La Bonita Taquería.
 
+## URLs públicas de la entrega GA8
+
+| Servicio | URL | Estado |
+|---|---|---|
+| Frontend React | https://mlbt-proyecto.vercel.app | Publicado en Vercel. |
+| Login React | https://mlbt-proyecto.vercel.app/login | Validado con autenticación real. |
+| Dashboard React | https://mlbt-proyecto.vercel.app/dashboard | Accesible después del login. |
+| API Node | https://mlbt-proyecto.onrender.com | Publicada en Render. |
+| Health API | https://mlbt-proyecto.onrender.com/api/health | Validado en producción. |
+| Base de datos | Aiven MySQL 8.4 | Conectada desde Render mediante variable de entorno segura. |
+
+No se publica la contraseña, el Service URI completo ni la variable DATABASE_URL por seguridad.
+
 ## Acceso rápido
 
 | Recurso | Enlace |
@@ -49,17 +62,18 @@ Proyecto formativo web para la gestión administrativa de María La Bonita Taque
 | [02_BACK_END/03_JAVA_WEB](02_BACK_END/03_JAVA_WEB) | Módulo Java Web con JSP y Servlets. |
 | [03_DOCS](03_DOCS) | Documentación técnica, estándares, trazabilidad y evidencias. |
 
-## Interfaz React AP07
+## Frontend React público
 
 | Elemento | Detalle |
 |---|---|
-| Ruta del módulo | [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) |
-| Guía técnica | [00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md](00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) |
+| Módulo | [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) |
 | README del módulo | [01_FRONT_END/01_REACT_AP07/README.md](01_FRONT_END/01_REACT_AP07/README.md) |
-| Dirección local | http://localhost:5173 |
+| Frontend público | https://mlbt-proyecto.vercel.app |
+| Login público | https://mlbt-proyecto.vercel.app/login |
+| API pública consumida | https://mlbt-proyecto.onrender.com |
 | Rama estable | Arawkano |
 
-Rutas funcionales:
+Rutas funcionales principales:
 
 - /login
 - /dashboard
@@ -69,10 +83,10 @@ Rutas funcionales:
 
 Credenciales de prueba:
 
-- Usuario: admin
-- Contraseña: admin
+- Usuario: adminapp
+- Contraseña: AdminApp123*
 
-Comandos principales:
+Comandos principales de validación local:
 
     Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
     pnpm install
@@ -87,6 +101,6 @@ Comandos principales:
 | Evidencia | Descripción | Ruta |
 |---|---|---|
 | GA8-220501096-AA1-EV01 | Integración funcional entre Frontend React, API Node y base de datos MySQL/MariaDB. | [03_DOCS/evidencias/GA8_220501096_AA1_EV01](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
-| GA8-220501096-AA1-EV02 | Módulos integrados, entradas/salidas, pruebas y URLs de ejecución. | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+| GA8-220501096-AA1-EV02 | Módulos integrados, entradas/salidas, pruebas y URLs públicas de ejecución. | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
 
 <!-- GA8_EVIDENCIAS_FIN -->

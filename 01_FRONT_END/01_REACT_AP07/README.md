@@ -2,11 +2,21 @@
 
 Módulo administrativo del proyecto formativo María La Bonita Taquería.
 
-Esta aplicación permite validar el flujo administrativo de MLBT mediante datos de prueba antes de conectar con los servicios del servidor.
+Esta aplicación corresponde al frontend administrativo del proyecto MLBT. El login está integrado con la API Node pública mediante JWT y el resto de módulos conserva datos locales de apoyo para navegación, análisis y presentación funcional.
 
 ## Evidencia relacionada
 
 - GA7-220501096-AA4-EV03: Componente front-end del proyecto formativo y proyectos de clase.
+
+## Despliegue público
+
+| Servicio | URL |
+|---|---|
+| Frontend React | https://mlbt-proyecto.vercel.app |
+| Login React | https://mlbt-proyecto.vercel.app/login |
+| API consumida | https://mlbt-proyecto.onrender.com |
+
+La variable VITE_API_URL permite definir la URL de la API en despliegue.
 
 ## Tecnologías utilizadas
 
@@ -40,8 +50,8 @@ Dirección local:
 
 ## Credenciales de prueba
 
-    Usuario: admin
-    Contraseña: admin
+    Usuario: adminapp
+    Contraseña: AdminApp123*
 
 ## Rutas funcionales
 
@@ -108,4 +118,4 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 
 ## Estado de entrega
 
-La interfaz React queda validada con revisión de código y compilación de producción.
+La interfaz React queda validada con revisión de código, compilación de producción y despliegue público en Vercel.

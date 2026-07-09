@@ -33,6 +33,14 @@ La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentac
 | Evidencia | Enlace | Estado |
 |---|---|---|
 | GA8-220501096-AA1-EV01 | [Integración de módulos componentes](evidencias/GA8_220501096_AA1_EV01/README.md) | Validada localmente con login React + API + JWT. |
-| GA8-220501096-AA1-EV02 | [Módulos integrados](evidencias/GA8_220501096_AA1_EV02/README.md) | Documentada con módulos, entradas/salidas, pruebas y URLs locales. |
+| GA8-220501096-AA1-EV02 | [Módulos integrados](evidencias/GA8_220501096_AA1_EV02/README.md) | Documentada con módulos, entradas/salidas, pruebas y URLs públicas. |
+
+## URLs públicas de referencia
+
+| Servicio | URL |
+|---|---|
+| Frontend React | https://mlbt-proyecto.vercel.app |
+| API Node | https://mlbt-proyecto.onrender.com |
+| Health API | https://mlbt-proyecto.onrender.com/api/health |
 
 <!-- GA8_DOCS_FIN -->

@@ -17,12 +17,20 @@ Este módulo contiene los servicios REST de MLBT para autenticación, usuarios, 
 - Node.js.
 - Express.
 - Prisma ORM.
-- MySQL / MariaDB con XAMPP.
+- MySQL / MariaDB con XAMPP para ambiente local y Aiven MySQL 8.4 para despliegue público.
 - bcrypt.
 - JSON Web Token.
 - Zod.
 - pnpm.
 - Postman para la evidencia EV04.
+
+## URL pública
+
+https://mlbt-proyecto.onrender.com
+
+Health check público:
+
+https://mlbt-proyecto.onrender.com/api/health
 
 ## URL local
 
@@ -62,8 +70,10 @@ Desde la carpeta 02_BACK_END/01_API_NODE:
 
 ## Base de datos
 
-- Motor: MySQL / MariaDB.
+- Motor local: MySQL / MariaDB.
+- Motor público: Aiven MySQL 8.4.
 - Base local: mlbt_api_ga7_aa5_ev03.
+- Base pública: defaultdb en Aiven.
 - ORM: Prisma.
 
 ## Datos iniciales
@@ -94,6 +104,19 @@ Archivo de colección:
 Capturas de evidencia:
 
 - [../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman](../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman)
+
+## Variables de entorno de producción
+
+| Variable | Uso |
+|---|---|
+| NODE_ENV | Define ambiente de ejecución. |
+| DATABASE_URL | Cadena de conexión segura hacia Aiven MySQL. |
+| JWT_SECRET | Secreto para firmar tokens JWT. |
+| JWT_EXPIRES_IN | Tiempo de expiración del token. |
+| BCRYPT_SALT_ROUNDS | Rondas de cifrado bcrypt. |
+| FRONTEND_ORIGIN | Dominio público permitido para CORS. |
+
+Estas variables se administran en Render y no se versionan en el repositorio.
 
 ## Nota de seguridad
 
