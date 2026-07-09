@@ -45,10 +45,13 @@ No se publica la contraseña, el Service URI completo ni la variable DATABASE_UR
 
 | Orden | Fecha Git | Evidencia | Entrega | Ruta |
 |---|---|---|---|---|
-| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Aplicación web Java / Spring | [03_DOCS/evidencias/GA7_220501096_AA3_EV01](03_DOCS/evidencias/GA7_220501096_AA3_EV01) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | Servicios REST MLBT | [02_BACK_END/01_API_NODE/docs](02_BACK_END/01_API_NODE/docs) y [03_DOCS/evidencias/GA7_220501096_AA5_EV03](03_DOCS/evidencias/GA7_220501096_AA5_EV03) |
-| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | Pruebas de API con Postman | [02_BACK_END/01_API_NODE/postman](02_BACK_END/01_API_NODE/postman) y [03_DOCS/evidencias/GA7_220501096_AA5_EV04](03_DOCS/evidencias/GA7_220501096_AA5_EV04) |
+| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Aplicación web Java / Spring | [03_DOCS/evidencias/GA7_220501096_AA3_EV01](03_DOCS/evidencias/GA7_220501096_AA3_EV01/README.md) |
+| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | Servicios REST MLBT | [02_BACK_END/01_API_NODE/docs](02_BACK_END/01_API_NODE/docs) y [03_DOCS/evidencias/GA7_220501096_AA5_EV03](03_DOCS/evidencias/GA7_220501096_AA5_EV03/README.md) |
+| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | Pruebas de API con Postman | [02_BACK_END/01_API_NODE/postman](02_BACK_END/01_API_NODE/postman) y [03_DOCS/evidencias/GA7_220501096_AA5_EV04](03_DOCS/evidencias/GA7_220501096_AA5_EV04/README.md) |
 | 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React del proyecto formativo | [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) y [00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md](00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) |
+| 05 | 2026-07-08 | GA8-220501096-AA1-EV01 | Integración funcional de módulos | [03_DOCS/evidencias/GA8_220501096_AA1_EV01](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
+| 06 | 2026-07-08 | GA8-220501096-AA1-EV02 | Módulos integrados con despliegue público | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+
 
 ## Estructura principal
 
