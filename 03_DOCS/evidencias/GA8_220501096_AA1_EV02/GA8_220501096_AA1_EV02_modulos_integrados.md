@@ -12,58 +12,46 @@ Documentar los módulos integrados del sistema y su relación técnica dentro de
 
 | Elemento | Valor |
 |---|---|
-| Repositorio | MLBT_Proyecto |
-| Rama de trabajo | feature/GA8_220501096_AA1_EV01_EV02_INTEGRACION_DESPLIEGUE |
-| Rama estable base | Arawkano |
+| Repositorio | https://github.com/borikano/MLBT_Proyecto |
+| Rama estable | Arawkano |
 | Control de versiones | Git y GitHub |
 
 ## Módulos integrados
 
-| Módulo | Tecnología | Ruta | Descripción |
+| Módulo | Tecnología | Ruta / Servicio | Estado |
 |---|---|---|---|
-| Frontend React | React, Vite, Tailwind CSS, shadcn/ui | 01_FRONT_END/01_REACT_AP07 | Interfaz administrativa del sistema. |
-| API Node | Node.js, Express, Prisma, JWT, bcrypt, Zod | 02_BACK_END/01_API_NODE | Servicios REST, autenticación y acceso a datos. |
-| Base de datos | MySQL/MariaDB | XAMPP local | Persistencia usada por Prisma. |
-| Spring Web | Java, Spring Boot, Thymeleaf | 02_BACK_END/02_SPRING_WEB | Módulo complementario del proyecto. |
-| Java Web | JSP, Servlets, Maven | 02_BACK_END/03_JAVA_WEB | Módulo complementario de evidencia Java Web. |
+| Frontend React | React, Vite, Tailwind CSS, shadcn/ui | https://mlbt-proyecto.vercel.app | Publicado en Vercel. |
+| API Node | Node.js, Express, Prisma, JWT, bcrypt, Zod | https://mlbt-proyecto.onrender.com | Publicado en Render. |
+| Base de datos | Aiven MySQL 8.4 | Aiven Cloud | Publicada y conectada con API mediante DATABASE_URL. |
+| Spring Web | Java, Spring Boot, Thymeleaf | 02_BACK_END/02_SPRING_WEB | Módulo complementario disponible. |
+| Java Web | JSP, Servlets, Maven | 02_BACK_END/03_JAVA_WEB | Módulo complementario disponible. |
+
+## URLs públicas
+
+| Servicio | URL |
+|---|---|
+| Frontend React | https://mlbt-proyecto.vercel.app |
+| Login | https://mlbt-proyecto.vercel.app/login |
+| Dashboard | https://mlbt-proyecto.vercel.app/dashboard |
+| API Node | https://mlbt-proyecto.onrender.com |
+| Health API | https://mlbt-proyecto.onrender.com/api/health |
 
 ## Integración validada
 
-El flujo principal integrado corresponde al inicio de sesión real desde React hacia la API Node.
-
 | Paso | Descripción |
 |---|---|
-| 1 | El usuario ingresa credenciales en React. |
-| 2 | React envía POST /api/auth/login a la API Node. |
-| 3 | La API valida credenciales con Prisma y bcrypt. |
+| 1 | El usuario ingresa credenciales en React publicado en Vercel. |
+| 2 | React envía POST /api/auth/login a la API Node publicada en Render. |
+| 3 | La API valida credenciales contra Aiven MySQL con Prisma y bcrypt. |
 | 4 | La API devuelve token JWT y datos del usuario. |
 | 5 | React guarda la sesión en sessionStorage. |
 | 6 | ProtectedRoute permite el acceso al dashboard. |
 | 7 | El botón Cerrar sesión limpia la sesión y retorna al login. |
 
-## Comandos de ejecución local
+## Seguridad
 
-### Base de datos
+La contraseña de la base de datos, el Service URI completo y la variable DATABASE_URL no se documentan en el repositorio. Estos valores se administran como variables de entorno en Render.
 
-Iniciar MySQL desde XAMPP en el puerto 3306.
+## Resultado
 
-### API Node
-
-`powershell
-Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\02_BACK_END\01_API_NODE"
-pnpm install
-pnpm prisma:generate
-pnpm prisma:migrate
-pnpm seed
-pnpm dev
-`",
-  ",
-
-`powershell
-Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
-pnpm install
-pnpm dev
-`",
-  ",
-
-La integración está validada localmente. Para la entrega con URLs públicas se debe realizar despliegue posterior de base de datos, backend y frontend.
+Los módulos principales del proyecto MLBT quedan integrados y publicados con URLs públicas funcionales para la evidencia GA8-220501096-AA1-EV02.

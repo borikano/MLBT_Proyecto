@@ -6,18 +6,19 @@ MLBT - María La Bonita Taquería.
 
 ## Objetivo
 
-Registrar las pruebas realizadas sobre los módulos integrados del sistema MLBT.
+Registrar las pruebas realizadas sobre los módulos integrados y publicados del sistema MLBT.
 
-## Ambiente utilizado
+## Ambiente público utilizado
 
 | Elemento | Valor |
 |---|---|
-| Base de datos | MySQL/MariaDB mediante XAMPP |
-| API | http://localhost:3001 |
-| Frontend | http://localhost:5173 |
-| Rama | feature/GA8_220501096_AA1_EV01_EV02_INTEGRACION_DESPLIEGUE |
+| Frontend | https://mlbt-proyecto.vercel.app |
+| API | https://mlbt-proyecto.onrender.com |
+| Health API | https://mlbt-proyecto.onrender.com/api/health |
+| Base de datos | Aiven MySQL 8.4 |
+| Rama estable | Arawkano |
 
-## Pruebas API
+## Pruebas API pública
 
 | Prueba | Resultado esperado | Resultado obtenido | Estado |
 |---|---|---|---|
@@ -31,24 +32,20 @@ Registrar las pruebas realizadas sobre los módulos integrados del sistema MLBT.
 | POST /api/auth/login incorrecto | Rechazo de credenciales | 401 esperado | Aprobado |
 | GET /api/auth/profile sin token | Rechazo de acceso | 401 esperado | Aprobado |
 
-## Pruebas Frontend
+## Pruebas Frontend público
 
 | Prueba | Resultado esperado | Resultado obtenido | Estado |
 |---|---|---|---|
-| pnpm lint | Sin errores de lint | Sin errores reportados | Aprobado |
-| pnpm build | Build de producción | Build generado correctamente | Aprobado |
-| pnpm dev | React disponible | http://localhost:5173 activo | Aprobado |
-| Login visual | Formulario disponible | /login visible | Aprobado |
+| Acceso a frontend | Carga aplicación | https://mlbt-proyecto.vercel.app disponible | Aprobado |
+| Acceso a /login | Carga formulario | Formulario visible | Aprobado |
+| Login real | Redirección a dashboard | Dashboard accesible | Aprobado |
+| Navegación interna | Acceso a módulos | Dashboard, usuarios, inventario y ventas accesibles | Aprobado |
+| Logout | Retorno a login | Sesión cerrada correctamente | Aprobado |
 
-## Pruebas de integración
+## Flujo público validado
 
-| Prueba | Resultado esperado | Resultado obtenido | Estado |
-|---|---|---|---|
-| Login real React + API | Redirección a dashboard | /dashboard accesible | Aprobado |
-| Token JWT | Sesión guardada | sessionStorage con sesión | Aprobado |
-| Ruta protegida | Acceso solo autenticado | ProtectedRoute validado | Aprobado |
-| Logout | Retorno a /login | Retorno visual confirmado | Aprobado |
+Vercel React -> Render API Node -> Aiven MySQL -> JWT -> Dashboard protegido.
 
 ## Resultado general
 
-Los módulos integrados fueron probados localmente. El flujo de autenticación real entre React, API Node y MySQL/MariaDB quedó aprobado.
+Los módulos integrados fueron probados en ambiente público. El flujo de autenticación real entre React, API Node y Aiven MySQL quedó aprobado.
