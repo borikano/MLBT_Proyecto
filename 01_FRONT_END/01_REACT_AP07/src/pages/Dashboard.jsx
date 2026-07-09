@@ -167,7 +167,7 @@ export default function Dashboard() {
     {
       titulo: "Usuarios activos",
       valor: usuariosActivos.length || usuariosMock.length,
-      descripcion: "Usuarios administrativos cargados desde el mock local.",
+      descripcion: "Usuarios administrativos cargados desde datos locales de apoyo.",
     },
   ]
 
@@ -184,7 +184,7 @@ export default function Dashboard() {
 
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
           Resumen administrativo conectado a usuarios, inventario, ventas y
-          movimientos mockeados. La información se calcula desde el estado local
+          movimientos de apoyo. La información se calcula desde el estado local
           compartido para mantener coherencia entre módulos.
         </p>
       </div>
@@ -515,5 +515,3 @@ export default function Dashboard() {
     </section>
   )
 }
-
-

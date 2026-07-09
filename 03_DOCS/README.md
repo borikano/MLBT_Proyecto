@@ -25,3 +25,14 @@ Esta carpeta centraliza la documentación técnica, las evidencias formativas, l
 ## Criterio de organización
 
 La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentación técnica general se conserva en esta carpeta y las evidencias se agrupan en subcarpetas independientes para facilitar revisión, trazabilidad y crecimiento futuro.
+
+<!-- GA8_DOCS_INICIO -->
+
+## Evidencias GA8 recientes
+
+| Evidencia | Enlace | Estado |
+|---|---|---|
+| GA8-220501096-AA1-EV01 | [Integración de módulos componentes](evidencias/GA8_220501096_AA1_EV01/README.md) | Validada localmente con login React + API + JWT. |
+| GA8-220501096-AA1-EV02 | [Módulos integrados](evidencias/GA8_220501096_AA1_EV02/README.md) | Documentada con módulos, entradas/salidas, pruebas y URLs locales. |
+
+<!-- GA8_DOCS_FIN -->

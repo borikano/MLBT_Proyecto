@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
 
 import logoPrincipal from "@/assets/mlbt/brand/logo-principal.png"
 import { Button } from "@/components/ui/button"
-import { logoutMock } from "@/lib/auth"
+import { logout } from "@/lib/auth"
 
 const navigationItems = [
   {
@@ -100,7 +100,7 @@ export default function AppSidebar() {
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    logoutMock()
+    logout()
     navigate("/login", { replace: true })
   }
 

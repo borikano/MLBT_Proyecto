@@ -79,3 +79,14 @@ Comandos principales:
     pnpm dev
     pnpm lint
     pnpm build
+
+<!-- GA8_EVIDENCIAS_INICIO -->
+
+## Evidencias GA8 - Integración y módulos integrados
+
+| Evidencia | Descripción | Ruta |
+|---|---|---|
+| GA8-220501096-AA1-EV01 | Integración funcional entre Frontend React, API Node y base de datos MySQL/MariaDB. | [03_DOCS/evidencias/GA8_220501096_AA1_EV01](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
+| GA8-220501096-AA1-EV02 | Módulos integrados, entradas/salidas, pruebas y URLs de ejecución. | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+
+<!-- GA8_EVIDENCIAS_FIN -->

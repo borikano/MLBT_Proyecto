@@ -1,57 +1,99 @@
+import { apiRequest } from "@/lib/api"
+
 const AUTH_STORAGE_KEY = "mlbt-auth-session"
+const SESSION_DURATION_MS = 1000 * 60 * 60 * 2
 
-const MOCK_ADMIN_USER = {
-  usuario: "admin",
-  clave: "admin",
-  nombre: "Administrador MLBT",
-  rol: "ADMIN",
-}
-
-const SESSION_DURATION_MS = 1000 * 60 * 60
-
-function buildMockSession() {
+function buildSession({ token, usuario }) {
   const issuedAt = Date.now()
   const expiresAt = issuedAt + SESSION_DURATION_MS
+
+  const user = {
+    id: usuario?.id,
+    usuario: usuario?.username || usuario?.usuario || "",
+    username: usuario?.username || usuario?.usuario || "",
+    nombre: usuario?.nombre || "Usuario MLBT",
+    email: usuario?.email || "",
+    rol: usuario?.rol || "LECTURA",
+    estado: usuario?.estado || "ACTIVO",
+  }
 
   return {
     isAuthenticated: true,
     authenticated: true,
-    usuario: MOCK_ADMIN_USER.usuario,
-    rol: MOCK_ADMIN_USER.rol,
-    user: {
-      usuario: MOCK_ADMIN_USER.usuario,
-      nombre: MOCK_ADMIN_USER.nombre,
-      rol: MOCK_ADMIN_USER.rol,
-    },
+    token,
+    usuario: user.username,
+    rol: user.rol,
+    user,
     issuedAt,
     expiresAt,
   }
 }
 
-export function loginMock({ usuario = "", clave = "" } = {}) {
-  const usuarioNormalizado = usuario.trim()
+export async function login({ usuario = "", clave = "" } = {}) {
+  const username = usuario.trim()
+  const password = clave
 
-  const credentialsAreValid =
-    usuarioNormalizado === MOCK_ADMIN_USER.usuario &&
-    clave === MOCK_ADMIN_USER.clave
-
-  if (!credentialsAreValid) {
+  if (!username || !password) {
     return {
       ok: false,
-      message: "Usuario o contraseña incorrectos.",
+      message: "Ingresa usuario y contraseña.",
     }
   }
 
-  const session = buildMockSession()
-  sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session))
+  try {
+    const loginResponse = await apiRequest("/api/auth/login", {
+      method: "POST",
+      body: {
+        username,
+        password,
+      },
+    })
 
-  return {
-    ok: true,
-    session,
+    const token = loginResponse?.token
+
+    if (!token) {
+      throw new Error("La API no devolvió un token JWT.")
+    }
+
+    let usuarioAutenticado = loginResponse.usuario
+
+    try {
+      const profileResponse = await apiRequest("/api/auth/profile", {
+        method: "GET",
+        token,
+      })
+
+      if (profileResponse?.usuario) {
+        usuarioAutenticado = profileResponse.usuario
+      }
+    } catch {
+      usuarioAutenticado = loginResponse.usuario
+    }
+
+    const session = buildSession({
+      token,
+      usuario: usuarioAutenticado,
+    })
+
+    sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session))
+
+    return {
+      ok: true,
+      session,
+    }
+  } catch (error) {
+    logout()
+
+    return {
+      ok: false,
+      message:
+        error?.message ||
+        "No fue posible iniciar sesión. Verifica la API y las credenciales.",
+    }
   }
 }
 
-export function getMockSession() {
+export function getSession() {
   const rawSession = sessionStorage.getItem(AUTH_STORAGE_KEY)
 
   if (!rawSession) {
@@ -62,23 +104,32 @@ export function getMockSession() {
     const session = JSON.parse(rawSession)
     const sessionHasExpired = !session.expiresAt || session.expiresAt < Date.now()
 
-    if (!session.isAuthenticated || sessionHasExpired) {
-      logoutMock()
+    if (!session.isAuthenticated || !session.token || sessionHasExpired) {
+      logout()
       return null
     }
 
     return session
   } catch {
-    logoutMock()
+    logout()
     return null
   }
 }
 
-export function isAuthenticatedMock() {
-  return Boolean(getMockSession())
+export function isAuthenticated() {
+  return Boolean(getSession())
 }
 
-export function logoutMock() {
+export function getAuthToken() {
+  return getSession()?.token || ""
+}
+
+export function logout() {
   sessionStorage.removeItem(AUTH_STORAGE_KEY)
   localStorage.removeItem(AUTH_STORAGE_KEY)
 }
+
+export const loginMock = login
+export const getMockSession = getSession
+export const isAuthenticatedMock = isAuthenticated
+export const logoutMock = logout
