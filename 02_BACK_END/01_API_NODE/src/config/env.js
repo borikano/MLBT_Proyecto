@@ -8,7 +8,8 @@ const config = {
   databaseUrl: process.env.DATABASE_URL,
   jwtSecret: process.env.JWT_SECRET || "cambiar_este_valor_en_desarrollo_local",
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "2h",
-  bcryptSaltRounds: Number(process.env.BCRYPT_SALT_ROUNDS || 10)
+  bcryptSaltRounds: Number(process.env.BCRYPT_SALT_ROUNDS || 10),
+  frontendOrigin: process.env.FRONTEND_ORIGIN || ""
 };
 
 export { config };
