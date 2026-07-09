@@ -151,7 +151,7 @@ export default function Login() {
                 )}
               </CardContent>
 
-              <CardFooter>
+              <CardFooter className="pt-3">
                 <Button
                   type="submit"
                   disabled={isSubmitting}
