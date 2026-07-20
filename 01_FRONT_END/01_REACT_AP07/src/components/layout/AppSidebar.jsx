@@ -33,19 +33,19 @@ const navigationItems = [
     children: [
       {
         label: "Resumen de inventario",
-        to: "/inventario#resumen-inventario",
+        to: "/inventario/resumen",
       },
       {
         label: "Registrar ítem",
-        to: "/inventario#formulario-inventario",
+        to: "/inventario/registrar",
       },
       {
         label: "Registrar movimiento",
-        to: "/inventario#movimiento-inventario",
+        to: "/inventario/movimientos",
       },
       {
         label: "Tablas de inventario",
-        to: "/inventario#tablas-inventario",
+        to: "/inventario/tablas",
       },
     ],
   },
