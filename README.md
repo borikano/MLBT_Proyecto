@@ -80,9 +80,21 @@ Rutas funcionales principales:
 
 - /login
 - /dashboard
-- /usuarios
-- /inventario
-- /ventas
+- /login
+- /dashboard
+- /usuarios -> /usuarios/resumen
+  - /usuarios/resumen
+  - /usuarios/crear
+  - /usuarios/listado
+- /inventario -> /inventario/resumen
+  - /inventario/resumen
+  - /inventario/registrar
+  - /inventario/movimientos
+  - /inventario/tablas
+- /ventas -> /ventas/pedido
+  - /ventas/pedido
+  - /ventas/historial
+  - /ventas/analisis
 
 Credenciales de prueba:
 

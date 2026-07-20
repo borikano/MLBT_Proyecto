@@ -6,9 +6,9 @@
 |---|---|
 | 01_FRONT_END/01_REACT_AP07/src/pages/Login.jsx | Inicio de sesión de prueba. |
 | 01_FRONT_END/01_REACT_AP07/src/pages/Dashboard.jsx | Panel principal con calendario de análisis. |
-| 01_FRONT_END/01_REACT_AP07/src/pages/Usuarios.jsx | Gestión local de usuarios. |
-| 01_FRONT_END/01_REACT_AP07/src/pages/Inventario.jsx | Gestión local de inventario. |
-| 01_FRONT_END/01_REACT_AP07/src/pages/Ventas.jsx | Registro y análisis de ventas. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/usuarios/ | Paginas internas de resumen, creacion y listado de usuarios. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/inventario/ | Paginas internas de resumen, registro, movimientos y tablas de inventario. |
+| 01_FRONT_END/01_REACT_AP07/src/pages/ventas/ | Paginas internas de pedido actual, historial confirmado y analisis de ventas. |
 | 01_FRONT_END/01_REACT_AP07/src/components/layout | Estructura administrativa y menú lateral. |
 | 01_FRONT_END/01_REACT_AP07/src/components/shared/DataTable.jsx | Tabla reutilizable. |
 | 01_FRONT_END/01_REACT_AP07/src/context/MlbtDataContext.jsx | Estado compartido de datos de prueba. |

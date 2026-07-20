@@ -22,7 +22,12 @@ El repositorio MLBT contiene módulos web, API REST, documentación técnica, ev
 - README del módulo actualizado.
 - Guía técnica AP07 disponible en 08_FRONTEND_REACT_AP07.md.
 - Validación realizada con pnpm lint y pnpm build.
-- Rutas funcionales principales: /login, /dashboard, /usuarios, /inventario, /ventas.
+- Rutas funcionales principales:
+  - /login
+  - /dashboard
+  - /usuarios/resumen, /usuarios/crear, /usuarios/listado
+  - /inventario/resumen, /inventario/registrar, /inventario/movimientos, /inventario/tablas
+  - /ventas/pedido, /ventas/historial, /ventas/analisis
 
 ## Estado final esperado
 

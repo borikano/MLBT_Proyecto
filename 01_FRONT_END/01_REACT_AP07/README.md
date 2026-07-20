@@ -57,9 +57,21 @@ Dirección local:
 
 - /login
 - /dashboard
-- /usuarios
-- /inventario
-- /ventas
+- /login
+- /dashboard
+- /usuarios -> /usuarios/resumen
+  - /usuarios/resumen
+  - /usuarios/crear
+  - /usuarios/listado
+- /inventario -> /inventario/resumen
+  - /inventario/resumen
+  - /inventario/registrar
+  - /inventario/movimientos
+  - /inventario/tablas
+- /ventas -> /ventas/pedido
+  - /ventas/pedido
+  - /ventas/historial
+  - /ventas/analisis
 
 ## Módulos implementados
 
@@ -106,9 +118,11 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 
 - src/pages/Login.jsx
 - src/pages/Dashboard.jsx
-- src/pages/Usuarios.jsx
-- src/pages/Inventario.jsx
-- src/pages/Ventas.jsx
+- src/features/usuarios/ y src/pages/usuarios/
+- src/features/inventario/ y src/pages/inventario/
+- src/features/ventas/ y src/pages/ventas/
+- src/routes/AppRouter.jsx
+- src/components/layout/AppSidebar.jsx
 - src/components/layout/AdminLayout.jsx
 - src/components/layout/AppSidebar.jsx
 - src/components/shared/DataTable.jsx
