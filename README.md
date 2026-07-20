@@ -103,7 +103,7 @@ Credenciales de prueba:
 
 Comandos principales de validación local:
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
+    Set-Location ".\01_FRONT_END\01_REACT_AP07"
     pnpm install
     pnpm dev
     pnpm lint
@@ -119,3 +119,21 @@ Comandos principales de validación local:
 | GA8-220501096-AA1-EV02 | Módulos integrados, entradas/salidas, pruebas y URLs públicas de ejecución. | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
 
 <!-- GA8_EVIDENCIAS_FIN -->
+
+<!-- GA9_PRUEBAS_INICIO -->
+## GA9 - Pruebas de software
+
+| Evidencia técnica | Descripción | Ruta |
+| --- | --- | --- |
+| GA9-220501096-AA1-EV01 | Se incorporaron pruebas básicas automatizadas en el frontend React mediante Vitest. | [Frontend React](01_FRONT_END/01_REACT_AP07/README.md) |
+
+Validaciones técnicas registradas:
+
+- Cálculo del total de un pedido.
+- Disponibilidad del endpoint público /api/health.
+
+Comandos principales desde la raíz del repositorio:
+
+    Set-Location .\01_FRONT_END\01_REACT_AP07
+    pnpm test:run
+<!-- GA9_PRUEBAS_FIN -->
