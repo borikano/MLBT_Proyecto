@@ -33,19 +33,19 @@ const navigationItems = [
     children: [
       {
         label: "Resumen de inventario",
-        to: "/inventario#resumen-inventario",
+        to: "/inventario/resumen",
       },
       {
         label: "Registrar ítem",
-        to: "/inventario#formulario-inventario",
+        to: "/inventario/registrar",
       },
       {
         label: "Registrar movimiento",
-        to: "/inventario#movimiento-inventario",
+        to: "/inventario/movimientos",
       },
       {
         label: "Tablas de inventario",
-        to: "/inventario#tablas-inventario",
+        to: "/inventario/tablas",
       },
     ],
   },
@@ -54,16 +54,16 @@ const navigationItems = [
     to: "/ventas",
     children: [
       {
-        label: "Análisis de ventas",
-        to: "/ventas#analisis-ventas",
+        label: "Pedido actual",
+        to: "/ventas/pedido",
       },
       {
         label: "Historial confirmado",
-        to: "/ventas#historial-ventas",
+        to: "/ventas/historial",
       },
       {
-        label: "Pedido actual",
-        to: "/ventas#pedido-actual",
+        label: "Análisis de ventas",
+        to: "/ventas/analisis",
       },
     ],
   },

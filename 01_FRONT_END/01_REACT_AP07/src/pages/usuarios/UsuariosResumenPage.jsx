@@ -77,6 +77,21 @@ export default function UsuariosResumenPage() {
         </Card>
       </div>
 
+
+      {usuariosPendientes > 0 && (
+        <Card className="border-orange-200 bg-orange-50">
+          <CardHeader>
+            <CardTitle className="text-lg text-orange-700">
+              Usuarios pendientes
+            </CardTitle>
+            <CardDescription className="text-orange-700">
+              Hay {usuariosPendientes} usuario(s) con estado pendiente. Revisa
+              el listado para completar la gestión administrativa.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      )}
+
       <div className="grid gap-4 xl:grid-cols-2">
         <Card className="border-[#f1d4bd] bg-white">
           <CardHeader>
@@ -153,20 +168,6 @@ export default function UsuariosResumenPage() {
           </CardContent>
         </Card>
       </div>
-
-      {usuariosPendientes > 0 && (
-        <Card className="border-orange-200 bg-orange-50">
-          <CardHeader>
-            <CardTitle className="text-lg text-orange-700">
-              Usuarios pendientes
-            </CardTitle>
-            <CardDescription className="text-orange-700">
-              Hay {usuariosPendientes} usuario(s) con estado pendiente. Revisa
-              el listado para completar la gestión administrativa.
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      )}
     </section>
   )
 }
