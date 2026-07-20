@@ -54,16 +54,16 @@ const navigationItems = [
     to: "/ventas",
     children: [
       {
-        label: "Análisis de ventas",
-        to: "/ventas#analisis-ventas",
+        label: "Pedido actual",
+        to: "/ventas/pedido",
       },
       {
         label: "Historial confirmado",
-        to: "/ventas#historial-ventas",
+        to: "/ventas/historial",
       },
       {
-        label: "Pedido actual",
-        to: "/ventas#pedido-actual",
+        label: "Análisis de ventas",
+        to: "/ventas/analisis",
       },
     ],
   },

@@ -12,7 +12,10 @@ import UsuariosCrearPage from "@/pages/usuarios/UsuariosCrearPage"
 import UsuariosListadoPage from "@/pages/usuarios/UsuariosListadoPage"
 import UsuariosModule from "@/pages/usuarios/UsuariosModule"
 import UsuariosResumenPage from "@/pages/usuarios/UsuariosResumenPage"
-import Ventas from "@/pages/Ventas"
+import VentasModule from "@/pages/ventas/VentasModule"
+import VentasAnalisisPage from "@/pages/ventas/VentasAnalisisPage"
+import VentasHistorialPage from "@/pages/ventas/VentasHistorialPage"
+import VentasPedidoPage from "@/pages/ventas/VentasPedidoPage"
 import ProtectedRoute from "@/routes/ProtectedRoute"
 
 export default function AppRouter() {
@@ -39,7 +42,12 @@ export default function AppRouter() {
             <Route path="movimientos" element={<InventarioMovimientosPage />} />
             <Route path="tablas" element={<InventarioTablasPage />} />
           </Route>
-          <Route path="/ventas" element={<Ventas />} />
+          <Route path="/ventas" element={<VentasModule />}>
+            <Route index element={<Navigate to="pedido" replace />} />
+            <Route path="pedido" element={<VentasPedidoPage />} />
+            <Route path="historial" element={<VentasHistorialPage />} />
+            <Route path="analisis" element={<VentasAnalisisPage />} />
+          </Route>
         </Route>
       </Route>
 
