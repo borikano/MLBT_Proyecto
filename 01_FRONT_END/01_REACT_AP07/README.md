@@ -32,7 +32,7 @@ La variable VITE_API_URL permite definir la URL de la API en despliegue.
 
 ## Instalación
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
+    Set-Location ".\01_FRONT_END\01_REACT_AP07"
     pnpm install
 
 ## Ejecución local
@@ -133,3 +133,28 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 ## Estado de entrega
 
 La interfaz React queda validada con revisión de código, compilación de producción y despliegue público en Vercel.
+
+<!-- GA9_PRUEBAS_FRONTEND_INICIO -->
+## Pruebas automatizadas GA9
+
+Para GA9-220501096-AA1-EV01 se incorporaron pruebas básicas automatizadas en el frontend React mediante Vitest.
+
+Archivo de pruebas:
+
+    src/__tests__/mlbt-basicas.test.js
+
+Scripts disponibles:
+
+    pnpm test
+    pnpm test:run
+
+Cobertura inicial validada:
+
+- Cálculo del total de un pedido.
+- Respuesta del endpoint público /api/health.
+
+Resultado técnico de referencia:
+
+    1 archivo de prueba aprobado.
+    2 pruebas aprobadas.
+<!-- GA9_PRUEBAS_FRONTEND_FIN -->
