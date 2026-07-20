@@ -15,15 +15,15 @@ const navigationItems = [
     children: [
       {
         label: "Resumen de usuarios",
-        to: "/usuarios#resumen-usuarios",
+        to: "/usuarios/resumen",
       },
       {
-        label: "Crear / editar usuario",
-        to: "/usuarios#formulario-usuarios",
+        label: "Crear usuario",
+        to: "/usuarios/crear",
       },
       {
         label: "Data Table de usuarios",
-        to: "/usuarios#tabla-usuarios",
+        to: "/usuarios/listado",
       },
     ],
   },
@@ -136,61 +136,58 @@ export default function AppSidebar() {
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-[#ead8c8] bg-white">
       <div className="shrink-0 border-b border-[#ead8c8] px-5 py-5">
-        <div className="flex items-center gap-3">
+        <Link to="/dashboard" className="flex items-center gap-3">
           <img
             src={logoPrincipal}
-            alt="Logo María La Bonita Taquería"
+            alt="MLBT"
             className="h-12 w-12 rounded-full border border-[#d6a37f] object-cover shadow-sm"
           />
-
           <div className="min-w-0">
             <p className="truncate text-sm font-bold text-[#7c2d12]">MLBT</p>
-            <p className="truncate text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Panel administrativo
             </p>
           </div>
-        </div>
+        </Link>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-3 py-5">
-        <p className="mb-3 px-2 text-xs text-muted-foreground">
+      <nav className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-5">
+        <p className="px-1 text-xs text-muted-foreground">
           Navegación principal
         </p>
 
-        <div className="space-y-3">
-          {navigationItems.map((item) => {
-            const active = isRouteActive(location.pathname, item.to)
+        {navigationItems.map((item) => {
+          const active = isRouteActive(location.pathname, item.to)
 
-            return (
-              <div key={item.to} className="space-y-2">
-                <NavLink to={item.to} className={getMainLinkClass}>
-                  <span>{item.label}</span>
-                </NavLink>
+          return (
+            <div key={item.to} className="space-y-2">
+              <NavLink to={item.to} className={getMainLinkClass}>
+                <span>{item.label}</span>
+              </NavLink>
 
-                {active && item.children?.length > 0 && (
-                  <div className="ml-3 space-y-2 rounded-xl border border-[#f1d4bd] bg-[#fffaf5] p-2">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.to}
-                        to={child.to}
-                        onClick={(event) =>
-                          handleSectionNavigation(event, child.to)
-                        }
-                        className={getChildLinkClass(
-                          location.pathname,
-                          location.hash,
-                          child.to
-                        )}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
+              {active && item.children?.length > 0 && (
+                <div className="ml-3 space-y-2 rounded-xl border border-[#f1d4bd] bg-[#fffaf5] p-2">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.to}
+                      to={child.to}
+                      onClick={(event) =>
+                        handleSectionNavigation(event, child.to)
+                      }
+                      className={getChildLinkClass(
+                        location.pathname,
+                        location.hash,
+                        child.to
+                      )}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </nav>
 
       <div className="shrink-0 border-t border-[#ead8c8] p-4">
