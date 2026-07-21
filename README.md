@@ -27,7 +27,7 @@ Proyecto formativo web para la gestión administrativa de María La Bonita Taque
 | Health API | https://mlbt-proyecto.onrender.com/api/health | Validado en producción. |
 | Base de datos | Aiven MySQL 8.4 | Conectada desde Render mediante variable de entorno segura. |
 
-No se publica la contraseña, el Service URI completo ni la variable DATABASE_URL por seguridad.
+No se publica la contraseña, la cadena completa de conexión ni variables de entorno sensibles por seguridad.
 
 ## Acceso rápido
 
@@ -137,3 +137,28 @@ Comandos principales desde la raíz del repositorio:
     Set-Location .\01_FRONT_END\01_REACT_AP07
     pnpm test:run
 <!-- GA9_PRUEBAS_FIN -->
+
+<!-- GA9_PRUEBAS_MLBT_INICIO -->
+## Pruebas de software GA9
+
+El proyecto MLBT cuenta con documentacion publica del ciclo GA9 de pruebas de software. Los entregables formales PDF, video y Excel se conservan fuera del repositorio; en GitHub se documentan comandos reproducibles, resultados consolidados y trazabilidad tecnica.
+
+| Evidencia | Estado | Soporte publico |
+|---|---|---|
+| GA9-220501096-AA1-EV01 | Completada | Pruebas Vitest y README frontend. |
+| GA9-220501096-AA1-EV02 | Completada | Plan de pruebas resumido en documentacion GA9. |
+| GA9-220501096-AA2-EV01 | Completada | Casos y ambiente relacionados en trazabilidad GA9. |
+| GA9-220501096-AA3-EV01 | Completada | Ejecucion documentada con 10 casos aprobados. |
+| GA9-220501096-AA3-EV02 | Completada | Reporte consolidado del plan de pruebas ejecutadas. |
+
+Documentacion GA9: [03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+
+Comando principal de pruebas:
+
+    cd 01_FRONT_END/01_REACT_AP07
+    pnpm test:run
+
+Endpoint publico validado:
+
+    https://mlbt-proyecto.onrender.com/api/health
+<!-- GA9_PRUEBAS_MLBT_FIN -->

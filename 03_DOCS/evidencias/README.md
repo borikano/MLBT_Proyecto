@@ -34,3 +34,11 @@ Esta carpeta organiza las evidencias formativas del proyecto MLBT. Cada evidenci
 ## Criterio de entrega
 
 Las evidencias se mantienen separadas por código para evitar mezclar documentos de diferentes actividades. Cuando una evidencia se soporta en un módulo principal del repositorio, se referencia la ruta del módulo y su guía técnica correspondiente.
+
+<!-- GA9_EVIDENCIAS_INDEX_INICIO -->
+## GA9 - pruebas de software
+
+| Evidencia | Enlace | Descripcion |
+|---|---|---|
+| GA9-220501096-AA1 a AA3 | [GA9 pruebas MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Pruebas de software, plan, casos, ejecucion documentada y reporte final de resultados. |
+<!-- GA9_EVIDENCIAS_INDEX_FIN -->

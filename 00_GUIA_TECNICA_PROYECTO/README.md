@@ -85,3 +85,14 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Licencia documentada | Completado |
 | Repositorio listo para revisión | Completado |
 | Despliegue público GA8 EV02 | Completado |
+
+<!-- GA9_GUIA_TECNICA_INICIO -->
+## Actualizacion GA9
+
+La guia tecnica incorpora el ciclo GA9 de pruebas de software con resultados consolidados y enlaces internos actualizados.
+
+| Documento | Descripcion |
+|---|---|
+| [05_EVIDENCIAS_Y_PRUEBAS.md](05_EVIDENCIAS_Y_PRUEBAS.md) | Estado general de evidencias y pruebas. |
+| [GA9 pruebas MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Documentacion publica del ciclo GA9. |
+<!-- GA9_GUIA_TECNICA_FIN -->

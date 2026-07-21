@@ -50,7 +50,7 @@ Documentar los módulos integrados del sistema y su relación técnica dentro de
 
 ## Seguridad
 
-La contraseña de la base de datos, el Service URI completo y la variable DATABASE_URL no se documentan en el repositorio. Estos valores se administran como variables de entorno en Render.
+La contraseña de la base de datos, la cadena completa de conexión y las variables de entorno sensibles no se documentan en el repositorio. Estos valores se administran como variables de entorno en Render.
 
 ## Resultado
 

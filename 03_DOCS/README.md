@@ -44,3 +44,13 @@ La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentac
 | Health API | https://mlbt-proyecto.onrender.com/api/health |
 
 <!-- GA8_DOCS_FIN -->
+
+<!-- GA9_DOCS_INICIO -->
+## Ciclo GA9 - pruebas de software
+
+| Evidencia | Documentacion publica | Estado |
+|---|---|---|
+| GA9-220501096-AA1 a AA3 | [GA9 pruebas MLBT](evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Completado |
+
+El repositorio documenta la trazabilidad publica del ciclo GA9 sin versionar PDFs, videos ni archivos Excel de entrega.
+<!-- GA9_DOCS_FIN -->
