@@ -20,3 +20,17 @@
 - node_modules no se versiona.
 - Las evidencias usan datos de prueba.
 - La interfaz React usa datos de prueba para validación local.
+
+<!-- GA9_EVIDENCIAS_PRUEBAS_INICIO -->
+## Actualizacion GA9 - Pruebas de software
+
+| Evidencia | Estado | Soporte publico | Entregable externo |
+|---|---|---|---|
+| GA9-220501096-AA1-EV01 | Completada | Pruebas Vitest en frontend React | PDF |
+| GA9-220501096-AA1-EV02 | Completada | Plan documentado y trazabilidad publica | PDF |
+| GA9-220501096-AA2-EV01 | Completada | Casos y ambiente resumidos | Excel |
+| GA9-220501096-AA3-EV01 | Completada | Ejecucion con 10 casos aprobados | PDF + video |
+| GA9-220501096-AA3-EV02 | Completada | Reporte consolidado de resultados | PDF + Excel actualizado |
+
+Indice publico GA9: [../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+<!-- GA9_EVIDENCIAS_PRUEBAS_FIN -->

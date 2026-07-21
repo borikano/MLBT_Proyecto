@@ -43,7 +43,7 @@ Presentar los módulos integrados del sistema MLBT, incluyendo código fuente ve
 | SSL | REQUIRED |
 | Uso | Base de datos pública conectada a la API Node mediante variable DATABASE_URL en Render. |
 
-No se publica la contraseña, el Service URI completo ni la variable DATABASE_URL por seguridad.
+No se publica la contraseña, la cadena completa de conexión ni variables de entorno sensibles por seguridad.
 
 ## Documentos de entrega
 

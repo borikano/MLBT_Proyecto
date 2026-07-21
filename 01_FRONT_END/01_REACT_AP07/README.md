@@ -135,26 +135,35 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 La interfaz React queda validada con revisión de código, compilación de producción y despliegue público en Vercel.
 
 <!-- GA9_PRUEBAS_FRONTEND_INICIO -->
-## Pruebas automatizadas GA9
+## Pruebas automatizadas y evidencias GA9
 
-Para GA9-220501096-AA1-EV01 se incorporaron pruebas básicas automatizadas en el frontend React mediante Vitest.
+Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el proyecto MLBT. El repositorio conserva el soporte publico y reproducible; los entregables PDF, video y Excel permanecen fuera del versionamiento.
 
-Archivo de pruebas:
+### Archivo de pruebas
 
     src/__tests__/mlbt-basicas.test.js
 
-Scripts disponibles:
+### Comandos
 
     pnpm test
     pnpm test:run
 
-Cobertura inicial validada:
+### Alcance validado
 
-- Cálculo del total de un pedido.
-- Respuesta del endpoint público /api/health.
+| Caso | Validacion | Resultado |
+|---|---|---|
+| CP-008 | Calculo total de pedido mediante Vitest | Aprobado |
+| CP-009 | Endpoint publico /api/health mediante Invoke-WebRequest | Aprobado |
 
-Resultado técnico de referencia:
+### Evidencias GA9 asociadas
 
-    1 archivo de prueba aprobado.
-    2 pruebas aprobadas.
+| Evidencia | Estado |
+|---|---|
+| GA9-220501096-AA1-EV01 | Taller y pruebas basicas completadas. |
+| GA9-220501096-AA1-EV02 | Plan de pruebas completado. |
+| GA9-220501096-AA2-EV01 | Casos y ambiente de pruebas completados. |
+| GA9-220501096-AA3-EV01 | Ejecucion documentada con PDF y video. |
+| GA9-220501096-AA3-EV02 | Reporte final de pruebas ejecutadas. |
+
+Documentacion consolidada: [GA9 pruebas MLBT](../../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
 <!-- GA9_PRUEBAS_FRONTEND_FIN -->
