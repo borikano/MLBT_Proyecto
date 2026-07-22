@@ -1,5 +1,27 @@
 # Evidencias del proyecto MLBT
 
+<!-- DOC-03-INICIO -->
+
+## Índice maestro de evidencias
+
+| Bloque | Carpeta | Descripción | Estado |
+|---|---|---|---|
+| GA7-220501096-AA3-EV01 | [GA7_220501096_AA3_EV01](GA7_220501096_AA3_EV01/README.md) | Evidencia técnica, validaciones y trazabilidad. | Cerrado |
+| GA7-220501096-AA5-EV03 | [GA7_220501096_AA5_EV03](GA7_220501096_AA5_EV03/README.md) | API Node, base de datos y endpoints. | Cerrado |
+| GA7-220501096-AA5-EV04 | [GA7_220501096_AA5_EV04](GA7_220501096_AA5_EV04/README.md) | Pruebas Postman, capturas y resultados. | Cerrado |
+| GA8-220501096-AA1-EV01 | [GA8_220501096_AA1_EV01](GA8_220501096_AA1_EV01/README.md) | Integración de módulos componentes. | Cerrado |
+| GA8-220501096-AA1-EV02 | [GA8_220501096_AA1_EV02](GA8_220501096_AA1_EV02/README.md) | Módulos integrados, entradas, salidas y pruebas. | Cerrado |
+| GA9-220501096 | [GA9_220501096_AA1_AA3_PRUEBAS_MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Pruebas de software MLBT. | Cerrado |
+
+## Regla de conservación
+
+- Los códigos oficiales GA, AA y EV no se renombran.
+- Los archivos entregables finales se gestionan fuera del repositorio.
+- Este índice facilita la navegación pública de las evidencias documentadas.
+
+<!-- DOC-03-FIN -->
+
+
 Esta carpeta organiza las evidencias formativas del proyecto MLBT. Cada evidencia conserva sus documentos de soporte, validación, cierre técnico y trazabilidad.
 
 ## Índice de evidencias
@@ -42,3 +64,4 @@ Las evidencias se mantienen separadas por código para evitar mezclar documentos
 |---|---|---|
 | GA9-220501096-AA1 a AA3 | [GA9 pruebas MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Pruebas de software, plan, casos, ejecucion documentada y reporte final de resultados. |
 <!-- GA9_EVIDENCIAS_INDEX_FIN -->
+
