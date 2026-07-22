@@ -1,5 +1,29 @@
 # Guía técnica del proyecto MLBT
 
+<!-- DOC-03-INICIO -->
+
+## Índice de la guía técnica
+
+| Documento | Propósito |
+|---|---|
+| [01_RESUMEN_TECNICO](01_RESUMEN_TECNICO.md) | Síntesis técnica del proyecto. |
+| [02_ESTRUCTURA_DEL_PROYECTO](02_ESTRUCTURA_DEL_PROYECTO.md) | Organización general del repositorio. |
+| [03_COMANDOS_DE_EJECUCION](03_COMANDOS_DE_EJECUCION.md) | Comandos principales de ejecución y validación. |
+| [04_CODIGO_FUENTE_RELEVANTE](04_CODIGO_FUENTE_RELEVANTE.md) | Archivos y módulos relevantes. |
+| [05_EVIDENCIAS_Y_PRUEBAS](05_EVIDENCIAS_Y_PRUEBAS.md) | Relación con evidencias y pruebas. |
+| [06_TRAZABILIDAD_GIT](06_TRAZABILIDAD_GIT.md) | Trazabilidad de ramas, commits y flujo Git. |
+| [07_CIERRE_TECNICO](07_CIERRE_TECNICO.md) | Estado técnico de cierre. |
+| [08_FRONTEND_REACT_AP07](08_FRONTEND_REACT_AP07.md) | Descripción del frontend React. |
+
+## Regla documental
+
+- Esta carpeta funciona como guía técnica pública.
+- No contiene credenciales privadas ni archivos pesados.
+- Las evidencias oficiales mantienen sus códigos originales.
+
+<!-- DOC-03-FIN -->
+
+
 Repositorio: [MLBT_Proyecto](../README.md)
 
 Proyecto web MLBT - María La Bonita Taquería.
@@ -96,3 +120,4 @@ La guia tecnica incorpora el ciclo GA9 de pruebas de software con resultados con
 | [05_EVIDENCIAS_Y_PRUEBAS.md](05_EVIDENCIAS_Y_PRUEBAS.md) | Estado general de evidencias y pruebas. |
 | [GA9 pruebas MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Documentacion publica del ciclo GA9. |
 <!-- GA9_GUIA_TECNICA_FIN -->
+

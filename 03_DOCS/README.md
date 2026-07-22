@@ -1,5 +1,25 @@
 # Documentación del proyecto MLBT
 
+<!-- DOC-03-INICIO -->
+
+## Índice documental
+
+| Sección | Descripción |
+|---|---|
+| [Evidencias](evidencias/README.md) | Evidencias públicas GA7, GA8 y GA9. |
+| [Auditorías](auditorias/refactor-paginas-react/01_cierre_refactor_rutas_react.md) | Trazabilidad histórica de ajustes técnicos. |
+| [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios documentales y técnicos del proyecto. |
+| [Trazabilidad formularios HTTP JSP](trazabilidad-formularios-http-jsp.md) | Referencia histórica de formularios y flujo web. |
+
+## Criterio de publicación
+
+- Esta documentación es pública y compatible con GitHub Markdown.
+- La organización visual avanzada se gestiona fuera del repositorio.
+- Los nombres oficiales de evidencias se conservan sin cambios.
+
+<!-- DOC-03-FIN -->
+
+
 Esta carpeta centraliza la documentación técnica, las evidencias formativas, los estándares del proyecto y los documentos de trazabilidad del repositorio MLBT.
 
 ## Acceso rápido
@@ -54,3 +74,4 @@ La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentac
 
 El repositorio documenta la trazabilidad publica del ciclo GA9 sin versionar PDFs, videos ni archivos Excel de entrega.
 <!-- GA9_DOCS_FIN -->
+

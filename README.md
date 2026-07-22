@@ -1,3 +1,23 @@
+<!-- DOC-03-INICIO -->
+
+## Navegación rápida
+
+| Sección | Descripción |
+|---|---|
+| [Guía técnica](00_GUIA_TECNICA_PROYECTO/README.md) | Resumen técnico, estructura, ejecución, evidencias y trazabilidad. |
+| [Frontend React](01_FRONT_END/01_REACT_AP07/README.md) | Interfaz web del proyecto MLBT. |
+| [API Node](02_BACK_END/01_API_NODE/README.md) | Backend principal, endpoints y soporte de integración. |
+| [Documentación](03_DOCS/README.md) | Documentación pública del proyecto. |
+| [Evidencias](03_DOCS/evidencias/README.md) | Índice maestro de evidencias GA7, GA8 y GA9. |
+
+## Estado documental
+
+- Los nombres oficiales de evidencias GA, AA y EV se conservan sin cambios.
+- Los entregables finales no se versionan en este repositorio.
+- La documentación pública resume la trazabilidad técnica del proyecto MLBT.
+
+<!-- DOC-03-FIN -->
+
 <!-- LICENCIA_USO_ACADEMICO_INICIO -->
 
 ## Licencia y uso académico
@@ -162,3 +182,4 @@ Endpoint publico validado:
 
     https://mlbt-proyecto.onrender.com/api/health
 <!-- GA9_PRUEBAS_MLBT_FIN -->
+
