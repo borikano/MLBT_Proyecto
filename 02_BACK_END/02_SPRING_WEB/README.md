@@ -1,46 +1,46 @@
 # MLBT Spring Web
 
-Modulo principal Spring Boot para la evidencia GA7_220501096_AA3_EV01.
+Módulo principal Spring Boot para la evidencia GA7_220501096_AA3_EV01.
 
-## Proposito
+## Propósito
 
-Este modulo implementa una aplicacion web Java usando Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL.
+Este módulo implementa una aplicación web Java usando Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL.
 
-Su objetivo es evidenciar la codificacion de un modulo web funcional con navegacion, persistencia y operaciones CRUD.
+Su objetivo es evidenciar la codificación de un módulo web funcional con navegación, persistencia y operaciones CRUD.
 
 ## Framework aplicado
 
-| Tecnologia | Uso |
+| Tecnología | Uso |
 |---|---|
-| Spring Boot | Arranque y configuracion del proyecto Java Web. |
-| Spring MVC | Controladores, rutas y navegacion web. |
+| Spring Boot | Arranque y configuración del proyecto Java Web. |
+| Spring MVC | Controladores, rutas y navegación web. |
 | Spring Data JPA | Acceso a datos mediante repositorios. |
-| Hibernate | Implementacion ORM para persistencia. |
-| Thymeleaf | Plantillas HTML dinamicas. |
+| Hibernate | Implementación ORM para persistencia. |
+| Thymeleaf | Plantillas HTML dinámicas. |
 | MySQL / MariaDB | Base de datos local mediante XAMPP. |
 
-## Separacion tecnica
+## Separación técnica
 
-| Tipo | Ubicacion |
+| Tipo | Ubicación |
 |---|---|
-| Aplicacion principal | src/main/java/com/mlbt/springweb/SpringWebApplication.java |
+| Aplicación principal | src/main/java/com/mlbt/springweb/SpringWebApplication.java |
 | Controladores Spring MVC | src/main/java/com/mlbt/springweb/controller |
 | Modelos JPA | src/main/java/com/mlbt/springweb/model |
 | Repositorios Spring Data JPA | src/main/java/com/mlbt/springweb/repository |
 | Servicios | src/main/java/com/mlbt/springweb/service |
-| Configuracion inicial | src/main/java/com/mlbt/springweb/config |
+| Configuración inicial | src/main/java/com/mlbt/springweb/config |
 | Templates Thymeleaf | src/main/resources/templates |
 | CSS | src/main/resources/static/css |
-| Configuracion de aplicacion | src/main/resources/application.properties |
+| Configuración de aplicación | src/main/resources/application.properties |
 
 ## Funcionalidades
 
-- Navegacion entre dashboard, usuarios, inventario y ventas.
+- Navegación entre dashboard, usuarios, inventario y ventas.
 - CRUD de usuarios.
 - CRUD de productos de inventario.
 - CRUD de ventas.
 - Persistencia en MySQL de XAMPP.
-- Creacion automatica de tablas mediante JPA/Hibernate.
+- Creación automática de tablas mediante JPA/Hibernate.
 - Datos iniciales mediante DataInitializer.
 
 ## Base de datos
@@ -49,11 +49,13 @@ Nombre: mlbt_ga7_aa3_ev01
 
 Usuario local: root
 
-Contrasena local: sin contrasena, segun configuracion local de XAMPP.
+Contraseña local: sin contraseña, según configuración local de XAMPP.
 
-## Ejecucion
+Esta configuración corresponde al entorno local académico. No debe reutilizarse como configuración productiva.
 
-Desde la raiz del repositorio:
+## Ejecución
+
+Desde la raíz del repositorio:
 
 .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml spring-boot:run
 
@@ -61,15 +63,25 @@ URL local:
 
 http://localhost:8082
 
-## Compilacion
+## Compilación
 
 .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml clean package
 
-## Modulos funcionales
+## Pruebas
 
-| Modulo | Ruta | Operaciones |
+Desde la raíz del repositorio:
+
+```powershell
+.\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test
+```
+
+Las pruebas automatizadas deben validar comportamiento real de servicios, controladores o configuración. No deben limitarse a afirmaciones triviales.
+
+## Módulos funcionales
+
+| Módulo | Ruta | Operaciones |
 |---|---|---|
-| Dashboard | /dashboard | Navegacion principal. |
+| Dashboard | /dashboard | Navegación principal. |
 | Usuarios | /usuarios | Listar, crear, editar y eliminar. |
 | Inventario | /inventario | Listar, crear, editar y eliminar. |
 | Ventas | /ventas | Listar, crear, editar y eliminar. |
