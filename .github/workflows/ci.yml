@@ -16,7 +16,7 @@ jobs:
         working-directory: 01_FRONT_END/01_REACT_AP07
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -50,7 +50,7 @@ jobs:
         working-directory: 02_BACK_END/01_API_NODE
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Java
         uses: actions/setup-java@v5
