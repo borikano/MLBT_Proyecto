@@ -6,3 +6,4 @@ revision-*.txt
 reorganizacion-*.txt
 validacion-*.txt
 reporte-*.txt
+**/target/

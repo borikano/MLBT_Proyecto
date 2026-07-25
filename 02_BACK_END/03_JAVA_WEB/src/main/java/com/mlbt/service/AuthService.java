@@ -2,6 +2,7 @@ package com.mlbt.service;
 
 public class AuthService {
 
+    // Credenciales controladas para evidencia local. No son autenticacion productiva.
     private static final String ADMIN_EMAIL = "admin@mlbt.com";
     private static final String ADMIN_PASSWORD = "admin123";
 

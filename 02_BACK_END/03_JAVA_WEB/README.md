@@ -1,14 +1,31 @@
 # MLBT Java Web
 
-Modulo complementario Java Web para la evidencia GA7_220501096_AA3_EV01.
+Módulo complementario Java Web para la evidencia GA7_220501096_AA3_EV01.
 
-## Proposito
+## Propósito
 
-Este modulo permite evidenciar una estructura web basada en Java, JSP y Servlets, incluyendo formularios con metodos GET y POST.
+Este módulo permite evidenciar una estructura web basada en Java, JSP y Servlets, incluyendo formularios con métodos GET y POST.
 
-## Separacion tecnica
+## Alcance
 
-| Tipo | Ubicacion |
+| Elemento | Estado |
+|---|---|
+| Uso principal | Evidencia académica complementaria. |
+| Autenticación | Simulada mediante credenciales controladas de prueba. |
+| Persistencia | Repositorio temporal en memoria. |
+| Producción | No debe usarse como autenticación productiva. |
+
+## Credenciales controladas de prueba
+
+| Usuario | Contraseña | Alcance |
+|---|---|---|
+| admin@mlbt.com | admin123 | Dato controlado de prueba para evidencia local. |
+
+Estas credenciales son ficticias y se conservan para reproducir la evidencia académica. No representan secretos reales.
+
+## Separación técnica
+
+| Tipo | Ubicación |
 |---|---|
 | Java | src/main/java/com/mlbt/ |
 | Servlets | src/main/java/com/mlbt/controller/ |
@@ -17,7 +34,7 @@ Este modulo permite evidenciar una estructura web basada en Java, JSP y Servlets
 | Servicios | src/main/java/com/mlbt/service/ |
 | JSP | src/main/webapp/WEB-INF/jsp/ |
 | CSS | src/main/webapp/assets/css/ |
-| Configuracion web | src/main/webapp/WEB-INF/web.xml |
+| Configuración web | src/main/webapp/WEB-INF/web.xml |
 
 ## Servlets
 
@@ -28,9 +45,15 @@ Este modulo permite evidenciar una estructura web basada en Java, JSP y Servlets
 | UsersServlet | /users | Consulta usuarios | Registra usuarios |
 | InventoryServlet | /inventory | Consulta inventario | Registra productos |
 | SalesServlet | /sales | Consulta ventas | Registra ventas |
-| LogoutServlet | /logout | Cierra sesion | No aplica |
+| LogoutServlet | /logout | Cierra sesión | No aplica |
 
-## Compilacion
+## Pruebas
+
+```powershell
+mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
+```
+
+## Compilación
 
 ```powershell
 mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml clean package
