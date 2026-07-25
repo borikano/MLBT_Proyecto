@@ -133,6 +133,14 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 
 La interfaz React queda validada con revisión de código, compilación de producción y despliegue público en Vercel.
 
+| Criterio | Estado |
+|---|---|
+| Pruebas automatizadas | Aprobadas con Vitest y Testing Library. |
+| Lint | Aprobado con ESLint. |
+| Build de producción | Aprobado con Vite. |
+| Integración pública | Login conectado a la API Node pública mediante JWT. |
+| Observación menor | Vite puede advertir un chunk mayor a 500 KB; no bloquea el despliegue y se deja como mejora futura de rendimiento. |
+
 <!-- GA9_PRUEBAS_FRONTEND_INICIO -->
 ## Pruebas automatizadas y evidencias GA9
 

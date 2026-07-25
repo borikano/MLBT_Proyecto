@@ -90,6 +90,37 @@ Validación de arranque sin levantar el servidor:
 - Base pública: defaultdb en Aiven.
 - ORM: Prisma.
 
+## Estado de producción
+
+![API](https://img.shields.io/badge/API-Render-blue)
+![Base de datos](https://img.shields.io/badge/DB-Aiven%20MySQL%208.4-orange)
+![Prisma](https://img.shields.io/badge/Prisma-6.x-success)
+
+La API está preparada para funcionar en producción con la configuración actual siempre que Render conserve las variables requeridas y la instancia Aiven permanezca activa.
+
+| Requisito | Estado esperado |
+|---|---|
+| `DATABASE_URL` | Debe apuntar a Aiven MySQL mediante una cadena privada no versionada. |
+| `JWT_SECRET` | Debe existir en Render para firmar tokens JWT. |
+| `FRONTEND_ORIGIN` | Debe apuntar al dominio público de Vercel permitido por CORS. |
+| Prisma | Se mantiene en `6.19.3` para conservar compatibilidad con `schema.prisma`. |
+| Migraciones | Deben ejecutarse de forma controlada con `pnpm prisma:deploy` cuando aplique. |
+
+> [!IMPORTANT]
+> La migración a Prisma 7 queda fuera del cierre actual. Prisma 7 ya no acepta `url = env("DATABASE_URL")` dentro de `schema.prisma`; por eso los upgrades mayores de `prisma` y `@prisma/client` están bloqueados en Dependabot hasta realizar una migración planificada.
+
+> [!NOTE]
+> Si las variables de Render y la instancia Aiven continúan activas, la base de datos productiva debe seguir funcionando con esta versión. El CI valida configuración y lógica local, pero no expone ni prueba secretos reales de producción.
+
+## Verificación pública de cierre
+
+| Prueba | Resultado | Alcance |
+|---|---|---|
+| `GET /api/health` | Aprobado | Confirma disponibilidad pública de la API. |
+| `POST /api/auth/login` con usuario controlado | Aprobado | Confirma autenticación, consulta de usuario en base de datos y emisión de JWT. |
+
+La autenticación pública aprobada confirma que la API publicada puede comunicarse con la base de datos productiva vigente. Esta validación no publica tokens, secretos ni cadenas de conexión.
+
 ## Datos iniciales
 
 Para cargar datos iniciales:

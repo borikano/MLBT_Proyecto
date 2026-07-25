@@ -107,3 +107,27 @@ Cada fase debe cerrarse con:
 3. Documentación actualizada cuando cambie el comportamiento o los comandos.
 4. Revisión de `git status` y `git diff` antes del commit.
 5. Commit local con asunto claro, solo cuando la fase esté finalizada.
+
+## Cierre técnico consolidado
+
+| Componente | Estado de cierre | Observación |
+|---|---|---|
+| Front End React | Aprobado | Pruebas, lint y build validados. |
+| API Node | Aprobado | Pruebas, configuración segura y endpoints públicos validados. |
+| Spring Web | Aprobado | Pruebas Maven ejecutadas correctamente. |
+| Java Web | Aprobado | Pruebas JUnit ejecutadas correctamente. |
+| CI/CD | Aprobado | GitHub Actions activo y obligatorio como referencia de calidad. |
+| Dependabot | Controlado | Actualizaciones activas con bloqueo de upgrades mayores de Prisma. |
+| Documentación | Aprobada | README, guía técnica, seguridad, pruebas y matriz QA actualizados. |
+
+### Riesgos residuales aceptados
+
+| Riesgo | Nivel | Tratamiento |
+|---|---|---|
+| Migración a Prisma 7 | Medio | Se documenta como tarea futura por cambio mayor incompatible con el datasource actual. |
+| Bundle principal de Vite mayor a 500 KB | Bajo | Se acepta como advertencia no bloqueante; se recomienda división de código en una fase de optimización. |
+| Dependencia de servicios externos públicos | Bajo | La verificación productiva depende de Render, Vercel y Aiven; las credenciales reales permanecen fuera del repositorio. |
+
+### Decisión sobre Prisma
+
+Prisma se mantiene en `6.19.3` porque la aplicación y el esquema actual son compatibles con esa línea. El salto a Prisma 7 requiere cambios explícitos en la configuración, validación de migraciones y prueba de conexión real. Por esta razón, Dependabot no debe fusionar upgrades mayores de `prisma` ni `@prisma/client` hasta que exista una fase técnica dedicada.
