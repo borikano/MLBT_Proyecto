@@ -49,7 +49,11 @@ describe("Login", () => {
     await user.type(screen.getByLabelText("Contraseña"), "clave-incorrecta")
     await user.click(screen.getByRole("button", { name: "Iniciar sesión" }))
 
-    expect(await screen.findByText("Credenciales invalidas.")).toBeInTheDocument()
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Credenciales invalidas."
+    )
+    expect(screen.getByLabelText("Usuario")).toHaveAttribute("aria-invalid", "true")
+    expect(screen.getByLabelText("Contraseña")).toHaveAttribute("aria-invalid", "true")
     expect(login).toHaveBeenCalledWith({
       usuario: "adminapp",
       clave: "clave-incorrecta",

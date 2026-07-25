@@ -29,6 +29,7 @@ export default function Login() {
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  const errorId = "login-error"
   const redirectTo = location.state?.from?.pathname || "/dashboard"
 
   useEffect(() => {
@@ -128,6 +129,8 @@ export default function Login() {
                     value={formData.usuario}
                     onChange={handleChange}
                     autoComplete="username"
+                    aria-invalid={error ? "true" : undefined}
+                    aria-describedby={error ? errorId : undefined}
                   />
                 </div>
 
@@ -137,15 +140,22 @@ export default function Login() {
                     id="clave"
                     name="clave"
                     type="password"
-                    placeholder="Ej: AdminApp123*"
+                    placeholder="Ingresa tu contraseña"
                     value={formData.clave}
                     onChange={handleChange}
                     autoComplete="current-password"
+                    aria-invalid={error ? "true" : undefined}
+                    aria-describedby={error ? errorId : undefined}
                   />
                 </div>
 
                 {error && (
-                  <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                  <p
+                    id={errorId}
+                    role="alert"
+                    aria-live="polite"
+                    className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+                  >
                     {error}
                   </p>
                 )}
@@ -155,6 +165,7 @@ export default function Login() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                   className="w-full bg-[#7c2d12] hover:bg-[#9a3412]"
                 >
                   {isSubmitting ? "Validando..." : "Iniciar sesión"}
