@@ -9,7 +9,8 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 1. README.md
 2. 03_DOCS/README.md
 3. 03_DOCS/estandares-proyecto-mlbt.md
-4. El README del módulo afectado
+4. 03_DOCS/seguridad-pruebas-calidad.md
+5. El README del módulo afectado
 
 ## Organización general
 
@@ -37,7 +38,10 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Conservar componentes reutilizables en src/components.
 - Conservar rutas en src/routes.
 - Conservar estado compartido en src/context.
-- Validar cambios con pnpm lint y pnpm build.
+- Validar cambios con pnpm test:run, pnpm lint y pnpm build cuando aplique.
+- Mantener las pruebas automatizadas sin dependencia de red externa.
+- Respetar la composición y accesibilidad de los componentes shadcn/ui.
+- Documentar cualquier credencial de prueba como dato controlado y no como secreto real.
 - No versionar node_modules ni dist.
 
 ## Estándares de interfaz base
@@ -56,7 +60,9 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Proteger variables locales mediante .env ignorado por Git.
 - Mantener .env.example como plantilla segura.
 - Documentar endpoints, base de datos, datos iniciales y validaciones en docs.
-- Validar la API con pruebas de terminal y Postman cuando corresponda.
+- Validar la API con pnpm test, pnpm check y Postman cuando corresponda.
+- Exigir configuración segura para producción, especialmente JWT_SECRET, DATABASE_URL y FRONTEND_ORIGIN.
+- Cubrir con pruebas los escenarios de autenticación, autorización, validación y errores.
 
 ## Estándares Spring Web
 
@@ -65,6 +71,8 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Mantener templates Thymeleaf en src/main/resources/templates.
 - Mantener CSS e imágenes en src/main/resources/static.
 - Documentar ejecución, compilación y base de datos en el README del módulo.
+- Evitar que las pruebas automatizadas sean únicamente afirmaciones triviales sin validar comportamiento.
+- Separar configuración local, académica y productiva cuando aplique.
 
 ## Estándares Java Web
 
@@ -73,6 +81,7 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Mantener JSP en WEB-INF/jsp.
 - Mantener index.jsp como punto de entrada, sin lógica sensible.
 - Documentar formularios GET y POST cuando aplique.
+- Documentar cualquier credencial embebida como dato controlado de evidencia o reemplazarla por configuración si el módulo se mantiene activo.
 
 ## Estándares de documentación
 
@@ -98,6 +107,17 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Usar example.com cuando se requieran correos de ejemplo.
 - No versionar .env, node_modules, dist, target ni artefactos temporales.
 - Documentar únicamente credenciales de prueba controladas.
+- No usar credenciales controladas como valores por defecto de producción.
+- Mantener la gestión de secretos alineada con OWASP y buenas prácticas de configuración por entorno.
+
+## Estándares de calidad y pruebas
+
+- Usar como referencia ISO/IEC 25010 para evaluar seguridad, mantenibilidad, usabilidad y confiabilidad.
+- Usar como referencia ISO/IEC/IEEE 29119 para planificar, ejecutar y documentar pruebas.
+- Usar OWASP Top 10 y OWASP ASVS básico para revisar autenticación, autorización, validación, errores y configuración.
+- Usar WCAG 2.2 AA para revisar formularios, foco, contraste, mensajes de error y navegación por teclado.
+- Mantener la trazabilidad entre requisito, riesgo, caso de prueba, resultado y evidencia.
+- Cerrar cada fase con validación, revisión de cambios y commit local con asunto claro.
 
 ## Criterio de continuidad
 

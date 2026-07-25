@@ -20,17 +20,41 @@
 - node_modules no se versiona.
 - Las evidencias usan datos de prueba.
 - La interfaz React usa datos de prueba para validación local.
+- Las credenciales documentadas son datos controlados de prueba, no secretos reales.
+- Los módulos históricos o académicos deben indicar su alcance cuando incluyan credenciales embebidas.
+
+## Criterios actuales de calidad y pruebas
+
+La evolución técnica del proyecto se apoya en los criterios documentados en [Seguridad, pruebas y calidad](../03_DOCS/seguridad-pruebas-calidad.md).
+
+| Referencia | Uso en el proyecto |
+|---|---|
+| ISO/IEC 25010 | Evaluar calidad, seguridad, mantenibilidad, usabilidad y confiabilidad. |
+| ISO/IEC/IEEE 29119 | Diseñar, ejecutar y documentar pruebas con trazabilidad. |
+| OWASP Top 10 / ASVS básico | Revisar autenticación, autorización, validación, errores y configuración. |
+| WCAG 2.2 AA | Revisar accesibilidad en formularios, foco, contraste y mensajes de error. |
+
+## Matriz de trazabilidad QA
+
+| Módulo | Riesgo principal | Prueba o evidencia esperada | Estado |
+|---|---|---|---|
+| Front End React | Fallos en reglas de ventas o rutas protegidas | Pruebas Vitest y Testing Library | En fortalecimiento |
+| API Node | Token inválido, rol insuficiente o configuración insegura | Pruebas unitarias, pruebas HTTP y check de entorno | En fortalecimiento |
+| Front End base | Credenciales controladas en código histórico | Documentación de alcance o endurecimiento | Pendiente |
+| Spring Web | Pruebas triviales sin validación funcional | Pruebas reales de contexto, servicios o controladores | Pendiente |
+| Java Web | Credenciales embebidas en servicio académico | Documentación de alcance o configuración externa | Pendiente |
+| Documentación | Comandos o evidencias desactualizadas | Actualización de README, guías y matriz QA | En fortalecimiento |
 
 <!-- GA9_EVIDENCIAS_PRUEBAS_INICIO -->
-## Actualizacion GA9 - Pruebas de software
+## Actualización GA9 - Pruebas de software
 
-| Evidencia | Estado | Soporte publico | Entregable externo |
+| Evidencia | Estado | Soporte público | Entregable externo |
 |---|---|---|---|
 | GA9-220501096-AA1-EV01 | Completada | Pruebas Vitest en frontend React | PDF |
-| GA9-220501096-AA1-EV02 | Completada | Plan documentado y trazabilidad publica | PDF |
+| GA9-220501096-AA1-EV02 | Completada | Plan documentado y trazabilidad pública | PDF |
 | GA9-220501096-AA2-EV01 | Completada | Casos y ambiente resumidos | Excel |
-| GA9-220501096-AA3-EV01 | Completada | Ejecucion con 10 casos aprobados | PDF + video |
+| GA9-220501096-AA3-EV01 | Completada | Ejecución con 10 casos aprobados | PDF + video |
 | GA9-220501096-AA3-EV02 | Completada | Reporte consolidado de resultados | PDF + Excel actualizado |
 
-Indice publico GA9: [../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+Índice público GA9: [../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
 <!-- GA9_EVIDENCIAS_PRUEBAS_FIN -->

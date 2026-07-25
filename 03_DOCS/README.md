@@ -9,6 +9,7 @@
 | [Evidencias](evidencias/README.md) | Evidencias públicas GA7, GA8 y GA9. |
 | [Auditorías](auditorias/refactor-paginas-react/01_cierre_refactor_rutas_react.md) | Trazabilidad histórica de ajustes técnicos. |
 | [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios documentales y técnicos del proyecto. |
+| [Seguridad, pruebas y calidad](seguridad-pruebas-calidad.md) | Criterios ISO, OWASP, WCAG, QA y endurecimiento técnico. |
 | [Trazabilidad formularios HTTP JSP](trazabilidad-formularios-http-jsp.md) | Referencia histórica de formularios y flujo web. |
 
 ## Criterio de publicación
@@ -30,6 +31,7 @@ Esta carpeta centraliza la documentación técnica, las evidencias formativas, l
 | [Guía técnica](../00_GUIA_TECNICA_PROYECTO/README.md) | Panel técnico principal para revisión. |
 | [Evidencias](evidencias/README.md) | Índice de evidencias organizadas por código de entrega. |
 | [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios de organización, estructura y documentación. |
+| [Seguridad, pruebas y calidad](seguridad-pruebas-calidad.md) | Lineamientos de calidad, seguridad, accesibilidad y pruebas. |
 | [Trazabilidad formularios HTTP JSP](trazabilidad-formularios-http-jsp.md) | Relación entre formularios, métodos HTTP y páginas JSP. |
 
 ## Bloques relacionados
