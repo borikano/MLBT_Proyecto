@@ -85,7 +85,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: maven
 
       - name: Test Spring Web
         run: mvn -f 02_BACK_END/02_SPRING_WEB/pom.xml test
