@@ -33,6 +33,13 @@ updates:
       timezone: America/Bogota
     commit-message:
       prefix: chore
+    ignore:
+      - dependency-name: prisma
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "@prisma/client"
+        update-types:
+          - version-update:semver-major
     groups:
       api-dependencies:
         patterns:
