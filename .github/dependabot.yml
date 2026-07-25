@@ -1,0 +1,59 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Bogota
+    commit-message:
+      prefix: chore
+
+  - package-ecosystem: npm
+    directory: /01_FRONT_END/01_REACT_AP07
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Bogota
+    commit-message:
+      prefix: chore
+    groups:
+      frontend-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: npm
+    directory: /02_BACK_END/01_API_NODE
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Bogota
+    commit-message:
+      prefix: chore
+    groups:
+      api-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: maven
+    directory: /02_BACK_END/02_SPRING_WEB
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Bogota
+    commit-message:
+      prefix: chore
+
+  - package-ecosystem: maven
+    directory: /02_BACK_END/03_JAVA_WEB
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Bogota
+    commit-message:
+      prefix: chore

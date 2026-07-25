@@ -34,6 +34,8 @@ Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
 
 # MLBT - María La Bonita Taquería
 
+[![CI](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml/badge.svg?branch=Arawkano)](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml)
+
 Proyecto formativo web para la gestión administrativa de María La Bonita Taquería.
 
 ## URLs públicas de la entrega GA8
