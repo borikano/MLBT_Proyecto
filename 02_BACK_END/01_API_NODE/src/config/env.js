@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 function buildConfig(envSource = process.env) {
   const env = envSource.NODE_ENV || "development";

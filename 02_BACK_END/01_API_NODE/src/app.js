@@ -34,7 +34,10 @@ const corsOptions = {
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(morgan(config.env === "production" ? "combined" : "dev"));
+
+if (config.env !== "test") {
+  app.use(morgan(config.env === "production" ? "combined" : "dev"));
+}
 
 app.get("/", (req, res) => {
   res.status(200).json({
