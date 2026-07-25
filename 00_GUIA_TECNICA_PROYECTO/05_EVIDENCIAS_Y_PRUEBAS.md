@@ -38,12 +38,21 @@ La evolución técnica del proyecto se apoya en los criterios documentados en [S
 
 | Módulo | Riesgo principal | Prueba o evidencia esperada | Estado |
 |---|---|---|---|
-| Front End React | Fallos en reglas de ventas o rutas protegidas | Pruebas Vitest y Testing Library | En fortalecimiento |
-| API Node | Token inválido, rol insuficiente o configuración insegura | Pruebas unitarias, pruebas HTTP y check de entorno | En fortalecimiento |
-| Front End base | Credenciales controladas en código histórico | Documentación de alcance o endurecimiento | Pendiente |
-| Spring Web | Pruebas triviales sin validación funcional | Pruebas reales de contexto, servicios o controladores | Pendiente |
-| Java Web | Credenciales embebidas en servicio académico | Documentación de alcance o configuración externa | Pendiente |
-| Documentación | Comandos o evidencias desactualizadas | Actualización de README, guías y matriz QA | En fortalecimiento |
+| Front End React | Fallos en reglas de ventas o rutas protegidas | Pruebas Vitest y Testing Library | Fortalecido |
+| API Node | Token inválido, rol insuficiente o configuración insegura | Pruebas unitarias, pruebas HTTP y check de entorno | Fortalecido |
+| Front End base | Credenciales controladas en código histórico | Documentación de alcance académico | Fortalecido |
+| Spring Web | Pruebas triviales sin validación funcional | Pruebas reales de servicios | Fortalecido |
+| Java Web | Credenciales embebidas en servicio académico | Pruebas JUnit y documentación de alcance | Fortalecido |
+| Documentación | Comandos o evidencias desactualizadas | Actualización de README, guías y matriz QA | Fortalecido |
+
+## Comandos reproducibles vigentes
+
+| Módulo | Comando |
+|---|---|
+| Front End React | pnpm test:run, pnpm lint, pnpm build |
+| API Node | pnpm test, pnpm check |
+| Spring Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test |
+| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test |
 
 <!-- GA9_EVIDENCIAS_PRUEBAS_INICIO -->
 ## Actualización GA9 - Pruebas de software

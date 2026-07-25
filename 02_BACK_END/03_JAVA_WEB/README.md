@@ -53,6 +53,12 @@ Estas credenciales son ficticias y se conservan para reproducir la evidencia aca
 mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
 ```
 
+Si Maven no está instalado globalmente, desde la raíz del repositorio puede usarse el Maven Wrapper disponible en el módulo Spring Web:
+
+```powershell
+.\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
+```
+
 ## Compilación
 
 ```powershell

@@ -66,7 +66,21 @@ Desde la carpeta 02_BACK_END/01_API_NODE:
 
 ## Validación rápida
 
+    pnpm test
+    pnpm check
+
+Validación de arranque sin levantar el servidor:
+
     node .\src\server.js --check
+
+## Pruebas automatizadas
+
+| Archivo | Alcance |
+|---|---|
+| src/__tests__/config.test.js | Configuración por ambiente y reglas de producción. |
+| src/__tests__/http.test.js | Endpoints públicos, autenticación, autorización y errores HTTP. |
+| src/__tests__/middlewares.test.js | Middlewares de autenticación y roles. |
+| src/__tests__/schemas.test.js | Validación de entradas con Zod. |
 
 ## Base de datos
 

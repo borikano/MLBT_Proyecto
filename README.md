@@ -100,21 +100,19 @@ Rutas funcionales principales:
 
 - /login
 - /dashboard
-- /login
-- /dashboard
 - /usuarios -> /usuarios/resumen
-  - /usuarios/resumen
-  - /usuarios/crear
-  - /usuarios/listado
 - /inventario -> /inventario/resumen
-  - /inventario/resumen
-  - /inventario/registrar
-  - /inventario/movimientos
-  - /inventario/tablas
 - /ventas -> /ventas/pedido
-  - /ventas/pedido
-  - /ventas/historial
-  - /ventas/analisis
+- /usuarios/resumen
+- /usuarios/crear
+- /usuarios/listado
+- /inventario/resumen
+- /inventario/registrar
+- /inventario/movimientos
+- /inventario/tablas
+- /ventas/pedido
+- /ventas/historial
+- /ventas/analisis
 
 Credenciales de prueba:
 
@@ -125,9 +123,23 @@ Comandos principales de validación local:
 
     Set-Location ".\01_FRONT_END\01_REACT_AP07"
     pnpm install
-    pnpm dev
+    pnpm test:run
     pnpm lint
     pnpm build
+
+## Validación automatizada
+
+| Módulo | Comando | Alcance |
+|---|---|---|
+| Frontend React | pnpm test:run, pnpm lint, pnpm build | Reglas de interfaz, rutas protegidas, componentes y compilación. |
+| API Node | pnpm test, pnpm check | Configuración segura, esquemas, middlewares y pruebas HTTP. |
+| Spring Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test | Pruebas de servicio con comportamiento real. |
+| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test | Pruebas JUnit del servicio de autenticación académico. |
+
+Comandos de desarrollo del frontend:
+
+    Set-Location ".\01_FRONT_END\01_REACT_AP07"
+    pnpm dev
 
 <!-- GA8_EVIDENCIAS_INICIO -->
 
@@ -161,17 +173,17 @@ Comandos principales desde la raíz del repositorio:
 <!-- GA9_PRUEBAS_MLBT_INICIO -->
 ## Pruebas de software GA9
 
-El proyecto MLBT cuenta con documentacion publica del ciclo GA9 de pruebas de software. Los entregables formales PDF, video y Excel se conservan fuera del repositorio; en GitHub se documentan comandos reproducibles, resultados consolidados y trazabilidad tecnica.
+El proyecto MLBT cuenta con documentación pública del ciclo GA9 de pruebas de software. Los entregables formales PDF, video y Excel se conservan fuera del repositorio; en GitHub se documentan comandos reproducibles, resultados consolidados y trazabilidad técnica.
 
-| Evidencia | Estado | Soporte publico |
+| Evidencia | Estado | Soporte público |
 |---|---|---|
 | GA9-220501096-AA1-EV01 | Completada | Pruebas Vitest y README frontend. |
-| GA9-220501096-AA1-EV02 | Completada | Plan de pruebas resumido en documentacion GA9. |
+| GA9-220501096-AA1-EV02 | Completada | Plan de pruebas resumido en documentación GA9. |
 | GA9-220501096-AA2-EV01 | Completada | Casos y ambiente relacionados en trazabilidad GA9. |
-| GA9-220501096-AA3-EV01 | Completada | Ejecucion documentada con 10 casos aprobados. |
+| GA9-220501096-AA3-EV01 | Completada | Ejecución documentada con pruebas automatizadas por módulo. |
 | GA9-220501096-AA3-EV02 | Completada | Reporte consolidado del plan de pruebas ejecutadas. |
 
-Documentacion GA9: [03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+Documentación GA9: [03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
 
 Comando principal de pruebas:
 

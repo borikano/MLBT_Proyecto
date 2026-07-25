@@ -20,6 +20,7 @@ Dirección local:
 
 Validación:
 
+    pnpm test:run
     pnpm lint
     pnpm build
 
@@ -41,6 +42,11 @@ Dirección local:
 
     http://localhost:3001
 
+Validación:
+
+    pnpm test
+    pnpm check
+
 ## Spring Web
 
 Desde la raíz del repositorio:
@@ -50,3 +56,17 @@ Desde la raíz del repositorio:
 Dirección local:
 
     http://localhost:8082
+
+Validación:
+
+    .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test
+
+## Java Web
+
+Desde la raíz del repositorio:
+
+    .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
+
+Compilación:
+
+    .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml clean package

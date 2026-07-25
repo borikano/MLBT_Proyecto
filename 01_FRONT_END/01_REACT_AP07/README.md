@@ -45,6 +45,7 @@ Dirección local:
 
 ## Validación
 
+    pnpm test:run
     pnpm lint
     pnpm build
 
@@ -57,21 +58,19 @@ Dirección local:
 
 - /login
 - /dashboard
-- /login
-- /dashboard
 - /usuarios -> /usuarios/resumen
-  - /usuarios/resumen
-  - /usuarios/crear
-  - /usuarios/listado
 - /inventario -> /inventario/resumen
-  - /inventario/resumen
-  - /inventario/registrar
-  - /inventario/movimientos
-  - /inventario/tablas
 - /ventas -> /ventas/pedido
-  - /ventas/pedido
-  - /ventas/historial
-  - /ventas/analisis
+- /usuarios/resumen
+- /usuarios/crear
+- /usuarios/listado
+- /inventario/resumen
+- /inventario/registrar
+- /inventario/movimientos
+- /inventario/tablas
+- /ventas/pedido
+- /ventas/historial
+- /ventas/analisis
 
 ## Módulos implementados
 
@@ -137,11 +136,16 @@ La interfaz React queda validada con revisión de código, compilación de produ
 <!-- GA9_PRUEBAS_FRONTEND_INICIO -->
 ## Pruebas automatizadas y evidencias GA9
 
-Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el proyecto MLBT. El repositorio conserva el soporte publico y reproducible; los entregables PDF, video y Excel permanecen fuera del versionamiento.
+Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el proyecto MLBT. El repositorio conserva el soporte público y reproducible; los entregables PDF, video y Excel permanecen fuera del versionamiento.
 
-### Archivo de pruebas
+### Archivos de pruebas
 
-    src/__tests__/mlbt-basicas.test.js
+| Archivo | Alcance |
+|---|---|
+| src/__tests__/mlbt-basicas.test.js | Reglas básicas y health check público. |
+| src/__tests__/Login.test.jsx | Formulario de login, estados de error y accesibilidad. |
+| src/__tests__/ProtectedRoute.test.jsx | Redirección de rutas protegidas. |
+| src/__tests__/DataTable.test.jsx | Renderizado y búsqueda en tabla compartida. |
 
 ### Comandos
 
@@ -150,20 +154,23 @@ Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el pr
 
 ### Alcance validado
 
-| Caso | Validacion | Resultado |
+| Caso | Validación | Resultado |
 |---|---|---|
-| CP-008 | Calculo total de pedido mediante Vitest | Aprobado |
-| CP-009 | Endpoint publico /api/health mediante Invoke-WebRequest | Aprobado |
+| CP-008 | Cálculo total de pedido mediante Vitest | Aprobado |
+| CP-009 | Endpoint público /api/health | Aprobado |
+| CP-010 | Login accesible y mensajes de error | Aprobado |
+| CP-011 | Protección de rutas privadas | Aprobado |
+| CP-012 | Tabla compartida con búsqueda | Aprobado |
 
 ### Evidencias GA9 asociadas
 
 | Evidencia | Estado |
 |---|---|
-| GA9-220501096-AA1-EV01 | Taller y pruebas basicas completadas. |
+| GA9-220501096-AA1-EV01 | Taller y pruebas básicas completadas. |
 | GA9-220501096-AA1-EV02 | Plan de pruebas completado. |
 | GA9-220501096-AA2-EV01 | Casos y ambiente de pruebas completados. |
-| GA9-220501096-AA3-EV01 | Ejecucion documentada con PDF y video. |
+| GA9-220501096-AA3-EV01 | Ejecución documentada con PDF y video. |
 | GA9-220501096-AA3-EV02 | Reporte final de pruebas ejecutadas. |
 
-Documentacion consolidada: [GA9 pruebas MLBT](../../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+Documentación consolidada: [GA9 pruebas MLBT](../../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
 <!-- GA9_PRUEBAS_FRONTEND_FIN -->
