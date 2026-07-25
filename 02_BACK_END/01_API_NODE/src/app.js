@@ -14,12 +14,12 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
-function buildCorsOrigin() {
-  if (!config.frontendOrigin || config.frontendOrigin === "*") {
+function buildCorsOrigin({ env = config.env, frontendOrigin = config.frontendOrigin } = {}) {
+  if (env !== "production" && (!frontendOrigin || frontendOrigin === "*")) {
     return true;
   }
 
-  return config.frontendOrigin
+  return frontendOrigin
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
@@ -63,4 +63,4 @@ app.use("/api/sales", saleRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-export { app };
+export { app, buildCorsOrigin };
