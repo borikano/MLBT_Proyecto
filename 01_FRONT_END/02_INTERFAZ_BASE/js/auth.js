@@ -2,6 +2,7 @@ import session from "./session.js";
 import { getUsers, saveUsers } from "./services/user-data-service.js";
 import { sanitizeInput } from "./validators.js";
 
+// Credenciales controladas para evidencia local. No son autenticacion productiva.
 const ADMIN_CREDENTIALS = Object.freeze({
 	email: "admin@mlbt.com",
 	password: "admin123",
