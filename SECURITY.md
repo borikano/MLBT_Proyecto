@@ -1,6 +1,6 @@
 # Política de seguridad
 
-Este repositorio corresponde al proyecto formativo MLBT - María La Bonita Taquería. El código, la documentación y los datos incluidos se publican con fines académicos, de revisión técnica y de portafolio.
+Este repositorio corresponde al proyecto MLBT - María La Bonita Taquería. El código, la documentación y los datos incluidos se mantienen para revisión técnica, operación controlada, demostración y portafolio profesional.
 
 ## Alcance
 
@@ -8,8 +8,8 @@ Este repositorio corresponde al proyecto formativo MLBT - María La Bonita Taque
 |---|---|
 | Frontend React | Incluido en revisión de seguridad básica. |
 | API Node | Incluida en revisión de configuración, autenticación y validación de entradas. |
-| Spring Web | Incluido como módulo académico Java. |
-| Java Web JSP/Servlets | Incluido como módulo académico complementario. |
+| Spring Web | Incluido como módulo Java de referencia y validación. |
+| Java Web JSP/Servlets | Incluido como módulo Java Web complementario. |
 | Credenciales de prueba documentadas | Datos ficticios y controlados, no secretos reales. |
 
 ## Reporte de vulnerabilidades

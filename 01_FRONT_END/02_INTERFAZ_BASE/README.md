@@ -1,23 +1,23 @@
 # Interfaz base HTML, CSS y JavaScript - MLBT
 
-Este módulo conserva la interfaz base del proyecto MLBT construida con HTML, CSS y JavaScript. Su propósito principal es servir como evidencia académica e histórica de la evolución del sistema antes de la interfaz React.
+Este módulo conserva la interfaz base del proyecto MLBT construida con HTML, CSS y JavaScript. Su propósito principal es servir como referencia histórica de la evolución del sistema antes de la interfaz React.
 
 ## Alcance
 
 | Elemento | Estado |
 |---|---|
-| Uso principal | Evidencia académica y referencia funcional. |
+| Uso principal | Referencia histórica y funcional. |
 | Autenticación | Simulada en cliente mediante datos controlados de prueba. |
 | Persistencia | `localStorage` del navegador. |
 | Producción | No debe usarse como mecanismo productivo de autenticación. |
 
 ## Credenciales controladas de prueba
 
-La interfaz base incluye credenciales ficticias para permitir navegación y validación de formularios durante la revisión académica:
+La interfaz base incluye credenciales ficticias para permitir navegación y validación controlada de formularios:
 
 | Usuario | Contraseña | Alcance |
 |---|---|---|
-| admin@mlbt.com | admin123 | Dato controlado de prueba para evidencia local. |
+| admin@mlbt.com | admin123 | Dato ficticio controlado para validación local. |
 
 Estas credenciales no representan secretos reales, no deben reutilizarse en producción y no sustituyen la autenticación JWT implementada en la API Node y la interfaz React.
 

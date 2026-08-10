@@ -1,16 +1,16 @@
 # MLBT Java Web
 
-Módulo complementario Java Web para la evidencia GA7_220501096_AA3_EV01.
+Módulo complementario Java Web del proyecto MLBT.
 
 ## Propósito
 
-Este módulo permite evidenciar una estructura web basada en Java, JSP y Servlets, incluyendo formularios con métodos GET y POST.
+Este módulo implementa una estructura web basada en Java, JSP y Servlets, incluyendo formularios con métodos GET y POST.
 
 ## Alcance
 
 | Elemento | Estado |
 |---|---|
-| Uso principal | Evidencia académica complementaria. |
+| Uso principal | Módulo complementario de referencia. |
 | Autenticación | Simulada mediante credenciales controladas de prueba. |
 | Persistencia | Repositorio temporal en memoria. |
 | Producción | No debe usarse como autenticación productiva. |
@@ -19,9 +19,9 @@ Este módulo permite evidenciar una estructura web basada en Java, JSP y Servlet
 
 | Usuario | Contraseña | Alcance |
 |---|---|---|
-| admin@mlbt.com | admin123 | Dato controlado de prueba para evidencia local. |
+| admin@mlbt.com | admin123 | Dato ficticio controlado para validación local. |
 
-Estas credenciales son ficticias y se conservan para reproducir la evidencia académica. No representan secretos reales.
+Estas credenciales son ficticias y se conservan para reproducir pruebas locales controladas. No representan secretos reales.
 
 ## Separación técnica
 

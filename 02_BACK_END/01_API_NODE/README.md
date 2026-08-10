@@ -1,12 +1,12 @@
-# API MLBT - GA7_220501096_AA5_EV03
+# API MLBT
 
 ## Proyecto
 
 MLBT Project - María La Bonita Taquería.
 
-## Evidencia
+## Descripción
 
-GA7-220501096-AA5-EV03 - Diseño y Desarrollo de servicios web - proyecto.
+API REST del proyecto MLBT para autenticación, usuarios, inventario y ventas.
 
 ## Propósito
 
@@ -22,7 +22,7 @@ Este módulo contiene los servicios REST de MLBT para autenticación, usuarios, 
 - JSON Web Token.
 - Zod.
 - pnpm.
-- Postman para la evidencia EV04.
+- Colección Postman para validación reproducible de endpoints.
 
 ## URL pública
 
@@ -136,17 +136,17 @@ Para cargar datos iniciales:
 | Datos iniciales EV03 | [docs/DATOS_INICIALES_EV03.md](docs/DATOS_INICIALES_EV03.md) |
 | Validación de endpoints EV03 | [docs/VALIDACION_ENDPOINTS_EV03.md](docs/VALIDACION_ENDPOINTS_EV03.md) |
 | Guía Postman EV04 | [docs/POSTMAN_EV04.md](docs/POSTMAN_EV04.md) |
-| Separación de evidencias AA5 | [docs/SEPARACION_EVIDENCIAS_AA5.md](docs/SEPARACION_EVIDENCIAS_AA5.md) |
+| Organización histórica de documentación | [docs/SEPARACION_EVIDENCIAS_AA5.md](docs/SEPARACION_EVIDENCIAS_AA5.md) |
 
-## Evidencia EV04 - Pruebas Postman
+## Pruebas Postman
 
-La evidencia GA7-220501096-AA5-EV04 valida esta API mediante una colección Postman.
+La API puede validarse mediante la colección Postman incluida en el repositorio.
 
 Archivo de colección:
 
 - [postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json](postman/GA7_220501096_AA5_EV04_MLBT_API.postman_collection.json)
 
-Capturas de evidencia:
+Capturas de validación:
 
 - [../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman](../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman)
 

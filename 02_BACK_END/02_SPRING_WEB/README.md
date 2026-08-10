@@ -1,12 +1,12 @@
 # MLBT Spring Web
 
-Módulo principal Spring Boot para la evidencia GA7_220501096_AA3_EV01.
+Módulo Spring Boot del proyecto MLBT.
 
 ## Propósito
 
 Este módulo implementa una aplicación web Java usando Spring Boot, Spring MVC, Spring Data JPA, Hibernate, Thymeleaf y MySQL.
 
-Su objetivo es evidenciar la codificación de un módulo web funcional con navegación, persistencia y operaciones CRUD.
+Su objetivo es implementar un módulo web funcional con navegación, persistencia y operaciones CRUD.
 
 ## Framework aplicado
 
@@ -51,7 +51,7 @@ Usuario local: root
 
 Contraseña local: sin contraseña, según configuración local de XAMPP.
 
-Esta configuración corresponde al entorno local académico. No debe reutilizarse como configuración productiva.
+Esta configuración corresponde al entorno local de desarrollo. No debe reutilizarse como configuración productiva.
 
 ## Ejecución
 

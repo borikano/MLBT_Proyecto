@@ -1,13 +1,13 @@
 # Seguridad, pruebas y calidad del proyecto MLBT
 
-Este documento define los criterios de calidad, seguridad, pruebas y accesibilidad que deben guiar la evolución del proyecto MLBT. Su propósito es mantener una base técnica coherente, auditable y preparada para revisión académica y endurecimiento progresivo.
+Este documento define los criterios de calidad, seguridad, pruebas y accesibilidad que deben guiar la evolución del proyecto MLBT. Su propósito es mantener una base técnica coherente, auditable y preparada para revisión técnica, mantenimiento y endurecimiento progresivo.
 
 ## Alcance
 
 | Bloque | Alcance de revisión |
 |---|---|
 | Front End React | Pruebas unitarias, pruebas de componentes, accesibilidad, rutas protegidas y uso consistente de shadcn/ui. |
-| Front End base | Revisión de credenciales controladas, almacenamiento local, formularios y documentación de alcance académico. |
+| Front End base | Revisión de credenciales controladas, almacenamiento local, formularios y documentación de alcance y uso controlado. |
 | API Node | Validación de entrada, autenticación, autorización, CORS, variables de entorno, errores y pruebas automatizadas. |
 | Spring Web | Configuración por ambiente, pruebas reales, validación y separación de responsabilidades. |
 | Java Web | Credenciales controladas, formularios, sesiones, servicios y documentación de alcance. |
@@ -84,7 +84,7 @@ Este documento define los criterios de calidad, seguridad, pruebas y accesibilid
 - Deben identificarse como datos ficticios o controlados.
 - No deben confundirse con secretos reales de producción.
 - No deben quedar como valor por defecto inseguro en entornos productivos.
-- Si aparecen en módulos históricos, el README debe aclarar que pertenecen a evidencia académica o demo controlada.
+- Si aparecen en módulos históricos, el README debe aclarar que pertenecen a datos ficticios de prueba o a una demo controlada.
 
 ## Matriz inicial de riesgos
 

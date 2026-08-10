@@ -1,8 +1,8 @@
 # Interfaz React AP07 - MLBT
 
-## Evidencia
+## Referencia histórica
 
-GA7-220501096-AA4-EV03 - Componente front-end del proyecto formativo y proyectos de clase.
+El identificador histórico asociado al módulo es GA7-220501096-AA4-EV03.
 
 ## Proyecto
 
@@ -10,7 +10,7 @@ MLBT - María La Bonita Taquería.
 
 ## Objetivo
 
-Documentar la implementación del componente de interfaz React desarrollado para el proyecto formativo MLBT, dejando trazabilidad técnica para revisión, ejecución local y entrega de evidencia.
+Documentar la implementación del componente de interfaz React de MLBT, manteniendo trazabilidad técnica para revisión, ejecución local, mantenimiento y validación.
 
 ## Alcance implementado
 

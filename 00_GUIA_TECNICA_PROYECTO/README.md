@@ -10,7 +10,7 @@
 | [02_ESTRUCTURA_DEL_PROYECTO](02_ESTRUCTURA_DEL_PROYECTO.md) | Organización general del repositorio. |
 | [03_COMANDOS_DE_EJECUCION](03_COMANDOS_DE_EJECUCION.md) | Comandos principales de ejecución y validación. |
 | [04_CODIGO_FUENTE_RELEVANTE](04_CODIGO_FUENTE_RELEVANTE.md) | Archivos y módulos relevantes. |
-| [05_EVIDENCIAS_Y_PRUEBAS](05_EVIDENCIAS_Y_PRUEBAS.md) | Relación con evidencias y pruebas. |
+| [05_EVIDENCIAS_Y_PRUEBAS](05_EVIDENCIAS_Y_PRUEBAS.md) | Relación con validaciones y pruebas. |
 | [06_TRAZABILIDAD_GIT](06_TRAZABILIDAD_GIT.md) | Trazabilidad de ramas, commits y flujo Git. |
 | [07_CIERRE_TECNICO](07_CIERRE_TECNICO.md) | Estado técnico de cierre. |
 | [08_FRONTEND_REACT_AP07](08_FRONTEND_REACT_AP07.md) | Descripción del frontend React. |
@@ -19,7 +19,7 @@
 
 - Esta carpeta funciona como guía técnica pública.
 - No contiene credenciales privadas ni archivos pesados.
-- Las evidencias oficiales mantienen sus códigos originales.
+- Los registros históricos mantienen sus identificadores originales para preservar trazabilidad.
 
 <!-- DOC-03-FIN -->
 
@@ -28,7 +28,7 @@ Repositorio: [MLBT_Proyecto](../README.md)
 
 Proyecto web MLBT - María La Bonita Taquería.
 
-Esta guía funciona como panel principal para revisar código fuente, evidencias, pruebas, API, interfaz React, documentación técnica y estado general del proyecto.
+Esta guía funciona como panel principal para revisar código fuente, validaciones, pruebas, API, interfaz React, documentación técnica y estado general del proyecto.
 
 ---
 
@@ -43,25 +43,25 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | API MLBT | [../02_BACK_END/01_API_NODE](../02_BACK_END/01_API_NODE) | Disponible |
 | Documentación API | [../02_BACK_END/01_API_NODE/docs](../02_BACK_END/01_API_NODE/docs) | Disponible |
 | Colección Postman | [../02_BACK_END/01_API_NODE/postman](../02_BACK_END/01_API_NODE/postman) | Disponible |
-| Evidencias generales | [../03_DOCS/evidencias](../03_DOCS/evidencias) | Disponible |
-| Licencia | [../LICENSE.md](../LICENSE.md) | Disponible |
+| Historial técnico | [../03_DOCS/evidencias](../03_DOCS/evidencias) | Disponible |
+| Licencia MIT | [../LICENSE.md](../LICENSE.md) | Disponible |
 
 ---
 
-## Línea de tiempo de evidencias
+## Historial de evolución
 
-| Orden | Fecha Git | Evidencia | Módulo o entrega | Ruta de revisión |
+| Orden | Fecha Git | Hito técnico | Componente | Ruta de revisión |
 |---|---|---|---|---|
-| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Spring Web / Java Web | [../03_DOCS/evidencias/GA7_220501096_AA3_EV01](../03_DOCS/evidencias/GA7_220501096_AA3_EV01) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | API MLBT | [../02_BACK_END/01_API_NODE/docs](../02_BACK_END/01_API_NODE/docs) y [../03_DOCS/evidencias/GA7_220501096_AA5_EV03](../03_DOCS/evidencias/GA7_220501096_AA5_EV03) |
-| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | API MLBT / Postman | [../02_BACK_END/01_API_NODE/postman](../02_BACK_END/01_API_NODE/postman) y [../03_DOCS/evidencias/GA7_220501096_AA5_EV04](../03_DOCS/evidencias/GA7_220501096_AA5_EV04) |
-| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React | [../01_FRONT_END/01_REACT_AP07](../01_FRONT_END/01_REACT_AP07) y [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md) |
-| 05 | 2026-07-08 | GA8-220501096-AA1-EV01 | Integración de módulos | [../03_DOCS/evidencias/GA8_220501096_AA1_EV01](../03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
-| 06 | 2026-07-08 | GA8-220501096-AA1-EV02 | Módulos integrados con despliegue público | [../03_DOCS/evidencias/GA8_220501096_AA1_EV02](../03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+| 01 | 2026-05-24 | Implementación web Java | Spring Web / Java Web | [Historial técnico](../03_DOCS/evidencias/GA7_220501096_AA3_EV01) |
+| 02 | 2026-05-29 | Implementación de servicios REST | API MLBT | [Documentación API](../02_BACK_END/01_API_NODE/docs) |
+| 03 | 2026-05-29 | Validación de servicios HTTP | API MLBT / Postman | [Colección Postman](../02_BACK_END/01_API_NODE/postman) |
+| 04 | 2026-06-18 | Interfaz administrativa | Frontend React | [Frontend React](../01_FRONT_END/01_REACT_AP07) |
+| 05 | 2026-07-08 | Integración funcional | React / API / base de datos | [Historial técnico](../03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
+| 06 | 2026-07-08 | Despliegue público integrado | Frontend / Backend | [Historial técnico](../03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
 
 ---
 
-## URLs públicas GA8
+## URLs públicas
 
 | Servicio | URL |
 |---|---|
@@ -105,19 +105,14 @@ Esta guía funciona como panel principal para revisar código fuente, evidencias
 | Interfaz React AP07 visible | Completado |
 | README del módulo React actualizado | Completado |
 | Guía técnica AP07 enlazada | Completado |
-| Evidencias enlazadas | Completado |
-| Licencia documentada | Completado |
+| Historial técnico enlazado | Completado |
+| Licencia MIT documentada | Completado |
 | Repositorio listo para revisión | Completado |
-| Despliegue público GA8 EV02 | Completado |
+| Despliegue público integrado | Completado |
 
-<!-- GA9_GUIA_TECNICA_INICIO -->
-## Actualizacion GA9
+## Pruebas de software
 
-La guia tecnica incorpora el ciclo GA9 de pruebas de software con resultados consolidados y enlaces internos actualizados.
+La guía técnica incorpora resultados consolidados, comandos reproducibles y enlaces internos para la validación de los distintos módulos.
 
-| Documento | Descripcion |
-|---|---|
-| [05_EVIDENCIAS_Y_PRUEBAS.md](05_EVIDENCIAS_Y_PRUEBAS.md) | Estado general de evidencias y pruebas. |
-| [GA9 pruebas MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Documentacion publica del ciclo GA9. |
-<!-- GA9_GUIA_TECNICA_FIN -->
+El historial detallado se conserva en [documentación de pruebas](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
 

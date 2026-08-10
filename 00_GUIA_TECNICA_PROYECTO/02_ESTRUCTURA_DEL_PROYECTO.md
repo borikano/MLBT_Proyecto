@@ -5,7 +5,7 @@
 | Ruta | Propósito |
 |---|---|
 | README.md | Presentación principal del repositorio. |
-| LICENSE.md | Condiciones de uso académico y técnico. |
+| LICENSE.md | Licencia MIT aplicable al código propio del proyecto. |
 | 00_GUIA_TECNICA_PROYECTO | Entrada técnica organizada para lectura y revisión. |
 | 01_FRONT_END | Bloque de interfaces del proyecto. |
 | 01_FRONT_END/01_REACT_AP07 | Interfaz React del proyecto MLBT para AP07. |

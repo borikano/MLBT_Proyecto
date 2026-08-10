@@ -4,33 +4,33 @@
 
 | Sección | Descripción |
 |---|---|
-| [Guía técnica](00_GUIA_TECNICA_PROYECTO/README.md) | Resumen técnico, estructura, ejecución, evidencias y trazabilidad. |
+| [Guía técnica](00_GUIA_TECNICA_PROYECTO/README.md) | Resumen técnico, estructura, ejecución, validaciones y trazabilidad. |
 | [Frontend React](01_FRONT_END/01_REACT_AP07/README.md) | Interfaz web del proyecto MLBT. |
 | [API Node](02_BACK_END/01_API_NODE/README.md) | Backend principal, endpoints y soporte de integración. |
 | [Documentación](03_DOCS/README.md) | Documentación pública del proyecto. |
-| [Evidencias](03_DOCS/evidencias/README.md) | Índice maestro de evidencias GA7, GA8 y GA9. |
+| [Historial técnico](03_DOCS/evidencias/README.md) | Registros históricos y trazabilidad de validaciones anteriores. |
 
 ## Estado documental
 
-- Los nombres oficiales de evidencias GA, AA y EV se conservan sin cambios.
-- Los entregables finales no se versionan en este repositorio.
+- Los registros históricos se conservan sin alterar su trazabilidad original.
+- Los artefactos externos y archivos binarios de entrega no forman parte del código versionado.
 - La documentación pública resume la trazabilidad técnica del proyecto MLBT.
 
 <!-- DOC-03-FIN -->
 
-<!-- LICENCIA_USO_ACADEMICO_INICIO -->
+<!-- LICENCIA_USO_INICIO -->
 
-## Licencia y uso académico
+## Licencia
 
-Este repositorio se publica con fines académicos, de revisión técnica y de portafolio.
+MLBT se distribuye bajo la [MIT License](LICENSE.md).
 
-La licencia y condiciones de uso están documentadas en:
+El texto completo de la licencia está disponible en:
 
 - [LICENSE.md](LICENSE.md)
 
 Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
 
-<!-- LICENCIA_USO_ACADEMICO_FIN -->
+<!-- LICENCIA_USO_FIN -->
 
 # MLBT - María La Bonita Taquería
 
@@ -40,22 +40,22 @@ Los datos usados en pruebas son ficticios y deben mantenerse anonimizados.
 ![Calidad](https://img.shields.io/badge/calidad-ISO%2025010-informational)
 ![Dependabot](https://img.shields.io/badge/dependabot-controlado-success)
 
-Proyecto formativo web para la gestión administrativa de María La Bonita Taquería.
+Aplicación web para la gestión administrativa de María La Bonita Taquería.
 
 ## Cierre técnico validado
 
-| Área | Estado | Evidencia |
+| Área | Estado | Validación |
 |---|---|---|
 | Frontend React | Validado | Pruebas Vitest, Testing Library, lint y build de producción. |
 | API Node | Validada | Pruebas unitarias, pruebas HTTP, check de configuración y endpoint público. |
 | Spring Web | Validado | Pruebas Maven sobre servicio con comportamiento real. |
-| Java Web | Validado | Pruebas JUnit del servicio de autenticación académico. |
+| Java Web | Validado | Pruebas JUnit del servicio de autenticación del módulo Java Web. |
 | CI GitHub Actions | Activo | Workflow `CI` aprobado para React, API Node y módulos Maven. |
 | Dependabot | Controlado | Actualizaciones automáticas activas con bloqueo de upgrades mayores incompatibles de Prisma. |
 | Seguridad documental | Consolidada | `SECURITY.md`, criterios OWASP/ISO/WCAG y manejo de secretos documentados. |
 | Producción | Operativa | Health público y login controlado validados contra API publicada. |
 
-El repositorio queda preparado para revisión académica, portafolio técnico y mantenimiento controlado. Los secretos reales no se versionan; la conexión productiva se administra mediante variables de entorno en Render y Aiven.
+El repositorio queda preparado para revisión técnica, portafolio profesional y mantenimiento controlado. Los secretos reales no se versionan; la conexión productiva se administra mediante variables de entorno en Render y Aiven.
 
 La validación pública de cierre confirmó respuesta satisfactoria de `https://mlbt-proyecto.onrender.com/api/health` y autenticación del usuario controlado `adminapp`. Esto indica que la API publicada puede operar con la base de datos productiva configurada en Aiven mientras las variables de Render y la instancia de base de datos permanezcan activas.
 
@@ -65,7 +65,7 @@ La validación pública de cierre confirmó respuesta satisfactoria de `https://
 > [!NOTE]
 > Vite puede advertir que el bundle principal supera 500 KB después de minificación. La compilación es satisfactoria y la advertencia se clasifica como mejora futura de optimización mediante división de código.
 
-## URLs públicas de la entrega GA8
+## URLs públicas
 
 | Servicio | URL | Estado |
 |---|---|---|
@@ -84,22 +84,22 @@ No se publica la contraseña, la cadena completa de conexión ni variables de en
 |---|---|
 | Guía técnica del proyecto | [00_GUIA_TECNICA_PROYECTO/README.md](00_GUIA_TECNICA_PROYECTO/README.md) |
 | Documentación general | [03_DOCS/README.md](03_DOCS/README.md) |
-| Evidencias | [03_DOCS/evidencias/README.md](03_DOCS/evidencias/README.md) |
+| Historial técnico | [03_DOCS/evidencias/README.md](03_DOCS/evidencias/README.md) |
 | Interfaz React AP07 | [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) |
 | README de la interfaz React | [01_FRONT_END/01_REACT_AP07/README.md](01_FRONT_END/01_REACT_AP07/README.md) |
 | API MLBT | [02_BACK_END/01_API_NODE](02_BACK_END/01_API_NODE) |
 | Documentación API | [02_BACK_END/01_API_NODE/docs](02_BACK_END/01_API_NODE/docs) |
 
-## Línea de tiempo de evidencias
+## Historial de evolución
 
-| Orden | Fecha Git | Evidencia | Entrega | Ruta |
+| Orden | Fecha Git | Hito técnico | Componente | Ruta |
 |---|---|---|---|---|
-| 01 | 2026-05-24 | GA7-220501096-AA3-EV01 | Aplicación web Java / Spring | [03_DOCS/evidencias/GA7_220501096_AA3_EV01](03_DOCS/evidencias/GA7_220501096_AA3_EV01/README.md) |
-| 02 | 2026-05-29 | GA7-220501096-AA5-EV03 | Servicios REST MLBT | [02_BACK_END/01_API_NODE/docs](02_BACK_END/01_API_NODE/docs) y [03_DOCS/evidencias/GA7_220501096_AA5_EV03](03_DOCS/evidencias/GA7_220501096_AA5_EV03/README.md) |
-| 03 | 2026-05-29 | GA7-220501096-AA5-EV04 | Pruebas de API con Postman | [02_BACK_END/01_API_NODE/postman](02_BACK_END/01_API_NODE/postman) y [03_DOCS/evidencias/GA7_220501096_AA5_EV04](03_DOCS/evidencias/GA7_220501096_AA5_EV04/README.md) |
-| 04 | 2026-06-18 | GA7-220501096-AA4-EV03 | Interfaz React del proyecto formativo | [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) y [00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md](00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) |
-| 05 | 2026-07-08 | GA8-220501096-AA1-EV01 | Integración funcional de módulos | [03_DOCS/evidencias/GA8_220501096_AA1_EV01](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
-| 06 | 2026-07-08 | GA8-220501096-AA1-EV02 | Módulos integrados con despliegue público | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+| 01 | 2026-05-24 | Implementación web Java | Spring Web / Java Web | [Historial técnico](03_DOCS/evidencias/GA7_220501096_AA3_EV01/README.md) |
+| 02 | 2026-05-29 | Implementación de servicios REST | API Node | [Documentación API](02_BACK_END/01_API_NODE/docs) |
+| 03 | 2026-05-29 | Validación de servicios HTTP | API Node / Postman | [Colección Postman](02_BACK_END/01_API_NODE/postman) |
+| 04 | 2026-06-18 | Implementación de interfaz administrativa | Frontend React | [Frontend React](01_FRONT_END/01_REACT_AP07) |
+| 05 | 2026-07-08 | Integración funcional | React / API / base de datos | [Historial técnico](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
+| 06 | 2026-07-08 | Despliegue público integrado | Frontend / Backend | [Historial técnico](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
 
 
 ## Estructura principal
@@ -107,12 +107,12 @@ No se publica la contraseña, la cadena completa de conexión ni variables de en
 | Ruta | Propósito |
 |---|---|
 | [00_GUIA_TECNICA_PROYECTO](00_GUIA_TECNICA_PROYECTO) | Panel técnico de revisión del proyecto. |
-| [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) | Interfaz React de la evidencia AP07. |
+| [01_FRONT_END/01_REACT_AP07](01_FRONT_END/01_REACT_AP07) | Interfaz administrativa React del proyecto. |
 | [01_FRONT_END/02_INTERFAZ_BASE](01_FRONT_END/02_INTERFAZ_BASE) | Interfaz base HTML, CSS y JavaScript del proyecto. |
 | [02_BACK_END/01_API_NODE](02_BACK_END/01_API_NODE) | API REST del proyecto MLBT. |
 | [02_BACK_END/02_SPRING_WEB](02_BACK_END/02_SPRING_WEB) | Módulo web Spring Boot. |
 | [02_BACK_END/03_JAVA_WEB](02_BACK_END/03_JAVA_WEB) | Módulo Java Web con JSP y Servlets. |
-| [03_DOCS](03_DOCS) | Documentación técnica, estándares, trazabilidad y evidencias. |
+| [03_DOCS](03_DOCS) | Documentación técnica, estándares, validaciones y trazabilidad. |
 
 ## Frontend React público
 
@@ -163,64 +163,21 @@ Comandos principales de validación local:
 | Frontend React | pnpm test:run, pnpm lint, pnpm build | Reglas de interfaz, rutas protegidas, componentes y compilación. |
 | API Node | pnpm test, pnpm check | Configuración segura, esquemas, middlewares y pruebas HTTP. |
 | Spring Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test | Pruebas de servicio con comportamiento real. |
-| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test | Pruebas JUnit del servicio de autenticación académico. |
+| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test | Pruebas JUnit del servicio de autenticación del módulo Java Web. |
 
 Comandos de desarrollo del frontend:
 
     Set-Location ".\01_FRONT_END\01_REACT_AP07"
     pnpm dev
 
-<!-- GA8_EVIDENCIAS_INICIO -->
+## Integración y despliegue
 
-## Evidencias GA8 - Integración y módulos integrados
+La integración entre el Frontend React, la API Node y la base de datos ha sido validada tanto localmente como mediante los servicios publicados.
 
-| Evidencia | Descripción | Ruta |
-|---|---|---|
-| GA8-220501096-AA1-EV01 | Integración funcional entre Frontend React, API Node y base de datos MySQL/MariaDB. | [03_DOCS/evidencias/GA8_220501096_AA1_EV01](03_DOCS/evidencias/GA8_220501096_AA1_EV01/README.md) |
-| GA8-220501096-AA1-EV02 | Módulos integrados, entradas/salidas, pruebas y URLs públicas de ejecución. | [03_DOCS/evidencias/GA8_220501096_AA1_EV02](03_DOCS/evidencias/GA8_220501096_AA1_EV02/README.md) |
+El historial detallado de integración y despliegue permanece disponible en [03_DOCS/evidencias](03_DOCS/evidencias/README.md).
 
-<!-- GA8_EVIDENCIAS_FIN -->
+## Pruebas de software
 
-<!-- GA9_PRUEBAS_INICIO -->
-## GA9 - Pruebas de software
+MLBT incorpora pruebas automatizadas y validaciones reproducibles sobre el Frontend React, la API Node y los módulos Java.
 
-| Evidencia técnica | Descripción | Ruta |
-| --- | --- | --- |
-| GA9-220501096-AA1-EV01 | Se incorporaron pruebas básicas automatizadas en el frontend React mediante Vitest. | [Frontend React](01_FRONT_END/01_REACT_AP07/README.md) |
-
-Validaciones técnicas registradas:
-
-- Cálculo del total de un pedido.
-- Disponibilidad del endpoint público /api/health.
-
-Comandos principales desde la raíz del repositorio:
-
-    Set-Location .\01_FRONT_END\01_REACT_AP07
-    pnpm test:run
-<!-- GA9_PRUEBAS_FIN -->
-
-<!-- GA9_PRUEBAS_MLBT_INICIO -->
-## Pruebas de software GA9
-
-El proyecto MLBT cuenta con documentación pública del ciclo GA9 de pruebas de software. Los entregables formales PDF, video y Excel se conservan fuera del repositorio; en GitHub se documentan comandos reproducibles, resultados consolidados y trazabilidad técnica.
-
-| Evidencia | Estado | Soporte público |
-|---|---|---|
-| GA9-220501096-AA1-EV01 | Completada | Pruebas Vitest y README frontend. |
-| GA9-220501096-AA1-EV02 | Completada | Plan de pruebas resumido en documentación GA9. |
-| GA9-220501096-AA2-EV01 | Completada | Casos y ambiente relacionados en trazabilidad GA9. |
-| GA9-220501096-AA3-EV01 | Completada | Ejecución documentada con pruebas automatizadas por módulo. |
-| GA9-220501096-AA3-EV02 | Completada | Reporte consolidado del plan de pruebas ejecutadas. |
-
-Documentación GA9: [03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
-
-Comando principal de pruebas:
-
-    cd 01_FRONT_END/01_REACT_AP07
-    pnpm test:run
-
-Endpoint público validado:
-
-    https://mlbt-proyecto.onrender.com/api/health
-<!-- GA9_PRUEBAS_MLBT_FIN -->
-
+Los comandos principales se documentan en la sección de validación automatizada y el historial detallado permanece disponible en [03_DOCS/evidencias](03_DOCS/evidencias/README.md).

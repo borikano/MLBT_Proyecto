@@ -72,7 +72,7 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 - Mantener CSS e imágenes en src/main/resources/static.
 - Documentar ejecución, compilación y base de datos en el README del módulo.
 - Evitar que las pruebas automatizadas sean únicamente afirmaciones triviales sin validar comportamiento.
-- Separar configuración local, académica y productiva cuando aplique.
+- Separar configuración local, de prueba y productiva cuando aplique.
 
 ## Estándares Java Web
 
@@ -95,7 +95,7 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 ## Estándares de Git
 
 - Arawkano representa la rama estable del proyecto.
-- principal representa integración y trabajo controlado.
+- Las ramas temporales de trabajo se crean cuando el alcance del cambio lo requiera y se integran en Arawkano únicamente después de su validación.
 - Todo cambio debe quedar probado, documentado y respaldado antes de llegar a la rama estable.
 - No usar push --force sobre ramas estables.
 - Los commits deben explicar nombre, asunto y motivo cuando el cambio sea relevante.
@@ -121,4 +121,4 @@ Cuando se haga un cambio relevante en el proyecto, se deben revisar:
 
 ## Criterio de continuidad
 
-La evolución del proyecto debe realizarse de forma incremental, manteniendo separación por tecnología, trazabilidad documental, validación funcional y claridad para revisión académica.
+La evolución del proyecto debe realizarse de forma incremental, manteniendo separación por tecnología, trazabilidad documental, validación funcional y claridad para revisión técnica y mantenimiento.

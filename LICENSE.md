@@ -1,38 +1,18 @@
-# Licencia y uso académico
+MIT License
 
-Este repositorio se publica con fines académicos, de revisión técnica y de portafolio.
+Copyright (c) 2026 Luis H. Echeverry O.
 
-## Uso permitido
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
 
-Se permite:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
 
-- Revisar el código fuente.
-- Ejecutar el proyecto en entorno local.
-- Analizar la estructura técnica.
-- Usar el repositorio como referencia académica citando al autor.
-- Revisar evidencias, documentación y pruebas asociadas a la entrega.
-
-## Restricciones
-
-No se autoriza:
-
-- Usar el proyecto como producto comercial sin autorización.
-- Presentar este trabajo como propio.
-- Reutilizar datos, evidencias o documentación sin atribución.
-- Publicar credenciales, datos personales o información sensible dentro del repositorio.
-
-## Datos de prueba
-
-Los usuarios, correos, contraseñas de prueba y registros documentados en este repositorio son ficticios y se usan únicamente para validación académica.
-
-Cuando se requieran correos de ejemplo, se debe usar el dominio `example.com`.
-
-## Estado de licencia abierta
-
-El repositorio queda disponible públicamente para revisión académica y técnica.
-
-La adopción de una licencia abierta estándar, como MIT o Apache-2.0, queda en estudio para una etapa posterior del portafolio, cuando el proyecto deje de ser una evidencia académica y pase a ser un componente reutilizable.
-
-## Autor
-
-Luis H. Echeverry O.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.

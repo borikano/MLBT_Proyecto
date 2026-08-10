@@ -1,12 +1,12 @@
 # Interfaz React - MLBT
 
-Módulo administrativo del proyecto formativo María La Bonita Taquería.
+Módulo administrativo de María La Bonita Taquería.
 
 Esta aplicación corresponde al frontend administrativo del proyecto MLBT. El login está integrado con la API Node pública mediante JWT y el resto de módulos conserva datos locales de apoyo para navegación, análisis y presentación funcional.
 
-## Evidencia relacionada
+## Referencia del módulo
 
-- GA7-220501096-AA4-EV03: Componente front-end del proyecto formativo y proyectos de clase.
+- Componente front-end administrativo del proyecto MLBT.
 
 ## Despliegue público
 
@@ -109,9 +109,9 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
   - Registrar movimiento
   - Tablas de inventario
 - Ventas
-  - Análisis de ventas
-  - Historial confirmado
   - Pedido actual
+  - Historial confirmado
+  - Análisis de ventas
 
 ## Archivos principales
 
@@ -123,13 +123,12 @@ Permite registrar ventas, validar existencias, seleccionar cliente, tipo de vent
 - src/routes/AppRouter.jsx
 - src/components/layout/AppSidebar.jsx
 - src/components/layout/AdminLayout.jsx
-- src/components/layout/AppSidebar.jsx
 - src/components/shared/DataTable.jsx
 - src/context/MlbtDataContext.jsx
 - src/lib/auth.js
 - src/data
 
-## Estado de entrega
+## Estado del módulo
 
 La interfaz React queda validada con revisión de código, compilación de producción y despliegue público en Vercel.
 
@@ -141,10 +140,10 @@ La interfaz React queda validada con revisión de código, compilación de produ
 | Integración pública | Login conectado a la API Node pública mediante JWT. |
 | Observación menor | Vite puede advertir un chunk mayor a 500 KB; no bloquea el despliegue y se deja como mejora futura de rendimiento. |
 
-<!-- GA9_PRUEBAS_FRONTEND_INICIO -->
-## Pruebas automatizadas y evidencias GA9
+<!-- PRUEBAS_FRONTEND_INICIO -->
+## Pruebas automatizadas
 
-Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el proyecto MLBT. El repositorio conserva el soporte público y reproducible; los entregables PDF, video y Excel permanecen fuera del versionamiento.
+El frontend incorpora pruebas automatizadas y documentación reproducible para validar comportamiento, rutas protegidas y componentes. Los artefactos externos no forman parte del código versionado.
 
 ### Archivos de pruebas
 
@@ -170,15 +169,15 @@ Para el ciclo GA9 se incorporaron y documentaron pruebas de software sobre el pr
 | CP-011 | Protección de rutas privadas | Aprobado |
 | CP-012 | Tabla compartida con búsqueda | Aprobado |
 
-### Evidencias GA9 asociadas
+### Resultados documentados
 
-| Evidencia | Estado |
+| Validación | Estado |
 |---|---|
-| GA9-220501096-AA1-EV01 | Taller y pruebas básicas completadas. |
-| GA9-220501096-AA1-EV02 | Plan de pruebas completado. |
-| GA9-220501096-AA2-EV01 | Casos y ambiente de pruebas completados. |
-| GA9-220501096-AA3-EV01 | Ejecución documentada con PDF y video. |
-| GA9-220501096-AA3-EV02 | Reporte final de pruebas ejecutadas. |
+| Pruebas básicas automatizadas | Completadas. |
+| Plan de pruebas | Completado. |
+| Casos y ambiente de pruebas | Completados. |
+| Ejecución documentada | Completada. |
+| Reporte consolidado | Completado. |
 
-Documentación consolidada: [GA9 pruebas MLBT](../../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
-<!-- GA9_PRUEBAS_FRONTEND_FIN -->
+Historial detallado de validaciones: [documentación de pruebas](../../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
+<!-- PRUEBAS_FRONTEND_FIN -->

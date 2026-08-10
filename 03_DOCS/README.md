@@ -6,7 +6,7 @@
 
 | Sección | Descripción |
 |---|---|
-| [Evidencias](evidencias/README.md) | Evidencias públicas GA7, GA8 y GA9. |
+| [Historial técnico](evidencias/README.md) | Registros históricos de validación y evolución. |
 | [Auditorías](auditorias/refactor-paginas-react/01_cierre_refactor_rutas_react.md) | Trazabilidad histórica de ajustes técnicos. |
 | [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios documentales y técnicos del proyecto. |
 | [Seguridad, pruebas y calidad](seguridad-pruebas-calidad.md) | Criterios ISO, OWASP, WCAG, QA y endurecimiento técnico. |
@@ -16,12 +16,12 @@
 
 - Esta documentación es pública y compatible con GitHub Markdown.
 - La organización visual avanzada se gestiona fuera del repositorio.
-- Los nombres oficiales de evidencias se conservan sin cambios.
+- Los registros históricos conservan sus identificadores originales para mantener trazabilidad.
 
 <!-- DOC-03-FIN -->
 
 
-Esta carpeta centraliza la documentación técnica, las evidencias formativas, los estándares del proyecto y los documentos de trazabilidad del repositorio MLBT.
+Esta carpeta centraliza la documentación técnica, los registros de validación, los estándares del proyecto y los documentos de trazabilidad del repositorio MLBT.
 
 ## Acceso rápido
 
@@ -29,7 +29,7 @@ Esta carpeta centraliza la documentación técnica, las evidencias formativas, l
 |---|---|
 | [Repositorio principal](../README.md) | Presentación general del proyecto MLBT. |
 | [Guía técnica](../00_GUIA_TECNICA_PROYECTO/README.md) | Panel técnico principal para revisión. |
-| [Evidencias](evidencias/README.md) | Índice de evidencias organizadas por código de entrega. |
+| [Historial técnico](evidencias/README.md) | Índice de registros históricos y validaciones anteriores. |
 | [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios de organización, estructura y documentación. |
 | [Seguridad, pruebas y calidad](seguridad-pruebas-calidad.md) | Lineamientos de calidad, seguridad, accesibilidad y pruebas. |
 | [Trazabilidad formularios HTTP JSP](trazabilidad-formularios-http-jsp.md) | Relación entre formularios, métodos HTTP y páginas JSP. |
@@ -46,34 +46,8 @@ Esta carpeta centraliza la documentación técnica, las evidencias formativas, l
 
 ## Criterio de organización
 
-La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentación técnica general se conserva en esta carpeta y las evidencias se agrupan en subcarpetas independientes para facilitar revisión, trazabilidad y crecimiento futuro.
+La carpeta 03_DOCS funciona como el punto documental del proyecto. La documentación técnica general se conserva en esta carpeta y los registros históricos se agrupan en subcarpetas independientes para facilitar revisión, trazabilidad y crecimiento futuro.
 
-<!-- GA8_DOCS_INICIO -->
+## Historial de validaciones
 
-## Evidencias GA8 recientes
-
-| Evidencia | Enlace | Estado |
-|---|---|---|
-| GA8-220501096-AA1-EV01 | [Integración de módulos componentes](evidencias/GA8_220501096_AA1_EV01/README.md) | Validada localmente con login React + API + JWT. |
-| GA8-220501096-AA1-EV02 | [Módulos integrados](evidencias/GA8_220501096_AA1_EV02/README.md) | Documentada con módulos, entradas/salidas, pruebas y URLs públicas. |
-
-## URLs públicas de referencia
-
-| Servicio | URL |
-|---|---|
-| Frontend React | https://mlbt-proyecto.vercel.app |
-| API Node | https://mlbt-proyecto.onrender.com |
-| Health API | https://mlbt-proyecto.onrender.com/api/health |
-
-<!-- GA8_DOCS_FIN -->
-
-<!-- GA9_DOCS_INICIO -->
-## Ciclo GA9 - pruebas de software
-
-| Evidencia | Documentacion publica | Estado |
-|---|---|---|
-| GA9-220501096-AA1 a AA3 | [GA9 pruebas MLBT](evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Completado |
-
-El repositorio documenta la trazabilidad publica del ciclo GA9 sin versionar PDFs, videos ni archivos Excel de entrega.
-<!-- GA9_DOCS_FIN -->
-
+Los registros anteriores de integración, pruebas y despliegue permanecen disponibles en [evidencias](evidencias/README.md) para conservar la trazabilidad técnica del proyecto.
