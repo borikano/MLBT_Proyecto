@@ -52,7 +52,7 @@ La evolución técnica del proyecto se apoya en los criterios documentados en [S
 | Front End React | pnpm test:run, pnpm lint, pnpm build |
 | API Node | pnpm test, pnpm check |
 | Spring Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test |
-| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test |
+| Java Web | .\02_BACK_END\03_JAVA_WEB\test.cmd |
 
 <!-- HISTORIAL_PRUEBAS_INICIO -->
 ## Historial de pruebas de software

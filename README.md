@@ -163,7 +163,7 @@ Comandos principales de validación local:
 | Frontend React | pnpm test:run, pnpm lint, pnpm build | Reglas de interfaz, rutas protegidas, componentes y compilación. |
 | API Node | pnpm test, pnpm check | Configuración segura, esquemas, middlewares y pruebas HTTP. |
 | Spring Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\02_SPRING_WEB\pom.xml test | Pruebas de servicio con comportamiento real. |
-| Java Web | .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test | Pruebas JUnit del servicio de autenticación del módulo Java Web. |
+| Java Web | .\02_BACK_END\03_JAVA_WEB\test.cmd | Pruebas JUnit del servicio de autenticación del módulo Java Web. |
 
 Comandos de desarrollo del frontend:
 

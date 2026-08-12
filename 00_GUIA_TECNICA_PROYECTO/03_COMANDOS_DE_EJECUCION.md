@@ -65,8 +65,13 @@ Validación:
 
 Desde la raíz del repositorio:
 
-    .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
+    .\02_BACK_END\03_JAVA_WEB\test.cmd
 
 Compilación:
 
+    .\02_BACK_END\03_JAVA_WEB\package.cmd
+
+Equivalente explícito del wrapper compartido:
+
+    .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
     .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml clean package

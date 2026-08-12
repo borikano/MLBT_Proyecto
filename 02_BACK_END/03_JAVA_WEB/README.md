@@ -49,20 +49,34 @@ Estas credenciales son ficticias y se conservan para reproducir pruebas locales 
 
 ## Pruebas
 
+Desde la raíz del repositorio, el procedimiento canónico encapsula el Maven Wrapper de Spring Web:
+
 ```powershell
-mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
+.\02_BACK_END\03_JAVA_WEB\test.cmd
 ```
 
-Si Maven no está instalado globalmente, desde la raíz del repositorio puede usarse el Maven Wrapper disponible en el módulo Spring Web:
+Equivalente explícito (mismo resultado):
 
 ```powershell
 .\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
 ```
 
+Si Maven está instalado globalmente, también puede usarse:
+
+```powershell
+mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
+```
+
 ## Compilación
 
 ```powershell
-mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml clean package
+.\02_BACK_END\03_JAVA_WEB\package.cmd
+```
+
+Equivalente explícito:
+
+```powershell
+.\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml clean package
 ```
 
 ## Artefacto esperado
