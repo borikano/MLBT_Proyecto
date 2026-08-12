@@ -43,7 +43,7 @@ Estas credenciales son solo para entorno local de desarrollo.
 
 | Usuario | Contraseña | Rol |
 |---|---|---|
-| adminapp | AdminApp123* | ADMIN_APP |
+| adminapp | [REDACTED - TEST DATA] | ADMIN_APP |
 | admintienda | AdminTienda123* | ADMIN_TIENDA |
 | mesero | Mesero123* | MESERO |
 | cocina | Cocina123* | COCINA |

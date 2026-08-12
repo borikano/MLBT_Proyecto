@@ -35,7 +35,7 @@ node .\src\server.js
 | Campo | Valor |
 |---|---|
 | Usuario | adminapp |
-| Contraseña | AdminApp123* |
+| Contraseña | [REDACTED - TEST DATA] |
 | Rol | ADMIN_APP |
 
 ## Pruebas planeadas

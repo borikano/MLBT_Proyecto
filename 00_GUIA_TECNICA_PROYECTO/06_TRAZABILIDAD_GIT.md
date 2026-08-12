@@ -1,32 +1,42 @@
-# Trazabilidad Git
+# Historial y trazabilidad Git
 
-## Rama estable
+## Rama principal
 
-    Arawkano
+`Arawkano`
 
-## Cambios relevantes
+## Commits relevantes del producto
 
-| Evidencia o módulo | Referencia Git | Propósito |
+| Área | Referencia | Descripción |
 |---|---|---|
-| AA3 EV01 | Merge pull request 4 | Cierre final de entrega GA7 AA3 EV01. |
-| AA4 EV03 | Commits de interfaz React | Implementación de aplicación web de una sola página con ReactJS. |
-| AA5 EV03 | Merge pull request 5 | API MLBT con Prisma, datos iniciales y rutas HTTP. |
-| AA5 EV04 | Merge pull request 6 | Evidencias Postman EV04 API MLBT. |
+| Frontend | `9d5c9f4` | Lazy loading por rutas; optimización de bundle |
+| Java Web | `41bca42` | Scripts `test.cmd` / `package.cmd` |
+| Dependabot | `ec8cb04` | Agrupación de actualizaciones rutinarias |
+| Documentación | `541d281`, `7603ecd` | Alineación documental y cierre técnico |
 
-## Criterio
+## Mejoras técnicas recientes
 
-Cada evidencia debe conservar trazabilidad mediante commits claros y ramas de trabajo cuando aplique.
-
-<!-- GA9_TRAZABILIDAD_INICIO -->
-## Actualizacion GA9 - trazabilidad de pruebas
-
-| Evidencia | Rama / soporte | Resultado |
+| Mejora | Commit | Resultado |
 |---|---|---|
-| GA9 AA1 EV01 | feature/ga9-aa3-ejecucion-reporte-pruebas / frontend React | Pruebas basicas Vitest y documentacion completadas. |
-| GA9 AA1 EV02 | Entregable externo + documentacion publica | Plan de pruebas completado. |
-| GA9 AA2 EV01 | Entregable externo + documentacion publica | Casos y ambiente de pruebas completados. |
-| GA9 AA3 EV01 | Entregable externo + documentacion publica | 10 casos ejecutados y aprobados, con PDF y video. |
-| GA9 AA3 EV02 | Entregable externo + documentacion publica | Reporte final de pruebas ejecutadas completado. |
+| Optimización bundle frontend | `9d5c9f4` | Entry 256.26 kB; warning >500 kB resuelto |
+| Reproducibilidad Java Web | `41bca42` | Procedimiento local estandarizado |
 
-Documentacion publica: [../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md).
-<!-- GA9_TRAZABILIDAD_FIN -->
+## Control de cambios
+
+- Commits descriptivos por área (`fix`, `chore`, `docs`)
+- CI obligatorio en push y pull request
+- Dependabot con bloqueo de majors incompatibles de Prisma
+
+---
+
+## Archivo histórico de trazabilidad
+
+Los registros siguientes conservan identificadores originales para referencia histórica.
+
+| Referencia histórica | Soporte | Resultado |
+|---|---|---|
+| GA9 — pruebas documentadas | [GA9 pruebas MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT) | Ciclo de pruebas completado |
+| GA7 AA3 EV01 | Merge PR #4 | Módulos web Java |
+| GA7 AA5 EV03 | Merge PR #5 | API con Prisma |
+| GA7 AA5 EV04 | Merge PR #6 | Validación Postman |
+
+Cada registro histórico mantiene trazabilidad mediante commits y ramas de trabajo documentadas en su carpeta correspondiente.

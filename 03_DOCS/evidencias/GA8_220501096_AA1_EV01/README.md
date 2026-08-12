@@ -47,7 +47,7 @@ Evidenciar la integración funcional entre los módulos principales del sistema:
 | Campo | Valor |
 |---|---|
 | Usuario | adminapp |
-| Contraseña | AdminApp123* |
+| Contraseña | [REDACTED - TEST DATA] |
 | Rol | ADMIN_APP |
 
 ## Resultado

@@ -4,7 +4,9 @@
 
 Ubicación:
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
+```powershell
+Set-Location ".\01_FRONT_END\01_REACT_AP07"
+```
 
 Instalación:
 
@@ -28,7 +30,9 @@ Validación:
 
 Ubicación:
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\02_BACK_END\01_API_NODE"
+```powershell
+Set-Location ".\02_BACK_END\01_API_NODE"
+```
 
 Instalación:
 

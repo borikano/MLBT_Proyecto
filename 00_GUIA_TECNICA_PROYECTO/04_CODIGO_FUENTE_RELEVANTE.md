@@ -4,7 +4,8 @@
 
 | Ruta | Propósito |
 |---|---|
-| 01_FRONT_END/01_REACT_AP07/src/pages/Login.jsx | Inicio de sesión de prueba. |
+| 01_FRONT_END/01_REACT_AP07/src/routes/AppRouter.jsx | Enrutamiento con React.lazy y Suspense (H-001). |
+| 01_FRONT_END/01_REACT_AP07/src/pages/Login.jsx | Inicio de sesión integrado con API Node. |
 | 01_FRONT_END/01_REACT_AP07/src/pages/Dashboard.jsx | Panel principal con calendario de análisis. |
 | 01_FRONT_END/01_REACT_AP07/src/pages/usuarios/ | Paginas internas de resumen, creacion y listado de usuarios. |
 | 01_FRONT_END/01_REACT_AP07/src/pages/inventario/ | Paginas internas de resumen, registro, movimientos y tablas de inventario. |
@@ -40,4 +41,5 @@
 | Ruta | Propósito |
 |---|---|
 | 02_BACK_END/02_SPRING_WEB | Módulo web Spring Boot con Thymeleaf y persistencia. |
-| 02_BACK_END/03_JAVA_WEB | Módulo Java Web con JSP, Servlets y estructura Maven. |
+| 02_BACK_END/03_JAVA_WEB/test.cmd | Script de pruebas JUnit (H-002). |
+| 02_BACK_END/03_JAVA_WEB/package.cmd | Script de empaquetado WAR (H-002). |

@@ -1,74 +1,67 @@
-# Cierre técnico
+# Estado técnico del proyecto
 
-## Estado consolidado
+Consolidación del estado actual de MLBT para revisión técnica, mantenimiento y preparación de release.
 
-El repositorio MLBT contiene módulos web, API REST, documentación técnica, evidencias, capturas, colección Postman y trazabilidad Git.
+## Resumen
 
-## Validaciones confirmadas
-
-- README principal disponible.
-- Interfaz React AP07 disponible.
-- API MLBT disponible.
-- Documentación EV03 disponible.
-- Documentación EV04 disponible.
-- Colección Postman disponible.
-- Capturas Postman disponibles.
-- .env ignorado correctamente.
-- node_modules ignorado correctamente.
-
-## Interfaz React AP07
-
-- Interfaz React disponible en 01_FRONT_END/01_REACT_AP07.
-- README del módulo actualizado.
-- Guía técnica AP07 disponible en 08_FRONTEND_REACT_AP07.md.
-- Validación realizada con pnpm lint y pnpm build.
-- Rutas funcionales principales:
-  - /login
-  - /dashboard
-  - /usuarios/resumen, /usuarios/crear, /usuarios/listado
-  - /inventario/resumen, /inventario/registrar, /inventario/movimientos, /inventario/tablas
-  - /ventas/pedido, /ventas/historial, /ventas/analisis
-
-## Estado final esperado
-
-Proyecto preparado para lectura, ejecución, prueba y auditoría técnica desde GitHub.
-
-## Cierre técnico final
-
-![Estado](https://img.shields.io/badge/cierre-validado-brightgreen)
-![CI](https://img.shields.io/badge/CI-aprobado-success)
-![Seguridad](https://img.shields.io/badge/seguridad-documentada-blue)
-![Dependabot](https://img.shields.io/badge/dependabot-controlado-success)
-
-El repositorio MLBT queda consolidado con pruebas automatizadas, CI GitHub Actions, Dependabot controlado, política de seguridad, documentación técnica actualizada y validación satisfactoria en frontend, API Node, Spring Web y Java Web.
-
-| Área | Resultado |
+| Control | Estado |
 |---|---|
-| Frontend React | Pruebas, lint y build aprobados. |
-| API Node | Pruebas, check de configuración y endpoints públicos validados. |
-| Spring Web | Pruebas Maven aprobadas. |
-| Java Web | Pruebas JUnit aprobadas. |
-| Producción | Frontend en Vercel, API en Render y base de datos en Aiven documentados. |
-| Seguridad | Secretos fuera del repositorio, CORS productivo controlado y política `SECURITY.md` disponible. |
-| Base de datos productiva | Health y login público validados contra API publicada. |
+| Pruebas automatizadas | 44/44 |
+| Frontend lint/build | PASS |
+| Bundle entry | 256.26 kB (gzip 80.77 kB) |
+| Java Web WAR | Generado vía `package.cmd` |
+| CI (HEAD `41bca42`) | Aprobado |
+| Dependabot | Activo |
 
-## Producción y base de datos
+## Validación por módulo
 
-La base de datos productiva funciona bajo la arquitectura actual siempre que se mantengan activas las variables de entorno de Render y la instancia Aiven MySQL 8.4. La cadena `DATABASE_URL` no se publica ni se versiona; se administra como secreto del entorno de despliegue.
+| Módulo | Pruebas | Notas |
+|---|---|---|
+| Frontend React | 15/15 | Lazy loading por rutas; sin warning >500 kB |
+| API Node | 23/23 | Check de configuración OK |
+| Spring Web | 3/3 | Maven Wrapper |
+| Java Web | 3/3 | `test.cmd` / `package.cmd` |
 
-La verificación de cierre confirmó autenticación satisfactoria con el usuario controlado `adminapp` en la API pública. Esa prueba implica consulta contra la tabla de usuarios, validación de contraseña y emisión de JWT, por lo que respalda el estado operativo de la conexión productiva.
+## Frontend React
 
-| Dependencia | Condición de operación |
-|---|---|
-| Render | Debe conservar `DATABASE_URL`, `JWT_SECRET` y `FRONTEND_ORIGIN`. |
-| Aiven MySQL 8.4 | Debe mantener activa la base `defaultdb` y sus credenciales. |
-| Prisma 6.x | Debe mantenerse para conservar compatibilidad con `schema.prisma`. |
-| Vercel | Debe consumir la URL pública de la API mediante `VITE_API_URL`. |
+- Ruta: `01_FRONT_END/01_REACT_AP07`
+- Documentación: [08_FRONTEND_REACT_AP07.md](08_FRONTEND_REACT_AP07.md)
+- Rutas: login, dashboard, usuarios, inventario, ventas
+
+## Java Web
+
+Procedimiento canónico:
+
+```powershell
+.\02_BACK_END\03_JAVA_WEB\test.cmd
+.\02_BACK_END\03_JAVA_WEB\package.cmd
+```
+
+## CI y dependencias
+
+[![CI](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml/badge.svg?branch=Arawkano)](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml)
+
+- Workflow `CI`: frontend, API Node, Maven
+- Dependabot semanal; majors de Prisma bloqueados (CH-001)
+
+## Producción
+
+| Servicio | Plataforma | Requisito |
+|---|---|---|
+| Frontend | Vercel | `VITE_API_URL` |
+| API | Render | `DATABASE_URL`, `JWT_SECRET`, `FRONTEND_ORIGIN` |
+| Base de datos | Aiven MySQL 8.4 | Variable de entorno segura |
+
+Las credenciales de validación se gestionan fuera del repositorio.
 
 ## Pendientes no bloqueantes
 
-| Pendiente | Prioridad | Motivo |
-|---|---|---|
-| Migración a Prisma 7 | Media | Requiere cambio de configuración del datasource y validación dedicada. |
-| División de código en Vite | Baja | Optimización futura para reducir advertencia de bundle mayor a 500 KB. |
-| Protección de rama en GitHub | Baja | Recomendable para exigir CI antes de merges futuros. |
+| Item | Prioridad |
+|---|---|
+| Migración Prisma 7 | Media |
+| Protección de rama GitHub | Baja |
+| Paridad CI Maven con wrapper local | Baja |
+
+## Conclusión
+
+Proyecto técnicamente consolidado y listo para verificación final y preparación de release `v1.0.0` posterior a la validación completa.

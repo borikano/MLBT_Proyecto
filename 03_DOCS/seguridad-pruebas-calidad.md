@@ -11,7 +11,7 @@ Este documento define los criterios de calidad, seguridad, pruebas y accesibilid
 | API Node | Validación de entrada, autenticación, autorización, CORS, variables de entorno, errores y pruebas automatizadas. |
 | Spring Web | Configuración por ambiente, pruebas reales, validación y separación de responsabilidades. |
 | Java Web | Credenciales controladas, formularios, sesiones, servicios y documentación de alcance. |
-| Documentación | Trazabilidad entre requisitos, riesgos, pruebas, evidencias y comandos reproducibles. |
+| Documentación | Trazabilidad entre requisitos, riesgos, pruebas, validación y comandos reproducibles. |
 
 ## Referencias normativas y buenas prácticas
 
@@ -125,7 +125,7 @@ Cada fase debe cerrarse con:
 | Riesgo | Nivel | Tratamiento |
 |---|---|---|
 | Migración a Prisma 7 | Medio | Se documenta como tarea futura por cambio mayor incompatible con el datasource actual. |
-| Bundle principal de Vite mayor a 500 KB | Bajo | Se acepta como advertencia no bloqueante; se recomienda división de código en una fase de optimización. |
+| Bundle principal de Vite mayor a 500 KB | — | **Cerrado (H-001)** — lazy loading por rutas; entry 256.26 kB verificado. |
 | Dependencia de servicios externos públicos | Bajo | La verificación productiva depende de Render, Vercel y Aiven; las credenciales reales permanecen fuera del repositorio. |
 
 ### Decisión sobre Prisma

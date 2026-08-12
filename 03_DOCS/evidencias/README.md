@@ -1,49 +1,35 @@
-# Evidencias del proyecto MLBT
+# Archivo histórico — validaciones MLBT
 
-<!-- DOC-03-INICIO -->
+Este índice organiza registros históricos de validación del proyecto MLBT. Los códigos oficiales (GA, AA, EV) se conservan sin renombrar para mantener trazabilidad.
 
-## Índice maestro de evidencias
+**Nota:** este material es archivo de referencia. La documentación principal del producto está en el [README principal](../../README.md) y la [guía técnica](../../00_GUIA_TECNICA_PROYECTO/README.md).
+
+## Índice
 
 | Bloque | Carpeta | Descripción | Estado |
 |---|---|---|---|
-| GA7-220501096-AA3-EV01 | [GA7_220501096_AA3_EV01](GA7_220501096_AA3_EV01/README.md) | Evidencia técnica, validaciones y trazabilidad. | Cerrado |
-| GA7-220501096-AA5-EV03 | [GA7_220501096_AA5_EV03](GA7_220501096_AA5_EV03/README.md) | API Node, base de datos y endpoints. | Cerrado |
-| GA7-220501096-AA5-EV04 | [GA7_220501096_AA5_EV04](GA7_220501096_AA5_EV04/README.md) | Pruebas Postman, capturas y resultados. | Cerrado |
-| GA8-220501096-AA1-EV01 | [GA8_220501096_AA1_EV01](GA8_220501096_AA1_EV01/README.md) | Integración de módulos componentes. | Cerrado |
-| GA8-220501096-AA1-EV02 | [GA8_220501096_AA1_EV02](GA8_220501096_AA1_EV02/README.md) | Módulos integrados, entradas, salidas y pruebas. | Cerrado |
-| GA9-220501096 | [GA9_220501096_AA1_AA3_PRUEBAS_MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Pruebas de software MLBT. | Cerrado |
+| GA7-220501096-AA3-EV01 | [GA7_220501096_AA3_EV01](GA7_220501096_AA3_EV01/README.md) | Módulos web Java, Spring Web y validaciones | Cerrado |
+| GA7-220501096-AA5-EV03 | [GA7_220501096_AA5_EV03](GA7_220501096_AA5_EV03/README.md) | API Node, base de datos y endpoints | Cerrado |
+| GA7-220501096-AA5-EV04 | [GA7_220501096_AA5_EV04](GA7_220501096_AA5_EV04/README.md) | Pruebas Postman, capturas y resultados | Cerrado |
+| GA7-220501096-AA4-EV03 | [Frontend React AP07](../../01_FRONT_END/01_REACT_AP07/README.md) | Componente React administrativo | Cerrado |
+| GA8-220501096-AA1-EV01 | [GA8_220501096_AA1_EV01](GA8_220501096_AA1_EV01/README.md) | Integración React, API y base de datos | Cerrado |
+| GA8-220501096-AA1-EV02 | [GA8_220501096_AA1_EV02](GA8_220501096_AA1_EV02/README.md) | Despliegue integrado y URLs públicas | Cerrado |
+| GA9-220501096 | [GA9 pruebas MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Ciclo documentado de pruebas de software | Cerrado |
 
-## Regla de conservación
-
-- Los códigos oficiales GA, AA y EV no se renombran.
-- Los archivos entregables finales se gestionan fuera del repositorio.
-- Este índice facilita la navegación pública de las evidencias documentadas.
-
-<!-- DOC-03-FIN -->
-
-
-Esta carpeta organiza las evidencias formativas del proyecto MLBT. Cada evidencia conserva sus documentos de soporte, validación, cierre técnico y trazabilidad.
-
-## Índice de evidencias
-
-| Orden | Código | Ruta de revisión | Propósito |
-|---|---|---|---|
-| 01 | GA7-220501096-AA3-EV01 | [GA7_220501096_AA3_EV01](GA7_220501096_AA3_EV01/README.md) | Evidencia relacionada con aplicación web Java, Spring Web, estructura técnica y validaciones. |
-| 02 | GA7-220501096-AA5-EV03 | [GA7_220501096_AA5_EV03](GA7_220501096_AA5_EV03/README.md) | Evidencia relacionada con API MLBT, base de datos, endpoints y documentación técnica. |
-| 03 | GA7-220501096-AA5-EV04 | [GA7_220501096_AA5_EV04](GA7_220501096_AA5_EV04/README.md) | Evidencia relacionada con pruebas Postman, capturas, resultados y cierre técnico. |
-| 04 | GA7-220501096-AA4-EV03 | [Frontend React AP07](../../01_FRONT_END/01_REACT_AP07/README.md) y [Guía React AP07](../../00_GUIA_TECNICA_PROYECTO/08_FRONTEND_REACT_AP07.md) | Evidencia relacionada con componente front-end del proyecto formativo. |
-| 05 | GA8-220501096-AA1-EV01 | [GA8_220501096_AA1_EV01](GA8_220501096_AA1_EV01/README.md) | Integración funcional local entre Frontend React, API Node y base de datos. |
-| 06 | GA8-220501096-AA1-EV02 | [GA8_220501096_AA1_EV02](GA8_220501096_AA1_EV02/README.md) | Módulos integrados, entradas/salidas, pruebas y URLs públicas de ejecución. |
-
-## URLs públicas de entrega GA8-AA1-EV02
+## URLs públicas (referencia histórica GA8)
 
 | Servicio | URL |
 |---|---|
 | Frontend React | https://mlbt-proyecto.vercel.app |
-| Login React | https://mlbt-proyecto.vercel.app/login |
-| Dashboard React | https://mlbt-proyecto.vercel.app/dashboard |
+| Login | https://mlbt-proyecto.vercel.app/login |
 | API Node | https://mlbt-proyecto.onrender.com |
-| Health API | https://mlbt-proyecto.onrender.com/api/health |
+| Health | https://mlbt-proyecto.onrender.com/api/health |
+
+## Reglas de conservación
+
+- Los códigos oficiales GA, AA y EV no se renombran.
+- Los archivos formales externos se gestionan fuera del repositorio.
+- Las credenciales de prueba en documentos históricos se redactan como `[REDACTED - TEST DATA]`.
 
 ## Navegación
 
@@ -51,17 +37,4 @@ Esta carpeta organiza las evidencias formativas del proyecto MLBT. Cada evidenci
 |---|---|
 | Documentación general | [../README.md](../README.md) |
 | Repositorio principal | [../../README.md](../../README.md) |
-| Guía técnica del proyecto | [../../00_GUIA_TECNICA_PROYECTO/README.md](../../00_GUIA_TECNICA_PROYECTO/README.md) |
-
-## Criterio de entrega
-
-Las evidencias se mantienen separadas por código para evitar mezclar documentos de diferentes actividades. Cuando una evidencia se soporta en un módulo principal del repositorio, se referencia la ruta del módulo y su guía técnica correspondiente.
-
-<!-- GA9_EVIDENCIAS_INDEX_INICIO -->
-## GA9 - pruebas de software
-
-| Evidencia | Enlace | Descripcion |
-|---|---|---|
-| GA9-220501096-AA1 a AA3 | [GA9 pruebas MLBT](GA9_220501096_AA1_AA3_PRUEBAS_MLBT/README.md) | Pruebas de software, plan, casos, ejecucion documentada y reporte final de resultados. |
-<!-- GA9_EVIDENCIAS_INDEX_FIN -->
-
+| Guía técnica | [../../00_GUIA_TECNICA_PROYECTO/README.md](../../00_GUIA_TECNICA_PROYECTO/README.md) |

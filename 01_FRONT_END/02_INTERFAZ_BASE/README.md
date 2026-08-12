@@ -11,15 +11,9 @@ Este módulo conserva la interfaz base del proyecto MLBT construida con HTML, CS
 | Persistencia | `localStorage` del navegador. |
 | Producción | No debe usarse como mecanismo productivo de autenticación. |
 
-## Credenciales controladas de prueba
+## Credenciales
 
-La interfaz base incluye credenciales ficticias para permitir navegación y validación controlada de formularios:
-
-| Usuario | Contraseña | Alcance |
-|---|---|---|
-| admin@mlbt.com | admin123 | Dato ficticio controlado para validación local. |
-
-Estas credenciales no representan secretos reales, no deben reutilizarse en producción y no sustituyen la autenticación JWT implementada en la API Node y la interfaz React.
+Las credenciales de validación se gestionan fuera del repositorio. Este módulo histórico conserva datos de prueba embebidos en el cliente; no deben reutilizarse en producción ni sustituir la autenticación JWT de la API Node y la interfaz React.
 
 ## Reglas de mantenimiento
 
@@ -32,6 +26,6 @@ Estas credenciales no representan secretos reales, no deben reutilizarse en prod
 ## Validación manual sugerida
 
 1. Abrir `index.html` desde un servidor local o entorno compatible.
-2. Ingresar con las credenciales controladas de prueba.
+2. Validar navegación entre páginas y formularios con datos controlados del entorno local.
 3. Validar navegación hacia usuarios, inventario y ventas.
 4. Confirmar que los datos se mantienen únicamente en almacenamiento local del navegador.

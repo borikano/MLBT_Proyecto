@@ -78,7 +78,7 @@ No se publica la contraseña, la cadena completa de conexión ni variables de en
 | Campo | Valor |
 |---|---|
 | Usuario | adminapp |
-| Contraseña | AdminApp123* |
+| Contraseña | [REDACTED - TEST DATA] |
 | Rol | ADMIN_APP |
 
 ## Resultado

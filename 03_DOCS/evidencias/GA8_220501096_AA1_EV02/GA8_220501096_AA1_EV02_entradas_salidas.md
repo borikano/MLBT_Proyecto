@@ -47,7 +47,7 @@ Registrar los datos de entrada y salida de los módulos integrados del sistema M
 | Campo | Valor |
 |---|---|
 | Usuario | adminapp |
-| Contraseña | AdminApp123* |
+| Contraseña | [REDACTED - TEST DATA] |
 | Resultado esperado | Acceso al dashboard y token JWT |
 
 ## Resultado

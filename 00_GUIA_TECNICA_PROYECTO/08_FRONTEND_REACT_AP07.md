@@ -14,20 +14,11 @@ Documentar la implementación del componente de interfaz React de MLBT, mantenie
 
 ## Alcance implementado
 
-- Inicio de sesión de prueba.
+- Inicio de sesión integrado con API Node (JWT).
 - Panel principal administrativo.
-- Calendario de análisis en el panel principal.
-- Gestión de usuarios.
-- Gestión de inventario.
-- Gestión de ventas.
-- Validación de existencias.
-- Registro de movimientos.
-- Pedido actual.
-- Historial de ventas.
-- Navegación lateral fija.
-- Enlaces internos por sección.
-- Roles administrativos.
-- Datos de prueba compartidos.
+- Gestión de usuarios, inventario y ventas.
+- Navegación lateral fija y rutas anidadas.
+- Datos de prueba compartidos en contexto local.
 
 ## Ruta del módulo
 
@@ -35,42 +26,48 @@ Documentar la implementación del componente de interfaz React de MLBT, mantenie
 
 ## Rutas funcionales
 
-- /login
-- /dashboard
-- /usuarios
-- /inventario
-- /ventas
+- `/login`
+- `/dashboard`
+- `/usuarios` → resumen, crear, listado
+- `/inventario` → resumen, registrar, movimientos, tablas
+- `/ventas` → pedido, historial, análisis
 
-## Credenciales de prueba
+## Autenticación
 
-    Usuario: admin
-    Contraseña: admin
+Las credenciales de validación se gestionan fuera del repositorio. Para entornos locales, consulte la configuración de la API Node.
 
-## Tecnologías utilizadas
+## Tecnologías (package.json)
 
-- ReactJS.
-- Vite.
-- JavaScript.
-- Tailwind CSS.
-- shadcn/ui.
-- Radix UI.
-- TanStack Table.
-- react-router-dom.
-- pnpm.
+| Tecnología | Versión |
+|---|---|
+| React / react-dom | ^19.2.8 |
+| Vite | ^8.1.5 |
+| Vitest | 4.1.10 |
+| react-router-dom | 7.18.1 |
+| @tanstack/react-table | 8.21.3 |
+| Tailwind CSS | 4.3.3 |
 
-## Ejecución local
+## Carga diferida — H-001 cerrado
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
-    pnpm install
-    pnpm dev
+Las rutas administrativas usan `React.lazy` + `Suspense` en `src/routes/AppRouter.jsx`.
 
-## Validación técnica
+| Métrica | Valor verificado |
+|---|---|
+| Chunk entry | 256.26 kB minificado |
+| Gzip entry | 80.77 kB |
+| Warning >500 kB | Eliminado |
 
-    Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
-    pnpm lint
-    pnpm build
+## Ejecución y validación
 
+```powershell
+Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"
+pnpm install
+pnpm test:run
+pnpm lint
+pnpm build
+```
 
-## Resultado
+## Referencias
 
-El componente de interfaz queda funcional con datos de prueba, navegación de una sola página, componentes reutilizables, formularios controlados, tablas de datos, validaciones visuales y estructura lista para integración posterior con el servidor.
+- [README del módulo](../01_REACT_AP07/README.md)
+- [README principal](../README.md)

@@ -50,7 +50,7 @@ pnpm dev
 
 | Prueba | Método | Endpoint | Entrada | Estado esperado | Estado obtenido | Resultado |
 |---|---|---|---|---|---|---|
-| Login correcto | POST | /api/auth/login | username=adminapp, password=AdminApp123* | 200 | 200 | Aprobado |
+| Login correcto | POST | /api/auth/login | username=adminapp, password=[REDACTED - TEST DATA] | 200 | 200 | Aprobado |
 | Perfil con token | GET | /api/auth/profile | Authorization Bearer TOKEN_JWT | 200 | 200 | Aprobado |
 | Login incorrecto | POST | /api/auth/login | password incorrecta | 401 | 401 | Aprobado |
 | Perfil sin token | GET | /api/auth/profile | Sin Authorization | 401 | 401 | Aprobado |

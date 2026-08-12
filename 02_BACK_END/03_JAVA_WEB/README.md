@@ -11,30 +11,24 @@ Este módulo implementa una estructura web basada en Java, JSP y Servlets, inclu
 | Elemento | Estado |
 |---|---|
 | Uso principal | Módulo complementario de referencia. |
-| Autenticación | Simulada mediante credenciales controladas de prueba. |
+| Autenticación | Simulada con credenciales controladas embebidas en el módulo histórico. |
 | Persistencia | Repositorio temporal en memoria. |
 | Producción | No debe usarse como autenticación productiva. |
 
-## Credenciales controladas de prueba
-
-| Usuario | Contraseña | Alcance |
-|---|---|---|
-| admin@mlbt.com | admin123 | Dato ficticio controlado para validación local. |
-
-Estas credenciales son ficticias y se conservan para reproducir pruebas locales controladas. No representan secretos reales.
+Las credenciales de validación se gestionan fuera de la documentación pública del repositorio. Para pruebas locales del módulo, consulte el código fuente del servicio de autenticación y las pruebas JUnit asociadas.
 
 ## Separación técnica
 
 | Tipo | Ubicación |
 |---|---|
-| Java | src/main/java/com/mlbt/ |
-| Servlets | src/main/java/com/mlbt/controller/ |
-| Modelos | src/main/java/com/mlbt/model/ |
-| Repositorio temporal | src/main/java/com/mlbt/repository/ |
-| Servicios | src/main/java/com/mlbt/service/ |
-| JSP | src/main/webapp/WEB-INF/jsp/ |
-| CSS | src/main/webapp/assets/css/ |
-| Configuración web | src/main/webapp/WEB-INF/web.xml |
+| Java | `src/main/java/com/mlbt/` |
+| Servlets | `src/main/java/com/mlbt/controller/` |
+| Modelos | `src/main/java/com/mlbt/model/` |
+| Repositorio temporal | `src/main/java/com/mlbt/repository/` |
+| Servicios | `src/main/java/com/mlbt/service/` |
+| JSP | `src/main/webapp/WEB-INF/jsp/` |
+| CSS | `src/main/webapp/assets/css/` |
+| Configuración web | `src/main/webapp/WEB-INF/web.xml` |
 
 ## Servlets
 
@@ -47,25 +41,15 @@ Estas credenciales son ficticias y se conservan para reproducir pruebas locales 
 | SalesServlet | /sales | Consulta ventas | Registra ventas |
 | LogoutServlet | /logout | Cierra sesión | No aplica |
 
-## Pruebas
+## Pruebas (H-002 estandarizado)
 
-Desde la raíz del repositorio, el procedimiento canónico encapsula el Maven Wrapper de Spring Web:
+Desde la raíz del repositorio:
 
 ```powershell
 .\02_BACK_END\03_JAVA_WEB\test.cmd
 ```
 
-Equivalente explícito (mismo resultado):
-
-```powershell
-.\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml test
-```
-
-Si Maven está instalado globalmente, también puede usarse:
-
-```powershell
-mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
-```
+El script reutiliza internamente el Maven Wrapper de Spring Web. **No se requiere Maven global** en la estación local.
 
 ## Compilación
 
@@ -73,14 +57,13 @@ mvn -f 02_BACK_END/03_JAVA_WEB/pom.xml test
 .\02_BACK_END\03_JAVA_WEB\package.cmd
 ```
 
-Equivalente explícito:
-
-```powershell
-.\02_BACK_END\02_SPRING_WEB\mvnw.cmd -f .\02_BACK_END\03_JAVA_WEB\pom.xml clean package
-```
-
 ## Artefacto esperado
 
 ```text
 02_BACK_END/03_JAVA_WEB/target/mlbt-java-web.war
 ```
+
+## Referencias
+
+- [README principal](../../README.md)
+- [Comandos de ejecución](../../00_GUIA_TECNICA_PROYECTO/03_COMANDOS_DE_EJECUCION.md)

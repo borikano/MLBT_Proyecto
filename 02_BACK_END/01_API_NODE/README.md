@@ -1,5 +1,7 @@
 # API MLBT
 
+Backend REST productivo del proyecto MLBT: autenticación JWT, usuarios, inventario y ventas sobre MySQL.
+
 ## Proyecto
 
 MLBT Project - María La Bonita Taquería.

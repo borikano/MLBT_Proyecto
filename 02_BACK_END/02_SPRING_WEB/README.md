@@ -1,6 +1,6 @@
 # MLBT Spring Web
 
-Módulo Spring Boot del proyecto MLBT.
+Módulo **complementario** Spring Boot del proyecto MLBT. No forma el backend productivo principal; la API Node en Render cumple ese rol en el despliegue actual.
 
 ## Propósito
 

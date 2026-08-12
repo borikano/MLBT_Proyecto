@@ -34,7 +34,7 @@ Comprobar la integración funcional entre el Frontend React y la API Node median
 | Campo | Valor |
 |---|---|
 | Usuario | adminapp |
-| Contraseña | AdminApp123* |
+| Contraseña | [REDACTED - TEST DATA] |
 | Rol | ADMIN_APP |
 
 ## Flujo validado
