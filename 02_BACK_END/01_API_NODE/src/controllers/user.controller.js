@@ -1,5 +1,6 @@
 import { asyncHandler } from "../utils/async-handler.js";
 import { listUsers, getUserById, createUser, updateUser, deactivateUser } from "../services/user.service.js";
+import { buildAuditContext } from "../security/audit-context.js";
 
 const listUsersController = asyncHandler(async (req, res) => {
   const usuarios = await listUsers(req.validated.query || {});
@@ -30,7 +31,7 @@ const createUserController = asyncHandler(async (req, res) => {
 });
 
 const updateUserController = asyncHandler(async (req, res) => {
-  const usuario = await updateUser(req.validated.params.id, req.validated.body);
+  const usuario = await updateUser(req.validated.params.id, req.validated.body, buildAuditContext(req, req.validated.body?.motivo));
 
   res.status(200).json({
     ok: true,
@@ -40,7 +41,7 @@ const updateUserController = asyncHandler(async (req, res) => {
 });
 
 const deactivateUserController = asyncHandler(async (req, res) => {
-  const usuario = await deactivateUser(req.validated.params.id);
+  const usuario = await deactivateUser(req.validated.params.id, buildAuditContext(req, req.validated.body?.motivo));
 
   res.status(200).json({
     ok: true,

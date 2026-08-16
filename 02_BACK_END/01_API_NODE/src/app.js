@@ -11,8 +11,11 @@ import { inventoryRoutes } from "./routes/inventory.routes.js";
 import { saleRoutes } from "./routes/sale.routes.js";
 import { notFoundHandler } from "./middlewares/not-found.middleware.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
+import { requestContext } from "./middlewares/request-context.middleware.js";
 
 const app = express();
+
+app.use(requestContext);
 
 function buildCorsOrigin({ env = config.env, frontendOrigin = config.frontendOrigin } = {}) {
   if (env !== "production" && (!frontendOrigin || frontendOrigin === "*")) {
