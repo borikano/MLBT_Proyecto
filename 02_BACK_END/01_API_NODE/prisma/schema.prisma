@@ -17,49 +17,185 @@ enum RolUsuario {
   LECTURA
 }
 
+enum EstadoUsuario {
+  ACTIVO
+  PENDIENTE_APROBACION
+  PENDIENTE_BAJA
+  RETIRADO
+  INACTIVO
+}
+
 enum EstadoRegistro {
   ACTIVO
   INACTIVO
 }
 
+enum TipoMovimientoInventario {
+  ENTRADA
+  SALIDA
+  AJUSTE
+}
+
+enum EstadoVenta {
+  CONFIRMADA
+  ANULADA
+}
+
 model Usuario {
-  id           Int            @id @default(autoincrement())
-  nombre       String         @db.VarChar(120)
-  username     String         @unique @db.VarChar(60)
-  email        String?        @unique @db.VarChar(120)
-  passwordHash String         @db.VarChar(255)
-  rol          RolUsuario     @default(MESERO)
-  estado       EstadoRegistro @default(ACTIVO)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  ventas       Venta[]
+  id                    Int                    @id @default(autoincrement())
+  numeroRegistro        String?                @unique @db.VarChar(30)
+  documento             String?                @unique @db.VarChar(30)
+  nombres               String?                @db.VarChar(80)
+  apellidos             String?                @db.VarChar(80)
+  telefono              String?                @db.VarChar(30)
+  nombre                String                 @db.VarChar(120)
+  username              String                 @unique @db.VarChar(60)
+  email                 String?                @unique @db.VarChar(120)
+  passwordHash          String                 @db.VarChar(255)
+  rol                   RolUsuario             @default(MESERO)
+  estado                EstadoUsuario          @default(ACTIVO)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  ventas                Venta[]
+  movimientosInventario MovimientoInventario[]
+  sessionVersion        Int                    @default(1)
+  auditEvents           AuditEvent[]
 
   @@map("usuarios")
 }
 
 model ProductoInventario {
-  id          Int            @id @default(autoincrement())
-  nombre      String         @db.VarChar(150)
-  descripcion String?        @db.VarChar(255)
-  stock       Decimal        @default(0) @db.Decimal(10, 2)
-  unidad      String         @default("unidad") @db.VarChar(40)
-  estado      EstadoRegistro @default(ACTIVO)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  id             Int                    @id @default(autoincrement())
+  numeroRegistro String?                @unique @db.VarChar(30)
+  nombre         String                 @db.VarChar(150)
+  descripcion    String?                @db.VarChar(255)
+  categoria      String?                @db.VarChar(60)
+  stock          Decimal                @default(0) @db.Decimal(10, 3)
+  stockMin       Decimal                @default(0) @db.Decimal(10, 3)
+  unidad         String                 @default("unidad") @db.VarChar(40)
+  estado         EstadoRegistro         @default(ACTIVO)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  movimientos    MovimientoInventario[]
+  recetasVenta   RecetaProductoVenta[]
 
   @@map("productos_inventario")
 }
 
-model Venta {
-  id        Int       @id @default(autoincrement())
-  producto  String    @db.VarChar(150)
-  cantidad  Int
-  total     Decimal   @db.Decimal(12, 2)
-  fecha     DateTime  @default(now())
-  usuarioId Int?
-  usuario   Usuario?  @relation(fields: [usuarioId], references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+model MovimientoInventario {
+  id               Int                      @id @default(autoincrement())
+  numeroMovimiento String?                  @unique @db.VarChar(30)
+  productoId       Int
+  producto         ProductoInventario       @relation(fields: [productoId], references: [id])
+  tipo             TipoMovimientoInventario
+  cantidad         Decimal                  @db.Decimal(10, 3)
+  stockAnterior    Decimal                  @db.Decimal(10, 3)
+  stockNuevo       Decimal                  @db.Decimal(10, 3)
+  motivo           String                   @db.VarChar(255)
+  usuarioId        Int?
+  usuario          Usuario?                 @relation(fields: [usuarioId], references: [id])
+  ventaId          Int?
+  venta            Venta?                   @relation(fields: [ventaId], references: [id])
+  createdAt        DateTime                 @default(now())
 
+  @@index([productoId, createdAt])
+  @@index([usuarioId])
+  @@index([ventaId])
+  @@map("movimientos_inventario")
+}
+
+model ProductoVenta {
+  id        Int                   @id @default(autoincrement())
+  codigo    String?               @unique @db.VarChar(30)
+  nombre    String                @db.VarChar(150)
+  categoria String                @default("General") @db.VarChar(60)
+  precio    Decimal               @db.Decimal(12, 2)
+  estado    EstadoRegistro        @default(ACTIVO)
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+  receta    RecetaProductoVenta[]
+  detalles  VentaDetalle[]
+
+  @@map("productos_venta")
+}
+
+model RecetaProductoVenta {
+  id                   Int                @id @default(autoincrement())
+  productoVentaId      Int
+  productoVenta        ProductoVenta      @relation(fields: [productoVentaId], references: [id], onDelete: Cascade)
+  productoInventarioId Int
+  productoInventario   ProductoInventario @relation(fields: [productoInventarioId], references: [id])
+  cantidad             Decimal            @db.Decimal(10, 3)
+
+  @@unique([productoVentaId, productoInventarioId])
+  @@index([productoInventarioId])
+  @@map("recetas_producto_venta")
+}
+
+model Venta {
+  id                 Int                    @id @default(autoincrement())
+  numeroVenta        String?                @unique @db.VarChar(30)
+  fecha              DateTime               @default(now())
+  tipoVenta          String                 @default("Mesa") @db.VarChar(30)
+  metodoPagoSegmento String                 @default("efectivo") @db.VarChar(30)
+  metodoPago         String                 @default("Efectivo") @db.VarChar(60)
+  cliente            String                 @default("Cliente mostrador") @db.VarChar(120)
+  estado             EstadoVenta            @default(CONFIRMADA)
+  total              Decimal                @db.Decimal(12, 2)
+  usuarioId          Int?
+  usuario            Usuario?               @relation(fields: [usuarioId], references: [id])
+  detalles           VentaDetalle[]
+  movimientos        MovimientoInventario[]
+
+  // Compatibilidad temporal con registros y seed del contrato v1.0.
+  producto String? @db.VarChar(150)
+  cantidad Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([fecha])
+  @@index([usuarioId])
   @@map("ventas")
+}
+
+model VentaDetalle {
+  id              Int            @id @default(autoincrement())
+  ventaId         Int
+  venta           Venta          @relation(fields: [ventaId], references: [id], onDelete: Cascade)
+  productoVentaId Int?
+  productoVenta   ProductoVenta? @relation(fields: [productoVentaId], references: [id])
+  codigoProducto  String?        @db.VarChar(30)
+  nombreProducto  String         @db.VarChar(150)
+  categoria       String?        @db.VarChar(60)
+  cantidad        Int
+  precioUnitario  Decimal        @db.Decimal(12, 2)
+  subtotal        Decimal        @db.Decimal(12, 2)
+
+  @@index([ventaId])
+  @@index([productoVentaId])
+  @@map("venta_detalles")
+}
+
+model AuditEvent {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  usuarioId Int?
+  role      String?  @db.VarChar(40)
+  modulo    String   @db.VarChar(40)
+  accion    String   @db.VarChar(80)
+  resultado String   @db.VarChar(20)
+  entidad   String?  @db.VarChar(60)
+  entidadId String?  @db.VarChar(80)
+  motivo    String?  @db.VarChar(255)
+  requestId String?  @db.VarChar(64)
+  ip        String?  @db.VarChar(64)
+  metadata  Json?
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([usuarioId, createdAt])
+  @@index([modulo, accion, createdAt])
+  @@index([requestId])
+  @@map("audit_events")
 }
