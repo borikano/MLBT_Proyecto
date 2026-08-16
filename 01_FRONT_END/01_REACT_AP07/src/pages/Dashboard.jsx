@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 import domicilioImg from "@/assets/mlbt/ui/domicilio.png"
 import horarioImg from "@/assets/mlbt/ui/horario.png"
@@ -13,8 +13,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { useMlbtData } from "@/context/MlbtDataContext"
-import * as usuariosData from "@/data/mocks/usuarios.mock"
+import { isApiError } from "@/lib/api"
+import { handleAuthenticatedApiError } from "@/lib/auth"
+import { mapApiUsersToUi } from "@/mappers/user.mapper"
+import { listUsersApi } from "@/services/users.api"
+import {
+  listInventoryApi,
+  listInventoryMovementsApi,
+} from "@/services/inventory.api"
+import {
+  mapApiInventoryListToUi,
+  mapApiInventoryMovementsToUi,
+} from "@/mappers/inventory.mapper"
+import { mapApiSalesToUi } from "@/mappers/sale.mapper"
+import { listSalesApi } from "@/services/sales.api"
 
 function getTodayIsoDate() {
   const today = new Date()
@@ -46,24 +58,6 @@ function formatQuantity(value) {
   return Number(value).toLocaleString("es-CO", {
     maximumFractionDigits: 2,
   })
-}
-
-function getUsuariosMock() {
-  const possibleArrays = Object.values(usuariosData).filter(Array.isArray)
-
-  return (
-    possibleArrays.find((items) =>
-      items.some(
-        (item) =>
-          item?.email ||
-          item?.rol ||
-          item?.role ||
-          item?.registrationNumber ||
-          item?.documentNumber ||
-          item?.numeroDocumento
-      )
-    ) || []
-  )
 }
 
 function getUsuarioNombre(usuario) {
@@ -101,13 +95,156 @@ const accesosRapidos = [
 ]
 
 export default function Dashboard() {
-  const { itemsInventario, movimientosInventario, ventas } = useMlbtData()
 
-  const usuariosMock = getUsuariosMock()
+  const navigate = useNavigate()
+  const [usuarios, setUsuarios] = useState([])
+  const [usuariosError, setUsuariosError] = useState("")
+  const [itemsInventario, setItemsInventario] = useState([])
+  const [movimientosInventario, setMovimientosInventario] = useState([])
+  const [inventarioError, setInventarioError] = useState("")
+  const [ventas, setVentas] = useState([])
+  const [ventasError, setVentasError] = useState("")
+
+  useEffect(() => {
+    let active = true
+
+    async function cargarUsuariosDashboard() {
+      try {
+        const data = await listUsersApi()
+
+        if (active) {
+          setUsuarios(mapApiUsersToUi(data))
+          setUsuariosError("")
+        }
+      } catch (error) {
+        if (!active) {
+          return
+        }
+
+        if (handleAuthenticatedApiError(error)) {
+          navigate("/login", { replace: true })
+          return
+        }
+
+        if (isApiError(error, 403)) {
+          setUsuarios([])
+          setUsuariosError(
+            "Tu rol no tiene permiso para consultar el módulo de usuarios."
+          )
+          return
+        }
+
+        setUsuarios([])
+        setUsuariosError(
+          isApiError(error) && error.status >= 500
+            ? "No fue posible cargar usuarios para el dashboard."
+            : error?.message || "No fue posible cargar usuarios para el dashboard."
+        )
+      }
+    }
+
+    cargarUsuariosDashboard()
+
+    return () => {
+      active = false
+    }
+  }, [navigate])
+
+  useEffect(() => {
+    let active = true
+
+    Promise.all([
+      listInventoryApi(),
+      listInventoryMovementsApi(),
+    ])
+      .then(([inventoryData, movementData]) => {
+        if (!active) {
+          return
+        }
+
+        setItemsInventario(mapApiInventoryListToUi(inventoryData))
+        setMovimientosInventario(
+          mapApiInventoryMovementsToUi(movementData)
+        )
+        setInventarioError("")
+      })
+      .catch((error) => {
+        if (!active) {
+          return
+        }
+
+        if (handleAuthenticatedApiError(error)) {
+          navigate("/login", { replace: true })
+          return
+        }
+
+        if (isApiError(error, 403)) {
+          setItemsInventario([])
+          setMovimientosInventario([])
+          setInventarioError(
+            "Tu rol no tiene permiso para consultar inventario."
+          )
+          return
+        }
+
+        setItemsInventario([])
+        setMovimientosInventario([])
+        setInventarioError(
+          isApiError(error) && error.status >= 500
+            ? "No fue posible cargar inventario para el dashboard."
+            : error?.message ||
+                "No fue posible cargar inventario para el dashboard."
+        )
+      })
+
+    return () => {
+      active = false
+    }
+  }, [navigate])
+  useEffect(() => {
+    let active = true
+
+    listSalesApi()
+      .then((data) => {
+        if (!active) {
+          return
+        }
+
+        setVentas(mapApiSalesToUi(data))
+        setVentasError("")
+      })
+      .catch((error) => {
+        if (!active) {
+          return
+        }
+
+        if (handleAuthenticatedApiError(error)) {
+          navigate("/login", { replace: true })
+          return
+        }
+
+        setVentas([])
+        setVentasError(
+          isApiError(error, 403)
+            ? "Tu rol no tiene permiso para consultar ventas."
+            : isApiError(error) && error.status >= 500
+              ? "No fue posible cargar ventas para el dashboard."
+              : error?.message ||
+                  "No fue posible cargar ventas para el dashboard."
+        )
+      })
+
+    return () => {
+      active = false
+    }
+  }, [navigate])
   const today = getTodayIsoDate()
   const [fechaDashboard, setFechaDashboard] = useState(today)
 
-  const ventasOrdenadas = [...ventas].sort((a, b) =>
+  const ventasConfirmadas = ventas.filter(
+    (venta) => venta.estado === "Confirmada"
+  )
+  const ventasOrdenadas = [...ventasConfirmadas].sort((a, b) =>
     String(b.fechaHora || "").localeCompare(String(a.fechaHora || ""))
   )
 
@@ -115,7 +252,7 @@ export default function Dashboard() {
     (a, b) => Number(b.id || 0) - Number(a.id || 0)
   )
 
-  const ventasHoy = ventas.filter((venta) => venta.fecha === fechaDashboard)
+  const ventasHoy = ventasOrdenadas.filter((venta) => venta.fecha === fechaDashboard)
 
   const totalVentasHoy = ventasHoy.reduce(
     (total, venta) => total + Number(venta.total || 0),
@@ -140,34 +277,36 @@ export default function Dashboard() {
     (item) => Number(item.stock) <= Number(item.stockMin)
   )
 
-  const usuariosActivos = usuariosMock.filter(
-    (usuario) => usuario.estado === "Activo"
+  const usuariosActivos = usuarios.filter(
+    (usuario) => usuario.status === "Activo"
   )
 
-  const ventasRecientes = ventasOrdenadas.slice(0, 4)
+  const ventasRecientes = ventasHoy.slice(0, 4)
   const movimientosRecientes = movimientosOrdenados.slice(0, 4)
-  const usuariosRecientes = usuariosMock.slice(0, 4)
+  const usuariosRecientes = usuarios.slice(0, 4)
 
   const metricas = [
     {
       titulo: "Ventas del día",
-      valor: formatCurrency(totalVentasHoy),
-      descripcion: `${ventasHoy.length} venta(s) confirmada(s) el ${formatDisplayDate(fechaDashboard)}.`,
+      valor: ventasError ? "N/D" : formatCurrency(totalVentasHoy),
+      descripcion: ventasError || `${ventasHoy.length} venta(s) confirmada(s) el ${formatDisplayDate(fechaDashboard)}.`,
     },
     {
       titulo: "Productos vendidos",
-      valor: productosVendidosHoy,
-      descripcion: `Unidades vendidas el ${formatDisplayDate(fechaDashboard)} según el historial local.`,
+      valor: ventasError ? "N/D" : productosVendidosHoy,
+      descripcion: ventasError || `Unidades vendidas el ${formatDisplayDate(fechaDashboard)} según el historial API.`,
     },
     {
       titulo: "Insumos activos",
-      valor: itemsActivos.length,
-      descripcion: "Ítems de inventario disponibles para operación.",
+      valor: inventarioError ? "N/D" : itemsActivos.length,
+      descripcion:
+        inventarioError ||
+        "Ítems activos consultados desde la API MLBT.",
     },
     {
       titulo: "Usuarios activos",
-      valor: usuariosActivos.length || usuariosMock.length,
-      descripcion: "Usuarios administrativos cargados desde datos locales de apoyo.",
+      valor: usuariosError ? "N/D" : usuariosActivos.length,
+      descripcion: usuariosError || "Usuarios activos consultados desde la API MLBT.",
     },
   ]
 
@@ -184,8 +323,7 @@ export default function Dashboard() {
 
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
           Resumen administrativo conectado a usuarios, inventario, ventas y
-          movimientos de apoyo. La información se calcula desde el estado local
-          compartido para mantener coherencia entre módulos.
+          movimientos de apoyo. Usuarios, inventario y ventas provienen de la API.
         </p>
       </div>
 
@@ -347,7 +485,7 @@ export default function Dashboard() {
                   Ventas de la fecha seleccionada
                 </CardTitle>
                 <CardDescription>
-                  Ventas confirmadas para la fecha seleccionada en el estado local.
+                  Ventas confirmadas consultadas desde la API para la fecha seleccionada.
                 </CardDescription>
               </div>
 
@@ -382,7 +520,7 @@ export default function Dashboard() {
               ))
             ) : (
               <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                No hay ventas registradas para la fecha seleccionada.
+                {ventasError || "No hay ventas confirmadas para la fecha seleccionada."}
               </p>
             )}
           </CardContent>
@@ -396,7 +534,7 @@ export default function Dashboard() {
                   Movimientos recientes
                 </CardTitle>
                 <CardDescription>
-                  Últimos movimientos del inventario local.
+                  Últimos movimientos consultados desde la API.
                 </CardDescription>
               </div>
 
@@ -446,7 +584,7 @@ export default function Dashboard() {
                   Usuarios recientes
                 </CardTitle>
                 <CardDescription>
-                  Registros administrativos cargados localmente.
+                  Registros administrativos consultados desde la API.
                 </CardDescription>
               </div>
 
@@ -467,8 +605,8 @@ export default function Dashboard() {
                     {getUsuarioNombre(usuario)}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {usuario.rol || usuario.role || "Rol administrativo"} ·{" "}
-                    {usuario.estado || "Activo"}
+                    {usuario.role || "Rol administrativo"} ·{" "}
+                    {usuario.status || "Sin estado"}
                   </p>
                 </div>
               ))

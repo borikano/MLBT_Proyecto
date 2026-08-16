@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -5,7 +7,6 @@ import DataTable from "@/components/shared/DataTable"
 import { useUsuariosModule } from "@/features/usuarios/useUsuariosModule"
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -21,9 +22,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 function formatBoolean(value) {
   return value ? "Sí" : "No"
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "Sin fecha"
+  }
+
+  return String(value).slice(0, 10)
 }
 
 function getStatusClass(status) {
@@ -31,7 +42,7 @@ function getStatusClass(status) {
     return "bg-green-50 text-green-700"
   }
 
-  if (status === "Retirado") {
+  if (status === "Retirado" || status === "Inactivo") {
     return "bg-red-50 text-red-700"
   }
 
@@ -43,11 +54,21 @@ export default function UsuariosListadoPage() {
 
   const {
     usuarios,
+    loading,
+    error,
+    formError,
     usuarioSeleccionado,
+    bajaMotivo,
+    usuarioReactivacion,
+    reactivacionMotivo,
     prepararEdicion,
     abrirConfirmacionBaja,
     cerrarConfirmacionBaja,
+    setBajaMotivo,
     darBajaUsuario,
+    abrirConfirmacionReactivacion,
+    cerrarConfirmacionReactivacion,
+    setReactivacionMotivo,
     reactivarUsuario,
   } = useUsuariosModule()
 
@@ -58,7 +79,7 @@ export default function UsuariosListadoPage() {
         header: "Registro",
         cell: ({ row }) => (
           <span className="font-semibold text-[#7c2d12]">
-            {row.original.registrationNumber}
+            {row.original.registrationNumber || "Pendiente"}
           </span>
         ),
       },
@@ -69,10 +90,13 @@ export default function UsuariosListadoPage() {
           <div>
             <p className="font-medium">{row.original.name}</p>
             <p className="text-sm text-muted-foreground">
-              {row.original.email}
+              @{row.original.username}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {row.original.email || "Sin email"}
             </p>
             <p className="text-xs text-muted-foreground">
-              Tel: {row.original.phone}
+              Tel: {row.original.phone || "Sin teléfono"}
             </p>
           </div>
         ),
@@ -108,8 +132,8 @@ export default function UsuariosListadoPage() {
         header: "Fechas",
         cell: ({ row }) => (
           <div className="text-xs text-muted-foreground">
-            <p>Alta: {row.original.createdAt}</p>
-            <p>Act: {row.original.updatedAt}</p>
+            <p>Alta: {formatDate(row.original.createdAt)}</p>
+            <p>Act: {formatDate(row.original.updatedAt)}</p>
           </div>
         ),
       },
@@ -121,36 +145,44 @@ export default function UsuariosListadoPage() {
 
           return (
             <div className="flex flex-wrap justify-end gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  prepararEdicion(usuario)
-                  navigate("/usuarios/crear")
-                }}
-              >
-                Editar
-              </Button>
+              <PermissionGate permission={PERMISSIONS.USERS_UPDATE}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    prepararEdicion(usuario)
+                    navigate("/usuarios/crear")
+                  }}
+                >
+                  Editar
+                </Button>
+              </PermissionGate>
 
               {usuario.status === "Retirado" ? (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => reactivarUsuario(usuario)}
-                >
-                  Reactivar
-                </Button>
+                <PermissionGate permission={PERMISSIONS.USERS_UPDATE}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      abrirConfirmacionReactivacion(usuario)
+                    }
+                  >
+                    Reactivar
+                  </Button>
+                </PermissionGate>
               ) : (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => abrirConfirmacionBaja(usuario)}
-                >
-                  Dar baja
-                </Button>
+                <PermissionGate permission={PERMISSIONS.USERS_DEACTIVATE}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => abrirConfirmacionBaja(usuario)}
+                  >
+                    Dar baja
+                  </Button>
+                </PermissionGate>
               )}
             </div>
           )
@@ -159,9 +191,9 @@ export default function UsuariosListadoPage() {
     ],
     [
       abrirConfirmacionBaja,
+      abrirConfirmacionReactivacion,
       navigate,
       prepararEdicion,
-      reactivarUsuario,
     ]
   )
 
@@ -169,16 +201,28 @@ export default function UsuariosListadoPage() {
     <section className="space-y-6">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
-          Gestión local
+          Gestión API
         </p>
         <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">
           Data Table de usuarios
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          Consulta los usuarios administrativos registrados, su estado, rol,
+          Consulta usuarios obtenidos desde la API, junto con rol, estado,
           acceso y fechas de actualización.
         </p>
       </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {formError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {formError}
+        </div>
+      )}
 
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader>
@@ -186,16 +230,22 @@ export default function UsuariosListadoPage() {
             Usuarios registrados
           </CardTitle>
           <CardDescription>
-            Implementada con TanStack Table y componentes shadcn/ui. Los datos
-            completos se conservan en el estado local compartido del módulo.
+            La API MLBT es la autoridad de los registros. El frontend conserva
+            únicamente estado de presentación.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <DataTable
-            columns={columns}
-            data={usuarios}
-            emptyMessage="No hay usuarios registrados."
-          />
+          {loading && usuarios.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Cargando usuarios...
+            </p>
+          ) : (
+            <DataTable
+              columns={columns}
+              data={usuarios}
+              emptyMessage="No hay usuarios registrados."
+            />
+          )}
         </CardContent>
       </Card>
 
@@ -213,16 +263,87 @@ export default function UsuariosListadoPage() {
               ¿Dar baja lógica al usuario?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción marcará a {usuarioSeleccionado?.name} como Retirado y
-              deshabilitará su acceso. El registro no se eliminará de la tabla
-              para conservar el historial.
+              La API marcará a {usuarioSeleccionado?.name} como Retirado y
+              revocará sus sesiones cuando corresponda. El registro se
+              conserva para historial y auditoría.
             </AlertDialogDescription>
           </AlertDialogHeader>
+
+          <div className="grid gap-2">
+            <Label htmlFor="bajaMotivo">Motivo de baja</Label>
+            <Input
+              id="bajaMotivo"
+              value={bajaMotivo}
+              onChange={(event) => setBajaMotivo(event.target.value)}
+              placeholder="Mínimo 3 caracteres"
+            />
+          </div>
+
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={darBajaUsuario}>
-              Confirmar baja lógica
-            </AlertDialogAction>
+            <AlertDialogCancel disabled={loading}>
+              Cancelar
+            </AlertDialogCancel>
+            <PermissionGate permission={PERMISSIONS.USERS_DEACTIVATE}>
+              <Button
+                type="button"
+                disabled={loading}
+                onClick={darBajaUsuario}
+                className="bg-[#7c2d12] hover:bg-[#9a3412]"
+              >
+                {loading ? "Procesando..." : "Confirmar baja lógica"}
+              </Button>
+            </PermissionGate>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog
+        open={Boolean(usuarioReactivacion)}
+        onOpenChange={(open) => {
+          if (!open) {
+            cerrarConfirmacionReactivacion()
+          }
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              ¿Reactivar usuario?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              La reactivación de {usuarioReactivacion?.name} se realizará
+              mediante PUT con estado ACTIVO y motivo de auditoría.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <div className="grid gap-2">
+            <Label htmlFor="reactivacionMotivo">
+              Motivo de reactivación
+            </Label>
+            <Input
+              id="reactivacionMotivo"
+              value={reactivacionMotivo}
+              onChange={(event) =>
+                setReactivacionMotivo(event.target.value)
+              }
+              placeholder="Mínimo 3 caracteres"
+            />
+          </div>
+
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={loading}>
+              Cancelar
+            </AlertDialogCancel>
+            <PermissionGate permission={PERMISSIONS.USERS_UPDATE}>
+              <Button
+                type="button"
+                disabled={loading}
+                onClick={reactivarUsuario}
+                className="bg-[#7c2d12] hover:bg-[#9a3412]"
+              >
+                {loading ? "Procesando..." : "Confirmar reactivación"}
+              </Button>
+            </PermissionGate>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

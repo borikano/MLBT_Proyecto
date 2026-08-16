@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { useNavigate } from "react-router-dom"
 
 import { useUsuariosModule } from "@/features/usuarios/useUsuariosModule"
@@ -25,6 +27,7 @@ export default function UsuariosCrearPage() {
   const {
     estadosUsuario,
     rolesUsuarios,
+    loading,
     formData,
     formError,
     estaEditando,
@@ -34,8 +37,8 @@ export default function UsuariosCrearPage() {
     guardarUsuario,
   } = useUsuariosModule()
 
-  const handleSubmit = (event) => {
-    const guardado = guardarUsuario(event)
+  const handleSubmit = async (event) => {
+    const guardado = await guardarUsuario(event)
 
     if (guardado) {
       navigate("/usuarios/listado")
@@ -51,15 +54,15 @@ export default function UsuariosCrearPage() {
     <section className="space-y-6">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
-          Gestión local
+          Gestión API
         </p>
         <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">
           {estaEditando ? "Editar usuario" : "Crear usuario"}
         </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          Registra o actualiza usuarios administrativos del sistema. La
-          contraseña se valida en el formulario, pero no se muestra ni se
-          persiste como texto plano.
+          Registra o actualiza usuarios administrativos usando la API MLBT como
+          fuente de verdad. Los identificadores y números de registro son
+          generados por el backend.
         </p>
       </div>
 
@@ -160,6 +163,18 @@ export default function UsuariosCrearPage() {
               </div>
 
               <div className="grid gap-2">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  autoComplete="username"
+                  placeholder="Ej: mariana.gomez"
+                />
+              </div>
+
+              <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -180,7 +195,8 @@ export default function UsuariosCrearPage() {
                   type="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Mínimo 6 caracteres"
+                  autoComplete="new-password"
+                  placeholder="Mínimo 8 caracteres"
                 />
               </div>
 
@@ -192,9 +208,29 @@ export default function UsuariosCrearPage() {
                   type="password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   placeholder="Repite la contraseña"
                 />
               </div>
+
+              {estaEditando && (
+                <div className="grid gap-2 md:col-span-2">
+                  <Label htmlFor="motivo">
+                    Motivo de auditoría
+                  </Label>
+                  <Input
+                    id="motivo"
+                    name="motivo"
+                    value={formData.motivo}
+                    onChange={handleChange}
+                    placeholder="Obligatorio si cambias rol o estado"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Para cambios efectivos de rol o estado, el backend exige
+                    un motivo de mínimo 3 caracteres.
+                  </p>
+                </div>
+              )}
             </div>
 
             {formError && (
@@ -205,14 +241,35 @@ export default function UsuariosCrearPage() {
 
             <div className="flex flex-wrap justify-end gap-3">
               {estaEditando && (
-                <Button type="button" variant="outline" onClick={handleCancel}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCancel}
+                  disabled={loading}
+                >
                   Cancelar edición
                 </Button>
               )}
 
-              <Button type="submit" className="bg-[#7c2d12] hover:bg-[#9a3412]">
-                {estaEditando ? "Guardar cambios" : "Crear usuario"}
-              </Button>
+              <PermissionGate
+                permission={
+                  estaEditando
+                    ? PERMISSIONS.USERS_UPDATE
+                    : PERMISSIONS.USERS_CREATE
+                }
+              >
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[#7c2d12] hover:bg-[#9a3412]"
+                >
+                  {loading
+                    ? "Guardando..."
+                    : estaEditando
+                      ? "Guardar cambios"
+                      : "Crear usuario"}
+                </Button>
+              </PermissionGate>
             </div>
           </form>
         </CardContent>

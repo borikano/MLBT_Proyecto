@@ -1,13 +1,34 @@
-import { useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
+import { useNavigate } from "react-router-dom"
 
 import { UsuariosContext } from "@/features/usuarios/usuariosContext"
-
 import {
   estadosUsuario,
   rolesUsuarios,
-  usuariosMock,
-} from "@/data/mocks/usuarios.mock"
-
+} from "@/data/catalogs/users.catalog"
+import {
+  buildCreateUserPayload,
+  buildUpdateUserPayload,
+  mapApiUserToUi,
+  mapApiUsersToUi,
+} from "@/mappers/user.mapper"
+import {
+  createUserApi,
+  deactivateUserApi,
+  listUsersApi,
+  updateUserApi,
+} from "@/services/users.api"
+import {
+  handleAuthenticatedApiError,
+} from "@/lib/auth"
+import {
+  isApiError,
+} from "@/lib/api"
 
 const initialFormData = {
   role: "ADMIN_TIENDA",
@@ -15,45 +36,125 @@ const initialFormData = {
   firstName: "",
   lastName: "",
   phone: "",
+  username: "",
   email: "",
   password: "",
   confirmPassword: "",
   status: "Activo",
+  motivo: "",
 }
 
-function getTodayIsoDate() {
-  return new Date().toISOString().slice(0, 10)
-}
+function getFunctionalApiError(error, fallbackMessage) {
+  if (isApiError(error, 403)) {
+    return "No tienes permiso para realizar esta operación."
+  }
 
-function getRoleData(roleValue) {
-  return rolesUsuarios.find((role) => role.value === roleValue)
-}
+  if (isApiError(error, 409)) {
+    return (
+      error.message ||
+      "Existe un conflicto con username, email o documento."
+    )
+  }
 
-function buildFullName(firstName, lastName) {
-  return `${firstName.trim()} ${lastName.trim()}`.trim()
-}
+  if (isApiError(error, 400) || isApiError(error, 404)) {
+    return error.message || fallbackMessage
+  }
 
-function generateRegistrationNumber(users, roleValue) {
-  const roleData = getRoleData(roleValue)
-  const prefix = roleData?.prefix || "USR"
+  if (isApiError(error) && error.status >= 500) {
+    return "No fue posible completar la operación. Intenta nuevamente."
+  }
 
-  const roleUsers = users.filter((user) =>
-    user.registrationNumber.startsWith(`${prefix}-`)
-  )
-
-  const nextNumber = roleUsers.length + 1
-
-  return `${prefix}-${String(nextNumber).padStart(4, "0")}`
+  return error?.message || fallbackMessage
 }
 
 export function UsuariosProvider({ children }) {
-  const [usuarios, setUsuarios] = useState(usuariosMock)
+  const navigate = useNavigate()
+  const [usuarios, setUsuarios] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState(initialFormData)
   const [formError, setFormError] = useState("")
   const [usuarioEditandoId, setUsuarioEditandoId] = useState(null)
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null)
+  const [bajaMotivo, setBajaMotivo] = useState("")
+  const [usuarioReactivacion, setUsuarioReactivacion] = useState(null)
+  const [reactivacionMotivo, setReactivacionMotivo] = useState("")
 
   const estaEditando = Boolean(usuarioEditandoId)
+
+  const usuarioEditando = useMemo(
+    () =>
+      usuarios.find((usuario) => usuario.id === usuarioEditandoId) || null,
+    [usuarios, usuarioEditandoId]
+  )
+
+  const handleApiFailure = useCallback(
+    (apiError, fallbackMessage) => {
+      if (handleAuthenticatedApiError(apiError)) {
+        navigate("/login", { replace: true })
+        return "La sesión ya no es válida. Inicia sesión nuevamente."
+      }
+
+      return getFunctionalApiError(apiError, fallbackMessage)
+    },
+    [navigate]
+  )
+
+  const cargarUsuarios = useCallback(async () => {
+    setLoading(true)
+    setError("")
+
+    try {
+      const data = await listUsersApi()
+      setUsuarios(mapApiUsersToUi(data))
+      return true
+    } catch (apiError) {
+      setError(
+        handleApiFailure(
+          apiError,
+          "No fue posible cargar los usuarios."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
+  }, [handleApiFailure])
+
+  useEffect(() => {
+    let active = true
+
+    listUsersApi()
+      .then((data) => {
+        if (!active) {
+          return
+        }
+
+        setUsuarios(mapApiUsersToUi(data))
+        setError("")
+      })
+      .catch((apiError) => {
+        if (!active) {
+          return
+        }
+
+        setError(
+          handleApiFailure(
+            apiError,
+            "No fue posible cargar los usuarios."
+          )
+        )
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false)
+        }
+      })
+
+    return () => {
+      active = false
+    }
+  }, [handleApiFailure])
 
   const totalUsuarios = usuarios.length
   const usuariosActivos = usuarios.filter(
@@ -62,12 +163,12 @@ export function UsuariosProvider({ children }) {
   const usuariosRetirados = usuarios.filter(
     (usuario) => usuario.status === "Retirado"
   ).length
-
   const usuariosPendientes = usuarios.filter((usuario) =>
     usuario.status.toLowerCase().includes("pendiente")
   ).length
-
-  const usuariosConAcceso = usuarios.filter((usuario) => usuario.canLogin).length
+  const usuariosConAcceso = usuarios.filter(
+    (usuario) => usuario.canLogin
+  ).length
 
   const limpiarFormulario = () => {
     setFormData(initialFormData)
@@ -96,12 +197,25 @@ export function UsuariosProvider({ children }) {
     const firstName = formData.firstName.trim()
     const lastName = formData.lastName.trim()
     const phone = formData.phone.trim()
+    const username = formData.username.trim()
     const email = formData.email.trim()
-    const password = formData.password.trim()
-    const confirmPassword = formData.confirmPassword.trim()
+    const password = formData.password
+    const confirmPassword = formData.confirmPassword
+    const motivo = formData.motivo.trim()
 
-    if (!documentNumber || !firstName || !lastName || !phone || !email) {
-      return "Completa rol, CC, nombres, apellidos, teléfono y email."
+    if (
+      !documentNumber ||
+      !firstName ||
+      !lastName ||
+      !phone ||
+      !username ||
+      !email
+    ) {
+      return "Completa rol, CC, nombres, apellidos, teléfono, username y email."
+    }
+
+    if (username.length < 3) {
+      return "El username debe tener mínimo 3 caracteres."
     }
 
     const documentoDuplicado = usuarios.some(
@@ -112,6 +226,16 @@ export function UsuariosProvider({ children }) {
 
     if (documentoDuplicado) {
       return "Ya existe un usuario con ese número de CC."
+    }
+
+    const usernameDuplicado = usuarios.some(
+      (usuario) =>
+        usuario.username.toLowerCase() === username.toLowerCase() &&
+        usuario.id !== usuarioEditandoId
+    )
+
+    if (usernameDuplicado) {
+      return "Ya existe un usuario con ese username."
     }
 
     const correoDuplicado = usuarios.some(
@@ -132,14 +256,32 @@ export function UsuariosProvider({ children }) {
       return "La contraseña y la confirmación no coinciden."
     }
 
-    if (password && password.length < 6) {
-      return "La contraseña debe tener mínimo 6 caracteres."
+    if (password && password.length < 8) {
+      return "La contraseña debe tener mínimo 8 caracteres."
+    }
+
+    if (password && password.length > 120) {
+      return "La contraseña no puede superar 120 caracteres."
+    }
+
+    if (estaEditando && usuarioEditando) {
+      const cambioSensible =
+        usuarioEditando.role !== formData.role ||
+        usuarioEditando.status !== formData.status
+
+      if (cambioSensible && motivo.length < 3) {
+        return "Indica un motivo de mínimo 3 caracteres para cambiar rol o estado."
+      }
+
+      if (motivo && motivo.length < 3) {
+        return "El motivo debe tener mínimo 3 caracteres."
+      }
     }
 
     return ""
   }
 
-  const guardarUsuario = (event) => {
+  const guardarUsuario = async (event) => {
     event.preventDefault()
 
     const mensajeError = validarFormulario()
@@ -149,59 +291,60 @@ export function UsuariosProvider({ children }) {
       return false
     }
 
-    const roleData = getRoleData(formData.role)
-    const today = getTodayIsoDate()
+    setLoading(true)
+    setError("")
+    setFormError("")
 
-    const usuarioNormalizado = {
-      documentNumber: formData.documentNumber.trim(),
-      firstName: formData.firstName.trim(),
-      lastName: formData.lastName.trim(),
-      name: buildFullName(formData.firstName, formData.lastName),
-      phone: formData.phone.trim(),
-      email: formData.email.trim(),
-      role: formData.role,
-      roleLabel: roleData?.label || "Sin rol",
-      status: formData.status,
-      canLogin: formData.status === "Activo",
-      updatedAt: today,
-    }
+    try {
+      if (estaEditando && usuarioEditando) {
+        const cambioSensible =
+          usuarioEditando.role !== formData.role ||
+          usuarioEditando.status !== formData.status
 
-    if (estaEditando) {
-      setUsuarios((usuariosActuales) =>
-        usuariosActuales.map((usuario) =>
-          usuario.id === usuarioEditandoId
-            ? {
-                ...usuario,
-                ...usuarioNormalizado,
-                passwordConfigured:
-                  usuario.passwordConfigured || Boolean(formData.password),
-              }
-            : usuario
+        const data = await updateUserApi(
+          usuarioEditandoId,
+          buildUpdateUserPayload(formData, {
+            includeReason: cambioSensible,
+          })
         )
-      )
+
+        const usuarioActualizado = mapApiUserToUi(data)
+
+        setUsuarios((usuariosActuales) =>
+          usuariosActuales.map((usuario) =>
+            usuario.id === usuarioActualizado.id
+              ? usuarioActualizado
+              : usuario
+          )
+        )
+      } else {
+        const data = await createUserApi(
+          buildCreateUserPayload(formData)
+        )
+
+        const nuevoUsuario = mapApiUserToUi(data)
+
+        setUsuarios((usuariosActuales) => [
+          ...usuariosActuales,
+          nuevoUsuario,
+        ])
+      }
 
       limpiarFormulario()
       return true
+    } catch (apiError) {
+      setFormError(
+        handleApiFailure(
+          apiError,
+          estaEditando
+            ? "No fue posible actualizar el usuario."
+            : "No fue posible crear el usuario."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
     }
-
-    const nuevoId =
-      usuarios.length > 0
-        ? Math.max(...usuarios.map((usuario) => usuario.id)) + 1
-        : 1
-
-    const nuevoUsuario = {
-      id: nuevoId,
-      registrationNumber: generateRegistrationNumber(usuarios, formData.role),
-      ...usuarioNormalizado,
-      passwordConfigured: true,
-      createdAt: today,
-      updatedAt: today,
-    }
-
-    setUsuarios((usuariosActuales) => [...usuariosActuales, nuevoUsuario])
-    limpiarFormulario()
-
-    return true
   }
 
   const prepararEdicion = (usuario) => {
@@ -212,70 +355,147 @@ export function UsuariosProvider({ children }) {
       firstName: usuario.firstName,
       lastName: usuario.lastName,
       phone: usuario.phone,
+      username: usuario.username,
       email: usuario.email,
       password: "",
       confirmPassword: "",
       status: usuario.status,
+      motivo: "",
     })
     setFormError("")
   }
 
   const abrirConfirmacionBaja = (usuario) => {
     setUsuarioSeleccionado(usuario)
+    setBajaMotivo("")
+    setFormError("")
   }
 
   const cerrarConfirmacionBaja = () => {
     setUsuarioSeleccionado(null)
+    setBajaMotivo("")
   }
 
-  const darBajaUsuario = () => {
+  const darBajaUsuario = async () => {
     if (!usuarioSeleccionado) {
-      return
+      return false
     }
 
-    const today = getTodayIsoDate()
+    const motivo = bajaMotivo.trim()
 
-    setUsuarios((usuariosActuales) =>
-      usuariosActuales.map((usuario) =>
-        usuario.id === usuarioSeleccionado.id
-          ? {
-              ...usuario,
-              status: "Retirado",
-              canLogin: false,
-              updatedAt: today,
-            }
-          : usuario
+    if (motivo.length < 3) {
+      setFormError(
+        "El motivo de baja es obligatorio y debe tener mínimo 3 caracteres."
       )
-    )
-
-    if (usuarioSeleccionado.id === usuarioEditandoId) {
-      limpiarFormulario()
+      return false
     }
 
-    cerrarConfirmacionBaja()
+    setLoading(true)
+    setError("")
+    setFormError("")
+
+    try {
+      const data = await deactivateUserApi(
+        usuarioSeleccionado.id,
+        motivo
+      )
+      const usuarioActualizado = mapApiUserToUi(data)
+
+      setUsuarios((usuariosActuales) =>
+        usuariosActuales.map((usuario) =>
+          usuario.id === usuarioActualizado.id
+            ? usuarioActualizado
+            : usuario
+        )
+      )
+
+      if (usuarioSeleccionado.id === usuarioEditandoId) {
+        limpiarFormulario()
+      }
+
+      cerrarConfirmacionBaja()
+      return true
+    } catch (apiError) {
+      setFormError(
+        handleApiFailure(
+          apiError,
+          "No fue posible dar de baja al usuario."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const reactivarUsuario = (usuarioSeleccionado) => {
-    const today = getTodayIsoDate()
+  const abrirConfirmacionReactivacion = (usuario) => {
+    setUsuarioReactivacion(usuario)
+    setReactivacionMotivo("")
+    setFormError("")
+  }
 
-    setUsuarios((usuariosActuales) =>
-      usuariosActuales.map((usuario) =>
-        usuario.id === usuarioSeleccionado.id
-          ? {
-              ...usuario,
-              status: "Activo",
-              canLogin: true,
-              updatedAt: today,
-            }
-          : usuario
+  const cerrarConfirmacionReactivacion = () => {
+    setUsuarioReactivacion(null)
+    setReactivacionMotivo("")
+  }
+
+  const reactivarUsuario = async () => {
+    if (!usuarioReactivacion) {
+      return false
+    }
+
+    const motivo = reactivacionMotivo.trim()
+
+    if (motivo.length < 3) {
+      setFormError(
+        "El motivo de reactivación es obligatorio y debe tener mínimo 3 caracteres."
       )
-    )
+      return false
+    }
+
+    setLoading(true)
+    setError("")
+    setFormError("")
+
+    try {
+      const data = await updateUserApi(
+        usuarioReactivacion.id,
+        {
+          estado: "ACTIVO",
+          motivo,
+        }
+      )
+      const usuarioActualizado = mapApiUserToUi(data)
+
+      setUsuarios((usuariosActuales) =>
+        usuariosActuales.map((usuario) =>
+          usuario.id === usuarioActualizado.id
+            ? usuarioActualizado
+            : usuario
+        )
+      )
+
+      cerrarConfirmacionReactivacion()
+      return true
+    } catch (apiError) {
+      setFormError(
+        handleApiFailure(
+          apiError,
+          "No fue posible reactivar al usuario."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
   }
 
   const value = {
     estadosUsuario,
     rolesUsuarios,
     usuarios,
+    loading,
+    error,
     formData,
     formError,
     estaEditando,
@@ -285,6 +505,10 @@ export function UsuariosProvider({ children }) {
     usuariosPendientes,
     usuariosConAcceso,
     usuarioSeleccionado,
+    bajaMotivo,
+    usuarioReactivacion,
+    reactivacionMotivo,
+    cargarUsuarios,
     limpiarFormulario,
     updateFormField,
     handleChange,
@@ -292,7 +516,11 @@ export function UsuariosProvider({ children }) {
     prepararEdicion,
     abrirConfirmacionBaja,
     cerrarConfirmacionBaja,
+    setBajaMotivo,
     darBajaUsuario,
+    abrirConfirmacionReactivacion,
+    cerrarConfirmacionReactivacion,
+    setReactivacionMotivo,
     reactivarUsuario,
   }
 

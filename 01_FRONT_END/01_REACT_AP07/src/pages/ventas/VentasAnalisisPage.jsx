@@ -36,6 +36,8 @@ export default function VentasAnalisisPage() {
     totalVentasFiltradas,
     totalIngresosFiltrados,
     totalProductosFiltrados,
+    salesLoading,
+    salesError,
     handleSegmentacionChange,
     handleFechaCalendarioChange,
     limpiarFiltros,
@@ -46,11 +48,23 @@ export default function VentasAnalisisPage() {
     <section className="min-w-0 space-y-8">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
-          Registro local
+          Datos API
         </p>
 
         <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Ventas</h1>
       </div>
+
+      {salesLoading && (
+        <p className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2 text-sm text-orange-800">
+          Cargando ventas para análisis...
+        </p>
+      )}
+
+      {salesError && (
+        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {salesError}
+        </p>
+      )}
 
       <section className="scroll-mt-6 space-y-5">
         <div className="rounded-xl border border-[#f1d4bd] bg-[#fff7ed] p-4">
@@ -62,17 +76,18 @@ export default function VentasAnalisisPage() {
             Análisis de ventas
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Consulta ventas confirmadas, demanda por producto y comportamiento
-            por método de pago sin afectar el pedido actual.
+            Las métricas consideran ventas confirmadas provenientes de la API.
+            Las ventas anuladas permanecen visibles en el historial, pero no
+            incrementan ingresos ni demanda.
           </p>
         </div>
 
         <div className="grid gap-3 md:grid-cols-3">
           <Card className="border-[#f1d4bd] bg-white">
             <CardHeader className="p-4">
-              <CardDescription>Ventas registradas hoy</CardDescription>
+              <CardDescription>Ventas confirmadas hoy</CardDescription>
               <CardTitle className="text-2xl text-[#7c2d12]">
-                {ventasDia}
+                {salesError ? "N/D" : ventasDia}
               </CardTitle>
             </CardHeader>
           </Card>
@@ -81,7 +96,7 @@ export default function VentasAnalisisPage() {
             <CardHeader className="p-4">
               <CardDescription>Total vendido hoy</CardDescription>
               <CardTitle className="text-2xl text-[#7c2d12]">
-                {formatCurrency(totalVentasDia)}
+                {salesError ? "N/D" : formatCurrency(totalVentasDia)}
               </CardTitle>
             </CardHeader>
           </Card>
@@ -90,7 +105,7 @@ export default function VentasAnalisisPage() {
             <CardHeader className="p-4">
               <CardDescription>Productos vendidos filtrados</CardDescription>
               <CardTitle className="text-2xl text-[#7c2d12]">
-                {totalProductosFiltrados}
+                {salesError ? "N/D" : totalProductosFiltrados}
               </CardTitle>
             </CardHeader>
           </Card>
@@ -102,8 +117,8 @@ export default function VentasAnalisisPage() {
               Segmentación de ventas
             </CardTitle>
             <CardDescription>
-              Usa el calendario y el segmento de pago para filtrar. La tabla se
-              agrupa directamente por día, hora, mes o año.
+              Usa el calendario y el segmento de pago para filtrar. El análisis
+              comercial usa únicamente ventas confirmadas.
             </CardDescription>
           </CardHeader>
 
@@ -122,7 +137,10 @@ export default function VentasAnalisisPage() {
 
               <div className="space-y-1.5">
                 <Label htmlFor="segmentacion">Agrupar por</Label>
-                <Select value={segmentacion} onValueChange={handleSegmentacionChange}>
+                <Select
+                  value={segmentacion}
+                  onValueChange={handleSegmentacionChange}
+                >
                   <SelectTrigger id="segmentacion" className="h-9">
                     <SelectValue placeholder="Selecciona agrupación" />
                   </SelectTrigger>
@@ -157,7 +175,11 @@ export default function VentasAnalisisPage() {
               </div>
 
               <div className="flex items-end">
-                <Button type="button" variant="outline" onClick={limpiarFiltros}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={limpiarFiltros}
+                >
                   Limpiar filtros
                 </Button>
               </div>
@@ -166,10 +188,10 @@ export default function VentasAnalisisPage() {
             <div className="grid gap-3 md:grid-cols-3">
               <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] p-3">
                 <p className="text-xs text-muted-foreground">
-                  Ventas filtradas
+                  Ventas confirmadas filtradas
                 </p>
                 <p className="text-xl font-bold text-[#7c2d12]">
-                  {totalVentasFiltradas}
+                  {salesError ? "N/D" : totalVentasFiltradas}
                 </p>
               </div>
 
@@ -178,7 +200,7 @@ export default function VentasAnalisisPage() {
                   Ingresos filtrados
                 </p>
                 <p className="text-xl font-bold text-[#7c2d12]">
-                  {formatCurrency(totalIngresosFiltrados)}
+                  {salesError ? "N/D" : formatCurrency(totalIngresosFiltrados)}
                 </p>
               </div>
 
@@ -193,7 +215,7 @@ export default function VentasAnalisisPage() {
             <DataTable
               columns={resumenColumns}
               data={resumenSegmentado}
-              emptyMessage="No hay periodos para mostrar."
+              emptyMessage="No hay periodos confirmados para mostrar."
             />
           </CardContent>
         </Card>
@@ -205,7 +227,7 @@ export default function VentasAnalisisPage() {
                 Demanda por producto
               </CardTitle>
               <CardDescription>
-                Unidades vendidas según los filtros aplicados.
+                Unidades de ventas confirmadas según los filtros aplicados.
               </CardDescription>
             </CardHeader>
 
@@ -235,7 +257,7 @@ export default function VentasAnalisisPage() {
                 ))
               ) : (
                 <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                  No hay demanda para los filtros aplicados.
+                  No hay demanda confirmada para los filtros aplicados.
                 </p>
               )}
             </CardContent>
@@ -247,7 +269,7 @@ export default function VentasAnalisisPage() {
                 Métodos de pago segmentados
               </CardTitle>
               <CardDescription>
-                Resumen por segmento de pago según los filtros aplicados.
+                Resumen de ventas confirmadas por segmento de pago.
               </CardDescription>
             </CardHeader>
 
@@ -279,7 +301,7 @@ export default function VentasAnalisisPage() {
                 ))
               ) : (
                 <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
-                  No hay pagos para los filtros aplicados.
+                  No hay pagos confirmados para los filtros aplicados.
                 </p>
               )}
             </CardContent>

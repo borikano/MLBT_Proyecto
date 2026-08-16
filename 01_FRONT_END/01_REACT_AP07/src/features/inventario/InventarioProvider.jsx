@@ -1,17 +1,40 @@
-import { useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from "react"
+import { useNavigate } from "react-router-dom"
 
 import {
   categoriasInventario,
   estadosInventario,
-  inventarioMock,
-  movimientosInventarioMock,
   tiposMovimientoInventario,
   unidadesInventario,
-} from "@/data/mocks/inventario.mock"
-
-import { Button } from "@/components/ui/button"
-
+} from "@/data/catalogs/inventory.catalog"
+import {
+  createItemColumns,
+  createMovementColumns,
+} from "./inventarioColumns"
 import { InventarioContext } from "./inventarioContext"
+import {
+  buildCreateInventoryPayload,
+  buildInventoryMovementPayload,
+  buildUpdateInventoryPayload,
+  mapApiInventoryListToUi,
+  mapApiInventoryMovementToUi,
+  mapApiInventoryMovementsToUi,
+  mapApiInventoryToUi,
+} from "@/mappers/inventory.mapper"
+import {
+  createInventoryApi,
+  createInventoryMovementApi,
+  deactivateInventoryApi,
+  listInventoryApi,
+  listInventoryMovementsApi,
+  updateInventoryApi,
+} from "@/services/inventory.api"
+import { handleAuthenticatedApiError } from "@/lib/auth"
+import { isApiError } from "@/lib/api"
 
 const initialItemForm = {
   nombre: "",
@@ -29,74 +52,32 @@ const initialMovementForm = {
   motivo: "",
 }
 
-function getTodayIsoDate() {
-  return new Date().toISOString().slice(0, 10)
-}
-
-function generateRegistrationNumber(items) {
-  const maxSequence = items.reduce((currentMax, item) => {
-    const sequence = Number(
-      String(item.registrationNumber || "").replace("PRD-", "")
-    )
-
-    return Number.isFinite(sequence) ? Math.max(currentMax, sequence) : currentMax
-  }, 0)
-
-  return `PRD-${String(maxSequence + 1).padStart(4, "0")}`
-}
-
-function generateMovementNumber(movements) {
-  const maxSequence = movements.reduce((currentMax, movement) => {
-    const sequence = Number(
-      String(movement.movementNumber || "").replace("MOV-", "")
-    )
-
-    return Number.isFinite(sequence) ? Math.max(currentMax, sequence) : currentMax
-  }, 0)
-
-  return `MOV-${String(maxSequence + 1).padStart(4, "0")}`
-}
-
-function getStockAlert(item) {
-  return Number(item.stock) <= Number(item.stockMin)
-    ? "Stock bajo"
-    : "Stock estable"
-}
-
-function getStockAlertClass(item) {
-  return Number(item.stock) <= Number(item.stockMin)
-    ? "bg-red-50 text-red-700"
-    : "bg-green-50 text-green-700"
-}
-
-function getStatusClass(status) {
-  return status === "Activo"
-    ? "bg-green-50 text-green-700"
-    : "bg-red-50 text-red-700"
-}
-
-function getMovementLabel(tipo) {
-  return (
-    tiposMovimientoInventario.find((movementType) => movementType.value === tipo)
-      ?.label || "Movimiento"
-  )
-}
-
-function calculateNextStock(currentStock, movementType, quantity) {
-  if (movementType === "entrada") {
-    return currentStock + quantity
+function getFunctionalApiError(error, fallbackMessage) {
+  if (isApiError(error, 403)) {
+    return "No tienes permiso para realizar esta operación."
   }
 
-  if (movementType === "salida") {
-    return currentStock - quantity
+  if (isApiError(error, 409)) {
+    return error.message || "La operación entra en conflicto con el inventario actual."
   }
 
-  return currentStock + quantity
+  if (isApiError(error, 400) || isApiError(error, 404)) {
+    return error.message || fallbackMessage
+  }
+
+  if (isApiError(error) && error.status >= 500) {
+    return "No fue posible completar la operación. Intenta nuevamente."
+  }
+
+  return error?.message || fallbackMessage
 }
 
 export default function InventarioProvider({ children }) {
-  const [items, setItems] = useState(inventarioMock)
-  const [movements, setMovements] = useState(movimientosInventarioMock)
+  const navigate = useNavigate()
+  const [items, setItems] = useState([])
+  const [movements, setMovements] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const [itemForm, setItemForm] = useState(initialItemForm)
   const [movementForm, setMovementForm] = useState(initialMovementForm)
   const [itemFormError, setItemFormError] = useState("")
@@ -107,10 +88,105 @@ export default function InventarioProvider({ children }) {
 
   const estaEditando = Boolean(itemEditandoId)
 
+  const handleApiFailure = useCallback(
+    (apiError, fallbackMessage) => {
+      if (handleAuthenticatedApiError(apiError)) {
+        navigate("/login", { replace: true })
+        return "La sesión ya no es válida. Inicia sesión nuevamente."
+      }
+
+      return getFunctionalApiError(apiError, fallbackMessage)
+    },
+    [navigate]
+  )
+
+  useEffect(() => {
+    let active = true
+
+    Promise.all([
+      listInventoryApi(),
+      listInventoryMovementsApi(),
+    ])
+      .then(([inventoryData, movementData]) => {
+        if (!active) {
+          return
+        }
+
+        setItems(mapApiInventoryListToUi(inventoryData))
+        setMovements(mapApiInventoryMovementsToUi(movementData))
+        setError("")
+      })
+      .catch((apiError) => {
+        if (!active) {
+          return
+        }
+
+        setError(
+          handleApiFailure(
+            apiError,
+            "No fue posible cargar el inventario."
+          )
+        )
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false)
+        }
+      })
+
+    return () => {
+      active = false
+    }
+  }, [handleApiFailure])
+
+  const cargarInventario = useCallback(async () => {
+    setLoading(true)
+    setError("")
+
+    try {
+      const data = await listInventoryApi()
+      setItems(mapApiInventoryListToUi(data))
+      return true
+    } catch (apiError) {
+      setError(
+        handleApiFailure(
+          apiError,
+          "No fue posible cargar el inventario."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
+  }, [handleApiFailure])
+
+  const cargarMovimientos = useCallback(async () => {
+    setLoading(true)
+    setError("")
+
+    try {
+      const data = await listInventoryMovementsApi()
+      setMovements(mapApiInventoryMovementsToUi(data))
+      return true
+    } catch (apiError) {
+      setError(
+        handleApiFailure(
+          apiError,
+          "No fue posible cargar los movimientos de inventario."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
+  }, [handleApiFailure])
+
   const totalItems = items.length
   const itemsActivos = items.filter((item) => item.estado === "Activo").length
   const itemsStockBajo = items.filter(
-    (item) => Number(item.stock) <= Number(item.stockMin)
+    (item) =>
+      item.estado === "Activo" &&
+      Number(item.stock) <= Number(item.stockMin)
   )
   const totalStockBajo = itemsStockBajo.length
 
@@ -118,7 +194,10 @@ export default function InventarioProvider({ children }) {
 
   const itemsFiltrados = items.filter((item) => {
     if (filtroInventario === "stock-bajo") {
-      return Number(item.stock) <= Number(item.stockMin)
+      return (
+        item.estado === "Activo" &&
+        Number(item.stock) <= Number(item.stockMin)
+      )
     }
 
     if (filtroInventario === "activos") {
@@ -186,8 +265,8 @@ export default function InventarioProvider({ children }) {
       return "Completa nombre, categoría, unidad y estado del ítem."
     }
 
-    if (!Number.isFinite(stock) || stock < 0) {
-      return "El stock debe ser un número válido mayor o igual a cero."
+    if (!estaEditando && (!Number.isFinite(stock) || stock < 0)) {
+      return "El stock inicial debe ser un número válido mayor o igual a cero."
     }
 
     if (!Number.isFinite(stockMin) || stockMin < 0) {
@@ -208,57 +287,62 @@ export default function InventarioProvider({ children }) {
     return ""
   }
 
-  const guardarItem = (event) => {
+  const guardarItem = async (event) => {
     event.preventDefault()
 
     const mensajeError = validarItemForm()
 
     if (mensajeError) {
       setItemFormError(mensajeError)
-      return
+      return false
     }
 
-    const today = getTodayIsoDate()
+    setLoading(true)
+    setError("")
+    setItemFormError("")
 
-    const itemNormalizado = {
-      nombre: itemForm.nombre.trim(),
-      categoria: itemForm.categoria.trim(),
-      unidad: itemForm.unidad.trim(),
-      stock: Number(itemForm.stock),
-      stockMin: Number(itemForm.stockMin),
-      estado: itemForm.estado,
-      updatedAt: today,
-    }
-
-    if (estaEditando) {
-      setItems((currentItems) =>
-        currentItems.map((item) =>
-          item.id === itemEditandoId
-            ? {
-                ...item,
-                ...itemNormalizado,
-              }
-            : item
+    try {
+      if (estaEditando) {
+        const data = await updateInventoryApi(
+          itemEditandoId,
+          buildUpdateInventoryPayload(itemForm)
         )
-      )
+        const itemActualizado = mapApiInventoryToUi(data)
+
+        setItems((currentItems) =>
+          currentItems.map((item) =>
+            item.id === itemActualizado.id
+              ? itemActualizado
+              : item
+          )
+        )
+      } else {
+        const data = await createInventoryApi(
+          buildCreateInventoryPayload(itemForm)
+        )
+        const nuevoItem = mapApiInventoryToUi(data)
+
+        setItems((currentItems) => [
+          ...currentItems,
+          nuevoItem,
+        ])
+      }
 
       limpiarItemForm()
-      return
+      return true
+    } catch (apiError) {
+      setItemFormError(
+        handleApiFailure(
+          apiError,
+          estaEditando
+            ? "No fue posible actualizar el ítem."
+            : "No fue posible crear el ítem."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
     }
-
-    const nuevoId =
-      items.length > 0 ? Math.max(...items.map((item) => item.id)) + 1 : 1
-
-    const nuevoItem = {
-      id: nuevoId,
-      registrationNumber: generateRegistrationNumber(items),
-      ...itemNormalizado,
-      createdAt: today,
-      updatedAt: today,
-    }
-
-    setItems((currentItems) => [...currentItems, nuevoItem])
-    limpiarItemForm()
   }
 
   const editarItem = (item) => {
@@ -272,57 +356,92 @@ export default function InventarioProvider({ children }) {
       estado: item.estado,
     })
     setItemFormError("")
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    navigate("/inventario/registrar")
   }
 
   const abrirConfirmacionBaja = (item) => {
     setItemSeleccionado(item)
+    setItemFormError("")
   }
 
   const cerrarConfirmacionBaja = () => {
     setItemSeleccionado(null)
   }
 
-  const darBajaItem = () => {
+  const darBajaItem = async () => {
     if (!itemSeleccionado) {
-      return
+      return false
     }
 
-    const today = getTodayIsoDate()
+    setLoading(true)
+    setError("")
+    setItemFormError("")
 
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === itemSeleccionado.id
-          ? {
-              ...item,
-              estado: "Inactivo",
-              updatedAt: today,
-            }
-          : item
+    try {
+      const data = await deactivateInventoryApi(itemSeleccionado.id)
+      const itemActualizado = mapApiInventoryToUi(data)
+
+      setItems((currentItems) =>
+        currentItems.map((item) =>
+          item.id === itemActualizado.id
+            ? itemActualizado
+            : item
+        )
       )
-    )
 
-    if (itemSeleccionado.id === itemEditandoId) {
-      limpiarItemForm()
+      if (itemSeleccionado.id === itemEditandoId) {
+        limpiarItemForm()
+      }
+
+      cerrarConfirmacionBaja()
+      return true
+    } catch (apiError) {
+      setItemFormError(
+        handleApiFailure(
+          apiError,
+          "No fue posible inactivar el ítem."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
     }
-
-    cerrarConfirmacionBaja()
   }
 
-  const activarItem = (itemSeleccionado) => {
-    const today = getTodayIsoDate()
+  const activarItem = async (itemSeleccionadoParaActivar) => {
+    setLoading(true)
+    setError("")
+    setItemFormError("")
 
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === itemSeleccionado.id
-          ? {
-              ...item,
-              estado: "Activo",
-              updatedAt: today,
-            }
-          : item
+    try {
+      const data = await updateInventoryApi(
+        itemSeleccionadoParaActivar.id,
+        {
+          estado: "ACTIVO",
+        }
       )
-    )
+      const itemActualizado = mapApiInventoryToUi(data)
+
+      setItems((currentItems) =>
+        currentItems.map((item) =>
+          item.id === itemActualizado.id
+            ? itemActualizado
+            : item
+        )
+      )
+
+      return true
+    } catch (apiError) {
+      setItemFormError(
+        handleApiFailure(
+          apiError,
+          "No fue posible activar el ítem."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
   }
 
   const validarMovementForm = () => {
@@ -333,12 +452,17 @@ export default function InventarioProvider({ children }) {
       return "Completa ítem, tipo de movimiento, cantidad y motivo."
     }
 
+    if (reason.length < 3) {
+      return "El motivo debe tener mínimo 3 caracteres."
+    }
+
     if (!Number.isFinite(quantity) || quantity === 0) {
       return "La cantidad debe ser un número distinto de cero."
     }
 
     if (
-      (movementForm.tipo === "entrada" || movementForm.tipo === "salida") &&
+      (movementForm.tipo === "entrada" ||
+        movementForm.tipo === "salida") &&
       quantity < 0
     ) {
       return "Entrada y salida requieren una cantidad positiva."
@@ -356,236 +480,69 @@ export default function InventarioProvider({ children }) {
       return "Solo se pueden registrar movimientos para ítems activos."
     }
 
-    const nextStock = calculateNextStock(
-      Number(selectedItem.stock),
-      movementForm.tipo,
-      quantity
-    )
-
-    if (nextStock < 0) {
-      return "El movimiento no puede dejar el stock en negativo."
-    }
-
     return ""
   }
 
-  const registrarMovimiento = (event) => {
+  const registrarMovimiento = async (event) => {
     event.preventDefault()
 
     const mensajeError = validarMovementForm()
 
     if (mensajeError) {
       setMovementFormError(mensajeError)
-      return
+      return false
     }
 
-    const selectedItem = items.find(
-      (item) => String(item.id) === movementForm.itemId
-    )
+    setLoading(true)
+    setError("")
+    setMovementFormError("")
 
-    const quantity = Number(movementForm.cantidad)
-    const stockAnterior = Number(selectedItem.stock)
-    const stockNuevo = calculateNextStock(
-      stockAnterior,
-      movementForm.tipo,
-      quantity
-    )
-    const today = getTodayIsoDate()
-
-    const nuevoMovimiento = {
-      id:
-        movements.length > 0
-          ? Math.max(...movements.map((movement) => movement.id)) + 1
-          : 1,
-      movementNumber: generateMovementNumber(movements),
-      itemId: selectedItem.id,
-      itemRegistrationNumber: selectedItem.registrationNumber,
-      itemName: selectedItem.nombre,
-      tipo: movementForm.tipo,
-      tipoLabel: getMovementLabel(movementForm.tipo),
-      cantidad: quantity,
-      stockAnterior,
-      stockNuevo,
-      motivo: movementForm.motivo.trim(),
-      fecha: today,
-      usuarioId: "system-local",
-    }
-
-    setItems((currentItems) =>
-      currentItems.map((item) =>
-        item.id === selectedItem.id
-          ? {
-              ...item,
-              stock: stockNuevo,
-              updatedAt: today,
-            }
-          : item
+    try {
+      const data = await createInventoryMovementApi(
+        buildInventoryMovementPayload(movementForm)
       )
-    )
+      const nuevoMovimiento = mapApiInventoryMovementToUi(data)
 
-    setMovements((currentMovements) => [
-      nuevoMovimiento,
-      ...currentMovements,
-    ])
+      setMovements((currentMovements) => [
+        nuevoMovimiento,
+        ...currentMovements,
+      ])
 
-    limpiarMovementForm()
+      setItems((currentItems) =>
+        currentItems.map((item) =>
+          item.id === nuevoMovimiento.itemId
+            ? {
+                ...item,
+                stock: nuevoMovimiento.stockNuevo,
+                updatedAt:
+                  nuevoMovimiento.createdAt ||
+                  item.updatedAt,
+              }
+            : item
+        )
+      )
+
+      limpiarMovementForm()
+      return true
+    } catch (apiError) {
+      setMovementFormError(
+        handleApiFailure(
+          apiError,
+          "No fue posible registrar el movimiento."
+        )
+      )
+      return false
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const itemColumns = [
-    {
-      accessorKey: "alerta",
-      header: "Alerta",
-      cell: ({ row }) => (
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-medium ${getStockAlertClass(
-            row.original
-          )}`}
-        >
-          {getStockAlert(row.original)}
-        </span>
-      ),
-    },
-    {
-      accessorKey: "registrationNumber",
-      header: "Registro",
-      cell: ({ row }) => (
-        <span className="font-medium">
-          {row.original.registrationNumber}
-        </span>
-      ),
-    },
-    {
-      accessorKey: "nombre",
-      header: "Ítem",
-      cell: ({ row }) => (
-        <div className="space-y-1">
-          <p className="font-medium">{row.original.nombre}</p>
-          <p className="text-xs text-muted-foreground">
-            {row.original.categoria}
-          </p>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "unidad",
-      header: "Unidad",
-    },
-    {
-      accessorKey: "stock",
-      header: "Stock",
-    },
-    {
-      accessorKey: "stockMin",
-      header: "Stock mínimo",
-    },
-    {
-      accessorKey: "estado",
-      header: "Estado",
-      cell: ({ row }) => (
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-medium ${getStatusClass(
-            row.original.estado
-          )}`}
-        >
-          {row.original.estado}
-        </span>
-      ),
-    },
-    {
-      id: "fechas",
-      header: "Fechas",
-      cell: ({ row }) => (
-        <div className="space-y-1 text-xs text-muted-foreground">
-          <p>Alta: {row.original.createdAt}</p>
-          <p>Act: {row.original.updatedAt}</p>
-        </div>
-      ),
-    },
-    {
-      id: "acciones",
-      header: () => <div className="text-right">Acciones</div>,
-      cell: ({ row }) => {
-        const item = row.original
-
-        return (
-          <div className="flex flex-wrap justify-end gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => editarItem(item)}
-            >
-              Editar
-            </Button>
-
-            {item.estado === "Inactivo" ? (
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="border-green-200 text-green-700 hover:bg-green-50 hover:text-green-800"
-                onClick={() => activarItem(item)}
-              >
-                Activar
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800"
-                onClick={() => abrirConfirmacionBaja(item)}
-              >
-                Dar baja
-              </Button>
-            )}
-          </div>
-        )
-      },
-    },
-  ]
-
-  const movementColumns = [
-    {
-      accessorKey: "movementNumber",
-      header: "Movimiento",
-      cell: ({ row }) => (
-        <span className="font-medium">{row.original.movementNumber}</span>
-      ),
-    },
-    {
-      accessorKey: "itemName",
-      header: "Ítem",
-      cell: ({ row }) => (
-        <div className="space-y-1">
-          <p className="font-medium">{row.original.itemName}</p>
-          <p className="text-xs text-muted-foreground">
-            {row.original.itemRegistrationNumber}
-          </p>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "tipoLabel",
-      header: "Tipo",
-    },
-    {
-      accessorKey: "cantidad",
-      header: "Cantidad",
-    },
-    {
-      accessorKey: "stockNuevo",
-      header: "Stock final",
-    },
-    {
-      accessorKey: "motivo",
-      header: "Motivo",
-    },
-    {
-      accessorKey: "fecha",
-      header: "Fecha",
-    },
-  ]
+  const itemColumns = createItemColumns({
+    editarItem,
+    activarItem,
+    abrirConfirmacionBaja,
+  })
+  const movementColumns = createMovementColumns()
 
   const contextValue = {
     categoriasInventario,
@@ -593,21 +550,15 @@ export default function InventarioProvider({ children }) {
     tiposMovimientoInventario,
     unidadesInventario,
     items,
-    setItems,
     movements,
-    setMovements,
+    loading,
+    error,
     itemForm,
-    setItemForm,
     movementForm,
-    setMovementForm,
     itemFormError,
-    setItemFormError,
     movementFormError,
-    setMovementFormError,
     itemEditandoId,
-    setItemEditandoId,
     itemSeleccionado,
-    setItemSeleccionado,
     filtroInventario,
     setFiltroInventario,
     estaEditando,
@@ -617,6 +568,8 @@ export default function InventarioProvider({ children }) {
     totalStockBajo,
     activeItems,
     itemsFiltrados,
+    cargarInventario,
+    cargarMovimientos,
     limpiarItemForm,
     limpiarMovementForm,
     updateItemFormField,

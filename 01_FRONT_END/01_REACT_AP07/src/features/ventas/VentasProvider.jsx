@@ -1,56 +1,165 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { useMlbtData } from "@/context/MlbtDataContext"
+import PermissionGate from "@/components/auth/PermissionGate"
+import { Button } from "@/components/ui/button"
 import {
-  productosVentaMock,
   segmentosMetodoPagoVenta,
   tiposVenta,
-} from "@/data/mocks/ventas.mock"
-
-import { Button } from "@/components/ui/button"
+} from "@/data/catalogs/sales.catalog"
+import { isApiError } from "@/lib/api"
+import { handleAuthenticatedApiError } from "@/lib/auth"
+import {
+  buildCreateSalePayload,
+  mapApiSaleProductsToUi,
+  mapApiSalesToUi,
+  mapApiSaleToUi,
+} from "@/mappers/sale.mapper"
+import { PERMISSIONS } from "@/security/permissions"
+import {
+  cancelSaleApi,
+  createSaleApi,
+  listSaleProductsApi,
+  listSalesApi,
+} from "@/services/sales.api"
 
 import { VentasContext } from "./ventasContext"
 import {
   initialOrderForm,
   initialSaleForm,
   segmentacionesVenta,
-  getLocalDateTime,
   getTodayIsoDate,
-  getSaleParts,
   formatCurrency,
   formatQuantity,
   formatDateTime,
-  generateSaleNumber,
-  generateMovementNumber,
   getPaymentSegment,
   buildSegmentSummary,
   buildDemandSummary,
   buildPaymentSummary,
   buildConsumptionFromOrder,
-  validateStockForProduct,
-  validateStockForOrder,
 } from "./ventasLogic"
 
+function getFunctionalApiMessage(error, fallback) {
+  if (isApiError(error, 403)) {
+    return "Tu rol no tiene permiso para realizar esta operación de ventas."
+  }
+
+  if (
+    isApiError(error, 400) ||
+    isApiError(error, 404) ||
+    isApiError(error, 409)
+  ) {
+    return error.message
+  }
+
+  if (isApiError(error) && error.status >= 500) {
+    return fallback
+  }
+
+  return error?.message || fallback
+}
+
 export default function VentasProvider({ children }) {
-  const {
-    itemsInventario,
-    setItemsInventario,
-    movimientosInventario,
-    setMovimientosInventario,
-    ventas,
-    setVentas,
-  } = useMlbtData()
+  const navigate = useNavigate()
+
+  const [productosVenta, setProductosVenta] = useState([])
+  const [ventas, setVentas] = useState([])
+  const [productsLoading, setProductsLoading] = useState(true)
+  const [salesLoading, setSalesLoading] = useState(true)
+  const [productsError, setProductsError] = useState("")
+  const [salesError, setSalesError] = useState("")
 
   const [pedidoActual, setPedidoActual] = useState([])
   const [orderForm, setOrderForm] = useState(initialOrderForm)
   const [saleForm, setSaleForm] = useState(initialSaleForm)
   const [orderError, setOrderError] = useState("")
   const [saleError, setSaleError] = useState("")
+  const [isSavingSale, setIsSavingSale] = useState(false)
+
   const [segmentacion, setSegmentacion] = useState("dia")
   const [fechaCalendario, setFechaCalendario] = useState("")
   const [segmentoPagoFiltro, setSegmentoPagoFiltro] = useState("todos")
 
-  const productosActivos = productosVentaMock.filter(
+  const [ventaAnulacion, setVentaAnulacion] = useState(null)
+  const [motivoAnulacion, setMotivoAnulacion] = useState("")
+  const [cancelError, setCancelError] = useState("")
+  const [isCancelling, setIsCancelling] = useState(false)
+
+  useEffect(() => {
+    let active = true
+
+    listSaleProductsApi()
+      .then((data) => {
+        if (!active) {
+          return
+        }
+
+        setProductosVenta(mapApiSaleProductsToUi(data))
+        setProductsError("")
+      })
+      .catch((error) => {
+        if (!active) {
+          return
+        }
+
+        if (handleAuthenticatedApiError(error)) {
+          navigate("/login", { replace: true })
+          return
+        }
+
+        setProductosVenta([])
+        setProductsError(
+          getFunctionalApiMessage(
+            error,
+            "No fue posible cargar el catálogo de productos de venta."
+          )
+        )
+      })
+      .finally(() => {
+        if (active) {
+          setProductsLoading(false)
+        }
+      })
+
+    listSalesApi()
+      .then((data) => {
+        if (!active) {
+          return
+        }
+
+        setVentas(mapApiSalesToUi(data))
+        setSalesError("")
+      })
+      .catch((error) => {
+        if (!active) {
+          return
+        }
+
+        if (handleAuthenticatedApiError(error)) {
+          navigate("/login", { replace: true })
+          return
+        }
+
+        setVentas([])
+        setSalesError(
+          getFunctionalApiMessage(
+            error,
+            "No fue posible cargar el historial de ventas."
+          )
+        )
+      })
+      .finally(() => {
+        if (active) {
+          setSalesLoading(false)
+        }
+      })
+
+    return () => {
+      active = false
+    }
+  }, [navigate])
+
+  const productosActivos = productosVenta.filter(
     (producto) => producto.estado === "Activo"
   )
 
@@ -65,31 +174,42 @@ export default function VentasProvider({ children }) {
           (venta) => venta.metodoPagoSegmento === segmentoPagoFiltro
         )
 
-  const resumenSegmentado = buildSegmentSummary(ventasFiltradas, segmentacion)
-  const demandaProductos = buildDemandSummary(ventasFiltradas)
-  const resumenPagos = buildPaymentSummary(ventasFiltradas)
+  const ventasConfirmadasFiltradas = ventasFiltradas.filter(
+    (venta) => venta.estado === "Confirmada"
+  )
+
+  const resumenSegmentado = buildSegmentSummary(
+    ventasConfirmadasFiltradas,
+    segmentacion
+  )
+  const demandaProductos = buildDemandSummary(ventasConfirmadasFiltradas)
+  const resumenPagos = buildPaymentSummary(ventasConfirmadasFiltradas)
 
   const totalPedido = pedidoActual.reduce(
     (total, item) => total + item.subtotal,
     0
   )
 
-  const ventasDia = ventas.filter(
+  const ventasConfirmadas = ventas.filter(
+    (venta) => venta.estado === "Confirmada"
+  )
+
+  const ventasDia = ventasConfirmadas.filter(
     (venta) => venta.fecha === getTodayIsoDate()
   ).length
 
-  const totalVentasDia = ventas
+  const totalVentasDia = ventasConfirmadas
     .filter((venta) => venta.fecha === getTodayIsoDate())
     .reduce((total, venta) => total + venta.total, 0)
 
-  const totalVentasFiltradas = ventasFiltradas.length
+  const totalVentasFiltradas = ventasConfirmadasFiltradas.length
 
-  const totalIngresosFiltrados = ventasFiltradas.reduce(
+  const totalIngresosFiltrados = ventasConfirmadasFiltradas.reduce(
     (total, venta) => total + venta.total,
     0
   )
 
-  const totalProductosFiltrados = ventasFiltradas.reduce(
+  const totalProductosFiltrados = ventasConfirmadasFiltradas.reduce(
     (total, venta) =>
       total +
       venta.items.reduce(
@@ -101,8 +221,19 @@ export default function VentasProvider({ children }) {
 
   const consumoPedido = buildConsumptionFromOrder(
     pedidoActual,
-    productosVentaMock
-  )
+    productosVenta
+  ).map((requirement) => {
+    const recipeItem = productosVenta
+      .flatMap((producto) => producto.receta)
+      .find((item) => item.itemId === requirement.itemId)
+
+    return {
+      ...requirement,
+      itemRegistrationNumber: recipeItem?.itemRegistrationNumber || "",
+      itemName: recipeItem?.itemName || `Insumo ${requirement.itemId}`,
+      unidad: recipeItem?.unidad || "",
+    }
+  })
 
   const updateOrderFormField = (name, value) => {
     setOrderForm((currentData) => ({
@@ -168,7 +299,7 @@ export default function VentasProvider({ children }) {
     event.preventDefault()
 
     const quantity = Number(orderForm.quantity)
-    const producto = productosVentaMock.find(
+    const producto = productosVenta.find(
       (item) => String(item.id) === orderForm.productId
     )
 
@@ -177,8 +308,15 @@ export default function VentasProvider({ children }) {
       return
     }
 
-    if (!Number.isFinite(quantity) || quantity <= 0) {
-      setOrderError("La cantidad debe ser un número mayor a cero.")
+    if (!Number.isInteger(quantity) || quantity <= 0) {
+      setOrderError("La cantidad debe ser un número entero mayor a cero.")
+      return
+    }
+
+    if (!Array.isArray(producto.receta) || producto.receta.length === 0) {
+      setOrderError(
+        "El producto no tiene una receta disponible y no puede agregarse."
+      )
       return
     }
 
@@ -189,19 +327,6 @@ export default function VentasProvider({ children }) {
     const requestedQuantity = productoExistente
       ? productoExistente.quantity + quantity
       : quantity
-
-    const stockError = validateStockForProduct({
-      product: producto,
-      requestedQuantity,
-      currentOrder: pedidoActual,
-      products: productosVentaMock,
-      inventoryItems: itemsInventario,
-    })
-
-    if (stockError) {
-      setOrderError(stockError)
-      return
-    }
 
     if (productoExistente) {
       setPedidoActual((currentItems) =>
@@ -247,7 +372,7 @@ export default function VentasProvider({ children }) {
     setSaleError("")
   }
 
-  const confirmarVenta = () => {
+  const confirmarVenta = async () => {
     const cliente = saleForm.cliente.trim()
 
     if (pedidoActual.length === 0) {
@@ -265,101 +390,102 @@ export default function VentasProvider({ children }) {
       return
     }
 
-    const stockError = validateStockForOrder({
-      orderItems: pedidoActual,
-      products: productosVentaMock,
-      inventoryItems: itemsInventario,
-    })
+    setIsSavingSale(true)
+    setSaleError("")
 
-    if (stockError) {
-      setSaleError(stockError)
+    try {
+      const created = await createSaleApi(
+        buildCreateSalePayload({
+          saleForm,
+          orderItems: pedidoActual,
+        })
+      )
+      const nuevaVenta = mapApiSaleToUi(created)
+
+      setVentas((currentSales) => [
+        nuevaVenta,
+        ...currentSales.filter((venta) => venta.id !== nuevaVenta.id),
+      ])
+
+      limpiarPedido()
+    } catch (error) {
+      if (handleAuthenticatedApiError(error)) {
+        navigate("/login", { replace: true })
+        return
+      }
+
+      setSaleError(
+        getFunctionalApiMessage(
+          error,
+          "No fue posible confirmar la venta."
+        )
+      )
+    } finally {
+      setIsSavingSale(false)
+    }
+  }
+
+  const abrirAnulacion = (venta) => {
+    setVentaAnulacion(venta)
+    setMotivoAnulacion("")
+    setCancelError("")
+  }
+
+  const cerrarAnulacion = () => {
+    setVentaAnulacion(null)
+    setMotivoAnulacion("")
+    setCancelError("")
+  }
+
+  const confirmarAnulacion = async () => {
+    const reason = motivoAnulacion.trim()
+
+    if (!ventaAnulacion) {
+      setCancelError("Selecciona una venta para anular.")
       return
     }
 
-    const fechaHora = getLocalDateTime()
-    const parts = getSaleParts(fechaHora)
-    const consumption = buildConsumptionFromOrder(
-      pedidoActual,
-      productosVentaMock
-    )
-
-    const nuevaVenta = {
-      id: ventas.length > 0 ? Math.max(...ventas.map((venta) => venta.id)) + 1 : 1,
-      saleNumber: generateSaleNumber(ventas),
-      fechaHora,
-      fecha: parts.fecha,
-      hora: parts.hora,
-      tipoVenta: saleForm.tipoVenta,
-      metodoPagoSegmento: saleForm.metodoPagoSegmento,
-      metodoPago: saleForm.metodoPago,
-      cliente,
-      usuario: "Administrador MLBT",
-      estado: "Confirmada",
-      items: pedidoActual.map((item) => ({
-        productId: item.productId,
-        productName: item.productName,
-        quantity: item.quantity,
-        unitPrice: item.unitPrice,
-        subtotal: item.subtotal,
-      })),
-      total: totalPedido,
+    if (reason.length < 3) {
+      setCancelError(
+        "El motivo de anulación es obligatorio y debe tener mínimo 3 caracteres."
+      )
+      return
     }
 
-    const nuevosMovimientos = consumption.map((requirement, index) => {
-      const inventoryItem = itemsInventario.find(
-        (item) => item.id === requirement.itemId
+    setIsCancelling(true)
+    setCancelError("")
+
+    try {
+      const cancelled = await cancelSaleApi(ventaAnulacion.id, reason)
+      const ventaActualizada = mapApiSaleToUi(cancelled)
+
+      setVentas((currentSales) =>
+        currentSales.map((venta) =>
+          venta.id === ventaActualizada.id ? ventaActualizada : venta
+        )
       )
-      const stockAnterior = Number(inventoryItem.stock)
-      const stockNuevo = stockAnterior - Number(requirement.cantidad)
 
-      return {
-        id:
-          movimientosInventario.length > 0
-            ? Math.max(...movimientosInventario.map((movement) => movement.id)) +
-              index +
-              1
-            : index + 1,
-        movementNumber: generateMovementNumber(movimientosInventario, index + 1),
-        itemId: inventoryItem.id,
-        itemRegistrationNumber: inventoryItem.registrationNumber,
-        itemName: inventoryItem.nombre,
-        tipo: "salida",
-        tipoLabel: "Salida",
-        cantidad: requirement.cantidad,
-        stockAnterior,
-        stockNuevo,
-        motivo: `Venta ${nuevaVenta.saleNumber}`,
-        fecha: parts.fecha,
-        usuarioId: "system-local",
+      cerrarAnulacion()
+    } catch (error) {
+      if (handleAuthenticatedApiError(error)) {
+        navigate("/login", { replace: true })
+        return
       }
-    })
 
-    setItemsInventario((currentItems) =>
-      currentItems.map((item) => {
-        const requirement = consumption.find((entry) => entry.itemId === item.id)
-
-        if (!requirement) {
-          return item
-        }
-
-        return {
-          ...item,
-          stock: Number(item.stock) - Number(requirement.cantidad),
-          updatedAt: parts.fecha,
-        }
-      })
-    )
-
-    setMovimientosInventario((currentMovements) => [
-      ...nuevosMovimientos,
-      ...currentMovements,
-    ])
-
-    setVentas((currentSales) => [nuevaVenta, ...currentSales])
-    limpiarPedido()
+      setCancelError(
+        getFunctionalApiMessage(
+          error,
+          "No fue posible anular la venta."
+        )
+      )
+    } finally {
+      setIsCancelling(false)
+    }
   }
 
-  const selectedPaymentSegment = getPaymentSegment(saleForm.metodoPagoSegmento)
+  const selectedPaymentSegment = getPaymentSegment(
+    saleForm.metodoPagoSegmento
+  )
 
   const ventasColumns = [
     {
@@ -399,7 +525,10 @@ export default function VentasProvider({ children }) {
       cell: ({ row }) => (
         <div className="space-y-1">
           {row.original.items.map((item) => (
-            <p key={`${row.original.id}-${item.productId}`} className="text-sm">
+            <p
+              key={`${row.original.id}-${item.id || item.productId}`}
+              className="text-sm"
+            >
               {item.quantity} x {item.productName}
             </p>
           ))}
@@ -415,10 +544,43 @@ export default function VentasProvider({ children }) {
     {
       accessorKey: "estado",
       header: "Estado",
+      cell: ({ row }) => {
+        const cancelled = row.original.estado === "Anulada"
+
+        return (
+          <span
+            className={
+              cancelled
+                ? "rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700"
+                : "rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700"
+            }
+          >
+            {row.original.estado}
+          </span>
+        )
+      },
+    },
+    {
+      id: "acciones",
+      header: () => <div className="text-right">Acciones</div>,
       cell: ({ row }) => (
-        <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
-          {row.original.estado}
-        </span>
+        <div className="text-right">
+          {row.original.estado === "Confirmada" ? (
+            <PermissionGate permission={PERMISSIONS.SALES_CANCEL}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="border-red-200 text-red-700 hover:bg-red-50 hover:text-red-800"
+                onClick={() => abrirAnulacion(row.original)}
+              >
+                Anular
+              </Button>
+            </PermissionGate>
+          ) : (
+            <span className="text-xs text-muted-foreground">Sin acciones</span>
+          )}
+        </div>
       ),
     },
   ]
@@ -427,7 +589,9 @@ export default function VentasProvider({ children }) {
     {
       accessorKey: "label",
       header: "Periodo",
-      cell: ({ row }) => <span className="font-medium">{row.original.label}</span>,
+      cell: ({ row }) => (
+        <span className="font-medium">{row.original.label}</span>
+      ),
     },
     { accessorKey: "ventas", header: "Ventas" },
     { accessorKey: "productos", header: "Productos" },
@@ -454,12 +618,12 @@ export default function VentasProvider({ children }) {
     { accessorKey: "quantity", header: "Cantidad" },
     {
       accessorKey: "unitPrice",
-      header: "Precio",
+      header: "Precio de referencia",
       cell: ({ row }) => formatCurrency(row.original.unitPrice),
     },
     {
       accessorKey: "subtotal",
-      header: "Subtotal",
+      header: "Subtotal estimado",
       cell: ({ row }) => formatCurrency(row.original.subtotal),
     },
     {
@@ -483,65 +647,45 @@ export default function VentasProvider({ children }) {
 
   const consumoColumns = [
     {
-      accessorKey: "itemId",
+      accessorKey: "itemName",
       header: "Insumo",
-      cell: ({ row }) => {
-        const inventoryItem = itemsInventario.find(
-          (item) => item.id === row.original.itemId
-        )
-
-        return (
-          <div className="space-y-1">
-            <p className="font-medium">{inventoryItem?.nombre}</p>
-            <p className="text-xs text-muted-foreground">
-              {inventoryItem?.registrationNumber}
-            </p>
-          </div>
-        )
-      },
+      cell: ({ row }) => (
+        <div className="space-y-1">
+          <p className="font-medium">{row.original.itemName}</p>
+          <p className="text-xs text-muted-foreground">
+            {row.original.itemRegistrationNumber || `ID ${row.original.itemId}`}
+          </p>
+        </div>
+      ),
     },
     {
       accessorKey: "cantidad",
-      header: "Reservado pedido",
-      cell: ({ row }) => {
-        const inventoryItem = itemsInventario.find(
-          (item) => item.id === row.original.itemId
-        )
-
-        return `${formatQuantity(row.original.cantidad)} ${
-          inventoryItem?.unidad || ""
-        }`
-      },
+      header: "Consumo estimado",
+      cell: ({ row }) =>
+        `${formatQuantity(row.original.cantidad)} ${
+          row.original.unidad || ""
+        }`,
     },
     {
-      accessorKey: "stock",
-      header: "Stock disponible",
-      cell: ({ row }) => {
-        const inventoryItem = itemsInventario.find(
-          (item) => item.id === row.original.itemId
-        )
-
-        return `${formatQuantity(inventoryItem?.stock || 0)} ${
-          inventoryItem?.unidad || ""
-        }`
-      },
+      id: "autoridad",
+      header: "Validación final",
+      cell: () => (
+        <span className="text-xs text-muted-foreground">
+          API al confirmar
+        </span>
+      ),
     },
   ]
 
   const contextValue = {
-    productosVentaMock,
+    productosVenta,
     segmentosMetodoPagoVenta,
     tiposVenta,
     segmentacionesVenta,
     formatCurrency,
     formatDateTime,
     getPaymentSegment,
-    itemsInventario,
-    setItemsInventario,
-    movimientosInventario,
-    setMovimientosInventario,
     ventas,
-    setVentas,
     pedidoActual,
     setPedidoActual,
     orderForm,
@@ -571,6 +715,16 @@ export default function VentasProvider({ children }) {
     totalIngresosFiltrados,
     totalProductosFiltrados,
     consumoPedido,
+    productsLoading,
+    salesLoading,
+    productsError,
+    salesError,
+    isSavingSale,
+    ventaAnulacion,
+    motivoAnulacion,
+    setMotivoAnulacion,
+    cancelError,
+    isCancelling,
     updateOrderFormField,
     updateSaleFormField,
     handleMetodoPagoSegmentoChange,
@@ -583,6 +737,9 @@ export default function VentasProvider({ children }) {
     quitarProducto,
     limpiarPedido,
     confirmarVenta,
+    abrirAnulacion,
+    cerrarAnulacion,
+    confirmarAnulacion,
     selectedPaymentSegment,
     ventasColumns,
     resumenColumns,

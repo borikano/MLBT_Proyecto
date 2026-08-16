@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { Link } from "react-router-dom"
 
 import { useUsuariosModule } from "@/features/usuarios/useUsuariosModule"
@@ -10,10 +12,20 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
+function formatDate(value) {
+  if (!value) {
+    return "Sin fecha"
+  }
+
+  return String(value).slice(0, 10)
+}
+
 export default function UsuariosResumenPage() {
   const {
     rolesUsuarios,
     usuarios,
+    loading,
+    error,
     totalUsuarios,
     usuariosActivos,
     usuariosRetirados,
@@ -22,22 +34,37 @@ export default function UsuariosResumenPage() {
   } = useUsuariosModule()
 
   const usuariosRecientes = [...usuarios]
-    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    .sort((a, b) =>
+      String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))
+    )
     .slice(0, 4)
 
   return (
     <section className="space-y-6">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
-          Gestión local
+          Gestión API
         </p>
-        <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">Usuarios</h1>
+        <h1 className="mt-1 text-2xl font-bold text-[#7c2d12]">
+          Usuarios
+        </h1>
         <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          Resumen operativo del módulo de usuarios administrativos del sistema
-          MLBT. Esta página concentra los indicadores principales antes de
-          crear, editar o consultar registros.
+          Resumen operativo construido desde los usuarios entregados por la
+          API MLBT.
         </p>
       </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {loading && usuarios.length === 0 && (
+        <div className="rounded-lg border border-[#f1d4bd] bg-white px-4 py-3 text-sm text-muted-foreground">
+          Cargando usuarios...
+        </div>
+      )}
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Card className="border-[#f1d4bd] bg-white">
@@ -77,7 +104,6 @@ export default function UsuariosResumenPage() {
         </Card>
       </div>
 
-
       {usuariosPendientes > 0 && (
         <Card className="border-orange-200 bg-orange-50">
           <CardHeader>
@@ -99,7 +125,7 @@ export default function UsuariosResumenPage() {
               Distribución por rol
             </CardTitle>
             <CardDescription>
-              Datos cargados desde el estado local del módulo de usuarios.
+              Datos cargados desde la API y normalizados para presentación.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -129,7 +155,7 @@ export default function UsuariosResumenPage() {
               Seguimiento reciente
             </CardTitle>
             <CardDescription>
-              Últimos usuarios actualizados dentro del módulo.
+              Últimos usuarios actualizados según la API.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -144,7 +170,10 @@ export default function UsuariosResumenPage() {
                       {usuario.name}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {usuario.email}
+                      @{usuario.username}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {usuario.email || "Sin email"}
                     </p>
                   </div>
                   <span className="text-xs font-semibold">
@@ -152,15 +181,20 @@ export default function UsuariosResumenPage() {
                   </span>
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  Actualizado: {usuario.updatedAt}
+                  Actualizado: {formatDate(usuario.updatedAt)}
                 </p>
               </div>
             ))}
 
             <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild className="bg-[#7c2d12] hover:bg-[#9a3412]">
-                <Link to="/usuarios/crear">Crear usuario</Link>
-              </Button>
+              <PermissionGate permission={PERMISSIONS.USERS_CREATE}>
+                <Button
+                  asChild
+                  className="bg-[#7c2d12] hover:bg-[#9a3412]"
+                >
+                  <Link to="/usuarios/crear">Crear usuario</Link>
+                </Button>
+              </PermissionGate>
               <Button asChild variant="outline">
                 <Link to="/usuarios/listado">Ver listado</Link>
               </Button>

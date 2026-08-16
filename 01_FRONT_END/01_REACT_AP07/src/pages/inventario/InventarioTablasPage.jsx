@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { useInventarioModule } from "@/features/inventario/useInventarioModule"
 
 import DataTable from "@/components/shared/DataTable"
@@ -22,6 +24,9 @@ import {
 
 export default function InventarioTablasPage() {
   const {
+    loading,
+    error,
+    itemFormError,
     itemSeleccionado,
     filtroInventario,
     setFiltroInventario,
@@ -33,13 +38,31 @@ export default function InventarioTablasPage() {
 
   return (
     <section className="min-w-0 space-y-5">
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {itemFormError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {itemFormError}
+        </div>
+      )}
+
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <CardTitle id="tablas-inventario" className="scroll-mt-6 text-lg text-[#7c2d12]">Data Table de inventario</CardTitle>
+              <CardTitle
+                id="tablas-inventario"
+                className="scroll-mt-6 text-lg text-[#7c2d12]"
+              >
+                Data Table de inventario
+              </CardTitle>
               <CardDescription>
-                Ítems registrados con control de stock, alertas y estado.
+                Ítems persistidos en la API con control de stock, alertas y
+                estado.
               </CardDescription>
             </div>
 
@@ -108,14 +131,19 @@ export default function InventarioTablasPage() {
         </CardHeader>
 
         <CardContent className="p-5 pt-0">
-          <DataTable
-            columns={itemColumns}
-            data={itemsFiltrados}
-            emptyMessage="No hay ítems para el filtro seleccionado."
-          />
+          {loading && itemsFiltrados.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Cargando inventario...
+            </p>
+          ) : (
+            <DataTable
+              columns={itemColumns}
+              data={itemsFiltrados}
+              emptyMessage="No hay ítems para el filtro seleccionado."
+            />
+          )}
         </CardContent>
       </Card>
-
 
       <AlertDialog
         open={Boolean(itemSeleccionado)}
@@ -130,19 +158,24 @@ export default function InventarioTablasPage() {
             <AlertDialogTitle>¿Dar baja al ítem?</AlertDialogTitle>
             <AlertDialogDescription>
               Esta acción marcará{" "}
-              <strong>{itemSeleccionado?.nombre}</strong> como Inactivo. El
-              registro no se elimina para conservar trazabilidad del inventario.
+              <strong>{itemSeleccionado?.nombre}</strong> como Inactivo en la
+              API. El registro no se elimina.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={darBajaItem}
-              className="bg-red-700 text-white hover:bg-red-800"
-            >
-              Confirmar baja
-            </AlertDialogAction>
+            <AlertDialogCancel disabled={loading}>
+              Cancelar
+            </AlertDialogCancel>
+            <PermissionGate permission={PERMISSIONS.INVENTORY_UPDATE}>
+              <AlertDialogAction
+                onClick={darBajaItem}
+                disabled={loading}
+                className="bg-red-700 text-white hover:bg-red-800"
+              >
+                {loading ? "Procesando..." : "Confirmar baja"}
+              </AlertDialogAction>
+            </PermissionGate>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

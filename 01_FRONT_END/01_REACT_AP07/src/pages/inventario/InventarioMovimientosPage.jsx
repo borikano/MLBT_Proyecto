@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { useInventarioModule } from "@/features/inventario/useInventarioModule"
 import DataTable from "@/components/shared/DataTable"
 
@@ -22,6 +24,8 @@ import {
 export default function InventarioMovimientosPage() {
   const {
     tiposMovimientoInventario,
+    loading,
+    error,
     movementForm,
     movementFormError,
     activeItems,
@@ -34,12 +38,23 @@ export default function InventarioMovimientosPage() {
 
   return (
     <section className="min-w-0 space-y-5">
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
       <Card className="min-w-0 border-[#f1d4bd] bg-white">
         <CardHeader className="p-5 pb-3">
-          <CardTitle id="movimiento-inventario" className="scroll-mt-6 text-lg text-[#7c2d12]">Registrar movimiento</CardTitle>
+          <CardTitle
+            id="movimiento-inventario"
+            className="scroll-mt-6 text-lg text-[#7c2d12]"
+          >
+            Registrar movimiento
+          </CardTitle>
           <CardDescription>
-            Documenta entradas, salidas o ajustes. El movimiento actualiza el
-            stock del ítem seleccionado.
+            La API registra entradas, salidas o ajustes y actualiza el stock
+            transaccionalmente.
           </CardDescription>
         </CardHeader>
 
@@ -94,6 +109,7 @@ export default function InventarioMovimientosPage() {
                   id="cantidad"
                   name="cantidad"
                   type="number"
+                  step="any"
                   placeholder="Ej: 5"
                   value={movementForm.cantidad}
                   onChange={handleMovementInputChange}
@@ -107,7 +123,7 @@ export default function InventarioMovimientosPage() {
                   id="motivo"
                   name="motivo"
                   type="text"
-                  placeholder="Ej: Compra de insumos"
+                  placeholder="Mínimo 3 caracteres"
                   value={movementForm.motivo}
                   onChange={handleMovementInputChange}
                   className="h-9"
@@ -122,12 +138,17 @@ export default function InventarioMovimientosPage() {
             )}
 
             <div className="flex justify-end">
-              <Button
-                type="submit"
-                className="bg-[#7c2d12] hover:bg-[#9a3412]"
-              >
-                Registrar movimiento
-              </Button>
+              <PermissionGate permission={PERMISSIONS.INVENTORY_MOVE}>
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[#7c2d12] hover:bg-[#9a3412]"
+                >
+                  {loading
+                    ? "Registrando..."
+                    : "Registrar movimiento"}
+                </Button>
+              </PermissionGate>
             </div>
           </form>
         </CardContent>
@@ -139,20 +160,24 @@ export default function InventarioMovimientosPage() {
             Historial de movimientos
           </CardTitle>
           <CardDescription>
-            Registro local de entradas, salidas y ajustes realizados durante la
-            sesión.
+            Movimientos persistidos y consultados desde la API MLBT.
           </CardDescription>
         </CardHeader>
 
         <CardContent className="p-5 pt-0">
-          <DataTable
-            columns={movementColumns}
-            data={movements}
-            emptyMessage="No hay movimientos registrados."
-          />
+          {loading && movements.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Cargando movimientos...
+            </p>
+          ) : (
+            <DataTable
+              columns={movementColumns}
+              data={movements}
+              emptyMessage="No hay movimientos registrados."
+            />
+          )}
         </CardContent>
       </Card>
-
     </section>
   )
 }

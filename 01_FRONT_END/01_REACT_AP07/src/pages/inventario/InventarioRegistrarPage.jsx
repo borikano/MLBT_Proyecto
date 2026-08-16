@@ -1,3 +1,5 @@
+import PermissionGate from "@/components/auth/PermissionGate"
+import { PERMISSIONS } from "@/security/permissions"
 import { useInventarioModule } from "@/features/inventario/useInventarioModule"
 
 import { Button } from "@/components/ui/button"
@@ -23,6 +25,7 @@ export default function InventarioRegistrarPage() {
     categoriasInventario,
     estadosInventario,
     unidadesInventario,
+    loading,
     itemForm,
     itemFormError,
     estaEditando,
@@ -41,8 +44,8 @@ export default function InventarioRegistrarPage() {
             {estaEditando ? "Modificar ítem" : "Registrar nuevo ítem"}
           </CardTitle>
           <CardDescription>
-            Registra productos o insumos para controlar existencias y alertas de
-            stock mínimo.
+            La API MLBT administra identificadores y persistencia. Los cambios
+            de stock sobre ítems existentes se realizan mediante movimientos.
           </CardDescription>
         </CardHeader>
 
@@ -87,7 +90,9 @@ export default function InventarioRegistrarPage() {
                 <Label htmlFor="unidad">Unidad</Label>
                 <Select
                   value={itemForm.unidad}
-                  onValueChange={(value) => updateItemFormField("unidad", value)}
+                  onValueChange={(value) =>
+                    updateItemFormField("unidad", value)
+                  }
                 >
                   <SelectTrigger id="unidad" className="h-9">
                     <SelectValue placeholder="Selecciona unidad" />
@@ -103,16 +108,27 @@ export default function InventarioRegistrarPage() {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="stock">Stock</Label>
+                <Label htmlFor="stock">
+                  {estaEditando
+                    ? "Stock actual (solo lectura)"
+                    : "Stock inicial"}
+                </Label>
                 <Input
                   id="stock"
                   name="stock"
                   type="number"
+                  step="any"
                   placeholder="Ej: 10"
                   value={itemForm.stock}
                   onChange={handleItemInputChange}
+                  disabled={estaEditando}
                   className="h-9"
                 />
+                {estaEditando && (
+                  <p className="text-xs text-muted-foreground">
+                    Usa Movimientos para modificar existencias.
+                  </p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -121,6 +137,7 @@ export default function InventarioRegistrarPage() {
                   id="stockMin"
                   name="stockMin"
                   type="number"
+                  step="any"
                   placeholder="Ej: 5"
                   value={itemForm.stockMin}
                   onChange={handleItemInputChange}
@@ -132,7 +149,9 @@ export default function InventarioRegistrarPage() {
                 <Label htmlFor="estado">Estado</Label>
                 <Select
                   value={itemForm.estado}
-                  onValueChange={(value) => updateItemFormField("estado", value)}
+                  onValueChange={(value) =>
+                    updateItemFormField("estado", value)
+                  }
                 >
                   <SelectTrigger id="estado" className="h-9">
                     <SelectValue placeholder="Selecciona estado" />
@@ -160,17 +179,31 @@ export default function InventarioRegistrarPage() {
                   type="button"
                   variant="outline"
                   onClick={limpiarItemForm}
+                  disabled={loading}
                 >
                   Cancelar edición
                 </Button>
               )}
 
-              <Button
-                type="submit"
-                className="bg-[#7c2d12] hover:bg-[#9a3412]"
+              <PermissionGate
+                permission={
+                  estaEditando
+                    ? PERMISSIONS.INVENTORY_UPDATE
+                    : PERMISSIONS.INVENTORY_CREATE
+                }
               >
-                {estaEditando ? "Guardar cambios" : "Guardar ítem"}
-              </Button>
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[#7c2d12] hover:bg-[#9a3412]"
+                >
+                  {loading
+                    ? "Guardando..."
+                    : estaEditando
+                      ? "Guardar cambios"
+                      : "Guardar ítem"}
+                </Button>
+              </PermissionGate>
             </div>
           </form>
         </CardContent>

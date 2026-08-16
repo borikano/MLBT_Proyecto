@@ -10,6 +10,9 @@ import {
 
 export default function InventarioResumenPage() {
   const {
+    items,
+    loading,
+    error,
     totalItems,
     itemsActivos,
     itemsStockBajo,
@@ -20,11 +23,32 @@ export default function InventarioResumenPage() {
     <section className="min-w-0 space-y-5">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#c44f2a]">
-          Control local
+          Control API
         </p>
 
-        <h1 id="resumen-inventario" className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]">Inventario</h1>
+        <h1
+          id="resumen-inventario"
+          className="scroll-mt-6 mt-1 text-2xl font-bold text-[#7c2d12]"
+        >
+          Inventario
+        </h1>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          Existencias consultadas desde la API MLBT.
+        </p>
       </div>
+
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
+
+      {loading && items.length === 0 && (
+        <div className="rounded-lg border border-[#f1d4bd] bg-white px-4 py-3 text-sm text-muted-foreground">
+          Cargando inventario...
+        </div>
+      )}
 
       <div className="grid gap-3 md:grid-cols-3">
         <Card className="border-[#f1d4bd] bg-white">
@@ -81,7 +105,7 @@ export default function InventarioResumenPage() {
           >
             {totalStockBajo > 0
               ? "Estos ítems están en el stock mínimo o por debajo del stock mínimo definido."
-              : "Actualmente no hay ítems por debajo del stock mínimo."}
+              : "Actualmente no hay ítems activos por debajo del stock mínimo."}
           </CardDescription>
         </CardHeader>
 

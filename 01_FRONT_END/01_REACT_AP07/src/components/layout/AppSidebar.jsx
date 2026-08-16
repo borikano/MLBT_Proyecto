@@ -2,7 +2,9 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
 
 import logoPrincipal from "@/assets/mlbt/brand/logo-principal.png"
 import { Button } from "@/components/ui/button"
-import { logout } from "@/lib/auth"
+import { getSession, logout } from "@/lib/auth"
+import { filterNavigationItems, getSessionRole } from "@/security/authorization"
+import { PERMISSIONS } from "@/security/permissions"
 
 const navigationItems = [
   {
@@ -12,58 +14,71 @@ const navigationItems = [
   {
     label: "Usuarios",
     to: "/usuarios",
+    permission: PERMISSIONS.USERS_READ,
     children: [
       {
         label: "Resumen de usuarios",
         to: "/usuarios/resumen",
+        permission: PERMISSIONS.USERS_READ,
       },
       {
         label: "Crear usuario",
         to: "/usuarios/crear",
+        permission: PERMISSIONS.USERS_CREATE,
       },
       {
         label: "Data Table de usuarios",
         to: "/usuarios/listado",
+        permission: PERMISSIONS.USERS_READ,
       },
     ],
   },
   {
     label: "Inventario",
     to: "/inventario",
+    permission: PERMISSIONS.INVENTORY_READ,
     children: [
       {
         label: "Resumen de inventario",
         to: "/inventario/resumen",
+        permission: PERMISSIONS.INVENTORY_READ,
       },
       {
         label: "Registrar ítem",
         to: "/inventario/registrar",
+        permission: PERMISSIONS.INVENTORY_CREATE,
       },
       {
         label: "Registrar movimiento",
         to: "/inventario/movimientos",
+        permission: PERMISSIONS.INVENTORY_MOVE,
       },
       {
         label: "Tablas de inventario",
         to: "/inventario/tablas",
+        permission: PERMISSIONS.INVENTORY_READ,
       },
     ],
   },
   {
     label: "Ventas",
     to: "/ventas",
+    permission: PERMISSIONS.SALES_READ,
     children: [
       {
         label: "Pedido actual",
         to: "/ventas/pedido",
+        permission: PERMISSIONS.SALES_CREATE,
       },
       {
         label: "Historial confirmado",
         to: "/ventas/historial",
+        permission: PERMISSIONS.SALES_READ,
       },
       {
         label: "Análisis de ventas",
         to: "/ventas/analisis",
+        permission: PERMISSIONS.ANALYTICS_READ,
       },
     ],
   },
@@ -98,6 +113,9 @@ function getChildLinkClass(pathname, hash, itemTo) {
 export default function AppSidebar() {
   const location = useLocation()
   const navigate = useNavigate()
+  const session = getSession()
+  const role = getSessionRole(session)
+  const visibleNavigationItems = filterNavigationItems(navigationItems, role)
 
   const handleLogout = () => {
     logout()
@@ -156,7 +174,7 @@ export default function AppSidebar() {
           Navegación principal
         </p>
 
-        {navigationItems.map((item) => {
+        {visibleNavigationItems.map((item) => {
           const active = isRouteActive(location.pathname, item.to)
 
           return (

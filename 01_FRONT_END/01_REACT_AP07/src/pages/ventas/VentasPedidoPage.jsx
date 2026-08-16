@@ -33,6 +33,9 @@ export default function VentasPedidoPage() {
     consumoPedido,
     productosActivos,
     selectedPaymentSegment,
+    productsLoading,
+    productsError,
+    isSavingSale,
     handleSaleInputChange,
     handleQuantityChange,
     updateOrderFormField,
@@ -56,11 +59,23 @@ export default function VentasPedidoPage() {
             Gestión del pedido actual
           </h2>
           <p className="mt-1 text-sm text-orange-800">
-            Construye una venta nueva. Los productos agregados al pedido validan
-            insumos contra inventario y solo descuentan stock cuando se confirma
-            la venta.
+            Construye una venta nueva con el catálogo real de la API. La receta,
+            el precio efectivo, el stock y el total definitivo son validados por
+            el backend al confirmar.
           </p>
         </div>
+
+        {productsLoading && (
+          <p className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2 text-sm text-orange-800">
+            Cargando catálogo de productos de venta...
+          </p>
+        )}
+
+        {productsError && (
+          <p className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+            {productsError}
+          </p>
+        )}
 
         <Card className="min-w-0 border-[#f1d4bd] bg-white">
           <CardHeader className="p-5 pb-3">
@@ -91,7 +106,9 @@ export default function VentasPedidoPage() {
                 <Label htmlFor="tipoVenta">Tipo de venta</Label>
                 <Select
                   value={saleForm.tipoVenta}
-                  onValueChange={(value) => updateSaleFormField("tipoVenta", value)}
+                  onValueChange={(value) =>
+                    updateSaleFormField("tipoVenta", value)
+                  }
                 >
                   <SelectTrigger id="tipoVenta" className="h-9">
                     <SelectValue placeholder="Selecciona tipo" />
@@ -155,8 +172,8 @@ export default function VentasPedidoPage() {
               Agregar producto al pedido
             </CardTitle>
             <CardDescription>
-              El sistema valida los insumos contra el stock disponible antes de
-              agregar productos al pedido.
+              El precio mostrado es de referencia. La API vuelve a leer el
+              producto y valida su receta al confirmar la venta.
             </CardDescription>
           </CardHeader>
 
@@ -176,7 +193,10 @@ export default function VentasPedidoPage() {
                     </SelectTrigger>
                     <SelectContent>
                       {productosActivos.map((producto) => (
-                        <SelectItem key={producto.id} value={String(producto.id)}>
+                        <SelectItem
+                          key={producto.id}
+                          value={String(producto.id)}
+                        >
                           {producto.codigo} - {producto.nombre} -{" "}
                           {formatCurrency(producto.precio)}
                         </SelectItem>
@@ -192,6 +212,7 @@ export default function VentasPedidoPage() {
                     name="quantity"
                     type="number"
                     min="1"
+                    step="1"
                     value={orderForm.quantity}
                     onChange={handleQuantityChange}
                     className="h-9"
@@ -200,6 +221,7 @@ export default function VentasPedidoPage() {
 
                 <Button
                   type="submit"
+                  disabled={productsLoading || Boolean(productsError)}
                   className="bg-[#7c2d12] hover:bg-[#9a3412]"
                 >
                   Agregar
@@ -219,10 +241,11 @@ export default function VentasPedidoPage() {
           <Card className="min-w-0 border-orange-200 bg-orange-50">
             <CardHeader className="p-5 pb-3">
               <CardTitle className="text-lg text-orange-800">
-                Insumos reservados para el pedido
+                Consumo estimado por receta
               </CardTitle>
               <CardDescription className="text-orange-700">
-                Estos insumos se descontarán del inventario al confirmar la venta.
+                Esta vista es informativa. El backend valida stock y realiza los
+                movimientos reales dentro de la transacción de venta.
               </CardDescription>
             </CardHeader>
 
@@ -230,7 +253,7 @@ export default function VentasPedidoPage() {
               <DataTable
                 columns={consumoColumns}
                 data={consumoPedido}
-                emptyMessage="No hay insumos reservados."
+                emptyMessage="No hay insumos estimados."
               />
             </CardContent>
           </Card>
@@ -245,14 +268,19 @@ export default function VentasPedidoPage() {
                   Pedido actual
                 </CardTitle>
                 <CardDescription>
-                  Productos agregados antes de confirmar la venta.
+                  Productos preparados antes de enviar la venta a la API.
                 </CardDescription>
               </div>
 
               <div className="rounded-lg border border-[#f1d4bd] bg-[#fff7ed] px-4 py-3 text-right">
-                <p className="text-xs text-muted-foreground">Total pedido</p>
+                <p className="text-xs text-muted-foreground">
+                  Total estimado
+                </p>
                 <p className="text-2xl font-bold text-[#7c2d12]">
                   {formatCurrency(totalPedido)}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  El total autoritativo lo calcula el backend.
                 </p>
               </div>
             </div>
@@ -272,16 +300,22 @@ export default function VentasPedidoPage() {
             )}
 
             <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
-              <Button type="button" variant="outline" onClick={limpiarPedido}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={limpiarPedido}
+                disabled={isSavingSale}
+              >
                 Limpiar pedido
               </Button>
 
               <Button
                 type="button"
                 onClick={confirmarVenta}
+                disabled={isSavingSale}
                 className="bg-[#7c2d12] hover:bg-[#9a3412]"
               >
-                Confirmar venta
+                {isSavingSale ? "Confirmando..." : "Confirmar venta"}
               </Button>
             </div>
           </CardContent>

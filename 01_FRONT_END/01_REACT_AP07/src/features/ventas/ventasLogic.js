@@ -1,5 +1,6 @@
-import { segmentosMetodoPagoVenta } from "@/data/mocks/ventas.mock"
-
+import {
+  segmentosMetodoPagoVenta,
+} from "@/data/catalogs/sales.catalog"
 const initialOrderForm = {
   productId: "",
   quantity: "1",
