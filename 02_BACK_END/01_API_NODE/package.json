@@ -1,6 +1,6 @@
 {
   "name": "api-mlbt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "API del proyecto MLBT - Maria La Bonita Taqueria para GA7-220501096-AA5-EV03.",
   "type": "module",
   "main": "src/server.js",
