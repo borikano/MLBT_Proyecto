@@ -152,6 +152,20 @@ Capturas de validación:
 
 - [../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman](../../03_DOCS/evidencias/GA7_220501096_AA5_EV04/capturas/postman)
 
+## Sesiones, revocación y auditoría
+
+La API incorpora el cierre técnico INT-005 para gobierno de sesiones y operaciones sensibles:
+
+- JWT con `sessionVersion`.
+- validación del usuario vigente y estado `ACTIVO` en `authRequired`.
+- revocación de sesiones ante cambios efectivos de rol o estado.
+- respuestas 401 para sesión inválida/revocada y 403 para permisos insuficientes.
+- auditoría de login, sesiones rechazadas y permisos denegados.
+- auditoría transaccional de operaciones sensibles de usuarios, inventario, ventas y catálogo.
+- metadata auditada mediante whitelist, sin secretos ni cuerpos HTTP completos.
+
+Documento de cierre: [INT-005 - sesiones, auditoría y gobierno](../../03_DOCS/int-005-cierre-sesiones-auditoria-gobierno.md).
+
 ## Variables de entorno de producción
 
 | Variable | Uso |

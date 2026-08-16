@@ -9,6 +9,7 @@ Documentación técnica, estándares de calidad y archivo histórico del reposit
 | [README principal](../README.md) | Presentación del producto |
 | [Guía técnica](../00_GUIA_TECNICA_PROYECTO/README.md) | Panel de revisión técnica |
 | [Seguridad y calidad](seguridad-pruebas-calidad.md) | Controles OWASP, WCAG y QA |
+| [Cierre INT-005](int-005-cierre-sesiones-auditoria-gobierno.md) | Sesiones, revocación y auditoría sensible |
 | [Estándares del proyecto](estandares-proyecto-mlbt.md) | Criterios documentales |
 
 ## Módulos
@@ -30,3 +31,4 @@ Los registros de validaciones anteriores se conservan en [evidencias](evidencias
 - Documentación compatible con GitHub Markdown
 - Sin secretos ni credenciales en archivos públicos
 - Identificadores históricos preservados sin renombrar
+- [MIG-001 - Cierre de migracion consolidada](./mig-001-cierre-migracion-consolidada.md)

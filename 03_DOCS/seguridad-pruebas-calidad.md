@@ -49,6 +49,25 @@ Este documento define los criterios de calidad, seguridad, pruebas y accesibilid
 | Errores | Los errores de producción no deben exponer trazas internas ni detalles sensibles. |
 | Sesión | El uso de `sessionStorage` con JWT debe documentarse como decisión técnica y riesgo frente a XSS. |
 
+## Controles consolidados INT-005
+
+INT-005 formaliza los controles de sesiones, revocación y auditoría sensible de la API Node.
+
+| Control | Implementación validada |
+|---|---|
+| Sesiones versionadas | El JWT incorpora `sessionVersion` y el middleware contrasta la versión del token con el usuario vigente. |
+| Revocación | Cambios efectivos de rol o estado incrementan `sessionVersion` y revocan tokens históricos. |
+| Usuario vigente | La autorización usa el usuario actual recuperado desde base de datos y exige estado `ACTIVO`. |
+| 401 / 403 | Sesión inválida o revocada responde 401; rol insuficiente responde 403. |
+| Auditoría de autenticación | Login exitoso/fallido y sesiones rechazadas generan eventos best-effort. |
+| Auditoría de autorización | Los accesos 403 generan `permission_denied` sin alterar la semántica HTTP. |
+| Auditoría sensible | Cambios de usuario, ajustes de inventario, cancelaciones y cambios de precio/receta generan eventos controlados. |
+| Atomicidad | Las operaciones sensibles que lo requieren registran auditoría con el mismo cliente transaccional de Prisma. |
+| Metadata segura | Se aplica whitelist; no se persisten contraseñas, hashes, JWT, Authorization, cookies ni cuerpos completos. |
+| Trazabilidad | `requestId` permite correlacionar eventos y solicitudes cuando está disponible. |
+
+La evidencia de cierre se consolida en [INT-005 - cierre de sesiones, auditoría y gobierno](int-005-cierre-sesiones-auditoria-gobierno.md).
+
 ## Criterios de pruebas ISO/IEC/IEEE 29119
 
 | Tipo de prueba | Criterio |

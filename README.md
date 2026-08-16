@@ -77,11 +77,11 @@ Versiones declaradas en `package.json`, `pom.xml` y lockfiles:
 
 | Módulo | Resultado |
 |---|---|
-| Frontend React | 15/15 |
-| API Node | 23/23 |
+| Frontend React | 30/30 |
+| API Node | 63/63 |
 | Spring Web | 3/3 |
 | Java Web | 3/3 |
-| **Total** | **44/44** |
+| **Total** | **99/99** |
 
 ### Frontend
 

@@ -105,7 +105,7 @@ Registro de ventas, validación de existencias, pedido actual, historial confirm
 
 | Criterio | Estado |
 |---|---|
-| Pruebas automatizadas | 15/15 con Vitest y Testing Library |
+| Pruebas automatizadas | 30/30 con Vitest y Testing Library |
 | Lint | ESLint aprobado |
 | Build de producción | Vite aprobado; H-001 cerrado |
 | Integración pública | Login conectado a API Node mediante JWT |

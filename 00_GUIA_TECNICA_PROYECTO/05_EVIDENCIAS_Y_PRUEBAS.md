@@ -6,11 +6,11 @@ Documentación de validación técnica, pruebas automatizadas y comandos reprodu
 
 | Módulo | Pruebas | Controles adicionales |
 |---|---|---|
-| Frontend React | 15/15 | ESLint, build de producción |
-| API Node | 23/23 | `pnpm check` |
+| Frontend React | 30/30 | ESLint, build de producción |
+| API Node | 63/63 | `pnpm check`, Prisma validate |
 | Spring Web | 3/3 | Maven Wrapper |
 | Java Web | 3/3 | `test.cmd`, `package.cmd` |
-| **Total** | **44/44** | CI GitHub Actions |
+| **Total** | **99/99** | CI GitHub Actions + validación local de cierre |
 
 ## Comandos reproducibles
 
@@ -28,6 +28,20 @@ Documentación de validación técnica, pruebas automatizadas y comandos reprodu
 - [API Node](../02_BACK_END/01_API_NODE/README.md)
 - [Seguridad y calidad](../03_DOCS/seguridad-pruebas-calidad.md)
 
+## Validación consolidada INT-005
+
+El cierre de sesiones, revocación y auditoría sensible fue validado mediante pruebas específicas y regresión completa.
+
+| Control | Resultado |
+|---|---|
+| Frontend React | 30/30 pruebas, lint PASS, build PASS |
+| API Node | 63/63 pruebas, check PASS, Prisma validate PASS |
+| Seguridad de sesión | 5/5 pruebas específicas |
+| Auditoría sensible | 4/4 pruebas específicas |
+| Auditoría adversarial final | 23 PASS, 0 WARN, 0 FAIL |
+
+Documento canónico: [INT-005 - cierre de sesiones, auditoría y gobierno](../03_DOCS/int-005-cierre-sesiones-auditoria-gobierno.md).
+
 ## Criterios de calidad (referencia)
 
 | Referencia | Uso |
@@ -41,8 +55,8 @@ Documentación de validación técnica, pruebas automatizadas y comandos reprodu
 
 | Módulo | Riesgo principal | Validación | Estado |
 |---|---|---|---|
-| Frontend React | Rutas protegidas y reglas de negocio | Vitest 15/15, build | Fortalecido |
-| API Node | Token, roles, configuración | 23/23 tests + check | Fortalecido |
+| Frontend React | Rutas protegidas, RBAC y reglas de negocio | Vitest 30/30, lint y build | Fortalecido |
+| API Node | Token, roles, sesiones, auditoría y configuración | 63/63 tests + check + Prisma validate | Fortalecido |
 | Interfaz base | Prototipo histórico con datos embebidos | Documentado como referencia | Controlado |
 | Spring Web | Cobertura funcional insuficiente | Pruebas de servicio 3/3 | Fortalecido |
 | Java Web | Procedimiento local inconsistente | Scripts + JUnit 3/3 | Fortalecido |
