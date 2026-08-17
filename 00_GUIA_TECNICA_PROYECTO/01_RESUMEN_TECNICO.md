@@ -12,11 +12,17 @@ Organizar y documentar el proyecto MLBT como repositorio público verificable, i
 
 | Control | Resultado |
 |---|---|
-| Pruebas automatizadas | 44/44 |
-| H-001 (bundle Vite) | Cerrado — entry 256.26 kB |
+| Runtime productivo principal | 137/137 (Frontend 74 + API 63) |
+| H-001 (bundle Vite) | Cerrado históricamente; baseline actual 246.35 kB (gzip 79.02 kB) |
 | H-002 (Java Web) | Estandarizado — `test.cmd` / `package.cmd` |
 | CH-001 (Dependabot) | Configurado — majors Prisma bloqueados |
-| CI | Workflow activo; última ejecución aprobada para HEAD `41bca42` |
+| CI | Workflow configurado con Node 24 y pnpm 11.0.8; validación automática en push y pull request |
+
+## Baseline de release
+
+- Release estable e inmutable: `v1.1.0`.
+- Commit base: `2d4e4acf4a2cafb6df09911abdbc94f3a3d591a5`.
+- PROD-001 aplica hardening posterior sin mover ni recrear el tag estable.
 
 ## Módulos principales
 

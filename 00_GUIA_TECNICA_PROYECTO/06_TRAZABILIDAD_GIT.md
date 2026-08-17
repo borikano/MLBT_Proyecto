@@ -4,7 +4,15 @@
 
 `Arawkano`
 
-## Commits relevantes del producto
+## Baseline vigente
+
+- Release estable: `v1.1.0`.
+- Commit base estable: `2d4e4acf4a2cafb6df09911abdbc94f3a3d591a5`.
+- Hardening PROD-001: Node 24.x, pnpm 11.0.8 y CI alineado.
+- Bundle Frontend validado en PROD-001: 246.35 kB minificado; 79.02 kB gzip.
+- Los HEAD de candidatos no se fijan como estado permanente en esta guía; la trazabilidad autoritativa permanece en Git y GitHub Actions.
+
+## Commits históricos relevantes del producto
 
 | Área | Referencia | Descripción |
 |---|---|---|
@@ -13,7 +21,7 @@
 | Dependabot | `ec8cb04` | Agrupación de actualizaciones rutinarias |
 | Documentación | `541d281`, `7603ecd` | Alineación documental y cierre técnico |
 
-## Mejoras técnicas recientes
+## Historial de mejoras técnicas
 
 | Mejora | Commit | Resultado |
 |---|---|---|

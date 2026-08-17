@@ -6,11 +6,11 @@ Documentación de validación técnica, pruebas automatizadas y comandos reprodu
 
 | Módulo | Pruebas | Controles adicionales |
 |---|---|---|
-| Frontend React | 30/30 | ESLint, build de producción |
+| Frontend React | 74/74 | ESLint, build de producción |
 | API Node | 63/63 | `pnpm check`, Prisma validate |
-| Spring Web | 3/3 | Maven Wrapper |
-| Java Web | 3/3 | `test.cmd`, `package.cmd` |
-| **Total** | **99/99** | CI GitHub Actions + validación local de cierre |
+| Spring Web | 3/3 (registro histórico) | Maven Wrapper |
+| Java Web | 3/3 (registro histórico) | `test.cmd`, `package.cmd` |
+| **Runtime productivo principal** | **137/137** | Frontend + API; CI GitHub Actions + validación local de cierre |
 
 ## Comandos reproducibles
 
@@ -28,7 +28,9 @@ Documentación de validación técnica, pruebas automatizadas y comandos reprodu
 - [API Node](../02_BACK_END/01_API_NODE/README.md)
 - [Seguridad y calidad](../03_DOCS/seguridad-pruebas-calidad.md)
 
-## Validación consolidada INT-005
+## Validación consolidada INT-005 (registro histórico)
+
+> Los conteos de esta subsección pertenecen al cierre INT-005 y se preservan por trazabilidad. El baseline vigente de PROD-001 está en **Resultados actuales**.
 
 El cierre de sesiones, revocación y auditoría sensible fue validado mediante pruebas específicas y regresión completa.
 
@@ -55,7 +57,7 @@ Documento canónico: [INT-005 - cierre de sesiones, auditoría y gobierno](../03
 
 | Módulo | Riesgo principal | Validación | Estado |
 |---|---|---|---|
-| Frontend React | Rutas protegidas, RBAC y reglas de negocio | Vitest 30/30, lint y build | Fortalecido |
+| Frontend React | Rutas protegidas, RBAC y reglas de negocio | Vitest 74/74, lint y build | Fortalecido |
 | API Node | Token, roles, sesiones, auditoría y configuración | 63/63 tests + check + Prisma validate | Fortalecido |
 | Interfaz base | Prototipo histórico con datos embebidos | Documentado como referencia | Controlado |
 | Spring Web | Cobertura funcional insuficiente | Pruebas de servicio 3/3 | Fortalecido |
@@ -68,11 +70,11 @@ Documento canónico: [INT-005 - cierre de sesiones, auditoría y gobierno](../03
 - Credenciales de validación fuera del repositorio
 - Datos de prueba anonimizados en documentación pública
 
-## Mejoras técnicas recientes
+## Historial de mejoras técnicas
 
 | Mejora | Detalle |
 |---|---|
-| Bundle frontend | Lazy loading; entry 256.26 kB; sin warning >500 kB |
+| Bundle frontend | Lazy loading; baseline actual 246.35 kB (gzip 79.02 kB); sin warning >500 kB |
 | Java Web | `test.cmd` / `package.cmd`; Maven global no requerido localmente |
 
 ---
@@ -90,4 +92,4 @@ Los registros históricos conservan sus identificadores oficiales sin alteració
 | Despliegue integrado | [GA8_220501096_AA1_EV02](../03_DOCS/evidencias/GA8_220501096_AA1_EV02) |
 | Ciclo de pruebas documentado | [GA9 pruebas MLBT](../03_DOCS/evidencias/GA9_220501096_AA1_AA3_PRUEBAS_MLBT) |
 
-Commits recientes de mejora: `9d5c9f4` (bundle), `41bca42` (Java Web scripts).
+Referencias históricas de mejora: `9d5c9f4` (bundle H-001), `41bca42` (Java Web scripts).

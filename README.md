@@ -3,7 +3,7 @@
 Plataforma full-stack para la gestión administrativa de María La Bonita Taquería: panel web, API REST, validación automatizada y despliegue en Vercel y Render.
 
 [![CI](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml/badge.svg?branch=Arawkano)](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml)
-![Tests](https://img.shields.io/badge/tests-44%2F44-brightgreen)
+![Tests](https://img.shields.io/badge/runtime_tests-137%2F137-brightgreen)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 ![Security](https://img.shields.io/badge/security-controls%20verified-blue)
 ![Dependencies](https://img.shields.io/badge/dependencies-monitored-informational)
@@ -11,7 +11,7 @@ Plataforma full-stack para la gestión administrativa de María La Bonita Taquer
 
 ## Demo / endpoints
 
-| Recurso | URL | Verificación (2026-08-11) |
+| Recurso | URL | Verificación (2026-08-16) |
 |---|---|---|
 | Frontend | https://mlbt-proyecto.vercel.app | HTTP 200 |
 | Login | https://mlbt-proyecto.vercel.app/login | HTTP 200 |
@@ -34,7 +34,7 @@ MLBT centraliza operaciones administrativas de la taquería: autenticación, pan
 | Inventario | Registro, movimientos, tablas y control de existencias |
 | Ventas | Pedido actual, historial y análisis |
 | API | Endpoints REST con validación de entrada (Zod), health público |
-| Calidad | 44 pruebas automatizadas, lint, build y CI |
+| Calidad | Runtime productivo principal: 137/137 pruebas (74 Frontend + 63 API), lint, build, check y CI |
 
 ## Arquitectura
 
@@ -65,8 +65,8 @@ Versiones declaradas en `package.json`, `pom.xml` y lockfiles:
 
 | Capa | Tecnologías |
 |---|---|
-| Frontend | React ^19.2.8, Vite ^8.1.5, Vitest 4.1.10, react-router-dom 7.18.1, TanStack Table 8.21.3, Tailwind CSS 4.3.3 |
-| API | Node >=20, Express 5.2.1, Prisma 6.19.3, JWT, Zod |
+| Frontend | Node 24.x, pnpm 11.0.8, React ^19.2.8, Vite ^8.1.5, Vitest 4.1.10, react-router-dom 7.18.1, TanStack Table 8.21.3, Tailwind CSS 4.3.3 |
+| API | Node 24.x, pnpm 11.0.8, Express 5.2.1, Prisma 6.19.3, JWT, Zod |
 | Datos | MySQL 8.4 (Aiven en producción) |
 | Java complementario | Spring Boot 4.1.0 (Java 17), Java Web WAR (Java 11), JUnit 6.1.2 |
 | Calidad | GitHub Actions, Dependabot, ESLint |
@@ -77,17 +77,17 @@ Versiones declaradas en `package.json`, `pom.xml` y lockfiles:
 
 | Módulo | Resultado |
 |---|---|
-| Frontend React | 30/30 |
+| Frontend React | 74/74 |
 | API Node | 63/63 |
-| Spring Web | 3/3 |
-| Java Web | 3/3 |
-| **Total** | **99/99** |
+| Spring Web | 3/3 (registro histórico) |
+| Java Web | 3/3 (registro histórico) |
+| **Runtime productivo principal** | **137/137** |
 
 ### Frontend
 
 - ESLint: PASS
 - Build de producción: PASS
-- Chunk entry: **256.26 kB** (gzip **80.77 kB**)
+- Chunk entry actual: **246.35 kB** (gzip **79.02 kB**)
 - Carga diferida por rutas (`React.lazy` / `Suspense`)
 - Sin warning Vite >500 kB en la última validación
 
@@ -163,6 +163,8 @@ Secretos, tokens y cadenas de conexión no se versionan. Configuración mediante
 
 > Prisma se mantiene en la línea 6.x. La migración a Prisma 7 requiere ajuste explícito del datasource y validación de conexión real.
 
+> **Condición operativa:** Vercel, Render y Aiven conforman la arquitectura pública vigente. Las limitaciones propias de los planes utilizados, como un posible cold start en Render, se documentan como condición operativa y no se presentan como un SLA empresarial.
+
 ## Seguridad
 
 - Política: [SECURITY.md](SECURITY.md)
@@ -196,17 +198,17 @@ Secretos, tokens y cadenas de conexión no se versionan. Configuración mediante
 
 ## Mantenimiento y dependencias
 
-- **CI:** workflow `CI` en push y pull request (Node 20, pnpm 10, Java 17, Maven).
+- **CI:** workflow `CI` en push y pull request (Node 24, pnpm 11.0.8, Java 17, Maven).
 - **Dependabot:** actualizaciones semanales; majors de Prisma bloqueados en CI.
-- **Última ejecución CI en `Arawkano`:** aprobada para HEAD `41bca42`.
+- **Ejecución CI:** cada candidato se valida en GitHub Actions después del push; el README no fija un HEAD efímero como estado permanente.
 
-## Mejoras técnicas recientes
+## Historial de mejoras técnicas
 
 ### Optimización del bundle frontend
 
 - Carga diferida por rutas con `React.lazy` y `Suspense`
-- Chunk entry: 509.80 kB → **256.26 kB**
-- Gzip: 151.23 kB → **80.77 kB**
+- H-001 histórico: chunk entry 509.80 kB → **256.26 kB**
+- H-001 histórico: gzip 151.23 kB → **80.77 kB**; baseline PROD-001 actual: **79.02 kB**
 - Warning Vite >500 kB resuelto
 
 ### Reproducibilidad Java Web

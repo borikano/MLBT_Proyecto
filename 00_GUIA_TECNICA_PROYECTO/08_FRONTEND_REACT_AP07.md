@@ -18,7 +18,7 @@ Documentar la implementación del componente de interfaz React de MLBT, mantenie
 - Panel principal administrativo.
 - Gestión de usuarios, inventario y ventas.
 - Navegación lateral fija y rutas anidadas.
-- Datos de prueba compartidos en contexto local.
+- Autenticación, usuarios, inventario y ventas integrados con API Node; los contextos legacy de datos locales fueron retirados del runtime funcional.
 
 ## Ruta del módulo
 
@@ -46,6 +46,8 @@ Las credenciales de validación se gestionan fuera del repositorio. Para entorno
 | react-router-dom | 7.18.1 |
 | @tanstack/react-table | 8.21.3 |
 | Tailwind CSS | 4.3.3 |
+| Node.js | 24.x |
+| pnpm | 11.0.8 |
 
 ## Carga diferida — H-001 cerrado
 
@@ -53,11 +55,13 @@ Las rutas administrativas usan `React.lazy` + `Suspense` en `src/routes/AppRoute
 
 | Métrica | Valor verificado |
 |---|---|
-| Chunk entry | 256.26 kB minificado |
-| Gzip entry | 80.77 kB |
+| Chunk entry | 246.35 kB minificado |
+| Gzip entry | 79.02 kB |
 | Warning >500 kB | Eliminado |
 
 ## Ejecución y validación
+
+Baseline PROD-001: **74/74 pruebas Frontend PASS**, ESLint PASS y build de producción PASS.
 
 ```powershell
 Set-Location "E:\Dev\01_Repositorios\MLBT_Proyecto\01_FRONT_END\01_REACT_AP07"

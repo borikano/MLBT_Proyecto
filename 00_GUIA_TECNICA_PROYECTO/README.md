@@ -4,6 +4,20 @@ Panel de documentación técnica para revisión, mantenimiento y control de camb
 
 Repositorio: [README principal](../README.md)
 
+## Baseline técnico vigente
+
+| Control | Baseline |
+|---|---|
+| Release estable | `v1.1.0` |
+| Rama principal | `Arawkano` |
+| Runtime JavaScript | Node 24.x |
+| Gestor de paquetes | pnpm 11.0.8 |
+| Frontend React | 74/74 pruebas, ESLint PASS, build PASS |
+| API Node | 63/63 pruebas, `pnpm check` PASS |
+| Arquitectura pública | Vercel → Render → Aiven MySQL 8.4 |
+
+Los secretos y credenciales productivas se administran fuera de Git. La existencia de servicios públicos no sustituye los gates formales de PROD-001 para autorizar un nuevo despliegue.
+
 ## Índice
 
 | Documento | Propósito |

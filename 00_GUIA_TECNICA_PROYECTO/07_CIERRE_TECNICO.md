@@ -6,19 +6,19 @@ Consolidación del estado actual de MLBT para revisión técnica, mantenimiento 
 
 | Control | Estado |
 |---|---|
-| Pruebas automatizadas | 44/44 |
+| Runtime productivo principal | 137/137 (Frontend 74 + API 63) |
 | Frontend lint/build | PASS |
-| Bundle entry | 256.26 kB (gzip 80.77 kB) |
+| Bundle entry | 246.35 kB (gzip 79.02 kB) |
 | Java Web WAR | Generado vía `package.cmd` |
-| CI (HEAD `41bca42`) | Aprobado |
+| CI | Node 24 / pnpm 11.0.8; ejecución obligatoria por candidato |
 | Dependabot | Activo |
 
 ## Validación por módulo
 
 | Módulo | Pruebas | Notas |
 |---|---|---|
-| Frontend React | 15/15 | Lazy loading por rutas; sin warning >500 kB |
-| API Node | 23/23 | Check de configuración OK |
+| Frontend React | 74/74 | Lazy loading por rutas; lint/build PASS; sin warning >500 kB |
+| API Node | 63/63 | `pnpm check` PASS; configuración productiva validada |
 | Spring Web | 3/3 | Maven Wrapper |
 | Java Web | 3/3 | `test.cmd` / `package.cmd` |
 
@@ -41,7 +41,7 @@ Procedimiento canónico:
 
 [![CI](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml/badge.svg?branch=Arawkano)](https://github.com/borikano/MLBT_Proyecto/actions/workflows/ci.yml)
 
-- Workflow `CI`: frontend, API Node, Maven
+- Workflow `CI`: frontend y API con Node 24 / pnpm 11.0.8; módulos Maven complementarios
 - Dependabot semanal; majors de Prisma bloqueados (CH-001)
 
 ## Producción
@@ -54,7 +54,18 @@ Procedimiento canónico:
 
 Las credenciales de validación se gestionan fuera del repositorio.
 
-## Pendientes no bloqueantes
+## Controles productivos cerrados
+
+- Usuario runtime MySQL mlbt_runtime validado con mínimo privilegio sobre defaultdb, sin GRANT OPTION.
+- Transporte TLS/SSL entre Render y Aiven confirmado sin publicar credenciales.
+- Backup lógico pre-migración generado y verificado con manifiesto SHA-256.
+- Migración productiva ejecutada, auditada y reconciliada mediante Prisma; migrate status y migrate diff quedaron limpios.
+- Smoke funcional productivo PASS para login, dashboard, usuarios, inventario y ventas.
+- Allowlist de Aiven restringida exclusivamente a los rangos de salida de Render; acceso administrativo temporal retirado.
+
+Estos controles quedaron cerrados en PROD-001 Fase 5. El release estable v1.1.0 permanece inmutable; el candidato v1.1.1 requiere auditoría final, commit controlado, CI, push y smoke post-deploy.
+
+## Backlog no bloqueante
 
 | Item | Prioridad |
 |---|---|
@@ -64,4 +75,4 @@ Las credenciales de validación se gestionan fuera del repositorio.
 
 ## Conclusión
 
-Proyecto técnicamente consolidado y listo para verificación final y preparación de release `v1.0.0` posterior a la validación completa.
+El release v1.1.0 permanece como baseline estable e inmutable. PROD-001 cerró los controles productivos de plataforma, base de datos y smoke funcional. El candidato v1.1.1 queda sujeto al gate final de commit, CI, push, despliegue asociado y smoke post-deploy.

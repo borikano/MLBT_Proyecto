@@ -152,4 +152,3 @@ ALTER TABLE `audit_events` ADD CONSTRAINT `audit_events_usuarioId_fkey` FOREIGN 
 
 -- RedefineIndex
 CREATE INDEX `ventas_usuarioId_idx` ON `ventas`(`usuarioId`);
-DROP INDEX IF EXISTS `ventas_usuarioId_fkey` ON `ventas`;

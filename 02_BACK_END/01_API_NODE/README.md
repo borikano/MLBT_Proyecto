@@ -16,14 +16,14 @@ Este módulo contiene los servicios REST de MLBT para autenticación, usuarios, 
 
 ## Tecnologías utilizadas
 
-- Node.js.
+- Node.js 24.x.
 - Express.
 - Prisma ORM.
 - MySQL / MariaDB con XAMPP para ambiente local y Aiven MySQL 8.4 para despliegue público.
 - bcrypt.
 - JSON Web Token.
 - Zod.
-- pnpm.
+- pnpm 11.0.8.
 - Colección Postman para validación reproducible de endpoints.
 
 ## URL pública
@@ -77,6 +77,8 @@ Validación de arranque sin levantar el servidor:
 
 ## Pruebas automatizadas
 
+Baseline PROD-001: **63/63 pruebas Backend PASS** y `pnpm check` PASS sobre Node 24.x / pnpm 11.0.8.
+
 | Archivo | Alcance |
 |---|---|
 | src/__tests__/config.test.js | Configuración por ambiente y reglas de producción. |
@@ -98,7 +100,7 @@ Validación de arranque sin levantar el servidor:
 ![Base de datos](https://img.shields.io/badge/DB-Aiven%20MySQL%208.4-orange)
 ![Prisma](https://img.shields.io/badge/Prisma-6.x-success)
 
-La API está preparada para funcionar en producción con la configuración actual siempre que Render conserve las variables requeridas y la instancia Aiven permanezca activa.
+La API está desplegada públicamente en Render y opera contra Aiven MySQL. En PROD-001 ya se verificaron mínimo privilegio del usuario runtime, TLS entre Render y Aiven, backup pre-migración, migración controlada y smoke funcional productivo. Todo nuevo despliegue sigue condicionado a auditoría final, CI y validación post-deploy.
 
 | Requisito | Estado esperado |
 |---|---|

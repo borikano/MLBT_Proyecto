@@ -2,7 +2,7 @@
 
 Módulo administrativo de María La Bonita Taquería.
 
-Esta aplicación corresponde al frontend administrativo del proyecto MLBT. El login está integrado con la API Node pública mediante JWT; el resto de módulos conserva datos locales de apoyo para navegación, análisis y presentación funcional.
+Esta aplicación corresponde al frontend administrativo del proyecto MLBT. Autenticación, usuarios, inventario y ventas consumen la API Node mediante el transporte HTTP versionado, JWT, RBAC y control de sesión; los contextos legacy de datos locales ya no forman parte del runtime funcional.
 
 Documentación relacionada:
 
@@ -30,7 +30,8 @@ La variable `VITE_API_URL` permite definir la URL de la API en despliegue.
 | @tanstack/react-table | 8.21.3 |
 | Tailwind CSS | 4.3.3 |
 | Radix UI | 1.6.7 |
-| pnpm | recomendado |
+| Node.js | 24.x |
+| pnpm | 11.0.8 |
 
 ## Instalación y ejecución
 
@@ -68,8 +69,8 @@ Las rutas administrativas se cargan con `React.lazy` y `Suspense` desde `src/rou
 
 | Métrica verificada | Valor |
 |---|---|
-| Chunk entry minificado | 256.26 kB |
-| Gzip entry | 80.77 kB |
+| Chunk entry minificado | 246.35 kB |
+| Gzip entry | 79.02 kB |
 | Warning Vite >500 kB | No presente |
 
 ## Módulos implementados
@@ -98,19 +99,21 @@ Registro de ventas, validación de existencias, pedido actual, historial confirm
 - `src/features/*` y `src/pages/*` — módulos de dominio
 - `src/components/layout/` — layout administrativo
 - `src/components/shared/DataTable.jsx` — tabla compartida
-- `src/context/MlbtDataContext.jsx` — datos mock compartidos
-- `src/lib/auth.js` — autenticación JWT
+- `src/lib/api.js` — cliente HTTP base y manejo consistente de errores de API
+- `src/lib/auth.js` — autenticación JWT y gobierno de sesión
 
 ## Estado del módulo
 
 | Criterio | Estado |
 |---|---|
-| Pruebas automatizadas | 30/30 con Vitest y Testing Library |
+| Pruebas automatizadas | 74/74 con Vitest y Testing Library |
 | Lint | ESLint aprobado |
 | Build de producción | Vite aprobado; H-001 cerrado |
-| Integración pública | Login conectado a API Node mediante JWT |
+| Integración pública | Autenticación, usuarios, inventario y ventas conectados a API Node con JWT/RBAC |
 
 ## Pruebas automatizadas
+
+Baseline PROD-001: **74/74 pruebas en 17 archivos**, ESLint PASS y build de producción PASS.
 
 | Archivo | Alcance |
 |---|---|
